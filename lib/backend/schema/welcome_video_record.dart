@@ -1,0 +1,110 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
+import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+
+class WelcomeVideoRecord extends FirestoreRecord {
+  WelcomeVideoRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
+
+  // "announcements_title" field.
+  String? _announcementsTitle;
+  String get announcementsTitle => _announcementsTitle ?? '';
+  bool hasAnnouncementsTitle() => _announcementsTitle != null;
+
+  // "announcements_text" field.
+  String? _announcementsText;
+  String get announcementsText => _announcementsText ?? '';
+  bool hasAnnouncementsText() => _announcementsText != null;
+
+  // "video" field.
+  VideoStruct? _video;
+  VideoStruct get video => _video ?? VideoStruct();
+  bool hasVideo() => _video != null;
+
+  void _initializeFields() {
+    _announcementsTitle = snapshotData['announcements_title'] as String?;
+    _announcementsText = snapshotData['announcements_text'] as String?;
+    _video = VideoStruct.maybeFromMap(snapshotData['video']);
+  }
+
+  static CollectionReference get collection =>
+      FirebaseFirestore.instance.collection('welcome_video');
+
+  static Stream<WelcomeVideoRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => WelcomeVideoRecord.fromSnapshot(s));
+
+  static Future<WelcomeVideoRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => WelcomeVideoRecord.fromSnapshot(s));
+
+  static WelcomeVideoRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      WelcomeVideoRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
+
+  static WelcomeVideoRecord getDocumentFromData(
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      WelcomeVideoRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'WelcomeVideoRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is WelcomeVideoRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
+}
+
+Map<String, dynamic> createWelcomeVideoRecordData({
+  String? announcementsTitle,
+  String? announcementsText,
+  VideoStruct? video,
+}) {
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'announcements_title': announcementsTitle,
+      'announcements_text': announcementsText,
+      'video': VideoStruct().toMap(),
+    }.withoutNulls,
+  );
+
+  // Handle nested data for "video" field.
+  addVideoStructData(firestoreData, video, 'video');
+
+  return firestoreData;
+}
+
+class WelcomeVideoRecordDocumentEquality
+    implements Equality<WelcomeVideoRecord> {
+  const WelcomeVideoRecordDocumentEquality();
+
+  @override
+  bool equals(WelcomeVideoRecord? e1, WelcomeVideoRecord? e2) {
+    return e1?.announcementsTitle == e2?.announcementsTitle &&
+        e1?.announcementsText == e2?.announcementsText &&
+        e1?.video == e2?.video;
+  }
+
+  @override
+  int hash(WelcomeVideoRecord? e) => const ListEquality()
+      .hash([e?.announcementsTitle, e?.announcementsText, e?.video]);
+
+  @override
+  bool isValidKey(Object? o) => o is WelcomeVideoRecord;
+}

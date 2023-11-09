@@ -1,0 +1,52 @@
+import '/backend/backend.dart';
+import '/components/nav_bar_widget.dart';
+import '/courses/missed_industry/missed_industry_widget.dart';
+import '/courses/missed_industry_thankyou/missed_industry_thankyou_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'all_courses_widget.dart' show AllCoursesWidget;
+import 'package:aligned_dialog/aligned_dialog.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+
+class AllCoursesModel extends FlutterFlowModel<AllCoursesWidget> {
+  ///  Local state fields for this page.
+
+  bool isSearch = false;
+
+  ///  State fields for stateful widgets in this page.
+
+  final unfocusNode = FocusNode();
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Alert Dialog - Custom Dialog] action in Container widget.
+  String? missedIndustryOutput;
+  // Model for navBar component.
+  late NavBarModel navBarModel;
+
+  /// Initialization and disposal methods.
+
+  void initState(BuildContext context) {
+    navBarModel = createModel(context, () => NavBarModel());
+  }
+
+  void dispose() {
+    unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
+
+    navBarModel.dispose();
+  }
+
+  /// Action blocks are added here.
+
+  /// Additional helper methods are added here.
+}

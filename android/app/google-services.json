@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "263957136102",
+    "project_id": "quis-c7624",
+    "storage_bucket": "quis-c7624.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263957136102:android:841ba7df64c2beaddc7127",
+        "android_client_info": {
+          "package_name": "com.appfyl.quis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw4u1JxJIzO91TpTcJHGjrdeiY78vccbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
