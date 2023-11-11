@@ -1,17 +1,10 @@
 import 'dart:convert';
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:timeago/timeago.dart' as timeago;
-import 'lat_lng.dart';
-import 'place.dart';
-import 'uploaded_file.dart';
-import '/backend/backend.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '/backend/schema/structs/index.dart';
+import 'package:http/http.dart' as http;
+
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 
 bool emailValidation(String? email) {
   // check if string is email
@@ -33,7 +26,7 @@ bool passwordValidation(String? password) {
 String generateRefCode() {
   // generate a random 6 symbols code with digits and capital letters
   final random = math.Random();
-  final chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   final code = List.generate(6, (index) => chars[random.nextInt(chars.length)]);
   return code.join();
 }
@@ -136,7 +129,9 @@ DateTime? getSameTime(
   DateTime DisTime =
       DateTime(userTime.year, userTime.month, userTime.day, hour, minute);
 
-  return userTime.isAfter(DisTime) ? DisTime.add(Duration(days: 1)) : DisTime;
+  return userTime.isAfter(DisTime)
+      ? DisTime.add(const Duration(days: 1))
+      : DisTime;
 }
 
 DateTime timeMinusMinutes(
@@ -159,18 +154,16 @@ int subtractTime(
 }
 
 List<DateTime>? generateCalendar(DateTime? pickedMonth) {
-  if (pickedMonth == null) {
-    pickedMonth = DateTime.now();
-  }
+  pickedMonth ??= DateTime.now();
 
-  int year = pickedMonth!.year;
-  int month = pickedMonth!.month;
+  int year = pickedMonth.year;
+  int month = pickedMonth.month;
   DateTime thisMonth = DateTime(year, month, 0);
   DateTime nextMonth = DateTime(year, month + 1, 0);
   int numberDays = nextMonth.difference(thisMonth).inDays;
 
-  final items = List<DateTime>.generate(numberDays,
-      (i) => DateTime(pickedMonth!.year, pickedMonth!.month, i + 1));
+  final items = List<DateTime>.generate(
+      numberDays, (i) => DateTime(pickedMonth!.year, pickedMonth.month, i + 1));
 
   int weekday = items[0].weekday;
   for (int a = 0; a < (weekday - 1); a++) {
@@ -186,4 +179,24 @@ DateTime decMonth(DateTime date) {
 
 DateTime incMonth(DateTime date) {
   return DateTime(date.year, date.month + 1, date.day);
+}
+
+Future<String> getAgoraToken(String channelName) async {
+  try {
+    final response = await http.post(
+      Uri.parse('https://generatertctoken-gnejgk7oca-uc.a.run.app'),
+      body: {
+        'uid': currentUser!.uid,
+        'channelName': 'test',
+      },
+    );
+    if (response.body.isNotEmpty) {
+      final token = jsonDecode(response.body)['token'];
+      return token;
+    } else {
+      return '';
+    }
+  } catch (e) {
+    return '';
+  }
 }
