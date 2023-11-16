@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -15,12 +14,13 @@ class AgoraUserTokenCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "uid": "${uid}",
-  "channelName": "${channelName}",
+  "uid": "$uid",
+  "channelName": "$channelName",
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Agora User Token',
-      apiUrl: 'https://generatertctoken-gnejgk7oca-uc.a.run.app',
+      apiUrl:
+          'https://us-central1-quis-c7624.cloudfunctions.net/generateRtcToken',
       callType: ApiCallType.POST,
       headers: {},
       params: {},

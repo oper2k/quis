@@ -11,10 +11,10 @@ export 'video_conf_page_model.dart';
 
 class VideoConfPageWidget extends StatefulWidget {
   const VideoConfPageWidget({
-    Key? key,
+    super.key,
     required this.token,
     required this.channelName,
-  }) : super(key: key);
+  });
 
   final String? token;
   final String? channelName;
@@ -61,7 +61,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: custom_widgets.VideoConfWidget(
@@ -69,6 +69,8 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
             height: double.infinity,
             channelName: widget.channelName!,
             token: widget.token!,
+            userProfileImage:
+                'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
           ),
         ),
       ),

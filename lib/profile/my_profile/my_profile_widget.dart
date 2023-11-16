@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/components/nav_bar_widget.dart';
@@ -1880,27 +1879,25 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            _model.apiResult = await AgoraUserTokenCall.call(
-                              uid: currentUserUid,
-                              channelName: 'test',
+                            // _model.apiResult = await AgoraUserTokenCall.call(
+                            //   uid: currentUserUid,
+                            //   channelName: 'test',
+                            // );
+                            // if ((_model.apiResult?.succeeded ?? true)) {
+                            context.pushNamed(
+                              'VideoConfPage',
+                              queryParameters: {
+                                'token': serializeParam(
+                                  '007eJxTYHj0q2zPCjkDCcUJuVsE1n7Z5/6q4dTEb25TdnxdtFfg/C57BQaLRONEMzODFCAwMklOTUq0NLMwSE00MzdMTTM2tTRcWBuWqtsRlmpl/oeJkYGRgQWIQYAJTDKDSRYoWZJaXMLMYGhkDADXmyKl',
+                                  ParamType.String,
+                                ),
+                                'channelName': serializeParam(
+                                  'test',
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
                             );
-                            if ((_model.apiResult?.succeeded ?? true)) {
-                              context.pushNamed(
-                                'VideoConfPage',
-                                queryParameters: {
-                                  'token': serializeParam(
-                                    AgoraUserTokenCall.token(
-                                      (_model.apiResult?.jsonBody ?? ''),
-                                    ).toString(),
-                                    ParamType.String,
-                                  ),
-                                  'channelName': serializeParam(
-                                    'test',
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            }
+                            // }
 
                             setState(() {});
                           },

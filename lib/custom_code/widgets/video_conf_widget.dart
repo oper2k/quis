@@ -1,8 +1,10 @@
 // Automatic FlutterFlow imports
 import 'dart:ui';
 
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,21 +18,115 @@ class VideoConfWidget extends StatefulWidget {
     this.height,
     required this.token,
     required this.channelName,
+    required this.userProfileImage,
   });
 
   final double? width;
   final double? height;
   final String token;
   final String channelName;
+  final String userProfileImage;
 
   @override
   _VideoConfWidgetState createState() => _VideoConfWidgetState();
 }
 
 class _VideoConfWidgetState extends State<VideoConfWidget> {
+  int? _remoteUid;
+  bool _localUserJoined = false;
+  late RtcEngine _engine;
+
+  static const appId = "8a3a660dddd24ceba9680ea671ef3591";
+
+  @override
+  void initState() {
+    super.initState();
+    initAgora();
+  }
+
+  Future<void> initAgora() async {
+    // retrieve permissions
+    await [Permission.microphone, Permission.camera].request();
+
+    //create the engine
+    _engine = createAgoraRtcEngine();
+    await _engine.initialize(const RtcEngineContext(
+      appId: appId,
+      channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+    ));
+
+    _engine.registerEventHandler(
+      RtcEngineEventHandler(
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          debugPrint("local user ${connection.localUid} joined");
+          setState(() {
+            _localUserJoined = true;
+          });
+        },
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          debugPrint("remote user $remoteUid joined");
+          setState(() {
+            _remoteUid = remoteUid;
+          });
+        },
+        onUserOffline: (RtcConnection connection, int remoteUid,
+            UserOfflineReasonType reason) {
+          debugPrint("remote user $remoteUid left channel");
+          setState(() {
+            _remoteUid = null;
+          });
+        },
+        onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
+          debugPrint(
+              '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+        },
+      ),
+    );
+
+    await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+    await _engine.enableVideo();
+    await _engine.startPreview();
+
+    await _engine.joinChannel(
+      token: widget.token,
+      channelId: widget.channelName,
+      uid: 0,
+      options: const ChannelMediaOptions(),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _dispose();
+  }
+
+  Future<void> _dispose() async {
+    await _engine.leaveChannel();
+    await _engine.release();
+  }
+
+  Widget _remoteVideo() {
+    if (_remoteUid != null) {
+      return AgoraVideoView(
+        controller: VideoViewController.remote(
+          rtcEngine: _engine,
+          canvas: VideoCanvas(uid: _remoteUid),
+          connection: RtcConnection(channelId: widget.channelName),
+        ),
+      );
+    } else {
+      return const Text(
+        'Please wait for remote user to join',
+        textAlign: TextAlign.center,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (isiOS && isWeb) {
+    if (isiOS) {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
           statusBarBrightness: Theme.of(context).brightness,
@@ -45,22 +141,10 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Stack(
           children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  'https://images.unsplash.com/photo-1505673542670-a5e3ff5b14a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxuaWdodCUyMHNreXxlbnwwfHx8fDE3MDAwODgxNTN8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                  width: 300,
-                  height: 200,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: _remoteVideo()),
             Align(
               alignment: const AlignmentDirectional(0.00, 1.00),
               child: SizedBox(
@@ -308,12 +392,19 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
               alignment: const AlignmentDirectional(1.00, -1.00),
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
-                child: Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    width: 90,
+                    height: 90,
+                    child: _localUserJoined
+                        ? AgoraVideoView(
+                            controller: VideoViewController(
+                              rtcEngine: _engine,
+                              canvas: const VideoCanvas(uid: 0),
+                            ),
+                          )
+                        : Image.network(widget.userProfileImage),
                   ),
                 ),
               ),
