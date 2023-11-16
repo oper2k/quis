@@ -3,8 +3,7 @@ import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/components/back_button_widget.dart';
 import '/components/subscription_required_dialog_widget.dart';
-import '/components/video_comments_bottom_sheet_widget.dart';
-import '/courses/send_feedback_bottom_sheet/send_feedback_bottom_sheet_widget.dart';
+import '/courses/video_comments_bottom_sheet/video_comments_bottom_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -23,6 +22,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'video_model.dart';
 export 'video_model.dart';
 
@@ -132,17 +132,19 @@ class _VideoWidgetState extends State<VideoWidget>
             builder: (dialogContext) {
               return Material(
                 color: Colors.transparent,
-                child: GestureDetector(
+                child: WebViewAware(
+                    child: GestureDetector(
                   onTap: () => _model.unfocusNode.canRequestFocus
                       ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                       : FocusScope.of(context).unfocus(),
                   child: SubscriptionRequiredDialogWidget(
                     text: 'To continue watching lectures, please subscribe',
+                    isAction: true,
                     action: () async {
                       context.safePop();
                     },
                   ),
-                ),
+                )),
               );
             },
           ).then((value) => setState(() {}));
@@ -225,12 +227,12 @@ class _VideoWidgetState extends State<VideoWidget>
                               child: Stack(
                                 children: [
                                   Hero(
-                                    tag: widget.videoItem!.video.imagePath,
+                                    tag: widget.videoItem!.vimeoVideo.imagePath,
                                     transitionOnUserGestures: true,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(0.0),
                                       child: Image.network(
-                                        widget.videoItem!.video.imagePath,
+                                        widget.videoItem!.vimeoVideo.imagePath,
                                         width: double.infinity,
                                         height: double.infinity,
                                         fit: BoxFit.cover,
@@ -255,11 +257,11 @@ class _VideoWidgetState extends State<VideoWidget>
                                         });
 
                                         context.pushNamed(
-                                          'VideoPlayer',
+                                          'VideoVimeo',
                                           queryParameters: {
-                                            'video': serializeParam(
-                                              widget
-                                                  .videoItem?.video?.videoPath,
+                                            'videoVimeoURL': serializeParam(
+                                              widget.videoItem?.vimeoVideo
+                                                  ?.vimeoVideoUrl,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
@@ -882,36 +884,18 @@ class _VideoWidgetState extends State<VideoWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () => _model
-                                                          .unfocusNode
-                                                          .canRequestFocus
-                                                      ? FocusScope.of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode)
-                                                      : FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child:
-                                                        SendFeedbackBottomSheetWidget(
-                                                      videoItem:
-                                                          widget.videoItem!,
-                                                    ),
-                                                  ),
-                                                );
+                                            context.pushNamed(
+                                              'SendFeedback',
+                                              queryParameters: {
+                                                'videoItem': serializeParam(
+                                                  widget.videoItem,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'videoItem': widget.videoItem,
                                               },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
+                                            );
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(),
@@ -983,7 +967,8 @@ class _VideoWidgetState extends State<VideoWidget>
                                               useSafeArea: true,
                                               context: context,
                                               builder: (context) {
-                                                return GestureDetector(
+                                                return WebViewAware(
+                                                    child: GestureDetector(
                                                   onTap: () => _model
                                                           .unfocusNode
                                                           .canRequestFocus
@@ -1009,7 +994,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                       ),
                                                     ),
                                                   ),
-                                                );
+                                                ));
                                               },
                                             ).then(
                                                 (value) => safeSetState(() {}));
@@ -1278,8 +1263,48 @@ class _VideoWidgetState extends State<VideoWidget>
                                     children: [
                                       Expanded(
                                         child: FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
+                                          onPressed: () async {
+                                            if (!currentUserDocument!
+                                                .courseProgress.refVideos
+                                                .contains(widget
+                                                    .videoItem?.reference)) {
+                                              await currentUserReference!
+                                                  .update({
+                                                ...createUsersRecordData(
+                                                  courseProgress:
+                                                      createCourseProgressStruct(
+                                                    fieldValues: {
+                                                      'ref_videos': FieldValue
+                                                          .arrayUnion([
+                                                        widget.videoItem
+                                                            ?.reference
+                                                      ]),
+                                                    },
+                                                    clearUnsetFields: false,
+                                                  ),
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'karma':
+                                                        FieldValue.increment(
+                                                            0.1),
+                                                  },
+                                                ),
+                                              });
+                                            }
+
+                                            context.goNamed(
+                                              'LatestInterviewQuestions',
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType
+                                                          .rightToLeft,
+                                                ),
+                                              },
+                                            );
                                           },
                                           text: 'More questions to Practice ',
                                           options: FFButtonOptions(
@@ -1327,18 +1352,21 @@ class _VideoWidgetState extends State<VideoWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              if (Navigator.of(context)
+                                                  .canPop()) {
+                                                context.pop();
+                                              }
                                               context.pushNamed(
                                                 'Video',
                                                 queryParameters: {
                                                   'videoItem': serializeParam(
                                                     _model.courseVideosQuery?[
                                                         functions.videoIndexInList(
-                                                                widget
-                                                                    .videoItem!
-                                                                    .reference,
+                                                                widget.videoItem
+                                                                    ?.reference,
                                                                 _model
                                                                     .courseVideosQuery!
-                                                                    .toList()) -
+                                                                    .toList())! -
                                                             1],
                                                     ParamType.Document,
                                                   ),
@@ -1347,11 +1375,11 @@ class _VideoWidgetState extends State<VideoWidget>
                                                   'videoItem': _model
                                                           .courseVideosQuery?[
                                                       functions.videoIndexInList(
-                                                              widget.videoItem!
-                                                                  .reference,
+                                                              widget.videoItem
+                                                                  ?.reference,
                                                               _model
                                                                   .courseVideosQuery!
-                                                                  .toList()) -
+                                                                  .toList())! -
                                                           1],
                                                   kTransitionInfoKey:
                                                       TransitionInfo(
@@ -1395,19 +1423,34 @@ class _VideoWidgetState extends State<VideoWidget>
                                       Expanded(
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            await currentUserReference!
-                                                .update(createUsersRecordData(
-                                              courseProgress:
-                                                  createCourseProgressStruct(
-                                                fieldValues: {
-                                                  'ref_videos':
-                                                      FieldValue.arrayUnion([
-                                                    widget.videoItem?.reference
-                                                  ]),
-                                                },
-                                                clearUnsetFields: false,
-                                              ),
-                                            ));
+                                            if (!currentUserDocument!
+                                                .courseProgress.refVideos
+                                                .contains(widget
+                                                    .videoItem?.reference)) {
+                                              await currentUserReference!
+                                                  .update({
+                                                ...createUsersRecordData(
+                                                  courseProgress:
+                                                      createCourseProgressStruct(
+                                                    fieldValues: {
+                                                      'ref_videos': FieldValue
+                                                          .arrayUnion([
+                                                        widget.videoItem
+                                                            ?.reference
+                                                      ]),
+                                                    },
+                                                    clearUnsetFields: false,
+                                                  ),
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'karma':
+                                                        FieldValue.increment(
+                                                            0.1),
+                                                  },
+                                                ),
+                                              });
+                                            }
                                             if (Navigator.of(context)
                                                 .canPop()) {
                                               context.pop();
@@ -1418,11 +1461,11 @@ class _VideoWidgetState extends State<VideoWidget>
                                                 'videoItem': serializeParam(
                                                   _model.courseVideosQuery?[
                                                       functions.videoIndexInList(
-                                                              widget.videoItem!
-                                                                  .reference,
+                                                              widget.videoItem
+                                                                  ?.reference,
                                                               _model
                                                                   .courseVideosQuery!
-                                                                  .toList()) +
+                                                                  .toList())! +
                                                           1],
                                                   ParamType.Document,
                                                 ),
@@ -1431,11 +1474,11 @@ class _VideoWidgetState extends State<VideoWidget>
                                                 'videoItem': _model
                                                         .courseVideosQuery?[
                                                     functions.videoIndexInList(
-                                                            widget.videoItem!
-                                                                .reference,
+                                                            widget.videoItem
+                                                                ?.reference,
                                                             _model
                                                                 .courseVideosQuery!
-                                                                .toList()) +
+                                                                .toList())! +
                                                         1],
                                                 kTransitionInfoKey:
                                                     TransitionInfo(

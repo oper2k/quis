@@ -7,14 +7,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:async';
 import 'add_ons_widget.dart' show AddOnsWidget;
+import 'package:expandable/expandable.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class AddOnsModel extends FlutterFlowModel<AddOnsWidget> {
   ///  Local state fields for this page.
@@ -23,9 +24,14 @@ class AddOnsModel extends FlutterFlowModel<AddOnsWidget> {
   void updatePickedAddonStruct(Function(ServiceStruct) updateFn) =>
       updateFn(pickedAddon ??= ServiceStruct());
 
+  bool isServiceValidated = true;
+
+  bool isCVValidated = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
   // Stores action output result for [Bottom Sheet - pickBottomSheet] action in Container widget.
   String? serviceOutput;
   // Model for pseudoDropDown component.
@@ -34,15 +40,60 @@ class AddOnsModel extends FlutterFlowModel<AddOnsWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  String? _textControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController1;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController2;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController3;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController4;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController5;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController6;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController7;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController8;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController9;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController10;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController11;
+
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableController12;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
     pseudoDropDownModel = createModel(context, () => PseudoDropDownModel());
+    textControllerValidator = _textControllerValidator;
   }
 
   void dispose() {
@@ -50,6 +101,19 @@ class AddOnsModel extends FlutterFlowModel<AddOnsWidget> {
     pseudoDropDownModel.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
+
+    expandableController1.dispose();
+    expandableController2.dispose();
+    expandableController3.dispose();
+    expandableController4.dispose();
+    expandableController5.dispose();
+    expandableController6.dispose();
+    expandableController7.dispose();
+    expandableController8.dispose();
+    expandableController9.dispose();
+    expandableController10.dispose();
+    expandableController11.dispose();
+    expandableController12.dispose();
   }
 
   /// Action blocks are added here.

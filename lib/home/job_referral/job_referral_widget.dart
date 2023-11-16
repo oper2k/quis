@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'job_referral_model.dart';
 export 'job_referral_model.dart';
 
@@ -552,7 +553,8 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                             enableDrag: false,
                                             context: context,
                                             builder: (context) {
-                                              return GestureDetector(
+                                              return WebViewAware(
+                                                  child: GestureDetector(
                                                 onTap: () => _model.unfocusNode
                                                         .canRequestFocus
                                                     ? FocusScope.of(context)
@@ -571,7 +573,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                             .toList(),
                                                   ),
                                                 ),
-                                              );
+                                              ));
                                             },
                                           ).then((value) => safeSetState(() =>
                                               _model.groupOutput = value));
@@ -648,7 +650,8 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                             enableDrag: false,
                                             context: context,
                                             builder: (context) {
-                                              return GestureDetector(
+                                              return WebViewAware(
+                                                  child: GestureDetector(
                                                 onTap: () => _model.unfocusNode
                                                         .canRequestFocus
                                                     ? FocusScope.of(context)
@@ -661,19 +664,21 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                       MediaQuery.viewInsetsOf(
                                                           context),
                                                   child: PickBottomSheetWidget(
-                                                    stringList:
-                                                        roleListRoleRecordList
-                                                            .where((e) =>
-                                                                e.group ==
+                                                    stringList: roleListRoleRecordList
+                                                        .where((e) =>
+                                                            (e.group ==
                                                                 _model
                                                                     .pickedIndustry
-                                                                    ?.reference)
-                                                            .toList()
-                                                            .map((e) => e.name)
-                                                            .toList(),
+                                                                    ?.reference) &&
+                                                            (e.name !=
+                                                                'Unemployed') &&
+                                                            (e.name != 'Other'))
+                                                        .toList()
+                                                        .map((e) => e.name)
+                                                        .toList(),
                                                   ),
                                                 ),
-                                              );
+                                              ));
                                             },
                                           ).then((value) => safeSetState(
                                               () => _model.roleOutput = value));
@@ -1074,7 +1079,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Text(
-                                  'This feature don’t guarantee the job, CV of candidate will be actively promoted internally and you will recieve a response once recruiter will decide CV is succesfull. ',
+                                  'This feature does not guarantee a Job Offer. Upon receiving your submission, we will actively promote CV within internal network of Recruiters. IF your CV is succesfull you will receive a response from the Recruiter informing further steps. \n\nNOTE: You can apply for a Job Referral only ONCE a month!',
                                   textAlign: TextAlign.start,
                                   style: FlutterFlowTheme.of(context)
                                       .labelMedium
@@ -1210,7 +1215,8 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       builder: (dialogContext) {
                                         return Material(
                                           color: Colors.transparent,
-                                          child: GestureDetector(
+                                          child: WebViewAware(
+                                              child: GestureDetector(
                                             onTap: () => _model
                                                     .unfocusNode.canRequestFocus
                                                 ? FocusScope.of(context)
@@ -1221,7 +1227,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                             child: DeductedKarmaWidget(
                                               deductedKarma: 15.0,
                                             ),
-                                          ),
+                                          )),
                                         );
                                       },
                                     ).then((value) => setState(() {}));

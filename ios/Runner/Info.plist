@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <!--FF_REVERSED_CLIENT_ID-->
+                <string>com.googleusercontent.apps.263957136102-8rot7sa82aht7k0540r5rk9m3qjh5rt1</string>
                 
             </array>
         </dict>
@@ -57,7 +57,8 @@
     <string>In order to take a picture or video, this app requires permission to access the camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
-
+	<key>PermissionGroupNotification</key>
+    <string>“Quis” Would Like to Send you Notifications</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>

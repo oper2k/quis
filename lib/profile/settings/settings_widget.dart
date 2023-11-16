@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'settings_model.dart';
 export 'settings_model.dart';
 
@@ -110,11 +111,20 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    wrapWithModel(
-                      model: _model.menuItemModel1,
-                      updateCallback: () => setState(() {}),
-                      child: MenuItemWidget(
-                        text: 'Billing Management',
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('BillingManagment');
+                      },
+                      child: wrapWithModel(
+                        model: _model.menuItemModel1,
+                        updateCallback: () => setState(() {}),
+                        child: MenuItemWidget(
+                          text: 'Billing Management',
+                        ),
                       ),
                     ),
                     InkWell(
@@ -138,7 +148,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           context: context,
                         );
 
-                        context.pushNamed('ResetPassword');
+                        context.pushNamed('ChangePassword');
                       },
                       child: wrapWithModel(
                         model: _model.menuItemModel2,
@@ -166,14 +176,15 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             builder: (dialogContext) {
                               return Material(
                                 color: Colors.transparent,
-                                child: GestureDetector(
+                                child: WebViewAware(
+                                    child: GestureDetector(
                                   onTap: () =>
                                       _model.unfocusNode.canRequestFocus
                                           ? FocusScope.of(context)
                                               .requestFocus(_model.unfocusNode)
                                           : FocusScope.of(context).unfocus(),
                                   child: DeleteAccountDialogWidget(),
-                                ),
+                                )),
                               );
                             },
                           ).then((value) =>

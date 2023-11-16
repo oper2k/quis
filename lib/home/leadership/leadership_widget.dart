@@ -249,9 +249,11 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 4.0, 0.0, 0.0),
                                         child: Text(
-                                          leadershipUsersRecordList[0]
-                                              .karma
-                                              .toString(),
+                                          (double? karma) {
+                                            return karma != null
+                                                ? karma.toStringAsFixed(1)
+                                                : '0';
+                                          }(leadershipUsersRecordList[0].karma),
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
@@ -407,11 +409,13 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: AuthUserStreamWidget(
                                             builder: (context) => Text(
-                                              valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.karma,
-                                                      0.0)
-                                                  .toString(),
+                                              (double? karma) {
+                                                return karma != null
+                                                    ? karma.toStringAsFixed(1)
+                                                    : '0';
+                                              }(valueOrDefault(
+                                                  currentUserDocument?.karma,
+                                                  0.0)),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -536,9 +540,11 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 4.0, 0.0, 0.0),
                                         child: Text(
-                                          leadershipUsersRecordList[1]
-                                              .karma
-                                              .toString(),
+                                          (double? karma) {
+                                            return karma != null
+                                                ? karma.toStringAsFixed(1)
+                                                : '0';
+                                          }(leadershipUsersRecordList[1].karma),
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(

@@ -14,6 +14,7 @@ class FFIcons {
   static const String _icomoon8Family = 'Icomoon8';
   static const String _icomoon9Family = 'Icomoon9';
   static const String _icomoon10Family = 'Icomoon10';
+  static const String _icomoon11Family = 'Icomoon11';
 
   // icomoon
   static const IconData kslected = IconData(0xe903, fontFamily: _icomoonFamily);
@@ -122,4 +123,8 @@ class FFIcons {
   static const IconData kchat = IconData(0xe900, fontFamily: _icomoon10Family);
   static const IconData kcomponent26 =
       IconData(0xe904, fontFamily: _icomoon10Family);
+
+  // icomoon11
+  static const IconData ksystemUiconsShare2 =
+      IconData(0xe900, fontFamily: _icomoon11Family);
 }

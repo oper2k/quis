@@ -133,7 +133,9 @@ final parametersBuilderMap =
   'Support': ParameterData.none(),
   'Karma': ParameterData.none(),
   'EarnKarma': ParameterData.none(),
-  'MatchedUsers': ParameterData.none(),
+  'MatchedUsers': (data) async => ParameterData(
+        allParams: {},
+      ),
   'UserProfile': (data) async => ParameterData(
         allParams: {
           'userItem': await getDocumentParameter<UsersRecord>(
@@ -175,7 +177,11 @@ final parametersBuilderMap =
         },
       ),
   'PracticeInterview': ParameterData.none(),
-  'InterviewFeedback': ParameterData.none(),
+  'InterviewFeedback': (data) async => ParameterData(
+        allParams: {
+          'userRef': getParameter<DocumentReference>(data, 'userRef'),
+        },
+      ),
   'FeedbackThankyou': ParameterData.none(),
   'LIQ': (data) async => ParameterData(
         allParams: {
@@ -197,7 +203,21 @@ final parametersBuilderMap =
               data, 'questionItem', InterviewQuestionRecord.fromSnapshot),
         },
       ),
-  'VdeoConf': ParameterData.none(),
+  'VideoConfPage': (data) async => ParameterData(
+        allParams: {
+          'token': getParameter<String>(data, 'token'),
+          'channelName': getParameter<String>(data, 'channelName'),
+        },
+      ),
+  'ThankYouForQuestion': ParameterData.none(),
+  'BillingManagment': ParameterData.none(),
+  'CustomerSupport': ParameterData.none(),
+  'ThankYouForSubscription': ParameterData.none(),
+  'VideoVimeo': (data) async => ParameterData(
+        allParams: {
+          'videoVimeoURL': getParameter<String>(data, 'videoVimeoURL'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

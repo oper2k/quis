@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -122,7 +123,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: Text(
-                      'Refer Friends.',
+                      'Spread the Word, Earn Rewards!',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).headlineLarge,
                     ),
@@ -374,6 +375,20 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                               await Clipboard.setData(ClipboardData(
                                   text: valueOrDefault(
                                       currentUserDocument?.refCode, '')));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'code copied to clipboard',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).accent2,
+                                ),
+                              );
                             },
                             child: Container(
                               decoration: BoxDecoration(),
@@ -405,7 +420,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                       highlightColor: Colors.transparent,
                       onTap: () async {
                         await Share.share(
-                          valueOrDefault(currentUserDocument?.refCode, ''),
+                          'Hey! Sign up using my Referral Code and start your Interview Success with Quis! Referral Code:  ${valueOrDefault(currentUserDocument?.refCode, '')}',
                           sharePositionOrigin: getWidgetBoundingBox(context),
                         );
                       },
@@ -555,15 +570,12 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                       AlignmentDirectional(
                                                           0.00, 0.00),
                                                   child: Text(
-                                                    (String? fName,
-                                                            String lName) {
-                                                      return fName != null
-                                                          ? fName[0]
-                                                          : '' + lName != null
-                                                              ? lName[0]
-                                                              : '';
-                                                    }(refUsersItem.firstName,
-                                                        refUsersItem.lastName),
+                                                    functions
+                                                        .getInitialsFromName(
+                                                            refUsersItem
+                                                                .firstName,
+                                                            refUsersItem
+                                                                .lastName)!,
                                                     textAlign: TextAlign.center,
                                                     style: FlutterFlowTheme.of(
                                                             context)

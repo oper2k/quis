@@ -26,8 +26,9 @@ void main() async {
   await appState.initializePersistedState();
 
   await revenue_cat.initialize(
+    "appl_NlRLjHgsEqBYMyojhItxJaFRsuW",
     "12345",
-    "12345",
+    loadDataAfterLaunch: true,
   );
 
   await initializeFirebaseRemoteConfig();

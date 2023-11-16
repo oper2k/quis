@@ -13,11 +13,14 @@ class SubscriptionRequiredDialogWidget extends StatefulWidget {
   const SubscriptionRequiredDialogWidget({
     Key? key,
     required this.text,
-    required this.action,
-  }) : super(key: key);
+    this.action,
+    bool? isAction,
+  })  : this.isAction = isAction ?? false,
+        super(key: key);
 
   final String? text;
   final Future<dynamic> Function()? action;
+  final bool isAction;
 
   @override
   _SubscriptionRequiredDialogWidgetState createState() =>
@@ -72,7 +75,11 @@ class _SubscriptionRequiredDialogWidgetState
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    await widget.action?.call();
+                    if (widget.isAction) {
+                      await widget.action?.call();
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                   child: Container(
                     width: 40.0,

@@ -118,7 +118,9 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                   child: AuthUserStreamWidget(
                     builder: (context) => Text(
-                      'You\'ve earned ${valueOrDefault(currentUserDocument?.karma, 0.0).toString()} karma!',
+                      'You\'ve earned ${(double? karma) {
+                        return karma != null ? karma.toStringAsFixed(1) : '0';
+                      }(valueOrDefault(currentUserDocument?.karma, 0.0))} karma!',
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
                                 fontFamily: 'Sofia Pro',
@@ -131,7 +133,7 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
-                    'Introducing Karma – points that you get when complete certain tasks. Karma serves as your ultimate reputation that can’t be bought for money. Earn Karma and find a reward that right for you, get FREE CV Feedback or a Job Referral to other recruiters on behalf of Quis.\n',
+                    'Karma embodies your ultimate reputation, a currency beyond monetary value; it can only be earned. You are receiving Karma points when complete specific tasks. In essence, Karma serves as a gauge of your engagement and contributions within the Quis community. The greater your involvement in Practice Interviews, votes or comments, the more Karma you receive. Karma reflects your commitment to collaboration, knowledge-sharing, and providing guidance. It\'s presented in a clear and concise manner, embracing transparency and simplicity.\n',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
                           fontFamily: 'Sofia Pro',
@@ -149,10 +151,30 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                     context.pushNamed('EarnKarma');
                   },
                   child: wrapWithModel(
-                    model: _model.menuItemModel,
+                    model: _model.menuItemModel1,
                     updateCallback: () => setState(() {}),
                     child: MenuItemWidget(
-                      text: 'Learn about Karma',
+                      text: 'How to earn Karma',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await launchURL(
+                          'https://quisapp.notion.site/5327c89c0dc04558add1d77aef5586b1?pvs=25');
+                    },
+                    child: wrapWithModel(
+                      model: _model.menuItemModel2,
+                      updateCallback: () => setState(() {}),
+                      child: MenuItemWidget(
+                        text: 'Learn more about Karma',
+                      ),
                     ),
                   ),
                 ),

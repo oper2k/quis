@@ -1,11 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/components/pick_bottom_sheet_widget.dart';
+import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import '/latest_questions/calendar_element/calendar_element_widget.dart';
 import '/latest_questions/question_answer_element/question_answer_element_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -17,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class NewQuestionModel extends FlutterFlowModel<NewQuestionWidget> {
   ///  Local state fields for this page.
@@ -41,22 +42,48 @@ class NewQuestionModel extends FlutterFlowModel<NewQuestionWidget> {
 
   DateTime? currentMonth;
 
+  DocumentReference? roleRef;
+
+  bool isRoleValidated = true;
+
+  String? pickedStage = '';
+
+  String? pickedRound = '';
+
+  bool isStageValid = true;
+
+  bool isRoundValid = true;
+
+  bool isDateValid = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
   // State field(s) for CompanyField widget.
   FocusNode? companyFieldFocusNode;
   TextEditingController? companyFieldController;
   String? Function(BuildContext, String?)? companyFieldControllerValidator;
-  // State field(s) for RoleDropDown widget.
-  String? roleDropDownValue;
-  FormFieldController<String>? roleDropDownValueController;
-  // State field(s) for StageDropDown widget.
-  String? stageDropDownValue;
-  FormFieldController<String>? stageDropDownValueController;
-  // State field(s) for passDropDown widget.
-  String? passDropDownValue;
-  FormFieldController<String>? passDropDownValueController;
+  String? _companyFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
+  // Stores action output result for [Bottom Sheet - pickBottomSheet] action in Container widget.
+  String? roleOutput;
+  // Model for pseudoDropDown component.
+  late PseudoDropDownModel pseudoDropDownModel1;
+  // Stores action output result for [Bottom Sheet - pickBottomSheet] action in Container widget.
+  String? stageOutput;
+  // Model for pseudoDropDown component.
+  late PseudoDropDownModel pseudoDropDownModel2;
+  // Stores action output result for [Bottom Sheet - pickBottomSheet] action in Container widget.
+  String? roundOutput;
+  // Model for pseudoDropDown component.
+  late PseudoDropDownModel pseudoDropDownModel3;
   // Models for questionAnswerElement dynamic component.
   late FlutterFlowDynamicModels<QuestionAnswerElementModel>
       questionAnswerElementModels;
@@ -66,6 +93,10 @@ class NewQuestionModel extends FlutterFlowModel<NewQuestionWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
+    companyFieldControllerValidator = _companyFieldControllerValidator;
+    pseudoDropDownModel1 = createModel(context, () => PseudoDropDownModel());
+    pseudoDropDownModel2 = createModel(context, () => PseudoDropDownModel());
+    pseudoDropDownModel3 = createModel(context, () => PseudoDropDownModel());
     questionAnswerElementModels =
         FlutterFlowDynamicModels(() => QuestionAnswerElementModel());
     calendarElementModels =
@@ -77,6 +108,9 @@ class NewQuestionModel extends FlutterFlowModel<NewQuestionWidget> {
     companyFieldFocusNode?.dispose();
     companyFieldController?.dispose();
 
+    pseudoDropDownModel1.dispose();
+    pseudoDropDownModel2.dispose();
+    pseudoDropDownModel3.dispose();
     questionAnswerElementModels.dispose();
     calendarElementModels.dispose();
   }

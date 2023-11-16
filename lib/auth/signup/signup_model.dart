@@ -83,12 +83,13 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
   // State field(s) for RefField widget.
   FocusNode? refFieldFocusNode;
   TextEditingController? refFieldController;
-  late bool refFieldVisibility;
   String? Function(BuildContext, String?)? refFieldControllerValidator;
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
   UsersRecord? refUserOutput;
   // Stores action output result for [Firestore Query - Query a collection] action in Google widget.
-  UsersRecord? refUserOutputCopy;
+  UsersRecord? refUserOutputGoogle;
+  // Stores action output result for [Firestore Query - Query a collection] action in Apple widget.
+  UsersRecord? refUserOutputApple;
 
   /// Initialization and disposal methods.
 
@@ -100,7 +101,6 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
     passwordField2ControllerValidator = _passwordField2ControllerValidator;
     checkMarkModel2 = createModel(context, () => CheckMarkModel());
     checkMarkModel3 = createModel(context, () => CheckMarkModel());
-    refFieldVisibility = false;
   }
 
   void dispose() {

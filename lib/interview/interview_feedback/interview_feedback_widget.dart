@@ -1,16 +1,25 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/feedback_pick_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'interview_feedback_model.dart';
 export 'interview_feedback_model.dart';
 
 class InterviewFeedbackWidget extends StatefulWidget {
-  const InterviewFeedbackWidget({Key? key}) : super(key: key);
+  const InterviewFeedbackWidget({
+    Key? key,
+    required this.userRef,
+  }) : super(key: key);
+
+  final DocumentReference? userRef;
 
   @override
   _InterviewFeedbackWidgetState createState() =>
@@ -580,8 +589,70 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                             (_model.feedbackFieldController.text != null &&
                                 _model.feedbackFieldController.text != ''))
                         ? null
-                        : () {
-                            print('Button pressed ...');
+                        : () async {
+                            _model.userOutput =
+                                await UsersRecord.getDocumentOnce(
+                                    widget.userRef!);
+                            if (_model.partner == 'Top 1%') {
+                              await widget.userRef!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'endorsement': FieldValue.increment(1),
+                                  },
+                                ),
+                              });
+                            } else if (_model.partner == 'Not good') {
+                              await widget.userRef!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'disliked_by': FieldValue.arrayUnion(
+                                        [currentUserReference]),
+                                  },
+                                ),
+                              });
+
+                              await currentUserReference!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'disliked_users':
+                                        FieldValue.arrayUnion([widget.userRef]),
+                                  },
+                                ),
+                              });
+                            }
+
+                            if (_model.improveFieldController.text != null &&
+                                _model.improveFieldController.text != '') {
+                              await launchUrl(Uri(
+                                  scheme: 'mailto',
+                                  path: _model.userOutput!.email,
+                                  query: {
+                                    'subject':
+                                        'Quis: User \"${'${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}'}\" has left feedback about you',
+                                    'body': _model.improveFieldController.text,
+                                  }
+                                      .entries
+                                      .map((MapEntry<String, String> e) =>
+                                          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                                      .join('&')));
+                            }
+                            await launchUrl(Uri(
+                                scheme: 'mailto',
+                                path: 'info@quis-hq.com',
+                                query: {
+                                  'subject':
+                                      'Quis: User \"${'${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}'}\" has left feedback ',
+                                  'body':
+                                      '${'Feedback about user \"${_model.userOutput?.firstName} ${_model.userOutput?.lastName}:  ${_model.improveFieldController.text}'} ${'Scale: ${_model.scaleFieldController.text}'} ${'Is there anything we could have done differently to improve Quis?: ${_model.improvequisFieldController.text}'} ${'Any feedback you want to share with us?: ${_model.feedbackFieldController.text}'}',
+                                }
+                                    .entries
+                                    .map((MapEntry<String, String> e) =>
+                                        '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                                    .join('&')));
+
+                            context.goNamed('FeedbackThankyou');
+
+                            setState(() {});
                           },
                     text: 'Submit Feedback',
                     options: FFButtonOptions(

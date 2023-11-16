@@ -331,19 +331,28 @@ class _LoginWidgetState extends State<LoginWidget> {
               ),
               Align(
                 alignment: AlignmentDirectional(1.00, 0.00),
-                child: Container(
-                  decoration: BoxDecoration(),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(14.0, 14.0, 0.0, 14.0),
-                    child: Text(
-                      'Forgot password?',
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
-                                fontFamily: 'Sofia Pro',
-                                useGoogleFonts: false,
-                                lineHeight: 1.16,
-                              ),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('ResetPassword');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(14.0, 14.0, 0.0, 14.0),
+                      child: Text(
+                        'Forgot password?',
+                        style:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
+                                  fontFamily: 'Sofia Pro',
+                                  useGoogleFonts: false,
+                                  lineHeight: 1.16,
+                                ),
+                      ),
                     ),
                   ),
                 ),
@@ -436,58 +445,89 @@ class _LoginWidgetState extends State<LoginWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 108.0,
-                      height: 56.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).white,
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).accent2,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(0.0),
-                            child: Image.asset(
-                              'assets/images/_Google.webp',
-                              width: 20.0,
-                              height: 20.0,
-                              fit: BoxFit.contain,
-                            ),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        GoRouter.of(context).prepareAuthEvent();
+                        final user =
+                            await authManager.signInWithGoogle(context);
+                        if (user == null) {
+                          return;
+                        }
+
+                        context.goNamedAuth('ConfirmEmail', context.mounted);
+                      },
+                      child: Container(
+                        width: 108.0,
+                        height: 56.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).accent2,
+                            width: 1.0,
                           ),
-                        ],
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(0.0),
+                              child: Image.asset(
+                                'assets/images/_Google.webp',
+                                width: 20.0,
+                                height: 20.0,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      width: 108.0,
-                      height: 56.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).white,
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).accent2,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(0.0),
-                            child: Image.asset(
-                              'assets/images/_Apple.webp',
-                              width: 20.0,
-                              height: 20.0,
-                              fit: BoxFit.contain,
-                            ),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        GoRouter.of(context).prepareAuthEvent();
+                        final user = await authManager.signInWithApple(context);
+                        if (user == null) {
+                          return;
+                        }
+
+                        context.goNamedAuth('ConfirmEmail', context.mounted);
+                      },
+                      child: Container(
+                        width: 108.0,
+                        height: 56.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).accent2,
+                            width: 1.0,
                           ),
-                        ],
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(0.0),
+                              child: Image.asset(
+                                'assets/images/_Apple.webp',
+                                width: 20.0,
+                                height: 20.0,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ].divide(SizedBox(width: 22.0)),

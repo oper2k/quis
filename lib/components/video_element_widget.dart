@@ -62,12 +62,12 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
               child: Stack(
                 children: [
                   Hero(
-                    tag: widget.videoItem!.video.imagePath,
+                    tag: widget.videoItem!.vimeoVideo.imagePath,
                     transitionOnUserGestures: true,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(0.0),
                       child: Image.network(
-                        widget.videoItem!.video.imagePath,
+                        widget.videoItem!.vimeoVideo.imagePath,
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,

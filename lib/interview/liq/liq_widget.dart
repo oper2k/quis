@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'liq_model.dart';
 export 'liq_model.dart';
 
@@ -84,7 +85,8 @@ class _LiqWidgetState extends State<LiqWidget> {
                       builder: (dialogContext) {
                         return Material(
                           color: Colors.transparent,
-                          child: GestureDetector(
+                          child: WebViewAware(
+                              child: GestureDetector(
                             onTap: () => _model.unfocusNode.canRequestFocus
                                 ? FocusScope.of(context)
                                     .requestFocus(_model.unfocusNode)
@@ -92,7 +94,7 @@ class _LiqWidgetState extends State<LiqWidget> {
                             child: MatchDialogWidget(
                               userItem: userRefItemUsersRecord,
                             ),
-                          ),
+                          )),
                         );
                       },
                     ).then((value) => setState(() {}));

@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'mock_interview_model.dart';
 export 'mock_interview_model.dart';
 
@@ -399,7 +400,8 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         enableDrag: false,
                         context: context,
                         builder: (context) {
-                          return GestureDetector(
+                          return WebViewAware(
+                              child: GestureDetector(
                             onTap: () => _model.unfocusNode.canRequestFocus
                                 ? FocusScope.of(context)
                                     .requestFocus(_model.unfocusNode)
@@ -413,7 +415,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                                     .toList(),
                               ),
                             ),
-                          );
+                          ));
                         },
                       ).then((value) =>
                           safeSetState(() => _model.serviceOutput = value));
@@ -434,6 +436,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                     child: Container(
                       height: 52.0,
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
                           color: _model.isServicePicked
                               ? Color(0x00000000)
@@ -702,7 +705,8 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                           builder: (dialogContext) {
                             return Material(
                               color: Colors.transparent,
-                              child: GestureDetector(
+                              child: WebViewAware(
+                                  child: GestureDetector(
                                 onTap: () => _model.unfocusNode.canRequestFocus
                                     ? FocusScope.of(context)
                                         .requestFocus(_model.unfocusNode)
@@ -711,7 +715,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                                   deductedKarma:
                                       _model.activeService!.priceKarma,
                                 ),
-                              ),
+                              )),
                             );
                           },
                         ).then((value) => setState(() {}));
@@ -1096,7 +1100,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: Text(
-                                      'Please fill up the Add-ons [LINK to ADD-ONS] form and we will get in touch with you.',
+                                      'Please fill up the Add-ons form and we will get in touch with you.',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall
                                           .override(

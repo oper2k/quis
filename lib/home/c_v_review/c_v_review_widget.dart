@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'c_v_review_model.dart';
 export 'c_v_review_model.dart';
 
@@ -725,7 +726,8 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                           builder: (dialogContext) {
                             return Material(
                               color: Colors.transparent,
-                              child: GestureDetector(
+                              child: WebViewAware(
+                                  child: GestureDetector(
                                 onTap: () => _model.unfocusNode.canRequestFocus
                                     ? FocusScope.of(context)
                                         .requestFocus(_model.unfocusNode)
@@ -733,7 +735,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                 child: DeductedKarmaWidget(
                                   deductedKarma: 10.0,
                                 ),
-                              ),
+                              )),
                             );
                           },
                         ).then((value) => setState(() {}));

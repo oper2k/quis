@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -20,9 +21,6 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
-      _entitlementID = prefs.getInt('ff_entitlementID') ?? _entitlementID;
-    });
-    _safeInit(() {
       _VideoOfTheDay =
           prefs.getString('ff_VideoOfTheDay')?.ref ?? _VideoOfTheDay;
     });
@@ -32,6 +30,12 @@ class FFAppState extends ChangeNotifier {
               prefs.getInt('ff_DayVideoOfDay')!)
           : _DayVideoOfDay;
     });
+    _safeInit(() {
+      _refUser = prefs.getString('ff_refUser')?.ref ?? _refUser;
+    });
+    _safeInit(() {
+      _entitlementID = prefs.getString('ff_entitlementID') ?? _entitlementID;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -40,19 +44,6 @@ class FFAppState extends ChangeNotifier {
   }
 
   late SharedPreferences prefs;
-
-  int _entitlementID = 0;
-  int get entitlementID => _entitlementID;
-  set entitlementID(int _value) {
-    _entitlementID = _value;
-    prefs.setInt('ff_entitlementID', _value);
-  }
-
-  DocumentReference? _RefUser;
-  DocumentReference? get RefUser => _RefUser;
-  set RefUser(DocumentReference? _value) {
-    _RefUser = _value;
-  }
 
   List<ServiceStruct> _addOns = [
     ServiceStruct.fromSerializableMap(jsonDecode(
@@ -174,7 +165,7 @@ class FFAppState extends ChangeNotifier {
   List<String> _filterRoleList = [
     'Waiter',
     'Manager',
-    'Hostess',
+    'Hostess/ Host',
     'Bartender',
     'Supervisor',
     'Cabin Crew'
@@ -241,6 +232,85 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInSupportTopicList(int _index, String _value) {
     _supportTopicList.insert(_index, _value);
+  }
+
+  DocumentReference? _refUser;
+  DocumentReference? get refUser => _refUser;
+  set refUser(DocumentReference? _value) {
+    _refUser = _value;
+    _value != null
+        ? prefs.setString('ff_refUser', _value.path)
+        : prefs.remove('ff_refUser');
+  }
+
+  List<String> _questionStage = [
+    'Pre-screening',
+    'In-person',
+    'Role-play game',
+    'Final Interview'
+  ];
+  List<String> get questionStage => _questionStage;
+  set questionStage(List<String> _value) {
+    _questionStage = _value;
+  }
+
+  void addToQuestionStage(String _value) {
+    _questionStage.add(_value);
+  }
+
+  void removeFromQuestionStage(String _value) {
+    _questionStage.remove(_value);
+  }
+
+  void removeAtIndexFromQuestionStage(int _index) {
+    _questionStage.removeAt(_index);
+  }
+
+  void updateQuestionStageAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _questionStage[_index] = updateFn(_questionStage[_index]);
+  }
+
+  void insertAtIndexInQuestionStage(int _index, String _value) {
+    _questionStage.insert(_index, _value);
+  }
+
+  List<String> _questionRound = ['Yes', 'No', 'I’m waiting for feedback'];
+  List<String> get questionRound => _questionRound;
+  set questionRound(List<String> _value) {
+    _questionRound = _value;
+  }
+
+  void addToQuestionRound(String _value) {
+    _questionRound.add(_value);
+  }
+
+  void removeFromQuestionRound(String _value) {
+    _questionRound.remove(_value);
+  }
+
+  void removeAtIndexFromQuestionRound(int _index) {
+    _questionRound.removeAt(_index);
+  }
+
+  void updateQuestionRoundAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _questionRound[_index] = updateFn(_questionRound[_index]);
+  }
+
+  void insertAtIndexInQuestionRound(int _index, String _value) {
+    _questionRound.insert(_index, _value);
+  }
+
+  String _entitlementID = 'Premium';
+  String get entitlementID => _entitlementID;
+  set entitlementID(String _value) {
+    _entitlementID = _value;
+    prefs.setString('ff_entitlementID', _value);
   }
 }
 

@@ -18,6 +18,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'course_model.dart';
 export 'course_model.dart';
 
@@ -281,7 +282,13 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .displayMedium,
+                                                        .displayMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro',
+                                                          useGoogleFonts: false,
+                                                          lineHeight: 1.16,
+                                                        ),
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
@@ -423,7 +430,12 @@ class _CourseWidgetState extends State<CourseWidget> {
                                           'description',
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .headlineSmall,
+                                            .headlineSmall
+                                            .override(
+                                              fontFamily: 'Sofia Pro',
+                                              useGoogleFonts: false,
+                                              lineHeight: 1.16,
+                                            ),
                                       ),
                                     ),
                                     Padding(
@@ -466,6 +478,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               [];
                                           return Column(
                                             mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children:
                                                 List.generate(included.length,
                                                     (includedIndex) {
@@ -676,18 +690,18 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                           onTap: () async {
                                                             if (revenue_cat
                                                                 .activeEntitlementIds
-                                                                .contains(FFAppState()
-                                                                    .entitlementID
-                                                                    .toString())) {
+                                                                .contains(
+                                                                    FFAppState()
+                                                                        .entitlementID)) {
                                                               context.pushNamed(
-                                                                'VideoPlayer',
+                                                                'VideoVimeo',
                                                                 queryParameters:
                                                                     {
-                                                                  'video':
+                                                                  'videoVimeoURL':
                                                                       serializeParam(
                                                                     masterclassItem
-                                                                        .video
-                                                                        .videoPath,
+                                                                        .vimeoVideo
+                                                                        .vimeoVideoUrl,
                                                                     ParamType
                                                                         .String,
                                                                   ),
@@ -717,8 +731,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                   return Material(
                                                                     color: Colors
                                                                         .transparent,
-                                                                    child:
-                                                                        GestureDetector(
+                                                                    child: WebViewAware(
+                                                                        child: GestureDetector(
                                                                       onTap: () => _model
                                                                               .unfocusNode
                                                                               .canRequestFocus
@@ -733,7 +747,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                         action:
                                                                             () async {},
                                                                       ),
-                                                                    ),
+                                                                    )),
                                                                   );
                                                                 },
                                                               ).then((value) =>
@@ -903,28 +917,51 @@ class _CourseWidgetState extends State<CourseWidget> {
                                         queryParameters: {
                                           'videoItem': serializeParam(
                                             lessonListCourseVideoRecordList[
-                                                functions.videoIndexInList(
-                                                        currentUserDocument!
+                                                currentUserDocument!
                                                             .courseProgress
                                                             .refVideos
-                                                            .last,
+                                                            .length >
+                                                        0
+                                                    ? ((int?
+                                                        lastCompletedLessonIndex) {
+                                                        return lastCompletedLessonIndex !=
+                                                                null
+                                                            ? lastCompletedLessonIndex +
+                                                                1
+                                                            : 0;
+                                                      }(functions.videoIndexInList(
+                                                        currentUserDocument
+                                                            ?.courseProgress
+                                                            ?.refVideos
+                                                            ?.last,
                                                         lessonListCourseVideoRecordList
-                                                            .toList()) +
-                                                    1],
+                                                            .toList())))
+                                                    : 0],
                                             ParamType.Document,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{
-                                          'videoItem':
-                                              lessonListCourseVideoRecordList[
-                                                  functions.videoIndexInList(
-                                                          currentUserDocument!
-                                                              .courseProgress
-                                                              .refVideos
-                                                              .last,
-                                                          lessonListCourseVideoRecordList
-                                                              .toList()) +
-                                                      1],
+                                          'videoItem': lessonListCourseVideoRecordList[
+                                              currentUserDocument!
+                                                          .courseProgress
+                                                          .refVideos
+                                                          .length >
+                                                      0
+                                                  ? ((int?
+                                                      lastCompletedLessonIndex) {
+                                                      return lastCompletedLessonIndex !=
+                                                              null
+                                                          ? lastCompletedLessonIndex +
+                                                              1
+                                                          : 0;
+                                                    }(functions.videoIndexInList(
+                                                      currentUserDocument
+                                                          ?.courseProgress
+                                                          ?.refVideos
+                                                          ?.last,
+                                                      lessonListCourseVideoRecordList
+                                                          .toList())))
+                                                  : 0],
                                         },
                                       );
                                     },

@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/courses_list_component_widget.dart';
 import '/components/nav_bar_widget.dart';
 import '/courses/missed_industry/missed_industry_widget.dart';
 import '/courses/missed_industry_thankyou/missed_industry_thankyou_widget.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class AllCoursesModel extends FlutterFlowModel<AllCoursesWidget> {
   ///  Local state fields for this page.
@@ -27,6 +29,12 @@ class AllCoursesModel extends FlutterFlowModel<AllCoursesWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Models for coursesListComponent dynamic component.
+  late FlutterFlowDynamicModels<CoursesListComponentModel>
+      coursesListComponentModels1;
+  // Models for coursesListComponent dynamic component.
+  late FlutterFlowDynamicModels<CoursesListComponentModel>
+      coursesListComponentModels2;
   // Stores action output result for [Alert Dialog - Custom Dialog] action in Container widget.
   String? missedIndustryOutput;
   // Model for navBar component.
@@ -35,6 +43,10 @@ class AllCoursesModel extends FlutterFlowModel<AllCoursesWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
+    coursesListComponentModels1 =
+        FlutterFlowDynamicModels(() => CoursesListComponentModel());
+    coursesListComponentModels2 =
+        FlutterFlowDynamicModels(() => CoursesListComponentModel());
     navBarModel = createModel(context, () => NavBarModel());
   }
 
@@ -43,6 +55,8 @@ class AllCoursesModel extends FlutterFlowModel<AllCoursesWidget> {
     textFieldFocusNode?.dispose();
     textController?.dispose();
 
+    coursesListComponentModels1.dispose();
+    coursesListComponentModels2.dispose();
     navBarModel.dispose();
   }
 

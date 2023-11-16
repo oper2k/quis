@@ -186,7 +186,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'MatchedUsers',
           path: '/matchedUsers',
-          builder: (context, params) => MatchedUsersWidget(),
+          asyncParams: {
+            'likedUsersList': getDocList(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => MatchedUsersWidget(
+            likedUsersList: params.getParam<UsersRecord>(
+                'likedUsersList', ParamType.Document, true),
+          ),
         ),
         FFRoute(
           name: 'UserProfile',
@@ -293,7 +299,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'InterviewFeedback',
           path: '/interviewFeedback',
-          builder: (context, params) => InterviewFeedbackWidget(),
+          builder: (context, params) => InterviewFeedbackWidget(
+            userRef: params.getParam(
+                'userRef', ParamType.DocumentReference, false, ['users']),
+          ),
         ),
         FFRoute(
           name: 'FeedbackThankyou',
@@ -346,9 +355,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'VdeoConf',
-          path: '/vdeoConf',
-          builder: (context, params) => VdeoConfWidget(),
+          name: 'VideoConfPage',
+          path: '/videoConfPage',
+          builder: (context, params) => VideoConfPageWidget(
+            token: params.getParam('token', ParamType.String),
+            channelName: params.getParam('channelName', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'ThankYouForQuestion',
+          path: '/thankYouForQuestion',
+          builder: (context, params) => ThankYouForQuestionWidget(),
+        ),
+        FFRoute(
+          name: 'BillingManagment',
+          path: '/billingManagment',
+          builder: (context, params) => BillingManagmentWidget(),
+        ),
+        FFRoute(
+          name: 'CustomerSupport',
+          path: '/customerSupport',
+          builder: (context, params) => CustomerSupportWidget(),
+        ),
+        FFRoute(
+          name: 'ThankYouForSubscription',
+          path: '/thankYouForSubscription',
+          builder: (context, params) => ThankYouForSubscriptionWidget(),
+        ),
+        FFRoute(
+          name: 'VideoVimeo',
+          path: '/videoVimeo',
+          builder: (context, params) => VideoVimeoWidget(
+            videoVimeoURL: params.getParam('videoVimeoURL', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

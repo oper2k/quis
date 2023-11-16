@@ -26,20 +26,10 @@ class InterviewQuestionRecord extends FirestoreRecord {
   String get company => _company ?? '';
   bool hasCompany() => _company != null;
 
-  // "role" field.
-  String? _role;
-  String get role => _role ?? '';
-  bool hasRole() => _role != null;
-
   // "stage" field.
   String? _stage;
   String get stage => _stage ?? '';
   bool hasStage() => _stage != null;
-
-  // "is_round_passed" field.
-  bool? _isRoundPassed;
-  bool get isRoundPassed => _isRoundPassed ?? false;
-  bool hasIsRoundPassed() => _isRoundPassed != null;
 
   // "question" field.
   String? _question;
@@ -56,15 +46,31 @@ class InterviewQuestionRecord extends FirestoreRecord {
   DateTime? get dateInterview => _dateInterview;
   bool hasDateInterview() => _dateInterview != null;
 
+  // "role" field.
+  String? _role;
+  String get role => _role ?? '';
+  bool hasRole() => _role != null;
+
+  // "round_passed" field.
+  String? _roundPassed;
+  String get roundPassed => _roundPassed ?? '';
+  bool hasRoundPassed() => _roundPassed != null;
+
+  // "created_time" field.
+  DateTime? _createdTime;
+  DateTime? get createdTime => _createdTime;
+  bool hasCreatedTime() => _createdTime != null;
+
   void _initializeFields() {
     _author = snapshotData['author'] as DocumentReference?;
     _company = snapshotData['company'] as String?;
-    _role = snapshotData['role'] as String?;
     _stage = snapshotData['stage'] as String?;
-    _isRoundPassed = snapshotData['is_round_passed'] as bool?;
     _question = snapshotData['question'] as String?;
     _userAnswer = snapshotData['user_answer'] as String?;
     _dateInterview = snapshotData['date_interview'] as DateTime?;
+    _role = snapshotData['role'] as String?;
+    _roundPassed = snapshotData['round_passed'] as String?;
+    _createdTime = snapshotData['created_time'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -105,23 +111,25 @@ class InterviewQuestionRecord extends FirestoreRecord {
 Map<String, dynamic> createInterviewQuestionRecordData({
   DocumentReference? author,
   String? company,
-  String? role,
   String? stage,
-  bool? isRoundPassed,
   String? question,
   String? userAnswer,
   DateTime? dateInterview,
+  String? role,
+  String? roundPassed,
+  DateTime? createdTime,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'author': author,
       'company': company,
-      'role': role,
       'stage': stage,
-      'is_round_passed': isRoundPassed,
       'question': question,
       'user_answer': userAnswer,
       'date_interview': dateInterview,
+      'role': role,
+      'round_passed': roundPassed,
+      'created_time': createdTime,
     }.withoutNulls,
   );
 
@@ -136,24 +144,26 @@ class InterviewQuestionRecordDocumentEquality
   bool equals(InterviewQuestionRecord? e1, InterviewQuestionRecord? e2) {
     return e1?.author == e2?.author &&
         e1?.company == e2?.company &&
-        e1?.role == e2?.role &&
         e1?.stage == e2?.stage &&
-        e1?.isRoundPassed == e2?.isRoundPassed &&
         e1?.question == e2?.question &&
         e1?.userAnswer == e2?.userAnswer &&
-        e1?.dateInterview == e2?.dateInterview;
+        e1?.dateInterview == e2?.dateInterview &&
+        e1?.role == e2?.role &&
+        e1?.roundPassed == e2?.roundPassed &&
+        e1?.createdTime == e2?.createdTime;
   }
 
   @override
   int hash(InterviewQuestionRecord? e) => const ListEquality().hash([
         e?.author,
         e?.company,
-        e?.role,
         e?.stage,
-        e?.isRoundPassed,
         e?.question,
         e?.userAnswer,
-        e?.dateInterview
+        e?.dateInterview,
+        e?.role,
+        e?.roundPassed,
+        e?.createdTime
       ]);
 
   @override

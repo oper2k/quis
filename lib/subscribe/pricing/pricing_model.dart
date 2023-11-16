@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class PricingModel extends FlutterFlowModel<PricingWidget> {
   ///  State fields for stateful widgets in this page.
@@ -67,6 +68,12 @@ class PricingModel extends FlutterFlowModel<PricingWidget> {
   late FeatureListItemModel featureListItemModel21;
   // Model for featureListItem component.
   late FeatureListItemModel featureListItemModel22;
+  // Stores action output result for [RevenueCat - Purchase] action in Button widget.
+  bool? monthlysubscriptionOutput;
+  // Stores action output result for [RevenueCat - Purchase] action in Button widget.
+  bool? yearlysubscriptionOutput;
+  // Stores action output result for [RevenueCat - Purchase] action in Button widget.
+  bool? onetimeOutput;
 
   /// Initialization and disposal methods.
 

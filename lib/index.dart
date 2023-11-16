@@ -3,7 +3,7 @@ export '/home/home/home_widget.dart' show HomeWidget;
 export '/auth/onboarding/onboarding_widget.dart' show OnboardingWidget;
 export '/auth/login/login_widget.dart' show LoginWidget;
 export '/auth/signup/signup_widget.dart' show SignupWidget;
-export '/pricing/pricing_widget.dart' show PricingWidget;
+export '/subscribe/pricing/pricing_widget.dart' show PricingWidget;
 export '/auth/confirm_email/confirm_email_widget.dart' show ConfirmEmailWidget;
 export '/auth/init_page/init_page_widget.dart' show InitPageWidget;
 export '/auth/reset_password/reset_password_widget.dart'
@@ -56,4 +56,14 @@ export '/latest_questions/new_question/new_question_widget.dart'
 export '/home/welcome_video/welcome_video_widget.dart' show WelcomeVideoWidget;
 export '/home/add_ons_copy/add_ons_copy_widget.dart' show AddOnsCopyWidget;
 export '/latest_questions/question/question_widget.dart' show QuestionWidget;
-export '/interview/vdeo_conf/vdeo_conf_widget.dart' show VdeoConfWidget;
+export '/interview/video_conf_page/video_conf_page_widget.dart'
+    show VideoConfPageWidget;
+export '/latest_questions/thank_you_for_question/thank_you_for_question_widget.dart'
+    show ThankYouForQuestionWidget;
+export '/subscribe/billing_managment/billing_managment_widget.dart'
+    show BillingManagmentWidget;
+export '/subscribe/customer_support/customer_support_widget.dart'
+    show CustomerSupportWidget;
+export '/subscribe/thank_you_for_subscription/thank_you_for_subscription_widget.dart'
+    show ThankYouForSubscriptionWidget;
+export '/video_vimeo/video_vimeo_widget.dart' show VideoVimeoWidget;

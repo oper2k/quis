@@ -86,21 +86,11 @@ class UsersRecord extends FirestoreRecord {
   DocumentReference? get group => _group;
   bool hasGroup() => _group != null;
 
-  // "match" field.
-  List<DocumentReference>? _match;
-  List<DocumentReference> get match => _match ?? const [];
-  bool hasMatch() => _match != null;
-
   // "career_profile" field.
   CareerProfileStruct? _careerProfile;
   CareerProfileStruct get careerProfile =>
       _careerProfile ?? CareerProfileStruct();
   bool hasCareerProfile() => _careerProfile != null;
-
-  // "likes" field.
-  int? _likes;
-  int get likes => _likes ?? 0;
-  bool hasLikes() => _likes != null;
 
   // "rank" field.
   int? _rank;
@@ -148,6 +138,17 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get dislikedBy => _dislikedBy ?? const [];
   bool hasDislikedBy() => _dislikedBy != null;
 
+  // "favorite_questions" field.
+  List<DocumentReference>? _favoriteQuestions;
+  List<DocumentReference> get favoriteQuestions =>
+      _favoriteQuestions ?? const [];
+  bool hasFavoriteQuestions() => _favoriteQuestions != null;
+
+  // "endorsement" field.
+  int? _endorsement;
+  int get endorsement => _endorsement ?? 0;
+  bool hasEndorsement() => _endorsement != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -163,10 +164,8 @@ class UsersRecord extends FirestoreRecord {
     _lastName = snapshotData['last_name'] as String?;
     _displayName = snapshotData['display_name'] as String?;
     _group = snapshotData['group'] as DocumentReference?;
-    _match = getDataList(snapshotData['match']);
     _careerProfile =
         CareerProfileStruct.maybeFromMap(snapshotData['career_profile']);
-    _likes = castToType<int>(snapshotData['likes']);
     _rank = castToType<int>(snapshotData['rank']);
     _favoriteVideos = getDataList(snapshotData['favorite_videos']);
     _isProfileCompleted = snapshotData['is_profile_completed'] as bool?;
@@ -177,6 +176,8 @@ class UsersRecord extends FirestoreRecord {
     _dislikedUsers = getDataList(snapshotData['disliked_users']);
     _likedBy = getDataList(snapshotData['liked_by']);
     _dislikedBy = getDataList(snapshotData['disliked_by']);
+    _favoriteQuestions = getDataList(snapshotData['favorite_questions']);
+    _endorsement = castToType<int>(snapshotData['endorsement']);
   }
 
   static CollectionReference get collection =>
@@ -228,10 +229,10 @@ Map<String, dynamic> createUsersRecordData({
   String? displayName,
   DocumentReference? group,
   CareerProfileStruct? careerProfile,
-  int? likes,
   int? rank,
   bool? isProfileCompleted,
   CourseProgressStruct? courseProgress,
+  int? endorsement,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -250,10 +251,10 @@ Map<String, dynamic> createUsersRecordData({
       'display_name': displayName,
       'group': group,
       'career_profile': CareerProfileStruct().toMap(),
-      'likes': likes,
       'rank': rank,
       'is_profile_completed': isProfileCompleted,
       'course_progress': CourseProgressStruct().toMap(),
+      'endorsement': endorsement,
     }.withoutNulls,
   );
 
@@ -286,9 +287,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.lastName == e2?.lastName &&
         e1?.displayName == e2?.displayName &&
         e1?.group == e2?.group &&
-        listEquality.equals(e1?.match, e2?.match) &&
         e1?.careerProfile == e2?.careerProfile &&
-        e1?.likes == e2?.likes &&
         e1?.rank == e2?.rank &&
         listEquality.equals(e1?.favoriteVideos, e2?.favoriteVideos) &&
         e1?.isProfileCompleted == e2?.isProfileCompleted &&
@@ -297,7 +296,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.likedUsers, e2?.likedUsers) &&
         listEquality.equals(e1?.dislikedUsers, e2?.dislikedUsers) &&
         listEquality.equals(e1?.likedBy, e2?.likedBy) &&
-        listEquality.equals(e1?.dislikedBy, e2?.dislikedBy);
+        listEquality.equals(e1?.dislikedBy, e2?.dislikedBy) &&
+        listEquality.equals(e1?.favoriteQuestions, e2?.favoriteQuestions) &&
+        e1?.endorsement == e2?.endorsement;
   }
 
   @override
@@ -316,9 +317,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.lastName,
         e?.displayName,
         e?.group,
-        e?.match,
         e?.careerProfile,
-        e?.likes,
         e?.rank,
         e?.favoriteVideos,
         e?.isProfileCompleted,
@@ -327,7 +326,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.likedUsers,
         e?.dislikedUsers,
         e?.likedBy,
-        e?.dislikedBy
+        e?.dislikedBy,
+        e?.favoriteQuestions,
+        e?.endorsement
       ]);
 
   @override

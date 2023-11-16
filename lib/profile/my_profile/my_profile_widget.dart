@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/components/nav_bar_widget.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -341,9 +343,15 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               .override(
                                                                 fontFamily:
                                                                     'Sofia Pro',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
+                                                                color: currentUserDocument
+                                                                            ?.careerProfile.role !=
+                                                                        null
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent2,
                                                                 useGoogleFonts:
                                                                     false,
                                                               ),
@@ -539,8 +547,8 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                               decoration: const BoxDecoration(),
                               child: Builder(
                                 builder: (context) {
-                                  if (revenue_cat.activeEntitlementIds.contains(
-                                      FFAppState().entitlementID.toString())) {
+                                  if (revenue_cat.activeEntitlementIds
+                                      .contains(FFAppState().entitlementID)) {
                                     return Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
@@ -752,8 +760,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                               if (revenue_cat
                                                   .activeEntitlementIds
                                                   .contains(FFAppState()
-                                                      .entitlementID
-                                                      .toString())) {
+                                                      .entitlementID)) {
                                                 return Container(
                                                   decoration: BoxDecoration(
                                                     color: FlutterFlowTheme.of(
@@ -921,8 +928,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                               if (revenue_cat
                                                   .activeEntitlementIds
                                                   .contains(FFAppState()
-                                                      .entitlementID
-                                                      .toString())) {
+                                                      .entitlementID)) {
                                                 return Align(
                                                   alignment:
                                                       const AlignmentDirectional(
@@ -1187,46 +1193,364 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed('MatchedUsers');
-                              },
-                              child: Container(
-                                height: 100.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(10.0),
+                            child: AuthUserStreamWidget(
+                              builder: (context) =>
+                                  StreamBuilder<List<UsersRecord>>(
+                                stream: queryUsersRecord(
+                                  queryBuilder: (usersRecord) =>
+                                      usersRecord.whereIn(
+                                          'uid',
+                                          (currentUserDocument?.likedUsers
+                                                      .toList() ??
+                                                  [])
+                                              .map((e) => e.id)
+                                              .toList()),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 15.0, 0.0, 15.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'People I matched with',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(0.0, 20.0, 0.0, 0.0),
-                                        child: Text(
-                                          '0',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium,
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
+                                    );
+                                  }
+                                  List<UsersRecord>
+                                      likedUsersListUsersRecordList =
+                                      snapshot.data!;
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'MatchedUsers',
+                                        queryParameters: {
+                                          'likedUsersList': serializeParam(
+                                            likedUsersListUsersRecordList,
+                                            ParamType.Document,
+                                            true,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'likedUsersList':
+                                              likedUsersListUsersRecordList,
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 15.0, 0.0, 15.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'People I matched with',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineMedium,
+                                            ),
+                                            Builder(
+                                              builder: (context) {
+                                                if (likedUsersListUsersRecordList
+                                                    .where((e) =>
+                                                        (currentUserDocument
+                                                                    ?.likedBy
+                                                                    .toList() ??
+                                                                [])
+                                                            .contains(
+                                                                e.reference))
+                                                    .toList()
+                                                    .isNotEmpty) {
+                                                  return Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Builder(
+                                                        builder: (context) {
+                                                          if (likedUsersListUsersRecordList
+                                                                  .where((e) =>
+                                                                      (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                      (e.photoUrl !=
+                                                                          ''))
+                                                                  .toList()
+                                                                  .length ==
+                                                              1) {
+                                                            return SizedBox(
+                                                              width: 40.0,
+                                                              height: 40.0,
+                                                              child: custom_widgets
+                                                                  .ImageStackWidget(
+                                                                width: 40.0,
+                                                                height: 40.0,
+                                                                imageRadius:
+                                                                    40.0,
+                                                                imageCount: likedUsersListUsersRecordList
+                                                                            .where((e) =>
+                                                                                (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                                (e.photoUrl !=
+                                                                                    ''))
+                                                                            .toList()
+                                                                            .length >
+                                                                        5
+                                                                    ? 5
+                                                                    : likedUsersListUsersRecordList
+                                                                        .where((e) =>
+                                                                            (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                            (e.photoUrl !=
+                                                                                ''))
+                                                                        .toList()
+                                                                        .length,
+                                                                imageBorderWidth:
+                                                                    1.0,
+                                                                imageBorderColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                                imagesList: functions.imagePathToString(likedUsersListUsersRecordList
+                                                                    .where((e) =>
+                                                                        (currentUserDocument?.likedBy.toList() ??
+                                                                                [])
+                                                                            .contains(e
+                                                                                .reference) &&
+                                                                        (e.photoUrl !=
+                                                                            ''))
+                                                                    .toList()
+                                                                    .map((e) =>
+                                                                        e.photoUrl)
+                                                                    .toList()),
+                                                              ),
+                                                            );
+                                                          } else if (likedUsersListUsersRecordList
+                                                                  .where((e) =>
+                                                                      (currentUserDocument?.likedBy.toList() ??
+                                                                              [])
+                                                                          .contains(e
+                                                                              .reference) &&
+                                                                      (e.photoUrl !=
+                                                                          ''))
+                                                                  .toList()
+                                                                  .length ==
+                                                              2) {
+                                                            return SizedBox(
+                                                              width: 80.0,
+                                                              height: 40.0,
+                                                              child: custom_widgets
+                                                                  .ImageStackWidget(
+                                                                width: 80.0,
+                                                                height: 40.0,
+                                                                imageRadius:
+                                                                    40.0,
+                                                                imageCount: likedUsersListUsersRecordList
+                                                                            .where((e) =>
+                                                                                (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                                (e.photoUrl !=
+                                                                                    ''))
+                                                                            .toList()
+                                                                            .length >
+                                                                        5
+                                                                    ? 5
+                                                                    : likedUsersListUsersRecordList
+                                                                        .where((e) =>
+                                                                            (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                            (e.photoUrl !=
+                                                                                ''))
+                                                                        .toList()
+                                                                        .length,
+                                                                imageBorderWidth:
+                                                                    1.0,
+                                                                imageBorderColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                                imagesList: functions.imagePathToString(likedUsersListUsersRecordList
+                                                                    .where((e) =>
+                                                                        (currentUserDocument?.likedBy.toList() ??
+                                                                                [])
+                                                                            .contains(e
+                                                                                .reference) &&
+                                                                        (e.photoUrl !=
+                                                                            ''))
+                                                                    .toList()
+                                                                    .map((e) =>
+                                                                        e.photoUrl)
+                                                                    .toList()),
+                                                              ),
+                                                            );
+                                                          } else if (likedUsersListUsersRecordList
+                                                                  .where((e) =>
+                                                                      (currentUserDocument?.likedBy.toList() ??
+                                                                              [])
+                                                                          .contains(
+                                                                              e.reference) &&
+                                                                      (e.photoUrl != ''))
+                                                                  .toList()
+                                                                  .length ==
+                                                              3) {
+                                                            return SizedBox(
+                                                              width: 120.0,
+                                                              height: 40.0,
+                                                              child: custom_widgets
+                                                                  .ImageStackWidget(
+                                                                width: 120.0,
+                                                                height: 40.0,
+                                                                imageRadius:
+                                                                    40.0,
+                                                                imageCount: likedUsersListUsersRecordList
+                                                                            .where((e) =>
+                                                                                (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                                (e.photoUrl !=
+                                                                                    ''))
+                                                                            .toList()
+                                                                            .length >
+                                                                        5
+                                                                    ? 5
+                                                                    : likedUsersListUsersRecordList
+                                                                        .where((e) =>
+                                                                            (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                            (e.photoUrl !=
+                                                                                ''))
+                                                                        .toList()
+                                                                        .length,
+                                                                imageBorderWidth:
+                                                                    1.0,
+                                                                imageBorderColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                                imagesList: functions.imagePathToString(likedUsersListUsersRecordList
+                                                                    .where((e) =>
+                                                                        (currentUserDocument?.likedBy.toList() ??
+                                                                                [])
+                                                                            .contains(e
+                                                                                .reference) &&
+                                                                        (e.photoUrl !=
+                                                                            ''))
+                                                                    .toList()
+                                                                    .map((e) =>
+                                                                        e.photoUrl)
+                                                                    .toList()),
+                                                              ),
+                                                            );
+                                                          } else {
+                                                            return SizedBox(
+                                                              width: 200.0,
+                                                              height: 40.0,
+                                                              child: custom_widgets
+                                                                  .ImageStackWidget(
+                                                                width: 200.0,
+                                                                height: 40.0,
+                                                                imageRadius:
+                                                                    40.0,
+                                                                imageCount: likedUsersListUsersRecordList
+                                                                            .where((e) =>
+                                                                                (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                                (e.photoUrl !=
+                                                                                    ''))
+                                                                            .toList()
+                                                                            .length >
+                                                                        5
+                                                                    ? 5
+                                                                    : likedUsersListUsersRecordList
+                                                                        .where((e) =>
+                                                                            (currentUserDocument?.likedBy.toList() ?? []).contains(e.reference) &&
+                                                                            (e.photoUrl !=
+                                                                                ''))
+                                                                        .toList()
+                                                                        .length,
+                                                                imageBorderWidth:
+                                                                    1.0,
+                                                                imageBorderColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                                imagesList: functions.imagePathToString(likedUsersListUsersRecordList
+                                                                    .where((e) =>
+                                                                        (currentUserDocument?.likedBy.toList() ??
+                                                                                [])
+                                                                            .contains(e
+                                                                                .reference) &&
+                                                                        (e.photoUrl !=
+                                                                            ''))
+                                                                    .toList()
+                                                                    .map((e) =>
+                                                                        e.photoUrl)
+                                                                    .toList()),
+                                                              ),
+                                                            );
+                                                          }
+                                                        },
+                                                      ),
+                                                      if (likedUsersListUsersRecordList
+                                                              .where((e) => (currentUserDocument
+                                                                          ?.likedBy
+                                                                          .toList() ??
+                                                                      [])
+                                                                  .contains(e
+                                                                      .reference))
+                                                              .toList()
+                                                              .length >
+                                                          5)
+                                                        Text(
+                                                          (int
+                                                              numberLikedUsers) {
+                                                            return '+ ${numberLikedUsers - 5}';
+                                                          }(likedUsersListUsersRecordList
+                                                              .where((e) => (currentUserDocument
+                                                                          ?.likedBy
+                                                                          .toList() ??
+                                                                      [])
+                                                                  .contains(e
+                                                                      .reference))
+                                                              .toList()
+                                                              .length),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .headlineSmall,
+                                                        ),
+                                                    ],
+                                                  );
+                                                } else {
+                                                  return Text(
+                                                    '0',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .headlineMedium,
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -1287,11 +1611,16 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                         0.0, 0.0, 4.0, 0.0),
                                                 child: AuthUserStreamWidget(
                                                   builder: (context) => Text(
-                                                    valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.karma,
-                                                            0.0)
-                                                        .toString(),
+                                                    (double? karma) {
+                                                      return karma != null
+                                                          ? karma
+                                                              .toStringAsFixed(
+                                                                  1)
+                                                          : '0';
+                                                    }(valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.karma,
+                                                        0.0)),
                                                     style: TextStyle(
                                                       fontFamily: 'Sofia Pro',
                                                       color:
@@ -1551,8 +1880,29 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            final token = await functions.getAgoraToken('test');
-                            context.pushNamed('VdeoConf');
+                            _model.apiResult = await AgoraUserTokenCall.call(
+                              uid: currentUserUid,
+                              channelName: 'test',
+                            );
+                            if ((_model.apiResult?.succeeded ?? true)) {
+                              context.pushNamed(
+                                'VideoConfPage',
+                                queryParameters: {
+                                  'token': serializeParam(
+                                    AgoraUserTokenCall.token(
+                                      (_model.apiResult?.jsonBody ?? ''),
+                                    ).toString(),
+                                    ParamType.String,
+                                  ),
+                                  'channelName': serializeParam(
+                                    'test',
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            }
+
+                            setState(() {});
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -1571,7 +1921,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                         const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 12.0, 0.0),
                                     child: Icon(
-                                      FFIcons.kiconoirPrivacyPolicy1,
+                                      Icons.video_chat_rounded,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       size: 24.0,
@@ -1579,7 +1929,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      'VideoConf',
+                                      'Video Conference',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineMedium
                                           .override(
