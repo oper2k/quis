@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/courses_list_component_widget.dart';
 import '/components/nav_bar_widget.dart';
 import '/courses/missed_industry/missed_industry_widget.dart';
 import '/courses/missed_industry_thankyou/missed_industry_thankyou_widget.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'all_courses_model.dart';
 export 'all_courses_model.dart';
 
@@ -276,174 +278,21 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                                                   (context, coursesIndex) {
                                                 final coursesItem =
                                                     courses[coursesIndex];
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    context.pushNamed(
-                                                      'Course',
-                                                      queryParameters: {
-                                                        'courseItem':
-                                                            serializeParam(
-                                                          coursesItem,
-                                                          ParamType.Document,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        'courseItem':
-                                                            coursesItem,
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    width: 170.0,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
+                                                return wrapWithModel(
+                                                  model: _model
+                                                      .coursesListComponentModels1
+                                                      .getModel(
+                                                    coursesIndex.toString(),
+                                                    coursesIndex,
+                                                  ),
+                                                  updateCallback: () =>
+                                                      setState(() {}),
+                                                  child:
+                                                      CoursesListComponentWidget(
+                                                    key: Key(
+                                                      'Keyilr_${coursesIndex.toString()}',
                                                     ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  8.0,
-                                                                  8.0,
-                                                                  8.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Hero(
-                                                            tag: coursesItem
-                                                                .previewVideo
-                                                                .imagePath,
-                                                            transitionOnUserGestures:
-                                                                true,
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10.0),
-                                                              child:
-                                                                  Image.network(
-                                                                coursesItem
-                                                                    .previewVideo
-                                                                    .imagePath,
-                                                                width: double
-                                                                    .infinity,
-                                                                height: 99.0,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Hello World\nвапвап',
-                                                                maxLines: 2,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                      lineHeight:
-                                                                          1.1,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    coursesItem
-                                                                        .rating
-                                                                        .rating
-                                                                        .toString(),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodySmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro',
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                  Icon(
-                                                                    FFIcons
-                                                                        .kmaterialSymbolsStar,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .orange,
-                                                                    size: 13.7,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                'Learn more',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodySmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .accent3,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                      lineHeight:
-                                                                          1.16,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
+                                                    courseItem: coursesItem,
                                                   ),
                                                 );
                                               },
@@ -481,8 +330,9 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                                                 mainAxisSpacing: 8.0,
                                                 childAspectRatio:
                                                     MediaQuery.sizeOf(context)
-                                                            .width /
-                                                        350,
+                                                                .width *
+                                                            0.0027 -
+                                                        0.01,
                                               ),
                                               primary: false,
                                               shrinkWrap: true,
@@ -492,169 +342,21 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                                                   (context, coursesIndex) {
                                                 final coursesItem =
                                                     courses[coursesIndex];
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    context.pushNamed(
-                                                      'Course',
-                                                      queryParameters: {
-                                                        'courseItem':
-                                                            serializeParam(
-                                                          coursesItem,
-                                                          ParamType.Document,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        'courseItem':
-                                                            coursesItem,
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    width: 170.0,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
+                                                return wrapWithModel(
+                                                  model: _model
+                                                      .coursesListComponentModels2
+                                                      .getModel(
+                                                    coursesIndex.toString(),
+                                                    coursesIndex,
+                                                  ),
+                                                  updateCallback: () =>
+                                                      setState(() {}),
+                                                  child:
+                                                      CoursesListComponentWidget(
+                                                    key: Key(
+                                                      'Keyt71_${coursesIndex.toString()}',
                                                     ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  8.0,
-                                                                  8.0,
-                                                                  8.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10.0),
-                                                            child:
-                                                                Image.network(
-                                                              coursesItem
-                                                                  .previewVideo
-                                                                  .imagePath,
-                                                              width: double
-                                                                  .infinity,
-                                                              height: 99.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          9.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                coursesItem
-                                                                    .name,
-                                                                maxLines: 2,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Text(
-                                                                      coursesItem
-                                                                          .rating
-                                                                          .rating
-                                                                          .toString(),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodySmall,
-                                                                    ),
-                                                                    Icon(
-                                                                      FFIcons
-                                                                          .kmaterialSymbolsStar,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .orange,
-                                                                      size:
-                                                                          13.7,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Text(
-                                                                  'Learn more',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .accent3,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                        lineHeight:
-                                                                            1.16,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
+                                                    courseItem: coursesItem,
                                                   ),
                                                 );
                                               },
@@ -690,7 +392,8 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                                     builder: (dialogContext) {
                                       return Material(
                                         color: Colors.transparent,
-                                        child: GestureDetector(
+                                        child: WebViewAware(
+                                            child: GestureDetector(
                                           onTap: () => _model
                                                   .unfocusNode.canRequestFocus
                                               ? FocusScope.of(context)
@@ -699,7 +402,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                                               : FocusScope.of(context)
                                                   .unfocus(),
                                           child: MissedIndustryWidget(),
-                                        ),
+                                        )),
                                       );
                                     },
                                   ).then((value) => safeSetState(() =>
@@ -720,7 +423,8 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                                       builder: (dialogContext) {
                                         return Material(
                                           color: Colors.transparent,
-                                          child: GestureDetector(
+                                          child: WebViewAware(
+                                              child: GestureDetector(
                                             onTap: () => _model
                                                     .unfocusNode.canRequestFocus
                                                 ? FocusScope.of(context)
@@ -730,7 +434,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                                                     .unfocus(),
                                             child:
                                                 MissedIndustryThankyouWidget(),
-                                          ),
+                                          )),
                                         );
                                       },
                                     ).then((value) => setState(() {}));

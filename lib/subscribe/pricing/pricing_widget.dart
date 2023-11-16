@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'pricing_model.dart';
 export 'pricing_model.dart';
 
@@ -1330,7 +1331,11 @@ class _PricingWidgetState extends State<PricingWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.safePop();
+                    if (widget.isFirst) {
+                      context.pushNamed('Home');
+                    } else {
+                      context.safePop();
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(),
@@ -1357,11 +1362,90 @@ class _PricingWidgetState extends State<PricingWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      final isEntitled =
-                          await revenue_cat.isEntitled('12345') ?? false;
-                      if (!isEntitled) {
-                        await revenue_cat.loadOfferings();
+                      var _shouldSetState = false;
+                      if (_model.pageViewCurrentIndex == 0) {
+                        _model.monthlysubscriptionOutput = await revenue_cat
+                            .purchasePackage('monthlysubscription');
+                        _shouldSetState = true;
+                        if (!_model.monthlysubscriptionOutput!) {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return WebViewAware(
+                                  child: AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Payment failed'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              ));
+                            },
+                          );
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+                      } else if (_model.pageViewCurrentIndex == 1) {
+                        _model.yearlysubscriptionOutput = await revenue_cat
+                            .purchasePackage('yearlysubscription');
+                        _shouldSetState = true;
+                        if (!_model.yearlysubscriptionOutput!) {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return WebViewAware(
+                                  child: AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Payment failed'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              ));
+                            },
+                          );
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+                      } else {
+                        _model.onetimeOutput =
+                            await revenue_cat.purchasePackage('onetime');
+                        _shouldSetState = true;
+                        if (!_model.onetimeOutput!) {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return WebViewAware(
+                                  child: AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Payment failed'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              ));
+                            },
+                          );
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
                       }
+
+                      if (Navigator.of(context).canPop()) {
+                        context.pop();
+                      }
+                      context.pushNamed('ThankYouForSubscription');
+
+                      if (_shouldSetState) setState(() {});
                     },
                     text: 'Select Plan',
                     options: FFButtonOptions(

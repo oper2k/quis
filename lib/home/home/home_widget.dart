@@ -19,6 +19,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
@@ -64,7 +65,19 @@ class _HomeWidgetState extends State<HomeWidget> {
                 .videoDayListOutput?[_model.videoDayListOutput!.length - 1]
                 ?.reference;
           });
+        } else {
+          setState(() {
+            FFAppState().VideoOfTheDay = null;
+          });
         }
+
+        await currentUserReference!.update({
+          ...mapToFirestore(
+            {
+              'karma': FieldValue.increment(0.1),
+            },
+          ),
+        });
       }
     });
   }
@@ -147,9 +160,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       imagePath: currentUserPhoto,
                                       isPremium: revenue_cat
                                           .activeEntitlementIds
-                                          .contains(FFAppState()
-                                              .entitlementID
-                                              .toString()),
+                                          .contains(FFAppState().entitlementID),
                                     ),
                                   ),
                                 ),
@@ -372,13 +383,21 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   },
                                                 );
                                               },
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                child: Image.asset(
-                                                  'assets/images/Rectangle_39531.webp',
-                                                  width: double.infinity,
-                                                  fit: BoxFit.cover,
+                                              child: Hero(
+                                                tag:
+                                                    containerWelcomeVideoRecord!
+                                                        .vimeoVideo.imagePath,
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  child: Image.network(
+                                                    containerWelcomeVideoRecord!
+                                                        .vimeoVideo.imagePath,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -394,26 +413,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                context.pushNamed(
-                                                  'WelcomeVideo',
-                                                  queryParameters: {
-                                                    'welcomeVideo':
-                                                        serializeParam(
-                                                      containerWelcomeVideoRecord,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'welcomeVideo':
-                                                        containerWelcomeVideoRecord,
-                                                  },
-                                                );
+                                                await launchURL(
+                                                    'https://quisapp.notion.site/861b4762e223478c8518cdd934142215?v=959e87c0ddad47e1b3b18fc15fc04e24');
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
                                                 child: Image.asset(
-                                                  'assets/images/Rectangle_39531.webp',
+                                                  'assets/images/2.webp',
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
                                                 ),
@@ -503,8 +510,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           builder: (context) {
                                             if (revenue_cat.activeEntitlementIds
                                                 .contains(FFAppState()
-                                                    .entitlementID
-                                                    .toString())) {
+                                                    .entitlementID)) {
                                               return Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(
@@ -728,40 +734,36 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         BorderRadius.circular(
                                                             10.0),
                                                   ),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Karma',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    14.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Row(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 15.0,
+                                                                0.0, 15.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          'Karma',
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .headlineMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                        Row(
                                                           mainAxisSize:
                                                               MainAxisSize.min,
                                                           mainAxisAlignment:
@@ -794,10 +796,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   builder:
                                                                       (context) =>
                                                                           Text(
-                                                                    valueOrDefault(
-                                                                            currentUserDocument?.karma,
-                                                                            0.0)
-                                                                        .toString(),
+                                                                    (double?
+                                                                        karma) {
+                                                                      return karma !=
+                                                                              null
+                                                                          ? karma
+                                                                              .toStringAsFixed(1)
+                                                                          : '0';
+                                                                    }(valueOrDefault(
+                                                                        currentUserDocument
+                                                                            ?.karma,
+                                                                        0.0)),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .headlineMedium
@@ -822,8 +831,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -838,44 +847,40 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    AuthUserStreamWidget(
-                                                      builder: (context) =>
-                                                          Text(
-                                                        valueOrDefault(
-                                                                currentUserDocument
-                                                                    ?.likes,
-                                                                0)
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 15.0, 0.0, 15.0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      AuthUserStreamWidget(
+                                                        builder: (context) =>
+                                                            Text(
+                                                          valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.endorsement,
+                                                                  0)
+                                                              .toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .headlineMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  14.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Icon(
+                                                      Icon(
                                                         FFIcons.kframe19,
                                                         color:
                                                             FlutterFlowTheme.of(
@@ -883,8 +888,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 .success,
                                                         size: 24.0,
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -943,37 +948,37 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                             BorderRadius
                                                                 .circular(10.0),
                                                       ),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            'Rank',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineSmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        14.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Row(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    15.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              'Rank',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .headlineMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                            Row(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .min,
@@ -1018,8 +1023,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   );
@@ -1293,7 +1298,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              borderRadius: BorderRadius.circular(10.0),
+                              borderRadius: BorderRadius.circular(19.0),
                             ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -1606,7 +1611,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       child: Image
                                                                           .network(
                                                                         videoItemCourseVideoRecord
-                                                                            .video
+                                                                            .vimeoVideo
                                                                             .imagePath,
                                                                         width: double
                                                                             .infinity,
@@ -1767,7 +1772,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                               10.0),
                                                       child: Image.network(
                                                         videoOfDayCourseVideoRecord
-                                                            .video.imagePath,
+                                                            .vimeoVideo
+                                                            .imagePath,
                                                         width: double.infinity,
                                                         height: double.infinity,
                                                         fit: BoxFit.cover,
@@ -1777,8 +1783,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   if (revenue_cat
                                                       .activeEntitlementIds
                                                       .contains(FFAppState()
-                                                          .entitlementID
-                                                          .toString()))
+                                                          .entitlementID))
                                                     Builder(
                                                       builder: (context) =>
                                                           InkWell(
@@ -1816,7 +1821,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 color: Colors
                                                                     .transparent,
                                                                 child:
-                                                                    GestureDetector(
+                                                                    WebViewAware(
+                                                                        child:
+                                                                            GestureDetector(
                                                                   onTap: () => _model
                                                                           .unfocusNode
                                                                           .canRequestFocus
@@ -1834,7 +1841,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                     action:
                                                                         () async {},
                                                                   ),
-                                                                ),
+                                                                )),
                                                               );
                                                             },
                                                           ).then((value) =>
@@ -2349,8 +2356,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               .contains(revenue_cat
                                                   .activeEntitlementIds
                                                   .contains(FFAppState()
-                                                      .entitlementID
-                                                      .toString())
+                                                      .entitlementID)
                                                   .toString())) {
                                             await launchURL(
                                                 'https://drive.google.com/drive/folders/1uyzytR52SgooMlcKR5UTFWE2kNBCQCeF?usp=sharing');
@@ -2372,7 +2378,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               builder: (dialogContext) {
                                                 return Material(
                                                   color: Colors.transparent,
-                                                  child: GestureDetector(
+                                                  child: WebViewAware(
+                                                      child: GestureDetector(
                                                     onTap: () => _model
                                                             .unfocusNode
                                                             .canRequestFocus
@@ -2387,7 +2394,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           'Company profiles are available upon subscription',
                                                       action: () async {},
                                                     ),
-                                                  ),
+                                                  )),
                                                 );
                                               },
                                             ).then((value) => setState(() {}));
@@ -2412,8 +2419,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     color: revenue_cat
                                                             .activeEntitlementIds
                                                             .contains(FFAppState()
-                                                                .entitlementID
-                                                                .toString())
+                                                                .entitlementID)
                                                         ? FlutterFlowTheme.of(
                                                                 context)
                                                             .primary
@@ -2427,8 +2433,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             color: revenue_cat
                                                     .activeEntitlementIds
                                                     .contains(FFAppState()
-                                                        .entitlementID
-                                                        .toString())
+                                                        .entitlementID)
                                                 ? FlutterFlowTheme.of(context)
                                                     .primary
                                                 : FlutterFlowTheme.of(context)

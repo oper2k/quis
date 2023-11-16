@@ -203,47 +203,8 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                         model: _model.karmaListItemModel12,
                         updateCallback: () => setState(() {}),
                         child: KarmaListItemWidget(
-                          text: 'YYou purchased any of Add-ons ',
+                          text: 'You purchased any of Add-ons ',
                           points: '2',
-                        ),
-                      ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await launchURL(
-                              'https://quisapp.notion.site/5327c89c0dc04558add1d77aef5586b1?pvs=25');
-                        },
-                        child: Container(
-                          height: 56.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                15.0, 11.0, 15.0, 11.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Learn more about Karma',
-                                  style:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                ),
-                                Icon(
-                                  FFIcons.kchevronDownS,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                              ],
-                            ),
-                          ),
                         ),
                       ),
                     ].divide(SizedBox(height: 8.0)),

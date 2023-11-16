@@ -1,16 +1,20 @@
 import '/auth/email_dialog/email_dialog_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'confirm_email_model.dart';
 export 'confirm_email_model.dart';
 
@@ -33,6 +37,18 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (!(valueOrDefault(currentUserDocument?.refCode, '') != null &&
+          valueOrDefault(currentUserDocument?.refCode, '') != '')) {
+        await currentUserReference!.update(createUsersRecordData(
+          refCode: functions.generateRefCode(),
+        ));
+      }
+      if ((FFAppState().refUser != null) &&
+          (currentUserDocument?.refUser == null)) {
+        await currentUserReference!.update(createUsersRecordData(
+          refUser: FFAppState().refUser,
+        ));
+      }
       if (currentUserEmailVerified) {
         context.goNamed('Home');
       } else {
@@ -188,13 +204,14 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
                           builder: (dialogContext) {
                             return Material(
                               color: Colors.transparent,
-                              child: GestureDetector(
+                              child: WebViewAware(
+                                  child: GestureDetector(
                                 onTap: () => _model.unfocusNode.canRequestFocus
                                     ? FocusScope.of(context)
                                         .requestFocus(_model.unfocusNode)
                                     : FocusScope.of(context).unfocus(),
                                 child: EmailDialogWidget(),
-                              ),
+                              )),
                             );
                           },
                         ).then((value) => setState(() {}));

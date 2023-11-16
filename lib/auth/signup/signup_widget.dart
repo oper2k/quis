@@ -612,7 +612,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                       child: TextFormField(
                         controller: _model.refFieldController,
                         focusNode: _model.refFieldFocusNode,
-                        obscureText: !_model.refFieldVisibility,
+                        obscureText: false,
                         decoration: InputDecoration(
                           hintText: 'Please enter your referral code',
                           hintStyle: FlutterFlowTheme.of(context)
@@ -655,20 +655,6 @@ class _SignupWidgetState extends State<SignupWidget> {
                           fillColor: FlutterFlowTheme.of(context).white,
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 16.0, 16.0, 16.0),
-                          suffixIcon: InkWell(
-                            onTap: () => setState(
-                              () => _model.refFieldVisibility =
-                                  !_model.refFieldVisibility,
-                            ),
-                            focusNode: FocusNode(skipTraversal: true),
-                            child: Icon(
-                              _model.refFieldVisibility
-                                  ? Icons.visibility_outlined
-                                  : Icons.visibility_off_outlined,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 22,
-                            ),
-                          ),
                         ),
                         style:
                             FlutterFlowTheme.of(context).headlineSmall.override(
@@ -740,7 +726,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                               ).then((s) => s.firstOrNull);
                               _shouldSetState = true;
                               setState(() {
-                                FFAppState().RefUser =
+                                FFAppState().refUser =
                                     _model.refUserOutput?.reference;
                               });
                             }
@@ -822,19 +808,29 @@ class _SignupWidgetState extends State<SignupWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          Function() _navigate = () {};
+                          var _shouldSetState = false;
+                          if (_model.isConsent) {
+                            setState(() {
+                              _model.isConsentRed = false;
+                            });
+                          } else {
+                            setState(() {
+                              _model.isConsentRed = true;
+                            });
+                            if (_shouldSetState) setState(() {});
+                            return;
+                          }
+
                           GoRouter.of(context).prepareAuthEvent();
                           final user =
                               await authManager.signInWithGoogle(context);
                           if (user == null) {
                             return;
                           }
-                          _navigate = () => context.goNamedAuth(
-                              'ConfirmEmail', context.mounted);
                           if (_model.isRef &&
                               (_model.refFieldController.text != null &&
                                   _model.refFieldController.text != '')) {
-                            _model.refUserOutputCopy =
+                            _model.refUserOutputGoogle =
                                 await queryUsersRecordOnce(
                               queryBuilder: (usersRecord) => usersRecord.where(
                                 'ref_code',
@@ -842,15 +838,17 @@ class _SignupWidgetState extends State<SignupWidget> {
                               ),
                               singleRecord: true,
                             ).then((s) => s.firstOrNull);
+                            _shouldSetState = true;
                             setState(() {
-                              FFAppState().RefUser =
-                                  _model.refUserOutput?.reference;
+                              FFAppState().refUser =
+                                  _model.refUserOutputGoogle?.reference;
                             });
                           }
+                          await authManager.sendEmailVerification();
 
-                          _navigate();
+                          context.goNamedAuth('ConfirmEmail', context.mounted);
 
-                          setState(() {});
+                          if (_shouldSetState) setState(() {});
                         },
                         child: Container(
                           width: 108.0,
@@ -880,31 +878,80 @@ class _SignupWidgetState extends State<SignupWidget> {
                           ),
                         ),
                       ),
-                      Container(
-                        width: 108.0,
-                        height: 56.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).accent2,
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(0.0),
-                              child: Image.asset(
-                                'assets/images/_Apple.webp',
-                                width: 20.0,
-                                height: 20.0,
-                                fit: BoxFit.contain,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          var _shouldSetState = false;
+                          if (_model.isConsent) {
+                            setState(() {
+                              _model.isConsentRed = false;
+                            });
+                          } else {
+                            setState(() {
+                              _model.isConsentRed = true;
+                            });
+                            if (_shouldSetState) setState(() {});
+                            return;
+                          }
+
+                          GoRouter.of(context).prepareAuthEvent();
+                          final user =
+                              await authManager.signInWithApple(context);
+                          if (user == null) {
+                            return;
+                          }
+                          if (_model.isRef &&
+                              (_model.refFieldController.text != null &&
+                                  _model.refFieldController.text != '')) {
+                            _model.refUserOutputApple =
+                                await queryUsersRecordOnce(
+                              queryBuilder: (usersRecord) => usersRecord.where(
+                                'ref_code',
+                                isEqualTo: _model.refFieldController.text,
                               ),
+                              singleRecord: true,
+                            ).then((s) => s.firstOrNull);
+                            _shouldSetState = true;
+                            setState(() {
+                              FFAppState().refUser =
+                                  _model.refUserOutputApple?.reference;
+                            });
+                          }
+                          await authManager.sendEmailVerification();
+
+                          context.goNamedAuth('ConfirmEmail', context.mounted);
+
+                          if (_shouldSetState) setState(() {});
+                        },
+                        child: Container(
+                          width: 108.0,
+                          height: 56.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).accent2,
+                              width: 1.0,
                             ),
-                          ],
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(0.0),
+                                child: Image.asset(
+                                  'assets/images/_Apple.webp',
+                                  width: 20.0,
+                                  height: 20.0,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ].divide(SizedBox(width: 22.0)),

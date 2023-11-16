@@ -117,7 +117,8 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 5.0,
                           mainAxisSpacing: 8.0,
-                          childAspectRatio: 0.98,
+                          childAspectRatio:
+                              MediaQuery.sizeOf(context).width * 0.0027 - 0.01,
                         ),
                         primary: false,
                         shrinkWrap: true,
@@ -190,7 +191,7 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                                 BorderRadius.circular(10.0),
                                             child: Image.network(
                                               containerCourseVideoRecord
-                                                  .video.imagePath,
+                                                  .vimeoVideo.imagePath,
                                               width: double.infinity,
                                               height: 99.0,
                                               fit: BoxFit.cover,
@@ -203,9 +204,17 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                               child: Text(
                                                 containerCourseVideoRecord.name,
                                                 maxLines: 2,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Sofia Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      useGoogleFonts: false,
+                                                    ),
                                               ),
                                             ),
                                           ),

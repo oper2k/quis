@@ -101,17 +101,19 @@ String? styleHTMLfunc(String? text) {
   return '<html>$cssStyle <body>$text</body></html>';
 }
 
-int videoIndexInList(
-  DocumentReference videoRef,
+int? videoIndexInList(
+  DocumentReference? videoRef,
   List<CourseVideoRecord> videoList,
 ) {
-  // find Index of the video in the list
+  if (videoRef == null) {
+    return null;
+  }
   for (int i = 0; i < videoList.length; i++) {
     if (videoList[i].reference == videoRef) {
       return i;
     }
   }
-  return -1;
+  return null;
 }
 
 List<String> generateExpYears(int itemsNumber) {
@@ -137,6 +139,26 @@ DateTime? getSameTime(
       DateTime(userTime.year, userTime.month, userTime.day, hour, minute);
 
   return userTime.isAfter(DisTime) ? DisTime.add(Duration(days: 1)) : DisTime;
+}
+
+int getYearInInt(DateTime dateTime) {
+  // get minutes in int
+  return dateTime.year;
+}
+
+int getDayInInt(DateTime dateTime) {
+  // get minutes in int
+  return dateTime.day;
+}
+
+int getHourInInt(DateTime dateTime) {
+  // get minutes in int
+  return dateTime.hour;
+}
+
+int getMonthInInt(DateTime dateTime) {
+  // get minutes in int
+  return dateTime.month;
 }
 
 DateTime timeMinusMinutes(
@@ -186,4 +208,73 @@ DateTime decMonth(DateTime date) {
 
 DateTime incMonth(DateTime date) {
   return DateTime(date.year, date.month + 1, date.day);
+}
+
+DateTime dateMinusDays(
+  DateTime date,
+  int days,
+) {
+  // date minus days
+  return date.subtract(Duration(days: days));
+}
+
+int getMinutesInInt(DateTime dateTime) {
+  // get minutes in int
+  return dateTime.minute;
+}
+
+String? getInitialsFromName(
+  String? fName,
+  String? lName,
+) {
+  // get initials of first and last name
+  if (fName == null || lName == null) {
+    return ' ';
+  }
+  final firstInitial = fName.isNotEmpty ? fName[0] : '';
+  final lastInitial = lName.isNotEmpty ? lName[0] : '';
+  return '$firstInitial $lastInitial';
+}
+
+bool checkUserKarmaMatch(
+  double? myKarma,
+  double? userKarma,
+) {
+  if (myKarma == null || userKarma == null) {
+    return false; // Assuming null values should not match
+  }
+
+  // Define the levels based on karma points
+  int getLevel(double karma) {
+    if (karma <= 5) {
+      return 1;
+    } else if (karma >= 6 && karma <= 11) {
+      return 2;
+    } else if (karma >= 12 && karma <= 17) {
+      return 3;
+    } else if (karma >= 18 && karma <= 23) {
+      return 4;
+    } else if (karma >= 24 && karma <= 29) {
+      return 5;
+    } else if (karma >= 30) {
+      return 6;
+    } else {
+      return 0; // Returns 0 for karma outside defined ranges
+    }
+  }
+
+  // Get the levels for myKarma and userKarma
+  int myLevel = getLevel(myKarma);
+  int userLevel = getLevel(userKarma);
+
+  // Check if both users are in the same level
+  return myLevel == userLevel && myLevel != 0;
+}
+
+List<String>? imagePathToString(List<String>? imagePath) {
+  // imagePath to string
+  if (imagePath == null) {
+    return null;
+  }
+  return imagePath;
 }

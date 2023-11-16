@@ -1,26 +1,30 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/avatar_widget.dart';
+import '/components/karma_plus_dialog_widget.dart';
 import '/components/message_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'question_comments_bottom_sheet_model.dart';
 export 'question_comments_bottom_sheet_model.dart';
 
 class QuestionCommentsBottomSheetWidget extends StatefulWidget {
   const QuestionCommentsBottomSheetWidget({
     Key? key,
-    required this.commentRef,
+    required this.questionRef,
   }) : super(key: key);
 
-  final DocumentReference? commentRef;
+  final DocumentReference? questionRef;
 
   @override
   _QuestionCommentsBottomSheetWidgetState createState() =>
@@ -74,7 +78,7 @@ class _QuestionCommentsBottomSheetWidgetState
 
     return Container(
       width: double.infinity,
-      height: double.infinity,
+      height: MediaQuery.sizeOf(context).height * 0.5,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.only(
@@ -90,7 +94,7 @@ class _QuestionCommentsBottomSheetWidgetState
               commentInterviewQuestionRecord
                   .where(
                     'ref_question',
-                    isEqualTo: widget.commentRef,
+                    isEqualTo: widget.questionRef,
                   )
                   .orderBy('created_time', descending: true),
         ),
@@ -121,7 +125,7 @@ class _QuestionCommentsBottomSheetWidgetState
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 5.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,28 +134,6 @@ class _QuestionCommentsBottomSheetWidgetState
                           'Comments',
                           style: FlutterFlowTheme.of(context).headlineSmall,
                         ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 5.0, 5.0, 5.0),
-                              child: Icon(
-                                FFIcons.kxmark,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -159,7 +141,7 @@ class _QuestionCommentsBottomSheetWidgetState
                     child: Container(
                       constraints: BoxConstraints(
                         minHeight: 50.0,
-                        maxHeight: MediaQuery.sizeOf(context).height * 0.8,
+                        maxHeight: MediaQuery.sizeOf(context).height * 0.5,
                       ),
                       decoration: BoxDecoration(),
                       child: Padding(
@@ -433,6 +415,32 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                           },
                                                                         ),
                                                                       });
+
+                                                                      await userRefItemUsersRecord
+                                                                          .reference
+                                                                          .update({
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'karma':
+                                                                                FieldValue.increment(0.5),
+                                                                          },
+                                                                        ),
+                                                                      });
+                                                                      triggerPushNotification(
+                                                                        notificationTitle:
+                                                                            'You recieve 0,5 Karma!',
+                                                                        notificationText:
+                                                                            'Somebody likes your comment!',
+                                                                        notificationSound:
+                                                                            'default',
+                                                                        userRefs: [
+                                                                          userRefItemUsersRecord
+                                                                              .reference
+                                                                        ],
+                                                                        initialPageName:
+                                                                            'Home',
+                                                                        parameterData: {},
+                                                                      );
                                                                     },
                                                                     child:
                                                                         Container(
@@ -629,22 +637,67 @@ class _QuestionCommentsBottomSheetWidgetState
                             ),
                           ),
                         ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {},
-                          child: Container(
-                            decoration: BoxDecoration(),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  4.0, 0.0, 0.0, 0.0),
-                              child: Icon(
-                                FFIcons.kfluentSend48Regular,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
+                        Builder(
+                          builder: (context) => InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              if (_model.textController.text != null &&
+                                  _model.textController.text != '') {
+                                await CommentInterviewQuestionRecord.collection
+                                    .doc()
+                                    .set(
+                                        createCommentInterviewQuestionRecordData(
+                                      user: currentUserReference,
+                                      text: _model.textController.text,
+                                      createdTime: getCurrentTimestamp,
+                                      refQuestion: widget.questionRef,
+                                    ));
+
+                                await currentUserReference!.update({
+                                  ...mapToFirestore(
+                                    {
+                                      'karma': FieldValue.increment(0.5),
+                                    },
+                                  ),
+                                });
+                                await showAlignedDialog(
+                                  context: context,
+                                  isGlobal: true,
+                                  avoidOverflow: false,
+                                  targetAnchor: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  followerAnchor: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  builder: (dialogContext) {
+                                    return Material(
+                                      color: Colors.transparent,
+                                      child: WebViewAware(
+                                          child: KarmaPlusDialogWidget(
+                                        karmaPoints: 0.5,
+                                      )),
+                                    );
+                                  },
+                                ).then((value) => setState(() {}));
+
+                                setState(() {
+                                  _model.textController?.clear();
+                                });
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    4.0, 0.0, 0.0, 0.0),
+                                child: Icon(
+                                  FFIcons.kfluentSend48Regular,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
                               ),
                             ),
                           ),

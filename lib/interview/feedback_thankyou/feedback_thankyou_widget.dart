@@ -61,15 +61,24 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
             children: [
               Align(
                 alignment: AlignmentDirectional(1.00, -1.00),
-                child: Container(
-                  decoration: BoxDecoration(),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
-                    child: Icon(
-                      FFIcons.kxmark,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 24.0,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.goNamed('Home');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                      child: Icon(
+                        FFIcons.kxmark,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 24.0,
+                      ),
                     ),
                   ),
                 ),
@@ -100,8 +109,8 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
               ),
               Spacer(),
               FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
+                onPressed: () async {
+                  context.goNamed('Home');
                 },
                 text: 'Back home',
                 options: FFButtonOptions(
@@ -128,8 +137,8 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.goNamed('PracticeInterview');
                   },
                   text: 'Get new reminder',
                   options: FFButtonOptions(

@@ -497,10 +497,11 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  valueOrDefault<String>(
-                                    widget.userItem?.karma?.toString(),
-                                    '0',
-                                  ),
+                                  (double? karma) {
+                                    return karma != null
+                                        ? karma.toStringAsFixed(1)
+                                        : '0';
+                                  }(widget.userItem?.karma),
                                   style: TextStyle(
                                     fontFamily: 'Sofia Pro',
                                     color: FlutterFlowTheme.of(context).primary,
@@ -647,7 +648,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                               children: [
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.userItem?.likes?.toString(),
+                                    widget.userItem?.endorsement?.toString(),
                                     '0',
                                   ),
                                   style: FlutterFlowTheme.of(context)

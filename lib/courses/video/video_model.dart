@@ -3,8 +3,7 @@ import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/components/back_button_widget.dart';
 import '/components/subscription_required_dialog_widget.dart';
-import '/components/video_comments_bottom_sheet_widget.dart';
-import '/courses/send_feedback_bottom_sheet/send_feedback_bottom_sheet_widget.dart';
+import '/courses/video_comments_bottom_sheet/video_comments_bottom_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -24,6 +23,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class VideoModel extends FlutterFlowModel<VideoWidget> {
   ///  Local state fields for this page.

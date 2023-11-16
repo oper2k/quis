@@ -47,6 +47,20 @@
       ]
     },
     {
+      "collectionGroup": "conference_room",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "users",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
       "collectionGroup": "comment_interview_question",
       "queryScope": "COLLECTION",
       "fields": [

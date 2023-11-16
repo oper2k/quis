@@ -21,11 +21,6 @@ class CourseVideoRecord extends FirestoreRecord {
   String get name => _name ?? '';
   bool hasName() => _name != null;
 
-  // "video" field.
-  VideoStruct? _video;
-  VideoStruct get video => _video ?? VideoStruct();
-  bool hasVideo() => _video != null;
-
   // "type" field.
   String? _type;
   String get type => _type ?? '';
@@ -66,9 +61,13 @@ class CourseVideoRecord extends FirestoreRecord {
   int get views => _views ?? 0;
   bool hasViews() => _views != null;
 
+  // "vimeo_video" field.
+  VimeoVideoStruct? _vimeoVideo;
+  VimeoVideoStruct get vimeoVideo => _vimeoVideo ?? VimeoVideoStruct();
+  bool hasVimeoVideo() => _vimeoVideo != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
-    _video = VideoStruct.maybeFromMap(snapshotData['video']);
     _type = snapshotData['type'] as String?;
     _course = snapshotData['course'] as DocumentReference?;
     _description = snapshotData['description'] as String?;
@@ -83,6 +82,7 @@ class CourseVideoRecord extends FirestoreRecord {
       LikeDislikeStruct.fromMap,
     );
     _views = castToType<int>(snapshotData['views']);
+    _vimeoVideo = VimeoVideoStruct.maybeFromMap(snapshotData['vimeo_video']);
   }
 
   static CollectionReference get collection =>
@@ -121,32 +121,32 @@ class CourseVideoRecord extends FirestoreRecord {
 
 Map<String, dynamic> createCourseVideoRecordData({
   String? name,
-  VideoStruct? video,
   String? type,
   DocumentReference? course,
   String? description,
   RatingStruct? rating,
   int? sort,
   int? views,
+  VimeoVideoStruct? vimeoVideo,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'name': name,
-      'video': VideoStruct().toMap(),
       'type': type,
       'course': course,
       'description': description,
       'rating': RatingStruct().toMap(),
       'sort': sort,
       'views': views,
+      'vimeo_video': VimeoVideoStruct().toMap(),
     }.withoutNulls,
   );
 
-  // Handle nested data for "video" field.
-  addVideoStructData(firestoreData, video, 'video');
-
   // Handle nested data for "rating" field.
   addRatingStructData(firestoreData, rating, 'rating');
+
+  // Handle nested data for "vimeo_video" field.
+  addVimeoVideoStructData(firestoreData, vimeoVideo, 'vimeo_video');
 
   return firestoreData;
 }
@@ -158,7 +158,6 @@ class CourseVideoRecordDocumentEquality implements Equality<CourseVideoRecord> {
   bool equals(CourseVideoRecord? e1, CourseVideoRecord? e2) {
     const listEquality = ListEquality();
     return e1?.name == e2?.name &&
-        e1?.video == e2?.video &&
         e1?.type == e2?.type &&
         e1?.course == e2?.course &&
         e1?.description == e2?.description &&
@@ -166,13 +165,13 @@ class CourseVideoRecordDocumentEquality implements Equality<CourseVideoRecord> {
         e1?.sort == e2?.sort &&
         listEquality.equals(e1?.textGuides, e2?.textGuides) &&
         listEquality.equals(e1?.likeDislike, e2?.likeDislike) &&
-        e1?.views == e2?.views;
+        e1?.views == e2?.views &&
+        e1?.vimeoVideo == e2?.vimeoVideo;
   }
 
   @override
   int hash(CourseVideoRecord? e) => const ListEquality().hash([
         e?.name,
-        e?.video,
         e?.type,
         e?.course,
         e?.description,
@@ -180,7 +179,8 @@ class CourseVideoRecordDocumentEquality implements Equality<CourseVideoRecord> {
         e?.sort,
         e?.textGuides,
         e?.likeDislike,
-        e?.views
+        e?.views,
+        e?.vimeoVideo
       ]);
 
   @override

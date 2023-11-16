@@ -83,8 +83,8 @@ class _QuestionsFilterBottomSheetWidgetState
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
               child: Wrap(
                 spacing: 10.0,
-                runSpacing: 5.0,
-                alignment: WrapAlignment.start,
+                runSpacing: 10.0,
+                alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.start,
                 direction: Axis.horizontal,
                 runAlignment: WrapAlignment.start,
@@ -284,107 +284,112 @@ class _QuestionsFilterBottomSheetWidgetState
                 ),
               ),
             ),
-            Builder(
-              builder: (context) {
-                final role = FFAppState().filterRoleList.toList();
-                return Wrap(
-                  spacing: 9.0,
-                  runSpacing: 9.0,
-                  alignment: WrapAlignment.center,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  direction: Axis.horizontal,
-                  runAlignment: WrapAlignment.start,
-                  verticalDirection: VerticalDirection.down,
-                  clipBehavior: Clip.none,
-                  children: List.generate(role.length, (roleIndex) {
-                    final roleItem = role[roleIndex];
-                    return InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        if (_model.filterList.contains(roleItem)) {
-                          setState(() {
-                            _model.removeFromFilterList(roleItem);
-                          });
-                        } else {
-                          setState(() {
-                            _model.addToFilterList(roleItem);
-                          });
-                        }
-                      },
-                      child: FilterElementWidget(
-                        key: Key('Keyj0u_${roleIndex}_of_${role.length}'),
-                        isPicked: _model.filterList.contains(roleItem),
-                        text: roleItem,
-                      ),
-                    );
-                  }),
-                );
-              },
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+              child: Builder(
+                builder: (context) {
+                  final role = FFAppState().filterRoleList.toList();
+                  return Wrap(
+                    spacing: 9.0,
+                    runSpacing: 9.0,
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    direction: Axis.horizontal,
+                    runAlignment: WrapAlignment.start,
+                    verticalDirection: VerticalDirection.down,
+                    clipBehavior: Clip.none,
+                    children: List.generate(role.length, (roleIndex) {
+                      final roleItem = role[roleIndex];
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          if (_model.filterList.contains(roleItem)) {
+                            setState(() {
+                              _model.removeFromFilterList(roleItem);
+                            });
+                          } else {
+                            setState(() {
+                              _model.addToFilterList(roleItem);
+                            });
+                          }
+                        },
+                        child: FilterElementWidget(
+                          key: Key('Keyj0u_${roleIndex}_of_${role.length}'),
+                          isPicked: _model.filterList.contains(roleItem),
+                          text: roleItem,
+                        ),
+                      );
+                    }),
+                  );
+                },
+              ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 10.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 40.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FFButtonWidget(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    text: 'Cancel',
-                    options: FFButtonOptions(
-                      width: 127.0,
-                      height: 45.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).white,
-                      textStyle:
-                          FlutterFlowTheme.of(context).headlineLarge.override(
-                                fontFamily: 'Sofia Pro',
-                                color: FlutterFlowTheme.of(context).primary,
-                                useGoogleFonts: false,
-                              ),
-                      elevation: 0.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 0.0,
+                  Expanded(
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                      },
+                      text: 'Cancel',
+                      options: FFButtonOptions(
+                        height: 45.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).white,
+                        textStyle:
+                            FlutterFlowTheme.of(context).headlineLarge.override(
+                                  fontFamily: 'Sofia Pro',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  useGoogleFonts: false,
+                                ),
+                        elevation: 0.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 0.0,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      Navigator.pop(context, _model.filterList);
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: 127.0,
-                      height: 45.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).headlineLarge.override(
-                                fontFamily: 'Sofia Pro',
-                                color: FlutterFlowTheme.of(context).white,
-                                useGoogleFonts: false,
-                              ),
-                      elevation: 0.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 0.0,
+                  Expanded(
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        Navigator.pop(context, _model.filterList);
+                      },
+                      text: 'Save',
+                      options: FFButtonOptions(
+                        height: 45.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).headlineLarge.override(
+                                  fontFamily: 'Sofia Pro',
+                                  color: FlutterFlowTheme.of(context).white,
+                                  useGoogleFonts: false,
+                                ),
+                        elevation: 0.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 0.0,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                ].divide(SizedBox(width: 44.0)),
+                ].divide(SizedBox(width: 30.0)),
               ),
             ),
           ],

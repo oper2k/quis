@@ -26,15 +26,15 @@ class WelcomeVideoRecord extends FirestoreRecord {
   String get announcementsText => _announcementsText ?? '';
   bool hasAnnouncementsText() => _announcementsText != null;
 
-  // "video" field.
-  VideoStruct? _video;
-  VideoStruct get video => _video ?? VideoStruct();
-  bool hasVideo() => _video != null;
+  // "vimeo_video" field.
+  VimeoVideoStruct? _vimeoVideo;
+  VimeoVideoStruct get vimeoVideo => _vimeoVideo ?? VimeoVideoStruct();
+  bool hasVimeoVideo() => _vimeoVideo != null;
 
   void _initializeFields() {
     _announcementsTitle = snapshotData['announcements_title'] as String?;
     _announcementsText = snapshotData['announcements_text'] as String?;
-    _video = VideoStruct.maybeFromMap(snapshotData['video']);
+    _vimeoVideo = VimeoVideoStruct.maybeFromMap(snapshotData['vimeo_video']);
   }
 
   static CollectionReference get collection =>
@@ -74,18 +74,18 @@ class WelcomeVideoRecord extends FirestoreRecord {
 Map<String, dynamic> createWelcomeVideoRecordData({
   String? announcementsTitle,
   String? announcementsText,
-  VideoStruct? video,
+  VimeoVideoStruct? vimeoVideo,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'announcements_title': announcementsTitle,
       'announcements_text': announcementsText,
-      'video': VideoStruct().toMap(),
+      'vimeo_video': VimeoVideoStruct().toMap(),
     }.withoutNulls,
   );
 
-  // Handle nested data for "video" field.
-  addVideoStructData(firestoreData, video, 'video');
+  // Handle nested data for "vimeo_video" field.
+  addVimeoVideoStructData(firestoreData, vimeoVideo, 'vimeo_video');
 
   return firestoreData;
 }
@@ -98,12 +98,12 @@ class WelcomeVideoRecordDocumentEquality
   bool equals(WelcomeVideoRecord? e1, WelcomeVideoRecord? e2) {
     return e1?.announcementsTitle == e2?.announcementsTitle &&
         e1?.announcementsText == e2?.announcementsText &&
-        e1?.video == e2?.video;
+        e1?.vimeoVideo == e2?.vimeoVideo;
   }
 
   @override
   int hash(WelcomeVideoRecord? e) => const ListEquality()
-      .hash([e?.announcementsTitle, e?.announcementsText, e?.video]);
+      .hash([e?.announcementsTitle, e?.announcementsText, e?.vimeoVideo]);
 
   @override
   bool isValidKey(Object? o) => o is WelcomeVideoRecord;

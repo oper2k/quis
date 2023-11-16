@@ -20,6 +20,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'edit_profile_model.dart';
 export 'edit_profile_model.dart';
 
@@ -564,7 +565,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     enableDrag: false,
                                                     context: context,
                                                     builder: (context) {
-                                                      return GestureDetector(
+                                                      return WebViewAware(
+                                                          child:
+                                                              GestureDetector(
                                                         onTap: () => _model
                                                                 .unfocusNode
                                                                 .canRequestFocus
@@ -588,7 +591,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                     .toList(),
                                                           ),
                                                         ),
-                                                      );
+                                                      ));
                                                     },
                                                   ).then((value) =>
                                                       safeSetState(() =>
@@ -621,7 +624,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                   updateCallback: () =>
                                                       setState(() {}),
                                                   child: PseudoDropDownWidget(
-                                                    defText: 'Goal',
+                                                    defText: 'Industry',
                                                     text: groupListGroupRecordList
                                                                 .where((e) =>
                                                                     e.reference ==
@@ -637,7 +640,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                             .toList()
                                                             .first
                                                             .name
-                                                        : ' ',
+                                                        : null,
                                                   ),
                                                 ),
                                               ),
@@ -714,7 +717,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                       context,
                                                                   builder:
                                                                       (context) {
-                                                                    return GestureDetector(
+                                                                    return WebViewAware(
+                                                                        child:
+                                                                            GestureDetector(
                                                                       onTap: () => _model
                                                                               .unfocusNode
                                                                               .canRequestFocus
@@ -735,7 +740,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                               .toList(),
                                                                         ),
                                                                       ),
-                                                                    );
+                                                                    ));
                                                                   },
                                                                 ).then((value) =>
                                                                     safeSetState(() =>
@@ -844,7 +849,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                       context,
                                                                   builder:
                                                                       (context) {
-                                                                    return GestureDetector(
+                                                                    return WebViewAware(
+                                                                        child:
+                                                                            GestureDetector(
                                                                       onTap: () => _model
                                                                               .unfocusNode
                                                                               .canRequestFocus
@@ -863,7 +870,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                               .toList(),
                                                                         ),
                                                                       ),
-                                                                    );
+                                                                    ));
                                                                   },
                                                                 ).then((value) =>
                                                                     safeSetState(() =>
@@ -973,7 +980,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                       context,
                                                                   builder:
                                                                       (context) {
-                                                                    return GestureDetector(
+                                                                    return WebViewAware(
+                                                                        child:
+                                                                            GestureDetector(
                                                                       onTap: () => _model
                                                                               .unfocusNode
                                                                               .canRequestFocus
@@ -991,7 +1000,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                               functions.generateExpYears(20),
                                                                         ),
                                                                       ),
-                                                                    );
+                                                                    ));
                                                                   },
                                                                 ).then((value) =>
                                                                     safeSetState(() =>
@@ -1232,6 +1241,19 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 clearUnsetFields: false,
                                               ),
                                             ));
+                                            if (_model.roleRef == null) {
+                                              await currentUserReference!
+                                                  .update(createUsersRecordData(
+                                                careerProfile:
+                                                    createCareerProfileStruct(
+                                                  fieldValues: {
+                                                    'goal_role':
+                                                        FieldValue.delete(),
+                                                  },
+                                                  clearUnsetFields: false,
+                                                ),
+                                              ));
+                                            }
                                             if (_model.uploadedFileUrl !=
                                                     null &&
                                                 _model.uploadedFileUrl != '') {
@@ -1304,7 +1326,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 builder: (dialogContext) {
                                                   return Material(
                                                     color: Colors.transparent,
-                                                    child: GestureDetector(
+                                                    child: WebViewAware(
+                                                        child: GestureDetector(
                                                       onTap: () => _model
                                                               .unfocusNode
                                                               .canRequestFocus
@@ -1319,7 +1342,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                           KarmaPlusDialogWidget(
                                                         karmaPoints: 0.5,
                                                       ),
-                                                    ),
+                                                    )),
                                                   );
                                                 },
                                               ).then(

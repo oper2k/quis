@@ -14,17 +14,21 @@ class KarmaModel extends FlutterFlowModel<KarmaWidget> {
 
   final unfocusNode = FocusNode();
   // Model for MenuItem component.
-  late MenuItemModel menuItemModel;
+  late MenuItemModel menuItemModel1;
+  // Model for MenuItem component.
+  late MenuItemModel menuItemModel2;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    menuItemModel = createModel(context, () => MenuItemModel());
+    menuItemModel1 = createModel(context, () => MenuItemModel());
+    menuItemModel2 = createModel(context, () => MenuItemModel());
   }
 
   void dispose() {
     unfocusNode.dispose();
-    menuItemModel.dispose();
+    menuItemModel1.dispose();
+    menuItemModel2.dispose();
   }
 
   /// Action blocks are added here.
