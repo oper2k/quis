@@ -1,3 +1,4 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -1879,16 +1880,16 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            // _model.apiResult = await AgoraUserTokenCall.call(
-                            //   uid: currentUserUid,
-                            //   channelName: 'test',
-                            // );
-                            // if ((_model.apiResult?.succeeded ?? true)) {
+                            HttpsCallable callable = FirebaseFunctions.instance
+                                .httpsCallable('generateRtcTokenCall');
+                            final resp = await callable.call(<String, dynamic>{
+                              'channelName': 'test',
+                            });
                             context.pushNamed(
                               'VideoConfPage',
                               queryParameters: {
                                 'token': serializeParam(
-                                  '007eJxTYHj0q2zPCjkDCcUJuVsE1n7Z5/6q4dTEb25TdnxdtFfg/C57BQaLRONEMzODFCAwMklOTUq0NLMwSE00MzdMTTM2tTRcWBuWqtsRlmpl/oeJkYGRgQWIQYAJTDKDSRYoWZJaXMLMYGhkDADXmyKl',
+                                  '007eJxTYNBdVsr9S92wpufesYUrrp8ozf1zUtHPfVGXd+Of5/Xv36QrMFgkGieamRmkAIGRSXJqUqKlmYVBaqKZuWFqmrGppeEpptjUhkBGhpUhWayMDBAI4rMwlKQWlzAwAAAVwiH7',
                                   ParamType.String,
                                 ),
                                 'channelName': serializeParam(
