@@ -190,11 +190,11 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                           builder: (_, isEnabled, __) =>
                                               GestureDetector(
                                             onTap: () async {
-                                              await _engine
-                                                  .muteLocalAudioStream(
-                                                      !isEnabled);
                                               isMicEnabledNotifier.value =
                                                   !isEnabled;
+                                              await _engine
+                                                  .muteLocalAudioStream(
+                                                      isEnabled);
                                             },
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -254,11 +254,11 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                           builder: (_, isEnabled, __) =>
                                               GestureDetector(
                                             onTap: () async {
-                                              await _engine
-                                                  .muteLocalVideoStream(
-                                                      !isEnabled);
                                               isCameraEnabledNotifier.value =
                                                   !isEnabled;
+                                              await _engine
+                                                  .muteLocalVideoStream(
+                                                      isEnabled);
                                             },
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -446,18 +446,21 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                     borderRadius: BorderRadius.circular(10),
                     child: ValueListenableBuilder(
                       valueListenable: isCameraEnabledNotifier,
-                      builder: (_, isEnabled, __) => SizedBox(
-                        width: 90,
-                        height: 90,
-                        child: _localUserJoined && isEnabled
-                            ? AgoraVideoView(
-                                controller: VideoViewController(
-                                  rtcEngine: _engine,
-                                  canvas: const VideoCanvas(uid: 0),
-                                ),
-                              )
-                            : _localPlaceholder(),
-                      ),
+                      builder: (_, isEnabled, __) {
+                        print('isCameraEnabledNotifier: $isEnabled');
+                        return SizedBox(
+                          width: 90,
+                          height: 90,
+                          child: _localUserJoined && isEnabled
+                              ? AgoraVideoView(
+                                  controller: VideoViewController(
+                                    rtcEngine: _engine,
+                                    canvas: const VideoCanvas(uid: 0),
+                                  ),
+                                )
+                              : _localPlaceholder(),
+                        );
+                      },
                     ),
                   ),
                 ),
