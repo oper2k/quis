@@ -19,6 +19,10 @@ class VideoConfWidget extends StatefulWidget {
     required this.token,
     required this.channelName,
     required this.userProfileImage,
+    this.onMuteTap,
+    this.onTurnOffTap,
+    this.onChatTap,
+    this.onEndTap,
   });
 
   final double? width;
@@ -26,6 +30,10 @@ class VideoConfWidget extends StatefulWidget {
   final String token;
   final String channelName;
   final String userProfileImage;
+  final VoidCallback? onMuteTap;
+  final VoidCallback? onTurnOffTap;
+  final VoidCallback? onChatTap;
+  final VoidCallback? onEndTap;
 
   @override
   _VideoConfWidgetState createState() => _VideoConfWidgetState();
@@ -33,11 +41,16 @@ class VideoConfWidget extends StatefulWidget {
 
 class _VideoConfWidgetState extends State<VideoConfWidget> {
   int? _remoteUid;
-  bool _localUserJoined = false;
   late RtcEngine _engine;
 
-  ValueNotifier<bool> isMicEnabledNotifier = ValueNotifier(true);
-  ValueNotifier<bool> isCameraEnabledNotifier = ValueNotifier(true);
+  final ValueNotifier<bool> _localUserJoinedNotifier = ValueNotifier(false);
+  final ValueNotifier<bool> _isMicEnabledNotifier = ValueNotifier(true);
+  final ValueNotifier<bool> _isCameraEnabledNotifier = ValueNotifier(true);
+  final ValueNotifier<bool> _remoteUserMicEnabledNotifier = ValueNotifier(true);
+  final ValueNotifier<bool> _remoteUserCameraEnabledNotifier =
+      ValueNotifier(true);
+  final ValueNotifier<bool> _remoteUserLostConnectionNotifier =
+      ValueNotifier(false);
 
   static const appId = "8a3a660dddd24ceba9680ea671ef3591";
 
@@ -63,7 +76,7 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           debugPrint("local user ${connection.localUid} joined");
           setState(() {
-            _localUserJoined = true;
+            _localUserJoinedNotifier.value = true;
           });
         },
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
@@ -82,6 +95,35 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
           debugPrint(
               '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+        },
+        onRemoteAudioStateChanged: (
+          connection,
+          remoteUid,
+          RemoteAudioState state,
+          reason,
+          elapsed,
+        ) {
+          if (state == RemoteAudioState.remoteAudioStateStopped) {
+            _remoteUserMicEnabledNotifier.value = false;
+          } else if (state == RemoteAudioState.remoteAudioStateDecoding) {
+            _remoteUserMicEnabledNotifier.value = true;
+          }
+        },
+        onRemoteVideoStateChanged: (
+          connection,
+          remoteUid,
+          RemoteVideoState state,
+          reason,
+          elapsed,
+        ) {
+          _remoteUserLostConnectionNotifier.value = false;
+          if (state == RemoteVideoState.remoteVideoStateStopped) {
+            _remoteUserCameraEnabledNotifier.value = false;
+          } else if (state == RemoteVideoState.remoteVideoStateDecoding) {
+            _remoteUserCameraEnabledNotifier.value = true;
+          } else if (state == RemoteVideoState.remoteVideoStateFrozen) {
+            _remoteUserLostConnectionNotifier.value = true;
+          }
         },
       ),
     );
@@ -112,11 +154,38 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
 
   Widget _remoteVideo() {
     if (_remoteUid != null) {
-      return AgoraVideoView(
-        controller: VideoViewController.remote(
-          rtcEngine: _engine,
-          canvas: VideoCanvas(uid: _remoteUid),
-          connection: RtcConnection(channelId: widget.channelName),
+      return ValueListenableBuilder(
+        valueListenable: _remoteUserLostConnectionNotifier,
+        builder: (_, isLostConnection, __) => ValueListenableBuilder(
+          valueListenable: _remoteUserMicEnabledNotifier,
+          builder: (_, isMicEnabled, __) => ValueListenableBuilder(
+            valueListenable: _remoteUserCameraEnabledNotifier,
+            builder: (_, isCameraEnabled, __) => Stack(
+              children: [
+                Positioned.fill(
+                  child: AgoraVideoView(
+                    controller: VideoViewController.remote(
+                      rtcEngine: _engine,
+                      canvas: VideoCanvas(uid: _remoteUid),
+                      connection: RtcConnection(channelId: widget.channelName),
+                    ),
+                  ),
+                ),
+                if (!isMicEnabled || !isCameraEnabled)
+                  Positioned.fill(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (isLostConnection) const Text('User conection lost'),
+                        if (!isMicEnabled) const Text('User muted microphone'),
+                        if (!isCameraEnabled)
+                          const Text('User turned camera off'),
+                      ],
+                    ),
+                  )
+              ],
+            ),
+          ),
         ),
       );
     } else {
@@ -147,188 +216,73 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Padding(
-          padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
-          child: Stack(
-            children: [
-              SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: _remoteVideo()),
-              Align(
-                alignment: const AlignmentDirectional(0.00, 1.00),
-                child: SizedBox(
-                  height: 190,
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(0),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX: 2,
-                            sigmaY: 2,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xACFFFFFF),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16, 49, 16, 44),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: ValueListenableBuilder(
-                                          valueListenable: isMicEnabledNotifier,
-                                          builder: (_, isEnabled, __) =>
-                                              GestureDetector(
-                                            onTap: () async {
-                                              isMicEnabledNotifier.value =
-                                                  !isEnabled;
-                                              await _engine
-                                                  .muteLocalAudioStream(
-                                                      isEnabled);
-                                            },
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Container(
-                                                  width: 70,
-                                                  height: 70,
-                                                  decoration: BoxDecoration(
-                                                    color: isEnabled
-                                                        ? const Color(
-                                                            0x2B010101)
-                                                        : Colors.black,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Icon(
-                                                    FFIcons.kon1,
-                                                    color: isEnabled
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .white
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .accent3,
-                                                    size: 30,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(0, 9, 0, 0),
-                                                  child: Text(
-                                                    'Mute',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent3,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: ValueListenableBuilder(
-                                          valueListenable:
-                                              isCameraEnabledNotifier,
-                                          builder: (_, isEnabled, __) =>
-                                              GestureDetector(
-                                            onTap: () async {
-                                              isCameraEnabledNotifier.value =
-                                                  !isEnabled;
-                                              await _engine
-                                                  .muteLocalVideoStream(
-                                                      isEnabled);
-                                            },
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Container(
-                                                  width: 70,
-                                                  height: 70,
-                                                  decoration: BoxDecoration(
-                                                    color: isEnabled
-                                                        ? const Color(
-                                                            0x2B010101)
-                                                        : Colors.black,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Icon(
-                                                    FFIcons.kcomponent27,
-                                                    color: isEnabled
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .white
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .accent3,
-                                                    size: 30,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(0, 9, 0, 0),
-                                                  child: Text(
-                                                    'Turn off',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent3,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          decoration: const BoxDecoration(),
+        body: Stack(
+          children: [
+            SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: _remoteVideo()),
+            Align(
+              alignment: const AlignmentDirectional(0.00, 1.00),
+              child: SizedBox(
+                height: 190,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(0),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: 2,
+                          sigmaY: 2,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: Color(0xACFFFFFF),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16, 49, 16, 44),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: ValueListenableBuilder(
+                                        valueListenable: _isMicEnabledNotifier,
+                                        builder: (_, isEnabled, __) =>
+                                            GestureDetector(
+                                          onTap: () async {
+                                            _isMicEnabledNotifier.value =
+                                                !isEnabled;
+                                            await _engine.muteLocalAudioStream(
+                                                isEnabled);
+                                          },
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Container(
                                                 width: 70,
                                                 height: 70,
-                                                decoration: const BoxDecoration(
-                                                  color: Color(0x2B010101),
+                                                decoration: BoxDecoration(
+                                                  color: isEnabled
+                                                      ? const Color(0x2B010101)
+                                                      : Colors.black,
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Icon(
-                                                  FFIcons.kchat,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .white,
+                                                  FFIcons.kon1,
+                                                  color: isEnabled
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .white
+                                                      : FlutterFlowTheme.of(
+                                                              context)
+                                                          .accent3,
                                                   size: 30,
                                                 ),
                                               ),
@@ -337,7 +291,7 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(0, 9, 0, 0),
                                                 child: Text(
-                                                  'Chat',
+                                                  'Mute',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .headlineMedium
@@ -357,13 +311,18 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                           ),
                                         ),
                                       ),
-                                      Expanded(
-                                        child: GestureDetector(
+                                    ),
+                                    Expanded(
+                                      child: ValueListenableBuilder(
+                                        valueListenable:
+                                            _isCameraEnabledNotifier,
+                                        builder: (_, isEnabled, __) =>
+                                            GestureDetector(
                                           onTap: () async {
-                                            await _dispose();
-                                            if (mounted) {
-                                              Navigator.pop(context);
-                                            }
+                                            _isCameraEnabledNotifier.value =
+                                                !isEnabled;
+                                            await _engine.muteLocalVideoStream(
+                                                isEnabled);
                                           },
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
@@ -372,17 +331,21 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                                 width: 70,
                                                 height: 70,
                                                 decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
+                                                  color: isEnabled
+                                                      ? const Color(0x2B010101)
+                                                      : Colors.black,
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Icon(
-                                                  FFIcons.kxmark,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .white,
-                                                  size: 40,
+                                                  FFIcons.kcomponent27,
+                                                  color: isEnabled
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .white
+                                                      : FlutterFlowTheme.of(
+                                                              context)
+                                                          .accent3,
+                                                  size: 30,
                                                 ),
                                               ),
                                               Padding(
@@ -390,7 +353,7 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(0, 9, 0, 0),
                                                 child: Text(
-                                                  'End',
+                                                  'Turn off',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .headlineMedium
@@ -399,7 +362,7 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .error,
+                                                                .accent3,
                                                         fontWeight:
                                                             FontWeight.normal,
                                                         useGoogleFonts: false,
@@ -410,63 +373,167 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        decoration: const BoxDecoration(),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Container(
+                                              width: 70,
+                                              height: 70,
+                                              decoration: const BoxDecoration(
+                                                color: Color(0x2B010101),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                FFIcons.kchat,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .white,
+                                                size: 30,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(0, 9, 0, 0),
+                                              child: Text(
+                                                'Chat',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .headlineMedium
+                                                    .override(
+                                                      fontFamily: 'Sofia Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent3,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          await _dispose();
+                                          if (mounted) {
+                                            Navigator.pop(context);
+                                          }
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Container(
+                                              width: 70,
+                                              height: 70,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                FFIcons.kxmark,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .white,
+                                                size: 40,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(0, 9, 0, 0),
+                                              child: Text(
+                                                'End',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .headlineMedium
+                                                    .override(
+                                                      fontFamily: 'Sofia Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.00, -1.00),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                          child: Container(
-                            width: 64,
-                            height: 5,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(10),
                             ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(0.00, -1.00),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                        child: Container(
+                          width: 64,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Align(
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
+              child: Align(
                 alignment: const AlignmentDirectional(1.00, -1.00),
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: ValueListenableBuilder(
-                      valueListenable: isCameraEnabledNotifier,
-                      builder: (_, isEnabled, __) {
-                        print('isCameraEnabledNotifier: $isEnabled');
-                        return SizedBox(
-                          width: 90,
-                          height: 90,
-                          child: _localUserJoined && isEnabled
-                              ? AgoraVideoView(
-                                  controller: VideoViewController(
-                                    rtcEngine: _engine,
-                                    canvas: const VideoCanvas(uid: 0),
-                                  ),
-                                )
-                              : _localPlaceholder(),
-                        );
-                      },
+                      valueListenable: _localUserJoinedNotifier,
+                      builder: (_, isJoined, __) => ValueListenableBuilder(
+                        valueListenable: _isCameraEnabledNotifier,
+                        builder: (_, isEnabled, __) {
+                          return SizedBox(
+                            width: 90,
+                            height: 90,
+                            child: isJoined && isEnabled
+                                ? AgoraVideoView(
+                                    controller: VideoViewController(
+                                      rtcEngine: _engine,
+                                      canvas: const VideoCanvas(uid: 0),
+                                    ),
+                                  )
+                                : _localPlaceholder(),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
