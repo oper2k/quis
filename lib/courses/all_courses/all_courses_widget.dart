@@ -106,6 +106,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget> {
                         children: [
                           Lottie.asset(
                             'assets/lottie_animations/animation_lo6423ic.json',
+                            width: 220.0,
                             height: 150.0,
                             fit: BoxFit.contain,
                             repeat: false,

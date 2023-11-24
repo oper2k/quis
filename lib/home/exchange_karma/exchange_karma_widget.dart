@@ -104,8 +104,8 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
               alignment: AlignmentDirectional(0.00, 0.00),
               child: Lottie.asset(
                 'assets/lottie_animations/animation_lnz09grs.json',
-                width: MediaQuery.sizeOf(context).width * 1.0,
-                height: MediaQuery.sizeOf(context).height * 0.24,
+                width: 220.0,
+                height: 200.0,
                 fit: BoxFit.contain,
                 animate: true,
               ),

@@ -61,17 +61,13 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
               height: 91.0,
               child: Stack(
                 children: [
-                  Hero(
-                    tag: widget.videoItem!.vimeoVideo.imagePath,
-                    transitionOnUserGestures: true,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(0.0),
-                      child: Image.network(
-                        widget.videoItem!.vimeoVideo.imagePath,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(0.0),
+                    child: Image.network(
+                      widget.videoItem!.imagePath,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Align(

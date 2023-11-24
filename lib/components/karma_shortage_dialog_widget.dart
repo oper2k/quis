@@ -10,12 +10,7 @@ import 'karma_shortage_dialog_model.dart';
 export 'karma_shortage_dialog_model.dart';
 
 class KarmaShortageDialogWidget extends StatefulWidget {
-  const KarmaShortageDialogWidget({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  final String? text;
+  const KarmaShortageDialogWidget({Key? key}) : super(key: key);
 
   @override
   _KarmaShortageDialogWidgetState createState() =>

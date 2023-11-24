@@ -121,7 +121,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ConfirmEmail',
           path: '/confirmEmail',
-          builder: (context, params) => ConfirmEmailWidget(),
+          builder: (context, params) => ConfirmEmailWidget(
+            isAfterReg: params.getParam('isAfterReg', ParamType.bool),
+          ),
         ),
         FFRoute(
           name: 'InitPage',
@@ -360,6 +362,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => VideoConfPageWidget(
             token: params.getParam('token', ParamType.String),
             channelName: params.getParam('channelName', ParamType.String),
+            userProfileImage:
+                params.getParam('userProfileImage', ParamType.String),
+            uid: params.getParam('uid', ParamType.int),
           ),
         ),
         FFRoute(

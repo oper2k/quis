@@ -6,6 +6,7 @@ import '/components/subscription_required_dialog_widget.dart';
 import '/components/video_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -147,97 +148,137 @@ class _CourseWidgetState extends State<CourseWidget> {
                                 height: 250.0,
                                 child: Stack(
                                   children: [
-                                    Hero(
-                                      tag: widget
-                                          .courseItem!.previewVideo.imagePath,
-                                      transitionOnUserGestures: true,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(0.0),
-                                        child: Image.network(
-                                          widget.courseItem!.previewVideo
-                                              .imagePath,
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          fit: BoxFit.cover,
-                                        ),
+                                    Container(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      child: FlutterFlowWebView(
+                                        content: widget
+                                            .courseItem!.previewVimeoVideoUrl,
+                                        bypass: false,
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                1.0,
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                1.0,
+                                        verticalScroll: false,
+                                        horizontalScroll: false,
                                       ),
                                     ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.20),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            'VideoPlayer',
-                                            queryParameters: {
-                                              'video': serializeParam(
-                                                widget.courseItem?.previewVideo
-                                                    ?.videoPath,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
+                                    if (responsiveVisibility(
+                                      context: context,
+                                      phone: false,
+                                      tablet: false,
+                                      tabletLandscape: false,
+                                      desktop: false,
+                                    ))
+                                      Hero(
+                                        tag: widget
+                                            .courseItem!.previewVideo.imagePath,
+                                        transitionOnUserGestures: true,
                                         child: ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          child: BackdropFilter(
-                                            filter: ImageFilter.blur(
-                                              sigmaX: 50.0,
-                                              sigmaY: 50.0,
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      15.0, 13.0, 15.0, 13.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    FFIcons.kocticonPlay24,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .white,
-                                                    size: 30.0,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(14.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      'Preview course',
-                                                      style:
+                                              BorderRadius.circular(0.0),
+                                          child: Image.network(
+                                            widget.courseItem!.previewVideo
+                                                .imagePath,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    if (responsiveVisibility(
+                                      context: context,
+                                      phone: false,
+                                      tablet: false,
+                                      tabletLandscape: false,
+                                      desktop: false,
+                                    ))
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.00, 0.20),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              'VideoPlayer',
+                                              queryParameters: {
+                                                'video': serializeParam(
+                                                  widget.courseItem
+                                                      ?.previewVideo?.videoPath,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: BackdropFilter(
+                                              filter: ImageFilter.blur(
+                                                sigmaX: 50.0,
+                                                sigmaY: 50.0,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        15.0, 13.0, 15.0, 13.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      FFIcons.kocticonPlay24,
+                                                      color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .headlineLarge
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Sofia Pro',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .white,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
+                                                              .white,
+                                                      size: 30.0,
                                                     ),
-                                                  ),
-                                                ],
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  14.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        'Preview course',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .white,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 50.0, 0.0, 0.0),
@@ -700,7 +741,6 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                   'videoVimeoURL':
                                                                       serializeParam(
                                                                     masterclassItem
-                                                                        .vimeoVideo
                                                                         .vimeoVideoUrl,
                                                                     ParamType
                                                                         .String,

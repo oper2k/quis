@@ -120,7 +120,11 @@ final parametersBuilderMap =
           'isFirst': getParameter<bool>(data, 'isFirst'),
         },
       ),
-  'ConfirmEmail': ParameterData.none(),
+  'ConfirmEmail': (data) async => ParameterData(
+        allParams: {
+          'isAfterReg': getParameter<bool>(data, 'isAfterReg'),
+        },
+      ),
   'InitPage': ParameterData.none(),
   'ResetPassword': ParameterData.none(),
   'ResetPasswordConfirm': ParameterData.none(),
@@ -207,6 +211,8 @@ final parametersBuilderMap =
         allParams: {
           'token': getParameter<String>(data, 'token'),
           'channelName': getParameter<String>(data, 'channelName'),
+          'userProfileImage': getParameter<String>(data, 'userProfileImage'),
+          'uid': getParameter<int>(data, 'uid'),
         },
       ),
   'ThankYouForQuestion': ParameterData.none(),

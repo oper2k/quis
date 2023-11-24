@@ -149,6 +149,11 @@ class UsersRecord extends FirestoreRecord {
   int get endorsement => _endorsement ?? 0;
   bool hasEndorsement() => _endorsement != null;
 
+  // "interview_sessions" field.
+  int? _interviewSessions;
+  int get interviewSessions => _interviewSessions ?? 0;
+  bool hasInterviewSessions() => _interviewSessions != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -178,6 +183,7 @@ class UsersRecord extends FirestoreRecord {
     _dislikedBy = getDataList(snapshotData['disliked_by']);
     _favoriteQuestions = getDataList(snapshotData['favorite_questions']);
     _endorsement = castToType<int>(snapshotData['endorsement']);
+    _interviewSessions = castToType<int>(snapshotData['interview_sessions']);
   }
 
   static CollectionReference get collection =>
@@ -233,6 +239,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? isProfileCompleted,
   CourseProgressStruct? courseProgress,
   int? endorsement,
+  int? interviewSessions,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -255,6 +262,7 @@ Map<String, dynamic> createUsersRecordData({
       'is_profile_completed': isProfileCompleted,
       'course_progress': CourseProgressStruct().toMap(),
       'endorsement': endorsement,
+      'interview_sessions': interviewSessions,
     }.withoutNulls,
   );
 
@@ -298,7 +306,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.likedBy, e2?.likedBy) &&
         listEquality.equals(e1?.dislikedBy, e2?.dislikedBy) &&
         listEquality.equals(e1?.favoriteQuestions, e2?.favoriteQuestions) &&
-        e1?.endorsement == e2?.endorsement;
+        e1?.endorsement == e2?.endorsement &&
+        e1?.interviewSessions == e2?.interviewSessions;
   }
 
   @override
@@ -328,7 +337,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.likedBy,
         e?.dislikedBy,
         e?.favoriteQuestions,
-        e?.endorsement
+        e?.endorsement,
+        e?.interviewSessions
       ]);
 
   @override

@@ -1,11 +1,10 @@
 import '/backend/firebase_storage/storage.dart';
-import '/components/check_mark_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/home/deducted_karma/deducted_karma_widget.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/actions/actions.dart' as action_blocks;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:expandable/expandable.dart';
@@ -129,8 +128,8 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   alignment: AlignmentDirectional(0.00, 0.00),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lo4e868o.json',
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: MediaQuery.sizeOf(context).height * 0.24,
+                    width: 220.0,
+                    height: 200.0,
                     fit: BoxFit.contain,
                     animate: true,
                   ),
@@ -430,100 +429,74 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
+                Form(
+                  key: _model.formKey,
+                  autovalidateMode: AutovalidateMode.disabled,
                   child: Container(
-                    height: 56.0,
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          child: TextFormField(
-                            controller: _model.emailFieldController,
-                            focusNode: _model.emailFieldFocusNode,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              '_model.emailFieldController',
-                              Duration(milliseconds: 100),
-                              () async {
-                                setState(() {
-                                  _model.isEmailValid =
-                                      functions.emailValidation(
-                                          _model.emailFieldController.text);
-                                });
-                              },
-                            ),
-                            textInputAction: TextInputAction.done,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              hintText: 'Email',
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .headlineSmall
-                                  .override(
-                                    fontFamily: 'Sofia Pro',
-                                    color: FlutterFlowTheme.of(context).accent2,
-                                    useGoogleFonts: false,
-                                    lineHeight: 2.0,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context).white,
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 16.0, 16.0),
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .headlineSmall
-                                .override(
+                    width: double.infinity,
+                    child: TextFormField(
+                      controller: _model.emailFieldController,
+                      focusNode: _model.emailFieldFocusNode,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.emailFieldController',
+                        Duration(milliseconds: 100),
+                        () async {
+                          setState(() {});
+                        },
+                      ),
+                      textInputAction: TextInputAction.done,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
                                   fontFamily: 'Sofia Pro',
+                                  color: FlutterFlowTheme.of(context).accent2,
                                   useGoogleFonts: false,
                                   lineHeight: 2.0,
                                 ),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: _model.emailFieldControllerValidator
-                                .asValidator(context),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
                           ),
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                        Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 16.0, 0.0),
-                            child: wrapWithModel(
-                              model: _model.checkMarkModel,
-                              updateCallback: () => setState(() {}),
-                              child: CheckMarkWidget(
-                                boolean: _model.isEmailValid,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        filled: true,
+                        fillColor: FlutterFlowTheme.of(context).white,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 16.0, 16.0, 16.0),
+                      ),
+                      style:
+                          FlutterFlowTheme.of(context).headlineSmall.override(
+                                fontFamily: 'Sofia Pro',
+                                useGoogleFonts: false,
+                                lineHeight: 2.0,
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      keyboardType: TextInputType.emailAddress,
+                      validator: _model.emailFieldControllerValidator
+                          .asValidator(context),
                     ),
                   ),
                 ),
@@ -705,16 +678,21 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                           setState(() {
                             _model.isCVvalidated = true;
                           });
+                          if (_model.formKey.currentState == null ||
+                              !_model.formKey.currentState!.validate()) {
+                            return;
+                          }
                         } else {
                           setState(() {
                             _model.isCVvalidated = false;
                           });
+                          if (_model.formKey.currentState == null ||
+                              !_model.formKey.currentState!.validate()) {
+                            return;
+                          }
                           return;
                         }
 
-                        if (!_model.isEmailValid) {
-                          return;
-                        }
                         await showAlignedDialog(
                           context: context,
                           isGlobal: true,
@@ -739,6 +717,11 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                             );
                           },
                         ).then((value) => setState(() {}));
+
+                        await action_blocks.payByKarma(
+                          context,
+                          karmaAmount: 10.0,
+                        );
                       },
                       text: 'Submit my CV',
                       options: FFButtonOptions(

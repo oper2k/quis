@@ -73,20 +73,6 @@
           "order": "DESCENDING"
         }
       ]
-    },
-    {
-      "collectionGroup": "course_video",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "type",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "views",
-          "order": "ASCENDING"
-        }
-      ]
     }
   ],
   "fieldOverrides": [

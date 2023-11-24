@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/home/deducted_karma/deducted_karma_widget.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'job_referral_widget.dart' show JobReferralWidget;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';

@@ -85,6 +85,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
               ),
               Lottie.asset(
                 'assets/lottie_animations/animation_loeodjhs.json',
+                width: MediaQuery.sizeOf(context).width * 1.0,
                 height: 276.0,
                 fit: BoxFit.cover,
                 animate: true,

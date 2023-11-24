@@ -4,6 +4,7 @@ import '/components/feedback_pick_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -603,6 +604,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                               });
                             } else if (_model.partner == 'Not good') {
                               await widget.userRef!.update({
+                                ...createUsersRecordData(
+                                  karma: functions.subtractToZero(
+                                      _model.userOutput?.karma, 0.5),
+                                ),
                                 ...mapToFirestore(
                                   {
                                     'disliked_by': FieldValue.arrayUnion(
@@ -638,7 +643,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                             }
                             await launchUrl(Uri(
                                 scheme: 'mailto',
-                                path: 'info@quis-hq.com',
+                                path: FFAppConstants.infoEmail,
                                 query: {
                                   'subject':
                                       'Quis: User \"${'${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}'}\" has left feedback ',
