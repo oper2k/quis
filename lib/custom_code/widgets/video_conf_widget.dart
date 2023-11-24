@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -18,22 +17,28 @@ class VideoConfWidget extends StatefulWidget {
     this.height,
     required this.token,
     required this.channelName,
+    required this.uid,
     required this.userProfileImage,
     this.onMuteTap,
     this.onTurnOffTap,
     this.onChatTap,
     this.onEndTap,
+    this.onRemoteUserJoin,
+    this.onRemoteUserLeave,
   });
 
   final double? width;
   final double? height;
   final String token;
   final String channelName;
+  final int uid;
   final String userProfileImage;
-  final VoidCallback? onMuteTap;
-  final VoidCallback? onTurnOffTap;
-  final VoidCallback? onChatTap;
-  final VoidCallback? onEndTap;
+  final Future<dynamic> Function()? onMuteTap;
+  final Future<dynamic> Function()? onTurnOffTap;
+  final Future<dynamic> Function()? onChatTap;
+  final Future<dynamic> Function()? onEndTap;
+  final Future<dynamic> Function()? onRemoteUserJoin;
+  final Future<dynamic> Function()? onRemoteUserLeave;
 
   @override
   _VideoConfWidgetState createState() => _VideoConfWidgetState();
@@ -84,6 +89,9 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
           setState(() {
             _remoteUid = remoteUid;
           });
+          if (widget.onRemoteUserJoin != null) {
+            widget.onRemoteUserJoin!();
+          }
         },
         onUserOffline: (RtcConnection connection, int remoteUid,
             UserOfflineReasonType reason) {
@@ -91,6 +99,9 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
           setState(() {
             _remoteUid = null;
           });
+          if (widget.onRemoteUserLeave != null) {
+            widget.onRemoteUserLeave!();
+          }
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
           debugPrint(
@@ -135,7 +146,7 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
     await _engine.joinChannel(
       token: widget.token,
       channelId: widget.channelName,
-      uid: 0,
+      uid: widget.uid,
       options: const ChannelMediaOptions(),
     );
   }
@@ -203,15 +214,6 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -261,6 +263,9 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                                 !isEnabled;
                                             await _engine.muteLocalAudioStream(
                                                 isEnabled);
+                                            if (widget.onMuteTap != null) {
+                                              widget.onMuteTap!();
+                                            }
                                           },
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
@@ -323,6 +328,9 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                                 !isEnabled;
                                             await _engine.muteLocalVideoStream(
                                                 isEnabled);
+                                            if (widget.onTurnOffTap != null) {
+                                              widget.onTurnOffTap!();
+                                            }
                                           },
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
@@ -375,8 +383,12 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                       ),
                                     ),
                                     Expanded(
-                                      child: Container(
-                                        decoration: const BoxDecoration(),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          if (widget.onChatTap != null) {
+                                            widget.onChatTap!();
+                                          }
+                                        },
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
@@ -426,6 +438,9 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                           await _dispose();
                                           if (mounted) {
                                             Navigator.pop(context);
+                                          }
+                                          if (widget.onEndTap != null) {
+                                            widget.onEndTap!();
                                           }
                                         },
                                         child: Column(

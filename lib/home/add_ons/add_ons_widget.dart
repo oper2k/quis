@@ -139,7 +139,8 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       alignment: AlignmentDirectional(0.00, 0.00),
                       child: Lottie.asset(
                         'assets/lottie_animations/animation_lnz09grs.json',
-                        height: MediaQuery.sizeOf(context).height * 0.24,
+                        width: 220.0,
+                        height: 200.0,
                         fit: BoxFit.cover,
                         animate: true,
                       ),

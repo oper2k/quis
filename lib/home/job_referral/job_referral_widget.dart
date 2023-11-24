@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/home/deducted_karma/deducted_karma_widget.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -166,20 +167,16 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               alignment: AlignmentDirectional(0.00, 0.00),
                               child: Lottie.asset(
                                 'assets/lottie_animations/animation_lo30k8t3.json',
-                                height: MediaQuery.sizeOf(context).height * 0.2,
+                                width: 220.0,
+                                height: 200.0,
                                 fit: BoxFit.contain,
                                 animate: true,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 0.0),
-                              child: Text(
-                                'Get job referrals to your dream companies',
-                                textAlign: TextAlign.center,
-                                style:
-                                    FlutterFlowTheme.of(context).headlineLarge,
-                              ),
+                            Text(
+                              'Get job referrals to your dream companies',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context).headlineLarge,
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -1231,6 +1228,11 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                         );
                                       },
                                     ).then((value) => setState(() {}));
+
+                                    await action_blocks.payByKarma(
+                                      context,
+                                      karmaAmount: 15.0,
+                                    );
                                   },
                                   text: 'Get a Referral',
                                   options: FFButtonOptions(

@@ -71,76 +71,106 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                 height: 250.0,
                 child: Stack(
                   children: [
-                    Hero(
-                      tag: widget.welcomeVideo!.vimeoVideo.imagePath,
-                      transitionOnUserGestures: true,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(0.0),
-                        child: Image.network(
-                          widget.welcomeVideo!.vimeoVideo.imagePath,
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
+                    Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: FlutterFlowWebView(
+                        content: widget.welcomeVideo!.vimeoVideo.vimeoVideoUrl,
+                        bypass: false,
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        verticalScroll: false,
+                        horizontalScroll: false,
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.00, 0.70),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'VideoVimeo',
-                            queryParameters: {
-                              'videoVimeoURL': serializeParam(
-                                widget.welcomeVideo?.vimeoVideo?.vimeoVideoUrl,
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).primary,
-                            borderRadius: BorderRadius.circular(10.0),
+                    if (responsiveVisibility(
+                      context: context,
+                      phone: false,
+                      tablet: false,
+                      tabletLandscape: false,
+                      desktop: false,
+                    ))
+                      Hero(
+                        tag: widget.welcomeVideo!.vimeoVideo.imagePath,
+                        transitionOnUserGestures: true,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(0.0),
+                          child: Image.network(
+                            widget.welcomeVideo!.vimeoVideo.imagePath,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
                           ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                50.0, 13.0, 50.0, 13.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FFIcons.kocticonPlay24,
-                                  color: FlutterFlowTheme.of(context).white,
-                                  size: 30.0,
+                        ),
+                      ),
+                    if (responsiveVisibility(
+                      context: context,
+                      phone: false,
+                      tablet: false,
+                      tabletLandscape: false,
+                      desktop: false,
+                    ))
+                      Align(
+                        alignment: AlignmentDirectional(0.00, 0.70),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              'VideoVimeo',
+                              queryParameters: {
+                                'videoVimeoURL': serializeParam(
+                                  widget
+                                      .welcomeVideo?.vimeoVideo?.vimeoVideoUrl,
+                                  ParamType.String,
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      14.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Play',
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .override(
-                                          fontFamily: 'Sofia Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          useGoogleFonts: false,
-                                        ),
+                              }.withoutNulls,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).primary,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  50.0, 13.0, 50.0, 13.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    FFIcons.kocticonPlay24,
+                                    color: FlutterFlowTheme.of(context).white,
+                                    size: 30.0,
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        14.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Play',
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineLarge
+                                          .override(
+                                            fontFamily: 'Sofia Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .white,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 50.0, 0.0, 0.0),
@@ -157,21 +187,6 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                           updateCallback: () => setState(() {}),
                           child: BackButtonWidget(),
                         ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: FlutterFlowWebView(
-                        content: widget.welcomeVideo!.vimeoVideo.vimeoVideoUrl,
-                        bypass: false,
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: MediaQuery.sizeOf(context).height * 1.0,
-                        verticalScroll: false,
-                        horizontalScroll: false,
                       ),
                     ),
                   ],

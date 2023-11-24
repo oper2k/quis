@@ -1,15 +1,18 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/custom_cloud_functions/custom_cloud_function_response_manager.dart';
 import '/components/avatar_widget.dart';
 import '/components/nav_bar_widget.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'my_profile_model.dart';
 
@@ -1879,25 +1882,55 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            // HttpsCallable callable = FirebaseFunctions.instance
-                            //     .httpsCallable('generateRtcTokenCall');
-                            // final resp = await callable.call(<String, dynamic>{
-                            //   'channelName': 'test',
-                            // });
-                            context.pushNamed(
-                              'VideoConfPage',
-                              queryParameters: {
-                                'token': serializeParam(
-                                  '007eJxTYJi473+Dj6/1khthE48ZpPGwGt6qPLmNX+pR2LS2tUpLKo0UGCwSjRPNzAxSgMDIJDk1KdHSzMIgNdHM3DA1zdjU0tAnKi61IZCRQaCxj4WRAQJBfBaGktTiEgYGACidHms=',
-                                  ParamType.String,
-                                ),
-                                'channelName': serializeParam(
-                                  'test',
-                                  ParamType.String,
-                                ),
-                              }.withoutNulls,
-                            );
-                            // }
+                            setState(() {
+                              _model.videoCallId =
+                                  random_data.randomInteger(0, 10000);
+                            });
+                            try {
+                              final result = await FirebaseFunctions.instance
+                                  .httpsCallable('generateRtcTokenCall')
+                                  .call({
+                                "channelName": 'test',
+                                "uid": _model.videoCallId!,
+                              });
+                              _model.cloudFunctions63 =
+                                  GenerateRtcTokenCallCloudFunctionCallResponse(
+                                data: result.data,
+                                succeeded: true,
+                                resultAsString: result.data.toString(),
+                                jsonBody: result.data,
+                              );
+                            } on FirebaseFunctionsException catch (error) {
+                              _model.cloudFunctions63 =
+                                  GenerateRtcTokenCallCloudFunctionCallResponse(
+                                errorCode: error.code,
+                                succeeded: false,
+                              );
+                            }
+
+                            if (_model.cloudFunctions63!.succeeded!) {
+                              context.pushNamed(
+                                'VideoConfPage',
+                                queryParameters: {
+                                  'token': serializeParam(
+                                    _model.cloudFunctions63?.resultAsString,
+                                    ParamType.String,
+                                  ),
+                                  'channelName': serializeParam(
+                                    'test',
+                                    ParamType.String,
+                                  ),
+                                  'userProfileImage': serializeParam(
+                                    currentUserPhoto,
+                                    ParamType.String,
+                                  ),
+                                  'uid': serializeParam(
+                                    _model.videoCallId,
+                                    ParamType.int,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            }
 
                             setState(() {});
                           },

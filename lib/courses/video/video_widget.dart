@@ -7,6 +7,7 @@ import '/courses/video_comments_bottom_sheet/video_comments_bottom_sheet_widget.
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -18,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -226,99 +227,137 @@ class _VideoWidgetState extends State<VideoWidget>
                               height: 250.0,
                               child: Stack(
                                 children: [
-                                  Hero(
-                                    tag: widget.videoItem!.vimeoVideo.imagePath,
-                                    transitionOnUserGestures: true,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(0.0),
-                                      child: Image.network(
-                                        widget.videoItem!.vimeoVideo.imagePath,
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    child: FlutterFlowWebView(
+                                      content: widget.videoItem!.vimeoVideoUrl,
+                                      bypass: false,
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              1.0,
+                                      verticalScroll: false,
+                                      horizontalScroll: false,
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.00, 0.20),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await widget.videoItem!.reference
-                                            .update({
-                                          ...mapToFirestore(
-                                            {
-                                              'views': FieldValue.increment(1),
-                                            },
-                                          ),
-                                        });
-
-                                        context.pushNamed(
-                                          'VideoVimeo',
-                                          queryParameters: {
-                                            'videoVimeoURL': serializeParam(
-                                              widget.videoItem?.vimeoVideo
-                                                  ?.vimeoVideoUrl,
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
+                                  if (responsiveVisibility(
+                                    context: context,
+                                    phone: false,
+                                    tablet: false,
+                                    tabletLandscape: false,
+                                    desktop: false,
+                                  ))
+                                    Hero(
+                                      tag: widget.videoItem!.imagePath,
+                                      transitionOnUserGestures: true,
                                       child: ClipRRect(
                                         borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                            sigmaX: 50.0,
-                                            sigmaY: 50.0,
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    50.0, 13.0, 50.0, 13.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  FFIcons.kocticonPlay24,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .white,
-                                                  size: 30.0,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          14.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'Play',
-                                                    style: FlutterFlowTheme.of(
+                                            BorderRadius.circular(0.0),
+                                        child: Image.network(
+                                          widget.videoItem!.imagePath,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  if (responsiveVisibility(
+                                    context: context,
+                                    phone: false,
+                                    tablet: false,
+                                    tabletLandscape: false,
+                                    desktop: false,
+                                  ))
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(0.00, 0.20),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          await widget.videoItem!.reference
+                                              .update({
+                                            ...mapToFirestore(
+                                              {
+                                                'views':
+                                                    FieldValue.increment(1),
+                                              },
+                                            ),
+                                          });
+
+                                          context.pushNamed(
+                                            'VideoVimeo',
+                                            queryParameters: {
+                                              'videoVimeoURL': serializeParam(
+                                                widget.videoItem?.vimeoVideoUrl,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                              sigmaX: 50.0,
+                                              sigmaY: 50.0,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      50.0, 13.0, 50.0, 13.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    FFIcons.kocticonPlay24,
+                                                    color: FlutterFlowTheme.of(
                                                             context)
-                                                        .headlineLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .white,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                                        .white,
+                                                    size: 30.0,
                                                   ),
-                                                ),
-                                              ],
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(14.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      'Play',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .headlineLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .white,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 50.0, 0.0, 0.0),
@@ -531,9 +570,13 @@ class _VideoWidgetState extends State<VideoWidget>
                                                           decoration:
                                                               BoxDecoration(),
                                                         ),
-                                                        expanded: Html(
-                                                          data: textGuideItem
-                                                              .textHtml,
+                                                        expanded: Container(
+                                                          height: 200.0,
+                                                          child: MarkdownBody(
+                                                            data: textGuideItem
+                                                                .textHtml,
+                                                            selectable: true,
+                                                          ),
                                                         ),
                                                         theme:
                                                             ExpandableThemeData(

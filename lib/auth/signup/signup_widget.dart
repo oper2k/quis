@@ -229,7 +229,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                   ),
                 ),
                 Form(
-                  key: _model.formKey,
+                  key: _model.formKey2,
                   autovalidateMode: AutovalidateMode.disabled,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -603,80 +603,157 @@ class _SignupWidgetState extends State<SignupWidget> {
                     ),
                   ),
                 ),
-                if (_model.isRef)
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 15.0),
+                Form(
+                  key: _model.formKey1,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                     child: Container(
-                      width: double.infinity,
-                      child: TextFormField(
-                        controller: _model.refFieldController,
-                        focusNode: _model.refFieldFocusNode,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'Please enter your referral code',
-                          hintStyle: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: 'Sofia Pro',
-                                color: FlutterFlowTheme.of(context).accent2,
-                                useGoogleFonts: false,
-                                lineHeight: 2.0,
-                              ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          filled: true,
-                          fillColor: FlutterFlowTheme.of(context).white,
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        border: Border.all(
+                          color: _model.isRefValid
+                              ? Color(0x00000000)
+                              : FlutterFlowTheme.of(context).error,
                         ),
-                        style:
-                            FlutterFlowTheme.of(context).headlineSmall.override(
+                      ),
+                      child: Visibility(
+                        visible: _model.isRef,
+                        child: Container(
+                          width: double.infinity,
+                          child: TextFormField(
+                            controller: _model.refFieldController,
+                            focusNode: _model.refFieldFocusNode,
+                            onChanged: (_) => EasyDebounce.debounce(
+                              '_model.refFieldController',
+                              Duration(milliseconds: 2000),
+                              () async {
+                                if (_model.refFieldController.text != null &&
+                                    _model.refFieldController.text != '') {
+                                  setState(() {
+                                    _model.isRefValid = true;
+                                  });
+                                } else {
+                                  setState(() {
+                                    _model.isRefValid = false;
+                                  });
+                                }
+                              },
+                            ),
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              hintText: 'Please enter your referral code',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .headlineSmall
+                                  .override(
+                                    fontFamily: 'Sofia Pro',
+                                    color: FlutterFlowTheme.of(context).accent2,
+                                    useGoogleFonts: false,
+                                    lineHeight: 2.0,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context).white,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 16.0, 16.0, 16.0),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .override(
                                   fontFamily: 'Sofia Pro',
                                   useGoogleFonts: false,
                                   lineHeight: 2.0,
                                 ),
-                        validator: _model.refFieldControllerValidator
-                            .asValidator(context),
+                            maxLength: 6,
+                            buildCounter: (context,
+                                    {required currentLength,
+                                    required isFocused,
+                                    maxLength}) =>
+                                null,
+                            validator: _model.refFieldControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: !_model.isEmailValid
                         ? null
                         : () async {
                             var _shouldSetState = false;
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              return;
+                            if (_model.isRef) {
+                              if (_model.refFieldController.text != null &&
+                                  _model.refFieldController.text != '') {
+                                setState(() {
+                                  _model.isRefValid = true;
+                                });
+                                if (_model.formKey2.currentState == null ||
+                                    !_model.formKey2.currentState!.validate()) {
+                                  return;
+                                }
+                              } else {
+                                setState(() {
+                                  _model.isRefValid = false;
+                                });
+                                if (_model.formKey2.currentState == null ||
+                                    !_model.formKey2.currentState!.validate()) {
+                                  return;
+                                }
+                                if (_shouldSetState) setState(() {});
+                                return;
+                              }
+
+                              _model.refUserOutput = await queryUsersRecordOnce(
+                                queryBuilder: (usersRecord) =>
+                                    usersRecord.where(
+                                  'ref_code',
+                                  isEqualTo: _model.refFieldController.text,
+                                ),
+                              );
+                              _shouldSetState = true;
+                              if (_model.refUserOutput!.length > 0) {
+                                setState(() {
+                                  FFAppState().refUser =
+                                      _model.refUserOutput?.first?.reference;
+                                });
+                              } else {
+                                setState(() {
+                                  _model.isRefValid = false;
+                                });
+                                if (_shouldSetState) setState(() {});
+                                return;
+                              }
                             }
                             if (_model.isConsent) {
                               setState(() {
@@ -713,27 +790,18 @@ class _SignupWidgetState extends State<SignupWidget> {
                               return;
                             }
 
-                            if (_model.isRef &&
-                                (_model.refFieldController.text != null &&
-                                    _model.refFieldController.text != '')) {
-                              _model.refUserOutput = await queryUsersRecordOnce(
-                                queryBuilder: (usersRecord) =>
-                                    usersRecord.where(
-                                  'ref_code',
-                                  isEqualTo: _model.refFieldController.text,
-                                ),
-                                singleRecord: true,
-                              ).then((s) => s.firstOrNull);
-                              _shouldSetState = true;
-                              setState(() {
-                                FFAppState().refUser =
-                                    _model.refUserOutput?.reference;
-                              });
-                            }
                             await authManager.sendEmailVerification();
 
                             context.goNamedAuth(
-                                'ConfirmEmail', context.mounted);
+                              'ConfirmEmail',
+                              context.mounted,
+                              queryParameters: {
+                                'isAfterReg': serializeParam(
+                                  true,
+                                  ParamType.bool,
+                                ),
+                              }.withoutNulls,
+                            );
 
                             if (_shouldSetState) setState(() {});
                           },
@@ -809,6 +877,49 @@ class _SignupWidgetState extends State<SignupWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           var _shouldSetState = false;
+                          if (_model.isRef) {
+                            if (_model.refFieldController.text != null &&
+                                _model.refFieldController.text != '') {
+                              setState(() {
+                                _model.isRefValid = true;
+                              });
+                              if (_model.formKey2.currentState == null ||
+                                  !_model.formKey2.currentState!.validate()) {
+                                return;
+                              }
+                            } else {
+                              setState(() {
+                                _model.isRefValid = false;
+                              });
+                              if (_model.formKey2.currentState == null ||
+                                  !_model.formKey2.currentState!.validate()) {
+                                return;
+                              }
+                              if (_shouldSetState) setState(() {});
+                              return;
+                            }
+
+                            _model.refUserOutputGoogle =
+                                await queryUsersRecordOnce(
+                              queryBuilder: (usersRecord) => usersRecord.where(
+                                'ref_code',
+                                isEqualTo: _model.refFieldController.text,
+                              ),
+                            );
+                            _shouldSetState = true;
+                            if (_model.refUserOutputGoogle!.length > 0) {
+                              setState(() {
+                                FFAppState().refUser = _model
+                                    .refUserOutputGoogle?.first?.reference;
+                              });
+                            } else {
+                              setState(() {
+                                _model.isRefValid = false;
+                              });
+                              if (_shouldSetState) setState(() {});
+                              return;
+                            }
+                          }
                           if (_model.isConsent) {
                             setState(() {
                               _model.isConsentRed = false;
@@ -826,23 +937,6 @@ class _SignupWidgetState extends State<SignupWidget> {
                               await authManager.signInWithGoogle(context);
                           if (user == null) {
                             return;
-                          }
-                          if (_model.isRef &&
-                              (_model.refFieldController.text != null &&
-                                  _model.refFieldController.text != '')) {
-                            _model.refUserOutputGoogle =
-                                await queryUsersRecordOnce(
-                              queryBuilder: (usersRecord) => usersRecord.where(
-                                'ref_code',
-                                isEqualTo: _model.refFieldController.text,
-                              ),
-                              singleRecord: true,
-                            ).then((s) => s.firstOrNull);
-                            _shouldSetState = true;
-                            setState(() {
-                              FFAppState().refUser =
-                                  _model.refUserOutputGoogle?.reference;
-                            });
                           }
                           await authManager.sendEmailVerification();
 
@@ -885,6 +979,49 @@ class _SignupWidgetState extends State<SignupWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           var _shouldSetState = false;
+                          if (_model.isRef) {
+                            if (_model.refFieldController.text != null &&
+                                _model.refFieldController.text != '') {
+                              setState(() {
+                                _model.isRefValid = true;
+                              });
+                              if (_model.formKey2.currentState == null ||
+                                  !_model.formKey2.currentState!.validate()) {
+                                return;
+                              }
+                            } else {
+                              setState(() {
+                                _model.isRefValid = false;
+                              });
+                              if (_model.formKey2.currentState == null ||
+                                  !_model.formKey2.currentState!.validate()) {
+                                return;
+                              }
+                              if (_shouldSetState) setState(() {});
+                              return;
+                            }
+
+                            _model.refUserOutputApple =
+                                await queryUsersRecordOnce(
+                              queryBuilder: (usersRecord) => usersRecord.where(
+                                'ref_code',
+                                isEqualTo: _model.refFieldController.text,
+                              ),
+                            );
+                            _shouldSetState = true;
+                            if (_model.refUserOutputApple!.length > 0) {
+                              setState(() {
+                                FFAppState().refUser =
+                                    _model.refUserOutputApple?.first?.reference;
+                              });
+                            } else {
+                              setState(() {
+                                _model.isRefValid = false;
+                              });
+                              if (_shouldSetState) setState(() {});
+                              return;
+                            }
+                          }
                           if (_model.isConsent) {
                             setState(() {
                               _model.isConsentRed = false;
@@ -902,23 +1039,6 @@ class _SignupWidgetState extends State<SignupWidget> {
                               await authManager.signInWithApple(context);
                           if (user == null) {
                             return;
-                          }
-                          if (_model.isRef &&
-                              (_model.refFieldController.text != null &&
-                                  _model.refFieldController.text != '')) {
-                            _model.refUserOutputApple =
-                                await queryUsersRecordOnce(
-                              queryBuilder: (usersRecord) => usersRecord.where(
-                                'ref_code',
-                                isEqualTo: _model.refFieldController.text,
-                              ),
-                              singleRecord: true,
-                            ).then((s) => s.firstOrNull);
-                            _shouldSetState = true;
-                            setState(() {
-                              FFAppState().refUser =
-                                  _model.refUserOutputApple?.reference;
-                            });
                           }
                           await authManager.sendEmailVerification();
 

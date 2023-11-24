@@ -47,6 +47,11 @@ class CourseRecord extends FirestoreRecord {
   List<FaqStruct> get faq => _faq ?? const [];
   bool hasFaq() => _faq != null;
 
+  // "preview_vimeo_video_url" field.
+  String? _previewVimeoVideoUrl;
+  String get previewVimeoVideoUrl => _previewVimeoVideoUrl ?? '';
+  bool hasPreviewVimeoVideoUrl() => _previewVimeoVideoUrl != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _previewVideo = VideoStruct.maybeFromMap(snapshotData['preview_video']);
@@ -58,6 +63,7 @@ class CourseRecord extends FirestoreRecord {
       snapshotData['faq'],
       FaqStruct.fromMap,
     );
+    _previewVimeoVideoUrl = snapshotData['preview_vimeo_video_url'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -99,6 +105,7 @@ Map<String, dynamic> createCourseRecordData({
   String? mainImage,
   RatingStruct? rating,
   CourseDescriptionStruct? description,
+  String? previewVimeoVideoUrl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -107,6 +114,7 @@ Map<String, dynamic> createCourseRecordData({
       'main_image': mainImage,
       'rating': RatingStruct().toMap(),
       'description': CourseDescriptionStruct().toMap(),
+      'preview_vimeo_video_url': previewVimeoVideoUrl,
     }.withoutNulls,
   );
 
@@ -133,7 +141,8 @@ class CourseRecordDocumentEquality implements Equality<CourseRecord> {
         e1?.mainImage == e2?.mainImage &&
         e1?.rating == e2?.rating &&
         e1?.description == e2?.description &&
-        listEquality.equals(e1?.faq, e2?.faq);
+        listEquality.equals(e1?.faq, e2?.faq) &&
+        e1?.previewVimeoVideoUrl == e2?.previewVimeoVideoUrl;
   }
 
   @override
@@ -143,7 +152,8 @@ class CourseRecordDocumentEquality implements Equality<CourseRecord> {
         e?.mainImage,
         e?.rating,
         e?.description,
-        e?.faq
+        e?.faq,
+        e?.previewVimeoVideoUrl
       ]);
 
   @override

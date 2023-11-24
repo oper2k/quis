@@ -1384,8 +1384,8 @@ class _LatestInterviewQuestionsWidgetState
                                                                                   return ClipRect(
                                                                                     child: ImageFiltered(
                                                                                       imageFilter: ImageFilter.blur(
-                                                                                        sigmaX: 2.0,
-                                                                                        sigmaY: 2.0,
+                                                                                        sigmaX: 4.0,
+                                                                                        sigmaY: 4.0,
                                                                                       ),
                                                                                       child: child,
                                                                                     ),

@@ -1,11 +1,10 @@
 import '/backend/firebase_storage/storage.dart';
-import '/components/check_mark_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/home/deducted_karma/deducted_karma_widget.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/actions/actions.dart' as action_blocks;
 import 'c_v_review_widget.dart' show CVReviewWidget;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -28,12 +27,22 @@ class CVReviewModel extends FlutterFlowModel<CVReviewWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
   // State field(s) for EmailField widget.
   FocusNode? emailFieldFocusNode;
   TextEditingController? emailFieldController;
   String? Function(BuildContext, String?)? emailFieldControllerValidator;
-  // Model for checkMark component.
-  late CheckMarkModel checkMarkModel;
+  String? _emailFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
+      return 'Has to be a valid email address.';
+    }
+    return null;
+  }
+
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -57,7 +66,7 @@ class CVReviewModel extends FlutterFlowModel<CVReviewWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    checkMarkModel = createModel(context, () => CheckMarkModel());
+    emailFieldControllerValidator = _emailFieldControllerValidator;
   }
 
   void dispose() {
@@ -65,7 +74,6 @@ class CVReviewModel extends FlutterFlowModel<CVReviewWidget> {
     emailFieldFocusNode?.dispose();
     emailFieldController?.dispose();
 
-    checkMarkModel.dispose();
     expandableController1.dispose();
     expandableController2.dispose();
     expandableController3.dispose();

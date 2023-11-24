@@ -30,10 +30,13 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
 
   bool isConsentRed = false;
 
+  bool isRefValid = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  final formKey = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
+  final formKey1 = GlobalKey<FormState>();
   // State field(s) for EmailField widget.
   FocusNode? emailFieldFocusNode;
   TextEditingController? emailFieldController;
@@ -84,12 +87,20 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
   FocusNode? refFieldFocusNode;
   TextEditingController? refFieldController;
   String? Function(BuildContext, String?)? refFieldControllerValidator;
+  String? _refFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
-  UsersRecord? refUserOutput;
+  List<UsersRecord>? refUserOutput;
   // Stores action output result for [Firestore Query - Query a collection] action in Google widget.
-  UsersRecord? refUserOutputGoogle;
+  List<UsersRecord>? refUserOutputGoogle;
   // Stores action output result for [Firestore Query - Query a collection] action in Apple widget.
-  UsersRecord? refUserOutputApple;
+  List<UsersRecord>? refUserOutputApple;
 
   /// Initialization and disposal methods.
 
@@ -101,6 +112,7 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
     passwordField2ControllerValidator = _passwordField2ControllerValidator;
     checkMarkModel2 = createModel(context, () => CheckMarkModel());
     checkMarkModel3 = createModel(context, () => CheckMarkModel());
+    refFieldControllerValidator = _refFieldControllerValidator;
   }
 
   void dispose() {

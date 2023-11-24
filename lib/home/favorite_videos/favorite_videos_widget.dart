@@ -191,7 +191,7 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                                 BorderRadius.circular(10.0),
                                             child: Image.network(
                                               containerCourseVideoRecord
-                                                  .vimeoVideo.imagePath,
+                                                  .imagePath,
                                               width: double.infinity,
                                               height: 99.0,
                                               fit: BoxFit.cover,

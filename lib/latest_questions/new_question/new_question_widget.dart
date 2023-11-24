@@ -160,6 +160,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 0.0, 23.0, 0.0, 0.0),
                             child: Lottie.asset(
                               'assets/lottie_animations/animation_lofuvsla.json',
+                              width: 220.0,
                               height: 131.0,
                               fit: BoxFit.contain,
                               animate: true,

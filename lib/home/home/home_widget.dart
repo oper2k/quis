@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
@@ -49,20 +50,16 @@ class _HomeWidgetState extends State<HomeWidget> {
               functions.dateTimeToDate(getCurrentTimestamp);
         });
         _model.videoDayListOutput = await queryCourseVideoRecordOnce(
-          queryBuilder: (courseVideoRecord) => courseVideoRecord
-              .where(
-                'type',
-                isEqualTo: 'lesson',
-              )
-              .where(
-                'views',
-                isGreaterThanOrEqualTo: getRemoteConfigInt('viewsForVideoDay'),
-              ),
+          queryBuilder: (courseVideoRecord) => courseVideoRecord.where(
+            'is_expert_video_of_day',
+            isEqualTo: true,
+          ),
         );
         if (_model.videoDayListOutput!.length > 0) {
           setState(() {
             FFAppState().VideoOfTheDay = _model
-                .videoDayListOutput?[_model.videoDayListOutput!.length - 1]
+                .videoDayListOutput?[random_data.randomInteger(
+                    0, _model.videoDayListOutput!.length - 1)]
                 ?.reference;
           });
         } else {
@@ -1203,7 +1200,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       children: [
                                                                         Text(
                                                                           courseRefItemCourseRecord
-                                                                              .name,
+                                                                              .name
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                20,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
                                                                           textAlign:
                                                                               TextAlign.center,
                                                                           style: FlutterFlowTheme.of(context)
@@ -1611,7 +1614,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       child: Image
                                                                           .network(
                                                                         videoItemCourseVideoRecord
-                                                                            .vimeoVideo
                                                                             .imagePath,
                                                                         width: double
                                                                             .infinity,
@@ -1772,8 +1774,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                               10.0),
                                                       child: Image.network(
                                                         videoOfDayCourseVideoRecord
-                                                            .vimeoVideo
-                                                            .imagePath,
+                                                            .imageForVideoOfDay,
                                                         width: double.infinity,
                                                         height: double.infinity,
                                                         fit: BoxFit.cover,

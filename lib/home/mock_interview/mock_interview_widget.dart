@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/home/deducted_karma/deducted_karma_widget.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
@@ -135,7 +136,8 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                   alignment: AlignmentDirectional(0.00, 0.00),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lnz09grs.json',
-                    height: MediaQuery.sizeOf(context).height * 0.24,
+                    width: 220.0,
+                    height: 200.0,
                     fit: BoxFit.contain,
                     animate: true,
                   ),
@@ -719,6 +721,15 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                             );
                           },
                         ).then((value) => setState(() {}));
+
+                        await action_blocks.payByKarma(
+                          context,
+                          karmaAmount: (int quantity, double? servicePrice) {
+                            return servicePrice != null
+                                ? servicePrice * quantity
+                                : 0;
+                          }(_model.quantity, _model.activeService?.priceKarma),
+                        );
                       },
                       text: 'Book now',
                       options: FFButtonOptions(

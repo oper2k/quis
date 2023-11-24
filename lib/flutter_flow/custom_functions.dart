@@ -267,3 +267,10 @@ List<String>? imagePathToString(List<String>? imagePath) {
   }
   return imagePath;
 }
+
+double subtractToZero(
+  double? original,
+  double subtractValue,
+) {
+  return original != null ? math.max(original - subtractValue, 0) : 0;
+}

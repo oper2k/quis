@@ -14,10 +14,14 @@ class VideoConfPageWidget extends StatefulWidget {
     super.key,
     required this.token,
     required this.channelName,
+    required this.userProfileImage,
+    required this.uid,
   });
 
   final String? token;
   final String? channelName;
+  final String? userProfileImage;
+  final int? uid;
 
   @override
   _VideoConfPageWidgetState createState() => _VideoConfPageWidgetState();
@@ -67,10 +71,16 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
           child: custom_widgets.VideoConfWidget(
             width: double.infinity,
             height: double.infinity,
+            uid: widget.uid!,
             channelName: widget.channelName!,
             token: widget.token!,
-            userProfileImage:
-                'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+            userProfileImage: widget.userProfileImage!,
+            onMuteTap: () async {},
+            onTurnOffTap: () async {},
+            onChatTap: () async {},
+            onEndTap: () async {},
+            onRemoteUserJoin: () async {},
+            onRemoteUserLeave: () async {},
           ),
         ),
       ),

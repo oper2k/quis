@@ -2,11 +2,13 @@ import '/auth/email_dialog/email_dialog_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'confirm_email_widget.dart' show ConfirmEmailWidget;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
@@ -28,10 +30,21 @@ class ConfirmEmailModel extends FlutterFlowModel<ConfirmEmailWidget> {
 
   bool isRef = false;
 
+  bool isSendEmailVisible = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   InstantTimer? instantTimer;
+  // State field(s) for Timer widget.
+  int timerMilliseconds = 600000;
+  String timerValue = StopWatchTimer.getDisplayTime(
+    600000,
+    hours: false,
+    milliSecond: false,
+  );
+  FlutterFlowTimerController timerController =
+      FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
   /// Initialization and disposal methods.
 
@@ -40,6 +53,7 @@ class ConfirmEmailModel extends FlutterFlowModel<ConfirmEmailWidget> {
   void dispose() {
     unfocusNode.dispose();
     instantTimer?.cancel();
+    timerController.dispose();
   }
 
   /// Action blocks are added here.
