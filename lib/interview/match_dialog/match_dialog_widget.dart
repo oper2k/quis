@@ -79,6 +79,7 @@ class _MatchDialogWidgetState extends State<MatchDialogWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Lottie.asset(
                       'assets/lottie_animations/animation_loesc95n.json',
+                      width: 200.0,
                       height: 142.0,
                       fit: BoxFit.cover,
                       animate: true,

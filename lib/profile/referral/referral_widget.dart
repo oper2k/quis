@@ -112,6 +112,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                   alignment: AlignmentDirectional(0.00, 0.00),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lnvylqq4.json',
+                    width: 220.0,
                     height: 170.0,
                     fit: BoxFit.contain,
                     animate: true,

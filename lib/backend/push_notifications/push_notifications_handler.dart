@@ -175,11 +175,6 @@ final parametersBuilderMap =
               data, 'videoItem', CourseVideoRecord.fromSnapshot),
         },
       ),
-  'VideoPlayer': (data) async => ParameterData(
-        allParams: {
-          'video': getParameter<String>(data, 'video'),
-        },
-      ),
   'PracticeInterview': ParameterData.none(),
   'InterviewFeedback': (data) async => ParameterData(
         allParams: {

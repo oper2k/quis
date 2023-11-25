@@ -428,9 +428,9 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                       });
                                                                       triggerPushNotification(
                                                                         notificationTitle:
-                                                                            'You recieve 0,5 Karma!',
+                                                                            'Cheers to Your Insights! 🌐',
                                                                         notificationText:
-                                                                            'Somebody likes your comment!',
+                                                                            'Your comment on the latest Interview question has just been upvoted by others. ',
                                                                         notificationSound:
                                                                             'default',
                                                                         userRefs: [
@@ -438,8 +438,11 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                               .reference
                                                                         ],
                                                                         initialPageName:
-                                                                            'Home',
-                                                                        parameterData: {},
+                                                                            'Question',
+                                                                        parameterData: {
+                                                                          'questionItem':
+                                                                              widget.questionRef,
+                                                                        },
                                                                       );
                                                                     },
                                                                     child:

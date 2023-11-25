@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/components/nav_bar_widget.dart';
@@ -29,6 +30,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in Home widget.
   List<CourseVideoRecord>? videoDayListOutput;
+  // Stores action output result for [Backend Call - API (Create a contact)] action in Home widget.
+  ApiCallResponse? apiResultsj6;
   // Model for avatar component.
   late AvatarModel avatarModel;
   // State field(s) for PageView widget.

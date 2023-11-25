@@ -30,7 +30,6 @@ dependencies:
   auto_size_text: 3.0.0
   awesome_notifications: ^0.6.2
   cached_network_image: 3.2.1
-  chewie: 1.4.0
   cloud_firestore: 4.8.0
   cloud_firestore_platform_interface: 5.15.0
   cloud_firestore_web: 3.6.0
@@ -39,6 +38,7 @@ dependencies:
   cloud_functions_web: 4.5.2
   dotted_decoration: ^2.0.0
   easy_debounce: 2.0.1
+  equatable: 2.0.5
   expandable: 5.0.1
   file_picker: 5.2.6
   firebase_auth: 4.6.2

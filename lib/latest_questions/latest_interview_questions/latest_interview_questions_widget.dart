@@ -93,7 +93,8 @@ class _LatestInterviewQuestionsWidgetState
                       alignment: AlignmentDirectional(0.00, 0.00),
                       child: Lottie.asset(
                         'assets/lottie_animations/animation_lofuvsla.json',
-                        height: 131.0,
+                        width: 220.0,
+                        height: 150.0,
                         fit: BoxFit.contain,
                         animate: true,
                       ),
@@ -1091,8 +1092,8 @@ class _LatestInterviewQuestionsWidgetState
                                                                                   return ClipRect(
                                                                                     child: ImageFiltered(
                                                                                       imageFilter: ImageFilter.blur(
-                                                                                        sigmaX: 2.0,
-                                                                                        sigmaY: 2.0,
+                                                                                        sigmaX: 6.0,
+                                                                                        sigmaY: 6.0,
                                                                                       ),
                                                                                       child: child,
                                                                                     ),
@@ -1384,8 +1385,8 @@ class _LatestInterviewQuestionsWidgetState
                                                                                   return ClipRect(
                                                                                     child: ImageFiltered(
                                                                                       imageFilter: ImageFilter.blur(
-                                                                                        sigmaX: 4.0,
-                                                                                        sigmaY: 4.0,
+                                                                                        sigmaX: 6.0,
+                                                                                        sigmaY: 6.0,
                                                                                       ),
                                                                                       child: child,
                                                                                     ),

@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/custom_cloud_functions/custom_cloud_function_response_manager.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/nav_bar_widget.dart';
 import '/components/pick_bottom_sheet_widget.dart';
@@ -12,10 +13,12 @@ import '/interview/no_user_found_dialog/no_user_found_dialog_widget.dart';
 import '/interview/reminder_dialog/reminder_dialog_widget.dart';
 import '/interview/sorry_dialog/sorry_dialog_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'practice_interview_widget.dart' show PracticeInterviewWidget;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +34,8 @@ class PracticeInterviewModel extends FlutterFlowModel<PracticeInterviewWidget> {
 
   String? pickedRole;
 
+  bool isRoleValid = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -40,6 +45,8 @@ class PracticeInterviewModel extends FlutterFlowModel<PracticeInterviewWidget> {
   late PseudoDropDownModel pseudoDropDownModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ConferenceRoomRecord? createdRoomOutput;
+  // Stores action output result for [Cloud Function - generateRtcTokenCall] action in Button widget.
+  GenerateRtcTokenCallCloudFunctionCallResponse? cloudFunctions814;
   // State field(s) for Timer widget.
   int timerMilliseconds = 0;
   String timerValue = StopWatchTimer.getDisplayTime(

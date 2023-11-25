@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/custom_cloud_functions/custom_cloud_function_response_manager.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/nav_bar_widget.dart';
 import '/components/pick_bottom_sheet_widget.dart';
@@ -12,9 +13,11 @@ import '/interview/no_user_found_dialog/no_user_found_dialog_widget.dart';
 import '/interview/reminder_dialog/reminder_dialog_widget.dart';
 import '/interview/sorry_dialog/sorry_dialog_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +111,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         alignment: AlignmentDirectional(0.00, 0.00),
                         child: Lottie.asset(
                           'assets/lottie_animations/animation_lodp1m2k.json',
-                          width: 150.0,
+                          width: 200.0,
                           height: 150.0,
                           fit: BoxFit.contain,
                           repeat: false,
@@ -743,6 +746,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                 _model
                                                                     .roleOutput;
                                                           });
+                                                          setState(() {
+                                                            _model.isRoleValid =
+                                                                true;
+                                                          });
                                                         }
 
                                                         setState(() {});
@@ -750,7 +757,21 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                       child: Container(
                                                         height: 52.0,
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                          border: Border.all(
+                                                            color: _model
+                                                                    .isRoleValid
+                                                                ? Color(
+                                                                    0x00000000)
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .error,
+                                                          ),
+                                                        ),
                                                         child: wrapWithModel(
                                                           model: _model
                                                               .pseudoDropDownModel,
@@ -844,6 +865,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                       getRemoteConfigInt(
                                                                           'unixTimeSecForInterview'),
                                                                       getCurrentTimestamp),
+                                                                  roomId: random_data
+                                                                      .randomInteger(
+                                                                          1000,
+                                                                          100000),
                                                                 ),
                                                                 ...mapToFirestore(
                                                                   {
@@ -868,6 +893,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                       getRemoteConfigInt(
                                                                           'unixTimeSecForInterview'),
                                                                       getCurrentTimestamp),
+                                                                  roomId: random_data
+                                                                      .randomInteger(
+                                                                          1000,
+                                                                          100000),
                                                                 ),
                                                                 ...mapToFirestore(
                                                                   {
@@ -982,6 +1011,77 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                 setState(() {});
                                                               return;
                                                             }
+                                                          }
+                                                          try {
+                                                            final result =
+                                                                await FirebaseFunctions
+                                                                    .instance
+                                                                    .httpsCallable(
+                                                                        'generateRtcTokenCall')
+                                                                    .call({
+                                                              "channelName":
+                                                                  'test',
+                                                              "uid":
+                                                                  confirenceRoomItemConferenceRoomRecord!
+                                                                      .roomId,
+                                                            });
+                                                            _model.cloudFunctions814 =
+                                                                GenerateRtcTokenCallCloudFunctionCallResponse(
+                                                              data: result.data,
+                                                              succeeded: true,
+                                                              resultAsString:
+                                                                  result.data
+                                                                      .toString(),
+                                                              jsonBody:
+                                                                  result.data,
+                                                            );
+                                                          } on FirebaseFunctionsException catch (error) {
+                                                            _model.cloudFunctions814 =
+                                                                GenerateRtcTokenCallCloudFunctionCallResponse(
+                                                              errorCode:
+                                                                  error.code,
+                                                              succeeded: false,
+                                                            );
+                                                          }
+
+                                                          _shouldSetState =
+                                                              true;
+                                                          if (_model
+                                                              .cloudFunctions814!
+                                                              .succeeded!) {
+                                                            context.pushNamed(
+                                                              'VideoConfPage',
+                                                              queryParameters: {
+                                                                'token':
+                                                                    serializeParam(
+                                                                  _model
+                                                                      .cloudFunctions814
+                                                                      ?.resultAsString,
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'channelName':
+                                                                    serializeParam(
+                                                                  confirenceRoomItemConferenceRoomRecord
+                                                                      ?.roomId
+                                                                      ?.toString(),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'userProfileImage':
+                                                                    serializeParam(
+                                                                  currentUserPhoto,
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'uid':
+                                                                    serializeParam(
+                                                                  confirenceRoomItemConferenceRoomRecord
+                                                                      ?.roomId,
+                                                                  ParamType.int,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
                                                           }
                                                         } else {
                                                           await showAlignedDialog(
@@ -1102,6 +1202,22 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                               0
                                                           ? null
                                                           : () async {
+                                                              if (_model.pickedRole !=
+                                                                      null &&
+                                                                  _model.pickedRole !=
+                                                                      '') {
+                                                                setState(() {
+                                                                  _model.isRoleValid =
+                                                                      true;
+                                                                });
+                                                              } else {
+                                                                setState(() {
+                                                                  _model.isRoleValid =
+                                                                      false;
+                                                                });
+                                                                return;
+                                                              }
+
                                                               if (interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                       ?.date ==
                                                                   functions.getSameTime(

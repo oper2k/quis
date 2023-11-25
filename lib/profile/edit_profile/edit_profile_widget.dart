@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/avatar_widget.dart';
@@ -1348,8 +1349,55 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                               ).then(
                                                   (value) => setState(() {}));
                                             }
+                                            if (valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.brevoId,
+                                                    0) !=
+                                                null) {
+                                              await BrevoGroup
+                                                  .updateAContactCall
+                                                  .call(
+                                                firstname: _model
+                                                    .firstNameFieldController
+                                                    .text,
+                                                lastname: _model
+                                                    .lastNameFieldController
+                                                    .text,
+                                                identifier: currentUserEmail,
+                                              );
+                                            } else {
+                                              _model.apiResultsj66 =
+                                                  await BrevoGroup
+                                                      .createAContactCall
+                                                      .call(
+                                                firstname: _model
+                                                    .firstNameFieldController
+                                                    .text,
+                                                lastname: _model
+                                                    .lastNameFieldController
+                                                    .text,
+                                                email: currentUserEmail,
+                                              );
+                                              if ((_model.apiResultsj66
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                await currentUserReference!
+                                                    .update(
+                                                        createUsersRecordData(
+                                                  brevoId: BrevoGroup
+                                                      .createAContactCall
+                                                      .brevoID(
+                                                    (_model.apiResultsj66
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                ));
+                                              }
+                                            }
 
                                             context.goNamed('MyProfile');
+
+                                            setState(() {});
                                           },
                                           text: 'Save',
                                           options: FFButtonOptions(

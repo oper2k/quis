@@ -287,13 +287,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'VideoPlayer',
-          path: '/videoPlayer',
-          builder: (context, params) => VideoPlayerWidget(
-            video: params.getParam('video', ParamType.String),
-          ),
-        ),
-        FFRoute(
           name: 'PracticeInterview',
           path: '/practiceInterview',
           builder: (context, params) => PracticeInterviewWidget(),
@@ -395,7 +388,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
-      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

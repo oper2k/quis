@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/components/nav_bar_widget.dart';
@@ -75,6 +76,20 @@ class _HomeWidgetState extends State<HomeWidget> {
             },
           ),
         });
+      }
+      if (!(valueOrDefault(currentUserDocument?.brevoId, 0) != null)) {
+        _model.apiResultsj6 = await BrevoGroup.createAContactCall.call(
+          firstname: valueOrDefault(currentUserDocument?.firstName, ''),
+          lastname: valueOrDefault(currentUserDocument?.lastName, ''),
+          email: currentUserEmail,
+        );
+        if ((_model.apiResultsj6?.succeeded ?? true)) {
+          await currentUserReference!.update(createUsersRecordData(
+            brevoId: BrevoGroup.createAContactCall.brevoID(
+              (_model.apiResultsj6?.jsonBody ?? ''),
+            ),
+          ));
+        }
       }
     });
   }

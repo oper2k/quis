@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -34,6 +35,17 @@ class FFAppState extends ChangeNotifier {
     });
     _safeInit(() {
       _entitlementID = prefs.getString('ff_entitlementID') ?? _entitlementID;
+    });
+    _safeInit(() {
+      _dailyNotificationID =
+          prefs.getInt('ff_dailyNotificationID') ?? _dailyNotificationID;
+    });
+    _safeInit(() {
+      _dailyNotificationDateTime =
+          prefs.containsKey('ff_dailyNotificationDateTime')
+              ? DateTime.fromMillisecondsSinceEpoch(
+                  prefs.getInt('ff_dailyNotificationDateTime')!)
+              : _dailyNotificationDateTime;
     });
   }
 
@@ -310,6 +322,23 @@ class FFAppState extends ChangeNotifier {
   set entitlementID(String _value) {
     _entitlementID = _value;
     prefs.setString('ff_entitlementID', _value);
+  }
+
+  int _dailyNotificationID = 0;
+  int get dailyNotificationID => _dailyNotificationID;
+  set dailyNotificationID(int _value) {
+    _dailyNotificationID = _value;
+    prefs.setInt('ff_dailyNotificationID', _value);
+  }
+
+  DateTime? _dailyNotificationDateTime;
+  DateTime? get dailyNotificationDateTime => _dailyNotificationDateTime;
+  set dailyNotificationDateTime(DateTime? _value) {
+    _dailyNotificationDateTime = _value;
+    _value != null
+        ? prefs.setInt(
+            'ff_dailyNotificationDateTime', _value.millisecondsSinceEpoch)
+        : prefs.remove('ff_dailyNotificationDateTime');
   }
 }
 

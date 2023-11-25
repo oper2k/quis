@@ -50,7 +50,12 @@ class _PickBottomSheetWidgetState extends State<PickBottomSheetWidget> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(0.0),
+          bottomRight: Radius.circular(0.0),
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10.0),
+        ),
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 40.0),

@@ -154,6 +154,16 @@ class UsersRecord extends FirestoreRecord {
   int get interviewSessions => _interviewSessions ?? 0;
   bool hasInterviewSessions() => _interviewSessions != null;
 
+  // "brevo_id" field.
+  int? _brevoId;
+  int get brevoId => _brevoId ?? 0;
+  bool hasBrevoId() => _brevoId != null;
+
+  // "daily_push_id" field.
+  int? _dailyPushId;
+  int get dailyPushId => _dailyPushId ?? 0;
+  bool hasDailyPushId() => _dailyPushId != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -184,6 +194,8 @@ class UsersRecord extends FirestoreRecord {
     _favoriteQuestions = getDataList(snapshotData['favorite_questions']);
     _endorsement = castToType<int>(snapshotData['endorsement']);
     _interviewSessions = castToType<int>(snapshotData['interview_sessions']);
+    _brevoId = castToType<int>(snapshotData['brevo_id']);
+    _dailyPushId = castToType<int>(snapshotData['daily_push_id']);
   }
 
   static CollectionReference get collection =>
@@ -240,6 +252,8 @@ Map<String, dynamic> createUsersRecordData({
   CourseProgressStruct? courseProgress,
   int? endorsement,
   int? interviewSessions,
+  int? brevoId,
+  int? dailyPushId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -263,6 +277,8 @@ Map<String, dynamic> createUsersRecordData({
       'course_progress': CourseProgressStruct().toMap(),
       'endorsement': endorsement,
       'interview_sessions': interviewSessions,
+      'brevo_id': brevoId,
+      'daily_push_id': dailyPushId,
     }.withoutNulls,
   );
 
@@ -307,7 +323,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.dislikedBy, e2?.dislikedBy) &&
         listEquality.equals(e1?.favoriteQuestions, e2?.favoriteQuestions) &&
         e1?.endorsement == e2?.endorsement &&
-        e1?.interviewSessions == e2?.interviewSessions;
+        e1?.interviewSessions == e2?.interviewSessions &&
+        e1?.brevoId == e2?.brevoId &&
+        e1?.dailyPushId == e2?.dailyPushId;
   }
 
   @override
@@ -338,7 +356,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.dislikedBy,
         e?.favoriteQuestions,
         e?.endorsement,
-        e?.interviewSessions
+        e?.interviewSessions,
+        e?.brevoId,
+        e?.dailyPushId
       ]);
 
   @override

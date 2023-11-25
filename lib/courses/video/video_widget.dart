@@ -230,10 +230,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                   Container(
                                     width: double.infinity,
                                     height: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
+                                    decoration: BoxDecoration(),
                                     child: FlutterFlowWebView(
                                       content: widget.videoItem!.vimeoVideoUrl,
                                       bypass: false,

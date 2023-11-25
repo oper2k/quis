@@ -30,8 +30,6 @@ export 'custom_icons.dart' show FFIcons;
 export 'nav/nav.dart';
 export 'firebase_remote_config_util.dart';
 
-final RouteObserver<ModalRoute> routeObserver = RouteObserver<PageRoute>();
-
 T valueOrDefault<T>(T? value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
 

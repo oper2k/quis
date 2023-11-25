@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/avatar_widget.dart';
@@ -76,6 +77,8 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   FocusNode? linkedinFieldFocusNode;
   TextEditingController? linkedinFieldController;
   String? Function(BuildContext, String?)? linkedinFieldControllerValidator;
+  // Stores action output result for [Backend Call - API (Create a contact)] action in Button widget.
+  ApiCallResponse? apiResultsj66;
 
   /// Initialization and disposal methods.
 

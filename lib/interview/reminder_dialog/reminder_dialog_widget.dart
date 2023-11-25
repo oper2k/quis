@@ -76,7 +76,8 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Lottie.asset(
                       'assets/lottie_animations/animation_loesndo3.json',
-                      height: 220.0,
+                      width: 200.0,
+                      height: 200.0,
                       fit: BoxFit.cover,
                       animate: true,
                     ),
@@ -148,33 +149,68 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
                   onPressed: () async {
                     await actions.awesomeNotificationSchedule(
                       random_data.randomInteger(0, 10000),
-                      'Something is coming!',
-                      'Practice interview starts in 30 minutes!',
+                      'Your Interview is in 15 Minutes!',
+                      'Your dream job awaits – let\'s get you ready! ✨',
                       functions.getHourInInt(functions.timeMinusMinutes(
                           functions.getSameTime(
                               getRemoteConfigInt('unixTimeSecForInterview'),
                               getCurrentTimestamp)!,
-                          '30')),
+                          '15')),
                       functions.getMinutesInInt(functions.timeMinusMinutes(
                           functions.getSameTime(
                               getRemoteConfigInt('unixTimeSecForInterview'),
                               getCurrentTimestamp)!,
-                          '30')),
+                          '15')),
                       functions.getYearInInt(functions.timeMinusMinutes(
                           functions.getSameTime(
                               getRemoteConfigInt('unixTimeSecForInterview'),
                               getCurrentTimestamp)!,
-                          '30')),
+                          '15')),
                       functions.getMonthInInt(functions.timeMinusMinutes(
                           functions.getSameTime(
                               getRemoteConfigInt('unixTimeSecForInterview'),
                               getCurrentTimestamp)!,
-                          '30')),
+                          '15')),
                       functions.getDayInInt(functions.timeMinusMinutes(
                           functions.getSameTime(
                               getRemoteConfigInt('unixTimeSecForInterview'),
                               getCurrentTimestamp)!,
-                          '30')),
+                          '15')),
+                      null,
+                      null,
+                      null,
+                      false,
+                      true,
+                    );
+                    await actions.awesomeNotificationSchedule(
+                      random_data.randomInteger(0, 10000),
+                      'Join Quis Practice Interview Session in 1 Hour! 💼',
+                      'Don\'t wait to be ready. Start preparing for your Interview today! ',
+                      functions.getHourInInt(functions.timeMinusMinutes(
+                          functions.getSameTime(
+                              getRemoteConfigInt('unixTimeSecForInterview'),
+                              getCurrentTimestamp)!,
+                          '60')),
+                      functions.getMinutesInInt(functions.timeMinusMinutes(
+                          functions.getSameTime(
+                              getRemoteConfigInt('unixTimeSecForInterview'),
+                              getCurrentTimestamp)!,
+                          '60')),
+                      functions.getYearInInt(functions.timeMinusMinutes(
+                          functions.getSameTime(
+                              getRemoteConfigInt('unixTimeSecForInterview'),
+                              getCurrentTimestamp)!,
+                          '60')),
+                      functions.getMonthInInt(functions.timeMinusMinutes(
+                          functions.getSameTime(
+                              getRemoteConfigInt('unixTimeSecForInterview'),
+                              getCurrentTimestamp)!,
+                          '60')),
+                      functions.getDayInInt(functions.timeMinusMinutes(
+                          functions.getSameTime(
+                              getRemoteConfigInt('unixTimeSecForInterview'),
+                              getCurrentTimestamp)!,
+                          '60')),
                       null,
                       null,
                       null,

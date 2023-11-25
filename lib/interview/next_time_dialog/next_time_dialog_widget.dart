@@ -73,6 +73,7 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Lottie.asset(
                       'assets/lottie_animations/animation_loescsjx.json',
+                      width: 220.0,
                       height: 142.0,
                       fit: BoxFit.cover,
                       animate: true,

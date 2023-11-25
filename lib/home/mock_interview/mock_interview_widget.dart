@@ -727,7 +727,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                           karmaAmount: (int quantity, double? servicePrice) {
                             return servicePrice != null
                                 ? servicePrice * quantity
-                                : 0;
+                                : 0.0;
                           }(_model.quantity, _model.activeService?.priceKarma),
                         );
                       },

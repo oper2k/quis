@@ -41,7 +41,6 @@ export '/courses/course/course_widget.dart' show CourseWidget;
 export '/courses/video/video_widget.dart' show VideoWidget;
 export '/courses/send_feedback/send_feedback_widget.dart'
     show SendFeedbackWidget;
-export '/video_player/video_player_widget.dart' show VideoPlayerWidget;
 export '/interview/practice_interview/practice_interview_widget.dart'
     show PracticeInterviewWidget;
 export '/interview/interview_feedback/interview_feedback_widget.dart'

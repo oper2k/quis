@@ -26,15 +26,15 @@ class ConferenceRoomRecord extends FirestoreRecord {
   List<DocumentReference> get users => _users ?? const [];
   bool hasUsers() => _users != null;
 
-  // "agora_token" field.
-  String? _agoraToken;
-  String get agoraToken => _agoraToken ?? '';
-  bool hasAgoraToken() => _agoraToken != null;
+  // "room_id" field.
+  int? _roomId;
+  int get roomId => _roomId ?? 0;
+  bool hasRoomId() => _roomId != null;
 
   void _initializeFields() {
     _date = snapshotData['date'] as DateTime?;
     _users = getDataList(snapshotData['users']);
-    _agoraToken = snapshotData['agora_token'] as String?;
+    _roomId = castToType<int>(snapshotData['room_id']);
   }
 
   static CollectionReference get collection =>
@@ -73,12 +73,12 @@ class ConferenceRoomRecord extends FirestoreRecord {
 
 Map<String, dynamic> createConferenceRoomRecordData({
   DateTime? date,
-  String? agoraToken,
+  int? roomId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'date': date,
-      'agora_token': agoraToken,
+      'room_id': roomId,
     }.withoutNulls,
   );
 
@@ -94,12 +94,12 @@ class ConferenceRoomRecordDocumentEquality
     const listEquality = ListEquality();
     return e1?.date == e2?.date &&
         listEquality.equals(e1?.users, e2?.users) &&
-        e1?.agoraToken == e2?.agoraToken;
+        e1?.roomId == e2?.roomId;
   }
 
   @override
   int hash(ConferenceRoomRecord? e) =>
-      const ListEquality().hash([e?.date, e?.users, e?.agoraToken]);
+      const ListEquality().hash([e?.date, e?.users, e?.roomId]);
 
   @override
   bool isValidKey(Object? o) => o is ConferenceRoomRecord;

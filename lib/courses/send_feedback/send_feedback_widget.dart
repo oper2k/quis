@@ -185,8 +185,8 @@ class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
                       alignment: AlignmentDirectional(0.00, 0.00),
                       child: Lottie.asset(
                         'assets/lottie_animations/animation_lo7x2gpx.json',
-                        width: 150.0,
-                        height: 150.0,
+                        width: 220.0,
+                        height: 200.0,
                         fit: BoxFit.contain,
                         animate: true,
                       ),
