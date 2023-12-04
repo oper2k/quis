@@ -363,6 +363,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   onPressed: !_model.isEmailValid || !_model.isPasswordValid
                       ? null
                       : () async {
+                          await authManager.refreshUser();
                           GoRouter.of(context).prepareAuthEvent();
 
                           final user = await authManager.signInWithEmail(

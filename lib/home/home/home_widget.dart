@@ -7,6 +7,7 @@ import '/components/subscription_required_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
@@ -89,6 +90,90 @@ class _HomeWidgetState extends State<HomeWidget> {
               (_model.apiResultsj6?.jsonBody ?? ''),
             ),
           ));
+        }
+      }
+      if (!(FFAppState().dailyNotificationID != null)) {
+        setState(() {
+          FFAppState().dailyNotificationID =
+              random_data.randomInteger(100, 10000);
+        });
+        await actions.awesomeNotificationSchedule(
+          FFAppState().dailyNotificationID,
+          'Hooray! You\'ve just earned Karma ☯️',
+          'Tap to find out more',
+          12,
+          00,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          true,
+          true,
+        );
+      }
+      if (!FFAppState().IslastLoginHappened) {
+        if (getCurrentTimestamp >
+            functions.datePlusDays(FFAppState().lastloginTime!, 1)) {
+          setState(() {
+            FFAppState().IslastLoginHappened = true;
+          });
+          await actions.awesomeNotificationSchedule(
+            FFAppState().lastLoginNotificationID,
+            null!,
+            null!,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false,
+            false,
+          );
+        } else {
+          await actions.awesomeNotificationSchedule(
+            FFAppState().lastLoginNotificationID,
+            null!,
+            null!,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false,
+            false,
+          );
+          setState(() {
+            FFAppState().lastLoginNotificationID =
+                random_data.randomInteger(100, 10000);
+            FFAppState().lastloginTime = getCurrentTimestamp;
+          });
+          await actions.awesomeNotificationSchedule(
+            FFAppState().lastLoginNotificationID,
+            'Missed Us? 🌟',
+            'We\'ve noticed you haven\'t been around in the past 24 hours, don\'t miss out on refining your Interview skills! ',
+            functions.getHourInInt(
+                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
+            functions.getMinutesInInt(
+                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
+            null,
+            functions.getMonthInInt(
+                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
+            functions.getDayInInt(
+                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
+            null,
+            null,
+            null,
+            false,
+            true,
+          );
         }
       }
     });

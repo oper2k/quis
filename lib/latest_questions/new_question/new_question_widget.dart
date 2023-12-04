@@ -874,61 +874,49 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 return;
                               }
                               while (_model.questionAnswerList.length > 0) {
-                                if ((/* NOT RECOMMENDED */ _model
-                                            .questionAnswerElementModels
-                                            .getValueForKey(
-                                          _model.questionAnswerList.first.index
-                                              .toString(),
-                                          (m) => m.questionFieldController.text,
-                                        ) ==
-                                        'true') &&
-                                    (/* NOT RECOMMENDED */ _model
-                                            .questionAnswerElementModels
-                                            .getValueForKey(
-                                          _model.questionAnswerList.first.index
-                                              .toString(),
-                                          (m) => m.answerFieldController.text,
-                                        ) ==
-                                        'true')) {
-                                  await InterviewQuestionRecord.collection
-                                      .doc()
-                                      .set(createInterviewQuestionRecordData(
-                                        question: _model
-                                            .questionAnswerElementModels
-                                            .getValueForKey(
-                                          _model.questionAnswerList.first.index
-                                              .toString(),
-                                          (m) => m.questionFieldController.text,
-                                        ),
-                                        author: currentUserReference,
-                                        company:
-                                            _model.companyFieldController.text,
-                                        role: roleListRoleRecordList
-                                            .where((e) =>
-                                                e.reference == _model.roleRef)
-                                            .toList()
-                                            .first
-                                            .name,
-                                        stage: _model.pickedStage,
-                                        userAnswer: _model
-                                            .questionAnswerElementModels
-                                            .getValueForKey(
-                                          _model.questionAnswerList.first.index
-                                              .toString(),
-                                          (m) => m.answerFieldController.text,
-                                        ),
-                                        dateInterview: _model.pickedDate,
-                                        roundPassed: _model.pickedRound,
-                                        createdTime: getCurrentTimestamp,
-                                      ));
-                                } else {
-                                  return;
-                                }
-
+                                await InterviewQuestionRecord.collection
+                                    .doc()
+                                    .set(createInterviewQuestionRecordData(
+                                      question: _model
+                                          .questionAnswerElementModels
+                                          .getValueForKey(
+                                        _model.questionAnswerList.first.index
+                                            .toString(),
+                                        (m) => m.questionFieldController.text,
+                                      ),
+                                      author: currentUserReference,
+                                      company:
+                                          _model.companyFieldController.text,
+                                      role: roleListRoleRecordList
+                                          .where((e) =>
+                                              e.reference == _model.roleRef)
+                                          .toList()
+                                          .first
+                                          .name,
+                                      stage: _model.pickedStage,
+                                      userAnswer: _model
+                                          .questionAnswerElementModels
+                                          .getValueForKey(
+                                        _model.questionAnswerList.first.index
+                                            .toString(),
+                                        (m) => m.answerFieldController.text,
+                                      ),
+                                      dateInterview: _model.pickedDate,
+                                      roundPassed: _model.pickedRound,
+                                      createdTime: getCurrentTimestamp,
+                                    ));
                                 setState(() {
                                   _model.removeAtIndexFromQuestionAnswerList(0);
                                 });
                               }
+
+                              await currentUserReference!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'karma': FieldValue.increment(1.5),
+                                  },
+                                ),
+                              });
                               context.safePop();
                             },
                             text: 'Submit',

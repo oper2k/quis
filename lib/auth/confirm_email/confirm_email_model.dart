@@ -22,14 +22,6 @@ import 'package:webviewx_plus/webviewx_plus.dart';
 class ConfirmEmailModel extends FlutterFlowModel<ConfirmEmailWidget> {
   ///  Local state fields for this page.
 
-  bool isEmailValid = false;
-
-  bool isPassword1Valid = false;
-
-  bool isPassword2Valid = false;
-
-  bool isRef = false;
-
   bool isSendEmailVisible = true;
 
   ///  State fields for stateful widgets in this page.
@@ -37,9 +29,9 @@ class ConfirmEmailModel extends FlutterFlowModel<ConfirmEmailWidget> {
   final unfocusNode = FocusNode();
   InstantTimer? instantTimer;
   // State field(s) for Timer widget.
-  int timerMilliseconds = 600000;
+  int timerMilliseconds = 120000;
   String timerValue = StopWatchTimer.getDisplayTime(
-    600000,
+    120000,
     hours: false,
     milliSecond: false,
   );

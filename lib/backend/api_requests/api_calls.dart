@@ -17,6 +17,7 @@ class BrevoGroup {
   };
   static CreateAContactCall createAContactCall = CreateAContactCall();
   static UpdateAContactCall updateAContactCall = UpdateAContactCall();
+  static SendAWelcomeEmailCall sendAWelcomeEmailCall = SendAWelcomeEmailCall();
 }
 
 class CreateAContactCall {
@@ -25,7 +26,7 @@ class CreateAContactCall {
     String? lastname = '',
     String? email = '',
     String? apiKey =
-        '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',
+        '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',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -62,7 +63,7 @@ class UpdateAContactCall {
     String? lastname = '',
     String? identifier = '',
     String? apiKey =
-        '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',
+        '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',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -75,6 +76,44 @@ class UpdateAContactCall {
       callName: 'Update a contact',
       apiUrl: '${BrevoGroup.baseUrl}/contacts/${identifier}',
       callType: ApiCallType.PUT,
+      headers: {
+        'api-key': '${apiKey}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class SendAWelcomeEmailCall {
+  Future<ApiCallResponse> call({
+    String? userEmail = '',
+    int? emailID = 2,
+    String? apiKey =
+        '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',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "sender": {
+    "name": "Quis",
+    "email": "info@quis-hq.com"
+  },
+  "to": [
+    {
+      "email": "${userEmail}"
+    }
+  ],
+  "templateId": ${emailID}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Send a welcome email',
+      apiUrl: '${BrevoGroup.baseUrl}/smtp/email',
+      callType: ApiCallType.POST,
       headers: {
         'api-key': '${apiKey}',
       },

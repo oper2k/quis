@@ -525,296 +525,809 @@ class _LatestInterviewQuestionsWidgetState
                                                     0) {
                                                   return Builder(
                                                     builder: (context) {
-                                                      final question = questionListInterviewQuestionRecordList
-                                                          .sortedList((e) =>
-                                                              e.createdTime!)
-                                                          .where((e) => _model
-                                                                  .isSearch
-                                                              ? functions.customSearching(
-                                                                  _model
-                                                                      .searchFieldController
-                                                                      .text,
-                                                                  e.question)
-                                                              : true)
-                                                          .toList();
-                                                      return Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: List.generate(
-                                                            question.length,
-                                                            (questionIndex) {
-                                                          final questionItem =
-                                                              question[
-                                                                  questionIndex];
-                                                          return Builder(
-                                                            builder:
-                                                                (context) =>
-                                                                    InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                if (!revenue_cat
-                                                                        .activeEntitlementIds
-                                                                        .contains(FFAppState()
-                                                                            .entitlementID) &&
-                                                                    (questionIndex >=
-                                                                        2)) {
-                                                                  await showAlignedDialog(
-                                                                    context:
-                                                                        context,
-                                                                    isGlobal:
-                                                                        true,
-                                                                    avoidOverflow:
+                                                      if (_model.isSearch) {
+                                                        return Builder(
+                                                          builder: (context) {
+                                                            if (revenue_cat
+                                                                .activeEntitlementIds
+                                                                .contains(
+                                                                    FFAppState()
+                                                                        .entitlementID)) {
+                                                              return Builder(
+                                                                builder:
+                                                                    (context) {
+                                                                  final questionListViewSearch = questionListInterviewQuestionRecordList
+                                                                      .sortedList(
+                                                                          (e) => e
+                                                                              .createdTime!)
+                                                                      .where((e) => functions.customSearching(
+                                                                          _model
+                                                                              .searchFieldController
+                                                                              .text,
+                                                                          e.question))
+                                                                      .toList();
+                                                                  return ListView
+                                                                      .builder(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    primary:
                                                                         false,
-                                                                    targetAnchor: AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                    followerAnchor: AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                    builder:
-                                                                        (dialogContext) {
-                                                                      return Material(
-                                                                        color: Colors
-                                                                            .transparent,
-                                                                        child: WebViewAware(
-                                                                            child: GestureDetector(
-                                                                          onTap: () => _model.unfocusNode.canRequestFocus
-                                                                              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                                                                              : FocusScope.of(context).unfocus(),
-                                                                          child:
-                                                                              SubscriptionRequiredDialogWidget(
-                                                                            text:
-                                                                                'To continue watching other questions, please subscribe',
-                                                                            action:
-                                                                                () async {},
-                                                                          ),
-                                                                        )),
-                                                                      );
-                                                                    },
-                                                                  ).then((value) =>
-                                                                      setState(
-                                                                          () {}));
-                                                                } else {
-                                                                  context
-                                                                      .pushNamed(
-                                                                    'Question',
-                                                                    queryParameters:
-                                                                        {
-                                                                      'questionItem':
-                                                                          serializeParam(
-                                                                        questionItem,
-                                                                        ParamType
-                                                                            .Document,
-                                                                      ),
-                                                                    }.withoutNulls,
-                                                                    extra: <String,
-                                                                        dynamic>{
-                                                                      'questionItem':
-                                                                          questionItem,
-                                                                    },
-                                                                  );
-                                                                }
-                                                              },
-                                                              child: Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10.0),
-                                                                ),
-                                                                child: Stack(
-                                                                  children: [
-                                                                    Builder(
-                                                                      builder:
-                                                                          (_) {
-                                                                        final child =
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              12.0,
-                                                                              15.0,
-                                                                              12.0,
-                                                                              15.0),
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              Icon(
-                                                                                FFIcons.kphQuestion,
-                                                                                color: FlutterFlowTheme.of(context).powderBlue,
-                                                                                size: 24.0,
-                                                                              ),
-                                                                              Expanded(
-                                                                                child: Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                  child: Column(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        questionItem.question,
-                                                                                        style: FlutterFlowTheme.of(context).headlineLarge,
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    scrollDirection:
+                                                                        Axis.vertical,
+                                                                    itemCount:
+                                                                        questionListViewSearch
+                                                                            .length,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            questionListViewSearchIndex) {
+                                                                      final questionListViewSearchItem =
+                                                                          questionListViewSearch[
+                                                                              questionListViewSearchIndex];
+                                                                      return Builder(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                InkWell(
+                                                                          splashColor:
+                                                                              Colors.transparent,
+                                                                          focusColor:
+                                                                              Colors.transparent,
+                                                                          hoverColor:
+                                                                              Colors.transparent,
+                                                                          highlightColor:
+                                                                              Colors.transparent,
+                                                                          onTap:
+                                                                              () async {
+                                                                            if (!revenue_cat.activeEntitlementIds.contains(FFAppState().entitlementID) &&
+                                                                                (questionListViewSearchIndex >= 2)) {
+                                                                              await showAlignedDialog(
+                                                                                context: context,
+                                                                                isGlobal: true,
+                                                                                avoidOverflow: false,
+                                                                                targetAnchor: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                followerAnchor: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                builder: (dialogContext) {
+                                                                                  return Material(
+                                                                                    color: Colors.transparent,
+                                                                                    child: WebViewAware(
+                                                                                        child: GestureDetector(
+                                                                                      onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                      child: SubscriptionRequiredDialogWidget(
+                                                                                        text: 'To continue watching other questions, please subscribe',
+                                                                                        action: () async {},
                                                                                       ),
-                                                                                      Column(
+                                                                                    )),
+                                                                                  );
+                                                                                },
+                                                                              ).then((value) => setState(() {}));
+                                                                            } else {
+                                                                              context.pushNamed(
+                                                                                'Question',
+                                                                                queryParameters: {
+                                                                                  'questionItem': serializeParam(
+                                                                                    questionListViewSearchItem,
+                                                                                    ParamType.Document,
+                                                                                  ),
+                                                                                }.withoutNulls,
+                                                                                extra: <String, dynamic>{
+                                                                                  'questionItem': questionListViewSearchItem,
+                                                                                },
+                                                                              );
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                            ),
+                                                                            child:
+                                                                                Stack(
+                                                                              children: [
+                                                                                Builder(
+                                                                                  builder: (_) {
+                                                                                    final child = Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+                                                                                      child: Row(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
-                                                                                          Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              children: [
-                                                                                                Expanded(
-                                                                                                  child: Text(
-                                                                                                    '${commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionItem.reference).toList().length.toString()} answers',
-                                                                                                    style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                          Icon(
+                                                                                            FFIcons.kphQuestion,
+                                                                                            color: FlutterFlowTheme.of(context).powderBlue,
+                                                                                            size: 24.0,
+                                                                                          ),
+                                                                                          Expanded(
+                                                                                            child: Padding(
+                                                                                              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Text(
+                                                                                                    questionListViewSearchItem.question,
+                                                                                                    style: FlutterFlowTheme.of(context).headlineLarge,
                                                                                                   ),
-                                                                                                ),
-                                                                                                Container(
-                                                                                                  decoration: BoxDecoration(
-                                                                                                    color: FlutterFlowTheme.of(context).powderBlue,
-                                                                                                    borderRadius: BorderRadius.circular(8.0),
-                                                                                                  ),
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
-                                                                                                    child: Text(
-                                                                                                      questionItem.role,
-                                                                                                      style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                                            fontFamily: 'Sofia Pro',
-                                                                                                            color: FlutterFlowTheme.of(context).white,
-                                                                                                            useGoogleFonts: false,
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                    children: [
+                                                                                                      Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                                        child: Row(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          children: [
+                                                                                                            Expanded(
+                                                                                                              child: Text(
+                                                                                                                '${commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().length.toString()} answers',
+                                                                                                                style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                            Container(
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: FlutterFlowTheme.of(context).powderBlue,
+                                                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                                                              ),
+                                                                                                              child: Padding(
+                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                                child: Text(
+                                                                                                                  questionListViewSearchItem.role,
+                                                                                                                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                                                        fontFamily: 'Sofia Pro',
+                                                                                                                        color: FlutterFlowTheme.of(context).white,
+                                                                                                                        useGoogleFonts: false,
+                                                                                                                      ),
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                      if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().length > 0)
+                                                                                                        Padding(
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                          child: Container(
+                                                                                                            constraints: BoxConstraints(
+                                                                                                              minHeight: 16.0,
+                                                                                                              maxHeight: 70.0,
+                                                                                                            ),
+                                                                                                            decoration: BoxDecoration(),
+                                                                                                            child: Stack(
+                                                                                                              children: [
+                                                                                                                ClipRect(
+                                                                                                                  child: ImageFiltered(
+                                                                                                                    imageFilter: ImageFilter.blur(
+                                                                                                                      sigmaX: 2.0,
+                                                                                                                      sigmaY: 2.0,
+                                                                                                                    ),
+                                                                                                                    child: Text(
+                                                                                                                      commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().first.text,
+                                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                            fontFamily: 'Sofia Pro',
+                                                                                                                            useGoogleFonts: false,
+                                                                                                                            lineHeight: 1.16,
+                                                                                                                          ),
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                                Container(
+                                                                                                                  decoration: BoxDecoration(
+                                                                                                                    color: FlutterFlowTheme.of(context).white,
+                                                                                                                  ),
+                                                                                                                  child: Text(
+                                                                                                                    commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().first.text,
+                                                                                                                    maxLines: 1,
+                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                          fontFamily: 'Sofia Pro',
+                                                                                                                          useGoogleFonts: false,
+                                                                                                                          lineHeight: 1.16,
+                                                                                                                        ),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ),
                                                                                                           ),
+                                                                                                        ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Padding(
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                                    child: Row(
+                                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                                      children: [
+                                                                                                        Expanded(
+                                                                                                          child: Text(
+                                                                                                            dateTimeFormat('d/M/y', questionListViewSearchItem.dateInterview!),
+                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                        Row(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          children: [
+                                                                                                            Text(
+                                                                                                              'View Question',
+                                                                                                              style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                                            ),
+                                                                                                            Icon(
+                                                                                                              FFIcons.kchevronDownS,
+                                                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                              size: 24.0,
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      ],
                                                                                                     ),
                                                                                                   ),
-                                                                                                ),
-                                                                                              ],
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
                                                                                           ),
-                                                                                          if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionItem.reference).toList().length > 0)
-                                                                                            Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                                                                                              child: Container(
-                                                                                                constraints: BoxConstraints(
-                                                                                                  minHeight: 16.0,
-                                                                                                  maxHeight: 70.0,
-                                                                                                ),
-                                                                                                decoration: BoxDecoration(),
-                                                                                                child: Stack(
-                                                                                                  children: [
-                                                                                                    ClipRect(
-                                                                                                      child: ImageFiltered(
-                                                                                                        imageFilter: ImageFilter.blur(
-                                                                                                          sigmaX: 2.0,
-                                                                                                          sigmaY: 2.0,
-                                                                                                        ),
-                                                                                                        child: Text(
-                                                                                                          commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionItem.reference).toList().first.text,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                fontFamily: 'Sofia Pro',
-                                                                                                                useGoogleFonts: false,
-                                                                                                                lineHeight: 1.16,
-                                                                                                              ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                    Container(
-                                                                                                      decoration: BoxDecoration(
-                                                                                                        color: FlutterFlowTheme.of(context).white,
-                                                                                                      ),
-                                                                                                      child: Text(
-                                                                                                        commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionItem.reference).toList().first.text,
-                                                                                                        maxLines: 1,
-                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                              fontFamily: 'Sofia Pro',
-                                                                                                              useGoogleFonts: false,
-                                                                                                              lineHeight: 1.16,
-                                                                                                            ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                              ),
-                                                                                            ),
                                                                                         ],
                                                                                       ),
-                                                                                      Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
-                                                                                        child: Row(
-                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                          children: [
-                                                                                            Expanded(
-                                                                                              child: Text(
-                                                                                                dateTimeFormat('d/M/y', questionItem.dateInterview!),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                    );
+                                                                                    if (!revenue_cat.activeEntitlementIds.contains(FFAppState().entitlementID) && (questionListViewSearchIndex >= 2)) {
+                                                                                      return ClipRect(
+                                                                                        child: ImageFiltered(
+                                                                                          imageFilter: ImageFilter.blur(
+                                                                                            sigmaX: 4.0,
+                                                                                            sigmaY: 4.0,
+                                                                                          ),
+                                                                                          child: child,
+                                                                                        ),
+                                                                                      );
+                                                                                    }
+                                                                                    return child;
+                                                                                  },
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                },
+                                                              );
+                                                            } else {
+                                                              return Builder(
+                                                                builder:
+                                                                    (context) {
+                                                                  final questionListViewSearch = questionListInterviewQuestionRecordList
+                                                                      .sortedList(
+                                                                          (e) => e
+                                                                              .createdTime!)
+                                                                      .take(2)
+                                                                      .toList()
+                                                                      .where((e) => functions.customSearching(
+                                                                          _model
+                                                                              .searchFieldController
+                                                                              .text,
+                                                                          e.question))
+                                                                      .toList();
+                                                                  return ListView
+                                                                      .builder(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    primary:
+                                                                        false,
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    scrollDirection:
+                                                                        Axis.vertical,
+                                                                    itemCount:
+                                                                        questionListViewSearch
+                                                                            .length,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            questionListViewSearchIndex) {
+                                                                      final questionListViewSearchItem =
+                                                                          questionListViewSearch[
+                                                                              questionListViewSearchIndex];
+                                                                      return Builder(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                InkWell(
+                                                                          splashColor:
+                                                                              Colors.transparent,
+                                                                          focusColor:
+                                                                              Colors.transparent,
+                                                                          hoverColor:
+                                                                              Colors.transparent,
+                                                                          highlightColor:
+                                                                              Colors.transparent,
+                                                                          onTap:
+                                                                              () async {
+                                                                            if (!revenue_cat.activeEntitlementIds.contains(FFAppState().entitlementID) &&
+                                                                                (questionListViewSearchIndex >= 2)) {
+                                                                              await showAlignedDialog(
+                                                                                context: context,
+                                                                                isGlobal: true,
+                                                                                avoidOverflow: false,
+                                                                                targetAnchor: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                followerAnchor: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                builder: (dialogContext) {
+                                                                                  return Material(
+                                                                                    color: Colors.transparent,
+                                                                                    child: WebViewAware(
+                                                                                        child: GestureDetector(
+                                                                                      onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                      child: SubscriptionRequiredDialogWidget(
+                                                                                        text: 'To continue watching other questions, please subscribe',
+                                                                                        action: () async {},
+                                                                                      ),
+                                                                                    )),
+                                                                                  );
+                                                                                },
+                                                                              ).then((value) => setState(() {}));
+                                                                            } else {
+                                                                              context.pushNamed(
+                                                                                'Question',
+                                                                                queryParameters: {
+                                                                                  'questionItem': serializeParam(
+                                                                                    questionListViewSearchItem,
+                                                                                    ParamType.Document,
+                                                                                  ),
+                                                                                }.withoutNulls,
+                                                                                extra: <String, dynamic>{
+                                                                                  'questionItem': questionListViewSearchItem,
+                                                                                },
+                                                                              );
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                            ),
+                                                                            child:
+                                                                                Stack(
+                                                                              children: [
+                                                                                Builder(
+                                                                                  builder: (_) {
+                                                                                    final child = Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+                                                                                      child: Row(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                        children: [
+                                                                                          Icon(
+                                                                                            FFIcons.kphQuestion,
+                                                                                            color: FlutterFlowTheme.of(context).powderBlue,
+                                                                                            size: 24.0,
+                                                                                          ),
+                                                                                          Expanded(
+                                                                                            child: Padding(
+                                                                                              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Text(
+                                                                                                    questionListViewSearchItem.question,
+                                                                                                    style: FlutterFlowTheme.of(context).headlineLarge,
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                    children: [
+                                                                                                      Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                                        child: Row(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          children: [
+                                                                                                            Expanded(
+                                                                                                              child: Text(
+                                                                                                                '${commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().length.toString()} answers',
+                                                                                                                style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                            Container(
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: FlutterFlowTheme.of(context).powderBlue,
+                                                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                                                              ),
+                                                                                                              child: Padding(
+                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                                child: Text(
+                                                                                                                  questionListViewSearchItem.role,
+                                                                                                                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                                                        fontFamily: 'Sofia Pro',
+                                                                                                                        color: FlutterFlowTheme.of(context).white,
+                                                                                                                        useGoogleFonts: false,
+                                                                                                                      ),
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                      if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().length > 0)
+                                                                                                        Padding(
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                          child: Container(
+                                                                                                            constraints: BoxConstraints(
+                                                                                                              minHeight: 16.0,
+                                                                                                              maxHeight: 70.0,
+                                                                                                            ),
+                                                                                                            decoration: BoxDecoration(),
+                                                                                                            child: Stack(
+                                                                                                              children: [
+                                                                                                                ClipRect(
+                                                                                                                  child: ImageFiltered(
+                                                                                                                    imageFilter: ImageFilter.blur(
+                                                                                                                      sigmaX: 2.0,
+                                                                                                                      sigmaY: 2.0,
+                                                                                                                    ),
+                                                                                                                    child: Text(
+                                                                                                                      commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().first.text,
+                                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                            fontFamily: 'Sofia Pro',
+                                                                                                                            useGoogleFonts: false,
+                                                                                                                            lineHeight: 1.16,
+                                                                                                                          ),
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                                Container(
+                                                                                                                  decoration: BoxDecoration(
+                                                                                                                    color: FlutterFlowTheme.of(context).white,
+                                                                                                                  ),
+                                                                                                                  child: Text(
+                                                                                                                    commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().first.text,
+                                                                                                                    maxLines: 1,
+                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                          fontFamily: 'Sofia Pro',
+                                                                                                                          useGoogleFonts: false,
+                                                                                                                          lineHeight: 1.16,
+                                                                                                                        ),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Padding(
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                                    child: Row(
+                                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                                      children: [
+                                                                                                        Expanded(
+                                                                                                          child: Text(
+                                                                                                            dateTimeFormat('d/M/y', questionListViewSearchItem.dateInterview!),
+                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                        Row(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          children: [
+                                                                                                            Text(
+                                                                                                              'View Question',
+                                                                                                              style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                                            ),
+                                                                                                            Icon(
+                                                                                                              FFIcons.kchevronDownS,
+                                                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                              size: 24.0,
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      ],
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ],
                                                                                               ),
                                                                                             ),
-                                                                                            Row(
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    );
+                                                                                    if (!revenue_cat.activeEntitlementIds.contains(FFAppState().entitlementID) && (questionListViewSearchIndex >= 2)) {
+                                                                                      return ClipRect(
+                                                                                        child: ImageFiltered(
+                                                                                          imageFilter: ImageFilter.blur(
+                                                                                            sigmaX: 4.0,
+                                                                                            sigmaY: 4.0,
+                                                                                          ),
+                                                                                          child: child,
+                                                                                        ),
+                                                                                      );
+                                                                                    }
+                                                                                    return child;
+                                                                                  },
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                },
+                                                              );
+                                                            }
+                                                          },
+                                                        );
+                                                      } else {
+                                                        return Builder(
+                                                          builder: (context) {
+                                                            final questionListView =
+                                                                questionListInterviewQuestionRecordList
+                                                                    .sortedList(
+                                                                        (e) => e
+                                                                            .createdTime!)
+                                                                    .toList();
+                                                            return ListView
+                                                                .builder(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              primary: false,
+                                                              shrinkWrap: true,
+                                                              scrollDirection:
+                                                                  Axis.vertical,
+                                                              itemCount:
+                                                                  questionListView
+                                                                      .length,
+                                                              itemBuilder: (context,
+                                                                  questionListViewIndex) {
+                                                                final questionListViewItem =
+                                                                    questionListView[
+                                                                        questionListViewIndex];
+                                                                return Builder(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      if (!revenue_cat.activeEntitlementIds.contains(FFAppState()
+                                                                              .entitlementID) &&
+                                                                          (questionListViewIndex >=
+                                                                              2)) {
+                                                                        await showAlignedDialog(
+                                                                          context:
+                                                                              context,
+                                                                          isGlobal:
+                                                                              true,
+                                                                          avoidOverflow:
+                                                                              false,
+                                                                          targetAnchor:
+                                                                              AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                          followerAnchor:
+                                                                              AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                          builder:
+                                                                              (dialogContext) {
+                                                                            return Material(
+                                                                              color: Colors.transparent,
+                                                                              child: WebViewAware(
+                                                                                  child: GestureDetector(
+                                                                                onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                child: SubscriptionRequiredDialogWidget(
+                                                                                  text: 'To continue watching other questions, please subscribe',
+                                                                                  action: () async {},
+                                                                                ),
+                                                                              )),
+                                                                            );
+                                                                          },
+                                                                        ).then((value) =>
+                                                                            setState(() {}));
+                                                                      } else {
+                                                                        context
+                                                                            .pushNamed(
+                                                                          'Question',
+                                                                          queryParameters:
+                                                                              {
+                                                                            'questionItem':
+                                                                                serializeParam(
+                                                                              questionListViewItem,
+                                                                              ParamType.Document,
+                                                                            ),
+                                                                          }.withoutNulls,
+                                                                          extra: <String,
+                                                                              dynamic>{
+                                                                            'questionItem':
+                                                                                questionListViewItem,
+                                                                          },
+                                                                        );
+                                                                      }
+                                                                    },
+                                                                    child:
+                                                                        Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10.0),
+                                                                      ),
+                                                                      child:
+                                                                          Stack(
+                                                                        children: [
+                                                                          Builder(
+                                                                            builder:
+                                                                                (_) {
+                                                                              final child = Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Icon(
+                                                                                      FFIcons.kphQuestion,
+                                                                                      color: FlutterFlowTheme.of(context).powderBlue,
+                                                                                      size: 24.0,
+                                                                                    ),
+                                                                                    Expanded(
+                                                                                      child: Padding(
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                        child: Column(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              questionListViewItem.question,
+                                                                                              style: FlutterFlowTheme.of(context).headlineLarge,
+                                                                                            ),
+                                                                                            Column(
                                                                                               mainAxisSize: MainAxisSize.max,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
                                                                                               children: [
-                                                                                                Text(
-                                                                                                  'View Question',
-                                                                                                  style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                                Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                                  child: Row(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    children: [
+                                                                                                      Expanded(
+                                                                                                        child: Text(
+                                                                                                          '${commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewItem.reference).toList().length.toString()} answers',
+                                                                                                          style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                      Container(
+                                                                                                        decoration: BoxDecoration(
+                                                                                                          color: FlutterFlowTheme.of(context).powderBlue,
+                                                                                                          borderRadius: BorderRadius.circular(8.0),
+                                                                                                        ),
+                                                                                                        child: Padding(
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                          child: Text(
+                                                                                                            questionListViewItem.role,
+                                                                                                            style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                                                  fontFamily: 'Sofia Pro',
+                                                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                                                  useGoogleFonts: false,
+                                                                                                                ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
                                                                                                 ),
-                                                                                                Icon(
-                                                                                                  FFIcons.kchevronDownS,
-                                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                  size: 24.0,
-                                                                                                ),
+                                                                                                if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewItem.reference).toList().length > 0)
+                                                                                                  Padding(
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                    child: Container(
+                                                                                                      constraints: BoxConstraints(
+                                                                                                        minHeight: 16.0,
+                                                                                                        maxHeight: 70.0,
+                                                                                                      ),
+                                                                                                      decoration: BoxDecoration(),
+                                                                                                      child: Stack(
+                                                                                                        children: [
+                                                                                                          ClipRect(
+                                                                                                            child: ImageFiltered(
+                                                                                                              imageFilter: ImageFilter.blur(
+                                                                                                                sigmaX: 2.0,
+                                                                                                                sigmaY: 2.0,
+                                                                                                              ),
+                                                                                                              child: Text(
+                                                                                                                commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewItem.reference).toList().first.text,
+                                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                      fontFamily: 'Sofia Pro',
+                                                                                                                      useGoogleFonts: false,
+                                                                                                                      lineHeight: 1.16,
+                                                                                                                    ),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          Container(
+                                                                                                            decoration: BoxDecoration(
+                                                                                                              color: FlutterFlowTheme.of(context).white,
+                                                                                                            ),
+                                                                                                            child: Text(
+                                                                                                              commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewItem.reference).toList().first.text,
+                                                                                                              maxLines: 1,
+                                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                    fontFamily: 'Sofia Pro',
+                                                                                                                    useGoogleFonts: false,
+                                                                                                                    lineHeight: 1.16,
+                                                                                                                  ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  ),
                                                                                               ],
+                                                                                            ),
+                                                                                            Padding(
+                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                              child: Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                children: [
+                                                                                                  Expanded(
+                                                                                                    child: Text(
+                                                                                                      dateTimeFormat('d/M/y', questionListViewItem.dateInterview!),
+                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                  Row(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    children: [
+                                                                                                      Text(
+                                                                                                        'View Question',
+                                                                                                        style: FlutterFlowTheme.of(context).headlineSmall,
+                                                                                                      ),
+                                                                                                      Icon(
+                                                                                                        FFIcons.kchevronDownS,
+                                                                                                        color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                        size: 24.0,
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
                                                                                           ],
                                                                                         ),
                                                                                       ),
-                                                                                    ],
-                                                                                  ),
+                                                                                    ),
+                                                                                  ],
                                                                                 ),
-                                                                              ),
-                                                                            ],
+                                                                              );
+                                                                              if (!revenue_cat.activeEntitlementIds.contains(FFAppState().entitlementID) && (questionListViewIndex >= 2)) {
+                                                                                return ClipRect(
+                                                                                  child: ImageFiltered(
+                                                                                    imageFilter: ImageFilter.blur(
+                                                                                      sigmaX: 4.0,
+                                                                                      sigmaY: 4.0,
+                                                                                    ),
+                                                                                    child: child,
+                                                                                  ),
+                                                                                );
+                                                                              }
+                                                                              return child;
+                                                                            },
                                                                           ),
-                                                                        );
-                                                                        if (!revenue_cat.activeEntitlementIds.contains(FFAppState().entitlementID) &&
-                                                                            (questionIndex >=
-                                                                                2)) {
-                                                                          return ClipRect(
-                                                                            child:
-                                                                                ImageFiltered(
-                                                                              imageFilter: ImageFilter.blur(
-                                                                                sigmaX: 2.0,
-                                                                                sigmaY: 2.0,
-                                                                              ),
-                                                                              child: child,
-                                                                            ),
-                                                                          );
-                                                                        }
-                                                                        return child;
-                                                                      },
+                                                                        ],
+                                                                      ),
                                                                     ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }).divide(SizedBox(
-                                                            height: 12.0)),
-                                                      );
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                        );
+                                                      }
                                                     },
                                                   );
                                                 } else {
@@ -1092,8 +1605,8 @@ class _LatestInterviewQuestionsWidgetState
                                                                                   return ClipRect(
                                                                                     child: ImageFiltered(
                                                                                       imageFilter: ImageFilter.blur(
-                                                                                        sigmaX: 6.0,
-                                                                                        sigmaY: 6.0,
+                                                                                        sigmaX: 4.0,
+                                                                                        sigmaY: 4.0,
                                                                                       ),
                                                                                       child: child,
                                                                                     ),

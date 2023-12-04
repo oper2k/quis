@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/message_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -66,11 +67,8 @@ class _AddOnsCopyWidgetState extends State<AddOnsCopyWidget> {
               children: [
                 Container(
                   decoration: BoxDecoration(),
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    primary: false,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Align(
                         alignment: AlignmentDirectional(0.00, 0.00),
@@ -94,20 +92,12 @@ class _AddOnsCopyWidgetState extends State<AddOnsCopyWidget> {
                               useGoogleFonts: false,
                             ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: Text(
-                          '',
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: 'Sofia Pro',
-                                fontWeight: FontWeight.w300,
-                                useGoogleFonts: false,
-                                lineHeight: 1.16,
-                              ),
+                      wrapWithModel(
+                        model: _model.messageElementModel,
+                        updateCallback: () => setState(() {}),
+                        child: MessageElementWidget(
+                          text:
+                              'tetsetsljetlesj,t,.jes.,tj,esjt,ejs,tsej.t,jes,.jt.,sejt,sejt,.jes.tjes.,jt,.esjt.,sjet,jset,.sejt.,esjt,.sjet,.jest,jestje,jt.,esjt,.esjt.ejst,.jjes.tje,.sjte.s,jt.esjt.esjt.esjt.sejt.jes,t.jes.jt,.sejt,.est,.jes,t.jes,.tj.e,sjt,es.tje,.sjt,.esjt,jestjsje.tjes,.tjs.,ejt,.sejt.,esjt,.jest.,jest.,jse,t.jes,.jt,sejt.,sejt.jest,sejt.,sejt.,sejt.,stetsetsljetlesj,t,.jes.,tj,esjt,ejs,tsej.t,jes,.jt.,sejt,sejt,.jes.tjes.,jt,.esjt.,sjet,jset,.sejt.,esjt,.sjet,.jest,jestje,jt.,esjt,.esjt.ejst,.jjes.tje,.sjte.s,jt.esjt.esjt.esjt.sejt.jes,t.jes.jt,.sejt,.est,.jes,t.jes,.tj.e,sjt,es.tje,.sjt,.esjt,jestjsje.tjes,.tjs.,ejt,.sejt.,esjt,.jest.,jest.,jse,t.jes,.jt,sejt.,sejt.jest,sejt.,sejt.,sejt.,stetsetsljetlesj,t,.jes.,tj,esjt,ejs,tsej.t,jes,.jt.,sejt,sejt,.jes.tjes.,jt,.esjt.,sjet,jset,.sejt.,esjt,.sjet,.jest,jestje,jt.,esjt,.esjt.ejst,.jjes.tje,.sjte.s,jt.esjt.esjt.esjt.sejt.jes,t.jes.jt,.sejt,.est,.jes,t.jes,.tj.e,sjt,es.tje,.sjt,.esjt,jestjsje.tjes,.tjs.,ejt,.sejt.,esjt,.jest.,jest.,jse,t.jes,.jt,sejt.,sejt.jest,sejt.,sejt.,sejt.,stetsetsljetlesj,t,.jes.,tj,esjt,ejs,tsej.t,jes,.jt.,sejt,sejt,.jes.tjes.,jt,.esjt.,sjet,jset,.sejt.,esjt,.sjet,.jest,jestje,jt.,esjt,.esjt.ejst,.jjes.tje,.sjte.s,jt.esjt.esjt.esjt.sejt.jes,t.jes.jt,.sejt,.est,.jes,t.jes,.tj.e,sjt,es.tje,.sjt,.esjt,jestjsje.tjes,.tjs.,ejt,.sejt.,esjt,.jest.,jest.,jse,t.jes,.jt,sejt.,sejt.jest,sejt.,sejt.,sejt.,stetsetsljetlesj,t,.jes.,tj,esjt,ejs,tsej.t,jes,.jt.,sejt,sejt,.jes.tjes.,jt,.esjt.,sjet,jset,.sejt.,esjt,.sjet,.jest,jestje,jt.,esjt,.esjt.ejst,.jjes.tje,.sjte.s,jt.esjt.esjt.esjt.sejt.jes,t.jes.jt,.sejt,.est,.jes,t.jes,.tj.e,sjt,es.tje,.sjt,.esjt,jestjsje.tjes,.tjs.,ejt,.sejt.,esjt,.jest.,jest.,jse,t.jes,.jt,sejt.,sejt.jest,sejt.,sejt.,sejt.,s',
                         ),
                       ),
                     ],

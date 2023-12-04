@@ -36,6 +36,10 @@ class PracticeInterviewModel extends FlutterFlowModel<PracticeInterviewWidget> {
 
   bool isRoleValid = true;
 
+  bool timer = false;
+
+  int? roomID;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -1,8 +1,11 @@
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/interview/interview_questions_bottom_sheet/interview_questions_bottom_sheet_widget.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,12 +21,14 @@ class VideoConfPageWidget extends StatefulWidget {
     required this.channelName,
     required this.userProfileImage,
     required this.uid,
+    required this.userRef,
   }) : super(key: key);
 
   final String? token;
   final String? channelName;
   final String? userProfileImage;
   final int? uid;
+  final DocumentReference? userRef;
 
   @override
   _VideoConfPageWidgetState createState() => _VideoConfPageWidgetState();
@@ -38,6 +43,8 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => VideoConfPageModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -86,6 +93,38 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                 onRemoteUserJoin: () async {},
                 onRemoteUserLeave: () async {},
               ),
+            ),
+            FlutterFlowTimer(
+              initialTime: _model.timerMilliseconds,
+              getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
+                value,
+                hours: false,
+                milliSecond: false,
+              ),
+              controller: _model.timerController,
+              updateStateInterval: Duration(milliseconds: 1000),
+              onChanged: (value, displayTime, shouldUpdate) {
+                _model.timerMilliseconds = value;
+                _model.timerValue = displayTime;
+                if (shouldUpdate) setState(() {});
+              },
+              onEnded: () async {
+                context.goNamed(
+                  'LIQ',
+                  queryParameters: {
+                    'userItem': serializeParam(
+                      widget.userRef,
+                      ParamType.DocumentReference,
+                    ),
+                  }.withoutNulls,
+                );
+              },
+              textAlign: TextAlign.start,
+              style: FlutterFlowTheme.of(context).displayLarge.override(
+                    fontFamily: 'Sofia Pro',
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    useGoogleFonts: false,
+                  ),
             ),
             Align(
               alignment: AlignmentDirectional(0.00, 0.50),

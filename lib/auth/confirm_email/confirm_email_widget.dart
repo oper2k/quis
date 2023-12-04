@@ -45,11 +45,12 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.timerController.onStartTimer();
+      await authManager.refreshUser();
       if (widget.isAfterReg) {
         setState(() {
           _model.isSendEmailVisible = false;
         });
+        _model.timerController.onStartTimer();
       }
       if (!(valueOrDefault(currentUserDocument?.refCode, '') != null &&
           valueOrDefault(currentUserDocument?.refCode, '') != '')) {
@@ -62,6 +63,14 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
         await currentUserReference!.update(createUsersRecordData(
           refUser: FFAppState().refUser,
         ));
+
+        await FFAppState().refUser!.update({
+          ...mapToFirestore(
+            {
+              'karma': FieldValue.increment(2.0),
+            },
+          ),
+        });
       }
       if (currentUserEmailVerified) {
         context.goNamed('Home');
@@ -249,7 +258,6 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              await authManager.sendEmailVerification();
                               await showAlignedDialog(
                                 context: context,
                                 isGlobal: true,
@@ -279,6 +287,7 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
                               });
                               _model.timerController.onResetTimer();
 
+                              await authManager.sendEmailVerification();
                               _model.timerController.onStartTimer();
                             },
                             child: Container(

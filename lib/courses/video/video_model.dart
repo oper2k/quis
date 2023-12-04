@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/avatar_widget.dart';
 import '/components/back_button_widget.dart';
 import '/components/subscription_required_dialog_widget.dart';

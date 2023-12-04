@@ -1945,6 +1945,10 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                     _model.videoCallId,
                                     ParamType.int,
                                   ),
+                                  'userRef': serializeParam(
+                                    currentUserReference,
+                                    ParamType.DocumentReference,
+                                  ),
                                 }.withoutNulls,
                               );
                             }

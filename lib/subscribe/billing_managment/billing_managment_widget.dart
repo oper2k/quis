@@ -334,53 +334,6 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                         ),
                       ),
                     ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed('CustomerSupport');
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).white,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 15.0, 12.0, 15.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Icon(
-                                FFIcons.kframe51584,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Customer support',
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineMedium,
-                                  ),
-                                ),
-                              ),
-                              Icon(
-                                FFIcons.kchevronDownS,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
                   ].divide(SizedBox(height: 8.0)),
                 ),
               ),

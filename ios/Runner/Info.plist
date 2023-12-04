@@ -59,6 +59,8 @@
     <string>In order to upload data, this app requires permission to access the photo library.</string>
 	<key>PermissionGroupNotification</key>
     <string>“Quis” Would Like to Send you Notifications</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>“Quis” requires the access to Microphone </string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>

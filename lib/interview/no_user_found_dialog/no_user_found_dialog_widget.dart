@@ -108,8 +108,8 @@ class _NoUserFoundDialogWidgetState extends State<NoUserFoundDialogWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(21.0, 22.0, 21.0, 0.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    Navigator.pop(context);
                   },
                   text: 'OK',
                   options: FFButtonOptions(

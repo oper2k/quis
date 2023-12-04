@@ -190,6 +190,23 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ).then((value) =>
                               safeSetState(() => _model.deleteOutput = value));
 
+                          if (_model.deleteOutput!) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Your account will be permanently deleted within 14 days.',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 3000),
+                                backgroundColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                              ),
+                            );
+                          }
+
                           setState(() {});
                         },
                         child: wrapWithModel(

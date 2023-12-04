@@ -208,11 +208,11 @@ final parametersBuilderMap =
           'channelName': getParameter<String>(data, 'channelName'),
           'userProfileImage': getParameter<String>(data, 'userProfileImage'),
           'uid': getParameter<int>(data, 'uid'),
+          'userRef': getParameter<DocumentReference>(data, 'userRef'),
         },
       ),
   'ThankYouForQuestion': ParameterData.none(),
   'BillingManagment': ParameterData.none(),
-  'CustomerSupport': ParameterData.none(),
   'ThankYouForSubscription': ParameterData.none(),
   'VideoVimeo': (data) async => ParameterData(
         allParams: {

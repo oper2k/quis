@@ -310,7 +310,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 3.0, 0.0, 0.0),
                                             child: Text(
-                                              '( Additional Access for Freemium and up to +2 Karma or get up to +5 karma if you were Premium before)',
+                                              '(Get an additional +5 Karma bonus)',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodySmall

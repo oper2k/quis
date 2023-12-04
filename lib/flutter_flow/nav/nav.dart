@@ -358,6 +358,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             userProfileImage:
                 params.getParam('userProfileImage', ParamType.String),
             uid: params.getParam('uid', ParamType.int),
+            userRef: params.getParam(
+                'userRef', ParamType.DocumentReference, false, ['users']),
           ),
         ),
         FFRoute(
@@ -369,11 +371,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'BillingManagment',
           path: '/billingManagment',
           builder: (context, params) => BillingManagmentWidget(),
-        ),
-        FFRoute(
-          name: 'CustomerSupport',
-          path: '/customerSupport',
-          builder: (context, params) => CustomerSupportWidget(),
         ),
         FFRoute(
           name: 'ThankYouForSubscription',

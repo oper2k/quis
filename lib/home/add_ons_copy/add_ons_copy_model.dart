@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/message_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -20,13 +21,18 @@ class AddOnsCopyModel extends FlutterFlowModel<AddOnsCopyWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Model for messageElement component.
+  late MessageElementModel messageElementModel;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    messageElementModel = createModel(context, () => MessageElementModel());
+  }
 
   void dispose() {
     unfocusNode.dispose();
+    messageElementModel.dispose();
   }
 
   /// Action blocks are added here.

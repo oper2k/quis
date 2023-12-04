@@ -41,11 +41,18 @@ class FFAppState extends ChangeNotifier {
           prefs.getInt('ff_dailyNotificationID') ?? _dailyNotificationID;
     });
     _safeInit(() {
-      _dailyNotificationDateTime =
-          prefs.containsKey('ff_dailyNotificationDateTime')
-              ? DateTime.fromMillisecondsSinceEpoch(
-                  prefs.getInt('ff_dailyNotificationDateTime')!)
-              : _dailyNotificationDateTime;
+      _lastloginTime = prefs.containsKey('ff_lastloginTime')
+          ? DateTime.fromMillisecondsSinceEpoch(
+              prefs.getInt('ff_lastloginTime')!)
+          : _lastloginTime;
+    });
+    _safeInit(() {
+      _lastLoginNotificationID = prefs.getInt('ff_lastLoginNotificationID') ??
+          _lastLoginNotificationID;
+    });
+    _safeInit(() {
+      _IslastLoginHappened =
+          prefs.getBool('ff_IslastLoginHappened') ?? _IslastLoginHappened;
     });
   }
 
@@ -331,14 +338,27 @@ class FFAppState extends ChangeNotifier {
     prefs.setInt('ff_dailyNotificationID', _value);
   }
 
-  DateTime? _dailyNotificationDateTime;
-  DateTime? get dailyNotificationDateTime => _dailyNotificationDateTime;
-  set dailyNotificationDateTime(DateTime? _value) {
-    _dailyNotificationDateTime = _value;
+  DateTime? _lastloginTime;
+  DateTime? get lastloginTime => _lastloginTime;
+  set lastloginTime(DateTime? _value) {
+    _lastloginTime = _value;
     _value != null
-        ? prefs.setInt(
-            'ff_dailyNotificationDateTime', _value.millisecondsSinceEpoch)
-        : prefs.remove('ff_dailyNotificationDateTime');
+        ? prefs.setInt('ff_lastloginTime', _value.millisecondsSinceEpoch)
+        : prefs.remove('ff_lastloginTime');
+  }
+
+  int _lastLoginNotificationID = 0;
+  int get lastLoginNotificationID => _lastLoginNotificationID;
+  set lastLoginNotificationID(int _value) {
+    _lastLoginNotificationID = _value;
+    prefs.setInt('ff_lastLoginNotificationID', _value);
+  }
+
+  bool _IslastLoginHappened = false;
+  bool get IslastLoginHappened => _IslastLoginHappened;
+  set IslastLoginHappened(bool _value) {
+    _IslastLoginHappened = _value;
+    prefs.setBool('ff_IslastLoginHappened', _value);
   }
 }
 

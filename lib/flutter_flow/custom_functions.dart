@@ -38,6 +38,14 @@ String generateRefCode() {
   return code.join();
 }
 
+DateTime datePlusDays(
+  DateTime date,
+  int days,
+) {
+  // date minus days
+  return date.add(Duration(days: days));
+}
+
 int? findUserIndexFromList(
   List<UsersRecord> userList,
   String userID,

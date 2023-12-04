@@ -476,8 +476,12 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                       StreamBuilder<List<InterviewParticipantsOfDayRecord>>(
                         stream: queryInterviewParticipantsOfDayRecord(
                           queryBuilder: (interviewParticipantsOfDayRecord) =>
-                              interviewParticipantsOfDayRecord.orderBy('date',
-                                  descending: true),
+                              interviewParticipantsOfDayRecord.where(
+                            'date',
+                            isEqualTo: functions.getSameTime(
+                                getRemoteConfigInt('unixTimeSecForInterview'),
+                                getCurrentTimestamp),
+                          ),
                           singleRecord: true,
                         ),
                         builder: (context, snapshot) {
@@ -553,245 +557,190 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      AuthUserStreamWidget(
-                                        builder: (context) =>
-                                            FutureBuilder<RoleRecord>(
-                                          future: RoleRecord.getDocumentOnce(
-                                              currentUserDocument!
-                                                  .careerProfile.role!),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50.0,
-                                                  height: 50.0,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<
-                                                            Color>(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            final conditionalBuilderRoleRecord =
-                                                snapshot.data!;
-                                            return Builder(
-                                              builder: (context) {
-                                                if ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
-                                                        null) &&
-                                                    (interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                            .participants
-                                                            .where((e) =>
-                                                                e.user ==
-                                                                currentUserReference)
-                                                            .toList()
-                                                            .length >
-                                                        0)) {
-                                                  return Visibility(
-                                                    visible: currentUserDocument
-                                                            ?.careerProfile
-                                                            ?.role !=
-                                                        null,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: InkWell(
-                                                        splashColor:
-                                                            Colors.transparent,
-                                                        focusColor:
-                                                            Colors.transparent,
-                                                        hoverColor:
-                                                            Colors.transparent,
-                                                        highlightColor:
-                                                            Colors.transparent,
-                                                        onTap: () async {},
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10.0),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        18.0,
-                                                                        11.0,
-                                                                        18.0,
-                                                                        11.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                      Builder(
+                                        builder: (context) {
+                                          if ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
+                                                  null) &&
+                                              (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                      .participants
+                                                      .where((e) =>
+                                                          e.user ==
+                                                          currentUserReference)
+                                                      .toList()
+                                                      .length >
+                                                  0)) {
+                                            return Visibility(
+                                              visible: currentUserDocument
+                                                      ?.careerProfile?.role !=
+                                                  null,
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 10.0, 0.0, 0.0),
+                                                child: AuthUserStreamWidget(
+                                                  builder: (context) => InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {},
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    18.0,
+                                                                    11.0,
+                                                                    18.0,
+                                                                    11.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           5.0,
                                                                           0.0,
                                                                           5.0),
-                                                                  child: Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                          ?.participants
-                                                                          ?.where((e) =>
-                                                                              e.user ==
-                                                                              currentUserReference)
-                                                                          .toList()
-                                                                          ?.first
-                                                                          ?.role,
-                                                                      'role',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro',
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                          lineHeight:
-                                                                              1.16,
-                                                                        ),
-                                                                  ),
+                                                              child: Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                      ?.participants
+                                                                      ?.where((e) =>
+                                                                          e.user ==
+                                                                          currentUserReference)
+                                                                      .toList()
+                                                                      ?.first
+                                                                      ?.role,
+                                                                  'role',
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 6.0,
-                                                                0.0, 0.0),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          enableDrag: false,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return WebViewAware(
-                                                                child:
-                                                                    GestureDetector(
-                                                              onTap: () => _model
-                                                                      .unfocusNode
-                                                                      .canRequestFocus
-                                                                  ? FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          _model
-                                                                              .unfocusNode)
-                                                                  : FocusScope.of(
-                                                                          context)
-                                                                      .unfocus(),
-                                                              child: Padding(
-                                                                padding: MediaQuery
-                                                                    .viewInsetsOf(
-                                                                        context),
-                                                                child:
-                                                                    PickBottomSheetWidget(
-                                                                  stringList:
-                                                                      FFAppState()
-                                                                          .filterRoleList,
-                                                                ),
-                                                              ),
-                                                            ));
-                                                          },
-                                                        ).then((value) =>
-                                                            safeSetState(() =>
-                                                                _model.roleOutput =
-                                                                    value));
-
-                                                        if (_model.roleOutput !=
-                                                                null &&
-                                                            _model.roleOutput !=
-                                                                '') {
-                                                          setState(() {
-                                                            _model.pickedRole =
-                                                                _model
-                                                                    .roleOutput;
-                                                          });
-                                                          setState(() {
-                                                            _model.isRoleValid =
-                                                                true;
-                                                          });
-                                                        }
-
-                                                        setState(() {});
-                                                      },
-                                                      child: Container(
-                                                        height: 52.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                          border: Border.all(
-                                                            color: _model
-                                                                    .isRoleValid
-                                                                ? Color(
-                                                                    0x00000000)
-                                                                : FlutterFlowTheme.of(
+                                                                style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .error,
-                                                          ),
-                                                        ),
-                                                        child: wrapWithModel(
-                                                          model: _model
-                                                              .pseudoDropDownModel,
-                                                          updateCallback: () =>
-                                                              setState(() {}),
-                                                          child:
-                                                              PseudoDropDownWidget(
-                                                            defText: 'Role',
-                                                            text: _model
-                                                                .pickedRole,
-                                                          ),
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Sofia Pro',
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                      lineHeight:
+                                                                          1.16,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
-                                                  );
-                                                }
-                                              },
+                                                  ),
+                                                ),
+                                              ),
                                             );
-                                          },
-                                        ),
+                                          } else {
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 6.0, 0.0, 0.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return WebViewAware(
+                                                          child:
+                                                              GestureDetector(
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
+                                                        child: Padding(
+                                                          padding: MediaQuery
+                                                              .viewInsetsOf(
+                                                                  context),
+                                                          child:
+                                                              PickBottomSheetWidget(
+                                                            stringList: FFAppState()
+                                                                .filterRoleList,
+                                                          ),
+                                                        ),
+                                                      ));
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() => _model
+                                                          .roleOutput = value));
+
+                                                  if (_model.roleOutput !=
+                                                          null &&
+                                                      _model.roleOutput != '') {
+                                                    setState(() {
+                                                      _model.pickedRole =
+                                                          _model.roleOutput;
+                                                    });
+                                                    setState(() {
+                                                      _model.isRoleValid = true;
+                                                    });
+                                                  }
+
+                                                  setState(() {});
+                                                },
+                                                child: Container(
+                                                  height: 52.0,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    border: Border.all(
+                                                      color: _model.isRoleValid
+                                                          ? Color(0x00000000)
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                    ),
+                                                  ),
+                                                  child: wrapWithModel(
+                                                    model: _model
+                                                        .pseudoDropDownModel,
+                                                    updateCallback: () =>
+                                                        setState(() {}),
+                                                    child: PseudoDropDownWidget(
+                                                      defText: 'Role',
+                                                      text: _model.pickedRole,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        },
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -804,22 +753,14 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                             getRemoteConfigInt(
                                                                 'unixTimeSecForInterview'),
                                                             getCurrentTimestamp)!,
-                                                        '5')) &&
+                                                        '5')) ||
                                                 (getCurrentTimestamp <
                                                     functions.timeMinusMinutes(
                                                         functions.getSameTime(
                                                             getRemoteConfigInt(
                                                                 'unixTimeSecForInterview'),
                                                             getCurrentTimestamp)!,
-                                                        '1435')) &&
-                                                (interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                        .participants
-                                                        .where((e) =>
-                                                            e.user ==
-                                                            currentUserReference)
-                                                        .toList()
-                                                        .length >
-                                                    0)) {
+                                                        '1435'))) {
                                               return Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -829,18 +770,30 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                       onPressed: () async {
                                                         var _shouldSetState =
                                                             false;
-                                                        if (interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                .participants
-                                                                .where((e) =>
-                                                                    e.user ==
-                                                                    currentUserReference)
-                                                                .toList()
-                                                                .length >
-                                                            0) {
-                                                          if (!(confirenceRoomItemConferenceRoomRecord !=
-                                                              null)) {
+                                                        if ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
+                                                                null) &&
+                                                            (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                    .participants
+                                                                    .where((e) =>
+                                                                        e.user ==
+                                                                        currentUserReference)
+                                                                    .toList()
+                                                                    .length >
+                                                                0)) {
+                                                          if (confirenceRoomItemConferenceRoomRecord !=
+                                                              null) {
+                                                            setState(() {
+                                                              _model.roomID =
+                                                                  confirenceRoomItemConferenceRoomRecord
+                                                                      ?.roomId;
+                                                            });
+                                                          } else {
                                                             if ((interviewParticipantsItemInterviewParticipantsOfDayRecord!
                                                                         .participants
+                                                                        .where((e) =>
+                                                                            e.user !=
+                                                                            currentUserReference)
+                                                                        .toList()
                                                                         .length >
                                                                     interviewParticipantsItemInterviewParticipantsOfDayRecord!
                                                                         .takenUsers
@@ -850,10 +803,19 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                         .where((e) =>
                                                                             !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
                                                                             functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0),
-                                                                                e.karma))
+                                                                                e.karma) &&
+                                                                            (e.user != currentUserReference))
                                                                         .toList()
                                                                         .length >
                                                                     0)) {
+                                                              setState(() {
+                                                                _model.roomID =
+                                                                    random_data
+                                                                        .randomInteger(
+                                                                            1000,
+                                                                            100000);
+                                                              });
+
                                                               var conferenceRoomRecordReference =
                                                                   ConferenceRoomRecord
                                                                       .collection
@@ -865,10 +827,8 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                       getRemoteConfigInt(
                                                                           'unixTimeSecForInterview'),
                                                                       getCurrentTimestamp),
-                                                                  roomId: random_data
-                                                                      .randomInteger(
-                                                                          1000,
-                                                                          100000),
+                                                                  roomId: _model
+                                                                      .roomID,
                                                                 ),
                                                                 ...mapToFirestore(
                                                                   {
@@ -893,10 +853,8 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                       getRemoteConfigInt(
                                                                           'unixTimeSecForInterview'),
                                                                       getCurrentTimestamp),
-                                                                  roomId: random_data
-                                                                      .randomInteger(
-                                                                          1000,
-                                                                          100000),
+                                                                  roomId: _model
+                                                                      .roomID,
                                                                 ),
                                                                 ...mapToFirestore(
                                                                   {
@@ -1012,6 +970,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                               return;
                                                             }
                                                           }
+
                                                           try {
                                                             final result =
                                                                 await FirebaseFunctions
@@ -1020,10 +979,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                         'generateRtcTokenCall')
                                                                     .call({
                                                               "channelName":
-                                                                  'test',
-                                                              "uid":
-                                                                  confirenceRoomItemConferenceRoomRecord!
-                                                                      .roomId,
+                                                                  _model.roomID!
+                                                                      .toString(),
+                                                              "uid": _model
+                                                                  .roomID!,
                                                             });
                                                             _model.cloudFunctions814 =
                                                                 GenerateRtcTokenCallCloudFunctionCallResponse(
@@ -1062,8 +1021,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                 ),
                                                                 'channelName':
                                                                     serializeParam(
-                                                                  confirenceRoomItemConferenceRoomRecord
-                                                                      ?.roomId
+                                                                  _model.roomID
                                                                       ?.toString(),
                                                                   ParamType
                                                                       .String,
@@ -1076,9 +1034,20 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                 ),
                                                                 'uid':
                                                                     serializeParam(
-                                                                  confirenceRoomItemConferenceRoomRecord
-                                                                      ?.roomId,
+                                                                  _model.roomID,
                                                                   ParamType.int,
+                                                                ),
+                                                                'userRef':
+                                                                    serializeParam(
+                                                                  confirenceRoomItemConferenceRoomRecord
+                                                                      ?.users
+                                                                      ?.where((e) =>
+                                                                          e !=
+                                                                          currentUserReference)
+                                                                      .toList()
+                                                                      ?.first,
+                                                                  ParamType
+                                                                      .DocumentReference,
                                                                 ),
                                                               }.withoutNulls,
                                                             );
@@ -1191,140 +1160,151 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               return Builder(
                                                 builder: (context) =>
                                                     FFButtonWidget(
-                                                  onPressed:
-                                                      interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                  onPressed: (interviewParticipantsItemInterviewParticipantsOfDayRecord !=
+                                                              null) &&
+                                                          (interviewParticipantsItemInterviewParticipantsOfDayRecord!
                                                                   .participants
                                                                   .where((e) =>
                                                                       e.user ==
                                                                       currentUserReference)
                                                                   .toList()
                                                                   .length >
-                                                              0
-                                                          ? null
-                                                          : () async {
-                                                              if (_model.pickedRole !=
-                                                                      null &&
-                                                                  _model.pickedRole !=
-                                                                      '') {
-                                                                setState(() {
-                                                                  _model.isRoleValid =
-                                                                      true;
-                                                                });
-                                                              } else {
-                                                                setState(() {
-                                                                  _model.isRoleValid =
-                                                                      false;
-                                                                });
-                                                                return;
-                                                              }
+                                                              0)
+                                                      ? null
+                                                      : () async {
+                                                          if (_model.pickedRole !=
+                                                                  null &&
+                                                              _model.pickedRole !=
+                                                                  '') {
+                                                            setState(() {
+                                                              _model.isRoleValid =
+                                                                  true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              _model.isRoleValid =
+                                                                  false;
+                                                            });
+                                                            return;
+                                                          }
 
-                                                              if (interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                      ?.date ==
-                                                                  functions.getSameTime(
-                                                                      getRemoteConfigInt(
-                                                                          'unixTimeSecForInterview'),
-                                                                      getCurrentTimestamp)) {
-                                                                await interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                    .reference
-                                                                    .update({
-                                                                  ...mapToFirestore(
-                                                                    {
-                                                                      'participants':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        getInterviewParticipantFirestoreData(
-                                                                          createInterviewParticipantStruct(
-                                                                            user:
-                                                                                currentUserReference,
-                                                                            karma:
-                                                                                valueOrDefault(currentUserDocument?.karma, 0.0),
-                                                                            role:
-                                                                                _model.pickedRole,
-                                                                            clearUnsetFields:
-                                                                                false,
-                                                                          ),
-                                                                          true,
-                                                                        )
-                                                                      ]),
-                                                                    },
-                                                                  ),
-                                                                });
-                                                              } else {
-                                                                await InterviewParticipantsOfDayRecord
-                                                                    .collection
-                                                                    .doc()
-                                                                    .set({
-                                                                  ...createInterviewParticipantsOfDayRecordData(
-                                                                    date: functions.getSameTime(
-                                                                        getRemoteConfigInt(
-                                                                            'unixTimeSecForInterview'),
-                                                                        getCurrentTimestamp),
-                                                                  ),
-                                                                  ...mapToFirestore(
-                                                                    {
-                                                                      'participants':
-                                                                          [
-                                                                        getInterviewParticipantFirestoreData(
-                                                                          updateInterviewParticipantStruct(
-                                                                            InterviewParticipantStruct(
-                                                                              user: currentUserReference,
-                                                                              karma: valueOrDefault(currentUserDocument?.karma, 0.0),
-                                                                              role: _model.pickedRole,
-                                                                            ),
-                                                                            clearUnsetFields:
-                                                                                false,
-                                                                            create:
-                                                                                true,
-                                                                          ),
-                                                                          true,
-                                                                        )
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                                });
-                                                              }
-
-                                                              await showAlignedDialog(
-                                                                context:
-                                                                    context,
-                                                                isGlobal: true,
-                                                                avoidOverflow:
-                                                                    false,
-                                                                targetAnchor:
-                                                                    AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                followerAnchor:
-                                                                    AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                builder:
-                                                                    (dialogContext) {
-                                                                  return Material(
-                                                                    color: Colors
-                                                                        .transparent,
-                                                                    child: WebViewAware(
-                                                                        child: GestureDetector(
-                                                                      onTap: () => _model
-                                                                              .unfocusNode
-                                                                              .canRequestFocus
-                                                                          ? FocusScope.of(context).requestFocus(_model
-                                                                              .unfocusNode)
-                                                                          : FocusScope.of(context)
-                                                                              .unfocus(),
-                                                                      child:
-                                                                          ReminderDialogWidget(),
-                                                                    )),
-                                                                  );
+                                                          if (interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                  ?.date ==
+                                                              functions.getSameTime(
+                                                                  getRemoteConfigInt(
+                                                                      'unixTimeSecForInterview'),
+                                                                  getCurrentTimestamp)) {
+                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                .reference
+                                                                .update({
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'participants':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    getInterviewParticipantFirestoreData(
+                                                                      createInterviewParticipantStruct(
+                                                                        user:
+                                                                            currentUserReference,
+                                                                        karma: valueOrDefault(
+                                                                            currentUserDocument?.karma,
+                                                                            0.0),
+                                                                        role: _model
+                                                                            .pickedRole,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                      true,
+                                                                    )
+                                                                  ]),
                                                                 },
-                                                              ).then((value) =>
-                                                                  setState(
-                                                                      () {}));
+                                                              ),
+                                                            });
+                                                          } else {
+                                                            await InterviewParticipantsOfDayRecord
+                                                                .collection
+                                                                .doc()
+                                                                .set({
+                                                              ...createInterviewParticipantsOfDayRecordData(
+                                                                date: functions.getSameTime(
+                                                                    getRemoteConfigInt(
+                                                                        'unixTimeSecForInterview'),
+                                                                    getCurrentTimestamp),
+                                                              ),
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'participants':
+                                                                      [
+                                                                    getInterviewParticipantFirestoreData(
+                                                                      updateInterviewParticipantStruct(
+                                                                        InterviewParticipantStruct(
+                                                                          user:
+                                                                              currentUserReference,
+                                                                          karma: valueOrDefault(
+                                                                              currentUserDocument?.karma,
+                                                                              0.0),
+                                                                          role:
+                                                                              _model.pickedRole,
+                                                                        ),
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                        create:
+                                                                            true,
+                                                                      ),
+                                                                      true,
+                                                                    )
+                                                                  ],
+                                                                },
+                                                              ),
+                                                            });
+                                                          }
+
+                                                          await showAlignedDialog(
+                                                            context: context,
+                                                            isGlobal: true,
+                                                            avoidOverflow:
+                                                                false,
+                                                            targetAnchor:
+                                                                AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                            followerAnchor:
+                                                                AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                            builder:
+                                                                (dialogContext) {
+                                                              return Material(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                child:
+                                                                    WebViewAware(
+                                                                        child:
+                                                                            GestureDetector(
+                                                                  onTap: () => _model
+                                                                          .unfocusNode
+                                                                          .canRequestFocus
+                                                                      ? FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(_model
+                                                                              .unfocusNode)
+                                                                      : FocusScope.of(
+                                                                              context)
+                                                                          .unfocus(),
+                                                                  child:
+                                                                      ReminderDialogWidget(),
+                                                                )),
+                                                              );
                                                             },
+                                                          ).then((value) =>
+                                                              setState(() {}));
+                                                        },
                                                   text: 'Get Reminder',
                                                   options: FFButtonOptions(
                                                     width: double.infinity,
@@ -1459,6 +1439,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                         _model.timerMilliseconds = value;
                                         _model.timerValue = displayTime;
                                         if (shouldUpdate) setState(() {});
+                                      },
+                                      onEnded: () async {
+                                        setState(() {
+                                          _model.timer = true;
+                                        });
                                       },
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)

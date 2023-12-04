@@ -61,8 +61,6 @@ export '/latest_questions/thank_you_for_question/thank_you_for_question_widget.d
     show ThankYouForQuestionWidget;
 export '/subscribe/billing_managment/billing_managment_widget.dart'
     show BillingManagmentWidget;
-export '/subscribe/customer_support/customer_support_widget.dart'
-    show CustomerSupportWidget;
 export '/subscribe/thank_you_for_subscription/thank_you_for_subscription_widget.dart'
     show ThankYouForSubscriptionWidget;
 export '/video_vimeo/video_vimeo_widget.dart' show VideoVimeoWidget;
