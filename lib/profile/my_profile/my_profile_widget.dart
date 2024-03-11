@@ -175,218 +175,227 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 0.0, 0.0, 0.0),
-                                              child: AuthUserStreamWidget(
-                                                builder: (context) =>
-                                                    wrapWithModel(
-                                                  model: _model.avatarModel,
-                                                  updateCallback: () =>
-                                                      setState(() {}),
-                                                  child: AvatarWidget(
-                                                    diameter: 60.0,
-                                                    imagePath: currentUserPhoto,
-                                                    isPremium: revenue_cat
-                                                        .activeEntitlementIds
-                                                        .contains(FFAppState()
-                                                            .entitlementID),
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 0.0, 0.0, 0.0),
+                                                child: AuthUserStreamWidget(
+                                                  builder: (context) =>
+                                                      wrapWithModel(
+                                                    model: _model.avatarModel,
+                                                    updateCallback: () =>
+                                                        setState(() {}),
+                                                    child: AvatarWidget(
+                                                      diameter: 60.0,
+                                                      imagePath:
+                                                          currentUserPhoto,
+                                                      isPremium: revenue_cat
+                                                          .activeEntitlementIds
+                                                          .contains(FFAppState()
+                                                              .entitlementID),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 0.0, 0.0, 0.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 12.0,
-                                                                0.0, 0.0),
-                                                    child: Builder(
-                                                      builder: (context) {
-                                                        if ((valueOrDefault(
-                                                                        currentUserDocument
-                                                                            ?.firstName,
-                                                                        '') !=
-                                                                    null &&
-                                                                valueOrDefault(
-                                                                        currentUserDocument
-                                                                            ?.firstName,
-                                                                        '') !=
-                                                                    '') &&
-                                                            (valueOrDefault(
-                                                                        currentUserDocument
-                                                                            ?.lastName,
-                                                                        '') !=
-                                                                    null &&
-                                                                valueOrDefault(
-                                                                        currentUserDocument
-                                                                            ?.lastName,
-                                                                        '') !=
-                                                                    '')) {
-                                                          return Text(
-                                                            '${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .white,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          );
-                                                        } else {
-                                                          return Text(
-                                                            'Your Name',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .accent3,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          );
-                                                        }
-                                                      },
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 0.0, 0.0, 0.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  12.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Builder(
+                                                        builder: (context) {
+                                                          if ((valueOrDefault(
+                                                                          currentUserDocument
+                                                                              ?.firstName,
+                                                                          '') !=
+                                                                      null &&
+                                                                  valueOrDefault(
+                                                                          currentUserDocument
+                                                                              ?.firstName,
+                                                                          '') !=
+                                                                      '') &&
+                                                              (valueOrDefault(
+                                                                          currentUserDocument
+                                                                              ?.lastName,
+                                                                          '') !=
+                                                                      null &&
+                                                                  valueOrDefault(
+                                                                          currentUserDocument
+                                                                              ?.lastName,
+                                                                          '') !=
+                                                                      '')) {
+                                                            return Text(
+                                                              '${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .headlineLarge
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            );
+                                                          } else {
+                                                            return Text(
+                                                              'Your Name',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .headlineLarge
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent3,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            );
+                                                          }
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 9.0,
-                                                                0.0, 0.0),
-                                                    child: Builder(
-                                                      builder: (context) {
-                                                        if (currentUserDocument
-                                                                ?.group !=
-                                                            null) {
-                                                          return StreamBuilder<
-                                                              GroupRecord>(
-                                                            stream: GroupRecord
-                                                                .getDocument(
-                                                                    currentUserDocument!
-                                                                        .group!),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 50.0,
-                                                                    height:
-                                                                        50.0,
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  9.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Builder(
+                                                        builder: (context) {
+                                                          if (currentUserDocument
+                                                                  ?.group !=
+                                                              null) {
+                                                            return StreamBuilder<
+                                                                GroupRecord>(
+                                                              stream: GroupRecord
+                                                                  .getDocument(
+                                                                      currentUserDocument!
+                                                                          .group!),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
                                                                     child:
-                                                                        CircularProgressIndicator(
-                                                                      valueColor:
-                                                                          AlwaysStoppedAnimation<
-                                                                              Color>(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .primary,
+                                                                        SizedBox(
+                                                                      width:
+                                                                          50.0,
+                                                                      height:
+                                                                          50.0,
+                                                                      child:
+                                                                          CircularProgressIndicator(
+                                                                        valueColor:
+                                                                            AlwaysStoppedAnimation<Color>(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .primary,
+                                                                        ),
                                                                       ),
                                                                     ),
+                                                                  );
+                                                                }
+                                                                final groupRefItemGroupRecord =
+                                                                    snapshot
+                                                                        .data!;
+                                                                return Container(
+                                                                  decoration:
+                                                                      BoxDecoration(),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .min,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .end,
+                                                                    children: [
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(0.0),
+                                                                        child: Image
+                                                                            .network(
+                                                                          groupRefItemGroupRecord
+                                                                              .icon,
+                                                                          width:
+                                                                              20.0,
+                                                                          height:
+                                                                              20.0,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          groupRefItemGroupRecord
+                                                                              .name,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .headlineSmall
+                                                                              .override(
+                                                                                fontFamily: 'Sofia Pro',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 );
-                                                              }
-                                                              final groupRefItemGroupRecord =
-                                                                  snapshot
-                                                                      .data!;
-                                                              return Container(
-                                                                decoration:
-                                                                    BoxDecoration(),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              0.0),
-                                                                      child: Image
-                                                                          .network(
-                                                                        groupRefItemGroupRecord
-                                                                            .icon,
-                                                                        width:
-                                                                            20.0,
-                                                                        height:
-                                                                            20.0,
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        groupRefItemGroupRecord
-                                                                            .name,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .headlineSmall
-                                                                            .override(
-                                                                              fontFamily: 'Sofia Pro',
-                                                                              color: FlutterFlowTheme.of(context).white,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        } else {
-                                                          return Text(
-                                                            'Your Industry',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .accent3,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          );
-                                                        }
-                                                      },
+                                                              },
+                                                            );
+                                                          } else {
+                                                            return Text(
+                                                              'Your Industry',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .headlineLarge
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent3,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            );
+                                                          }
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                         Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -2557,7 +2566,6 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                         ),
                         if (responsiveVisibility(
                           context: context,
-                          phone: false,
                           tablet: false,
                           tabletLandscape: false,
                           desktop: false,
@@ -2572,15 +2580,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                   'MY_PROFILE_Container_nmcfvsm4_ON_TAP');
                               logFirebaseEvent('Container_navigate_to');
 
-                              context.pushNamed(
-                                'ConfirmEmailCopy',
-                                queryParameters: {
-                                  'isAfterReg': serializeParam(
-                                    true,
-                                    ParamType.bool,
-                                  ),
-                                }.withoutNulls,
-                              );
+                              context.pushNamed('HomeGuide1');
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -2606,7 +2606,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        'Test',
+                                        'Test guide',
                                         style: FlutterFlowTheme.of(context)
                                             .headlineMedium
                                             .override(

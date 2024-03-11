@@ -127,3 +127,5 @@ export '/onboarding/guide/latest_interview_questions_guide/latest_interview_ques
 export '/onboarding/guide/home_guide2/home_guide2_widget.dart'
     show HomeGuide2Widget;
 export '/test/test_widget.dart' show TestWidget;
+export '/onboarding/guide/practice_interview_guide/practice_interview_guide_widget.dart'
+    show PracticeInterviewGuideWidget;

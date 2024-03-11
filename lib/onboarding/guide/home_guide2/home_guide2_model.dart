@@ -61,7 +61,36 @@ class HomeGuide2Model extends FlutterFlowModel<HomeGuide2Widget> {
   TutorialCoachMark createPageWalkthrough(BuildContext context) =>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_CO');
+          logFirebaseEvent('HomeGuide2_navigate_to');
+
+          context.goNamed(
+            'PracticeInterviewGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        },
         onSkip: () {
+          logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_SK');
+          logFirebaseEvent('HomeGuide2_navigate_to');
+
+          context.goNamed(
+            'PracticeInterviewGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
           return true;
         },
       );

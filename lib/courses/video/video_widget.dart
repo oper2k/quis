@@ -118,7 +118,7 @@ class _VideoWidgetState extends State<VideoWidget>
             .orderBy('sort'),
       );
       if (_model.courseVideosQuery!
-              .take(2)
+              .take(FFAppConstants.freeVideosNumber)
               .toList()
               .where((e) => e.reference == widget.videoItem?.reference)
               .toList()

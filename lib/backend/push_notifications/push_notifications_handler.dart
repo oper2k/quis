@@ -272,6 +272,7 @@ final parametersBuilderMap =
   'LatestInterviewQuestionsGuide': ParameterData.none(),
   'HomeGuide2': ParameterData.none(),
   'test': ParameterData.none(),
+  'PracticeInterviewGuide': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

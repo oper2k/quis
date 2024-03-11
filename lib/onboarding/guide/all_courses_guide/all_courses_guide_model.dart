@@ -71,7 +71,36 @@ class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
   TutorialCoachMark createPageWalkthrough(BuildContext context) =>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
+          logFirebaseEvent('AllCoursesGuide_navigate_to');
+
+          context.goNamed(
+            'LatestInterviewQuestionsGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        },
         onSkip: () {
+          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
+          logFirebaseEvent('AllCoursesGuide_navigate_to');
+
+          context.goNamed(
+            'LatestInterviewQuestionsGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
           return true;
         },
       );

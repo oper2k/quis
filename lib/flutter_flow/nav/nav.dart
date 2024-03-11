@@ -572,6 +572,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'test',
           path: '/test',
           builder: (context, params) => TestWidget(),
+        ),
+        FFRoute(
+          name: 'PracticeInterviewGuide',
+          path: '/practiceInterviewGuide',
+          builder: (context, params) => PracticeInterviewGuideWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

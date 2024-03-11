@@ -438,21 +438,40 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     }
                                                     final textRoleRecord =
                                                         snapshot.data!;
-                                                    return Text(
-                                                      textRoleRecord.name,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Sofia Pro',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .accent2,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
+                                                    return InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'HOME_PAGE_Text_u2ok5t3e_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Text_navigate_to');
+
+                                                        context
+                                                            .pushNamed('test');
+                                                      },
+                                                      child: Text(
+                                                        textRoleRecord.name,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .accent2,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
                                                     );
                                                   },
                                                 ),
@@ -706,7 +725,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
                                                 child: Image.asset(
-                                                  'assets/images/1.webp',
+                                                  'assets/images/howToUseApp.webp',
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
                                                 ),
@@ -735,7 +754,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
                                                 child: Image.asset(
-                                                  'assets/images/2.webp',
+                                                  'assets/images/gotQuestion.webp',
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
                                                 ),

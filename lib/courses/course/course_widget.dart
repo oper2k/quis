@@ -447,200 +447,214 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                 currentUserDocument
                                                     ?.courseProgress
                                                     ?.refCourse) {
-                                              return Visibility(
-                                                visible: !revenue_cat
-                                                    .activeEntitlementIds
-                                                    .contains(FFAppState()
-                                                        .entitlementID),
-                                                child: InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'COURSE_PAGE_Container_zhks4ukg_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Container_navigate_to');
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'COURSE_PAGE_Container_zhks4ukg_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Container_navigate_to');
 
-                                                    context.pushNamed(
-                                                      'Pricing',
-                                                      queryParameters: {
-                                                        'offers':
-                                                            serializeParam(
-                                                          PaywallPrice.standard,
-                                                          ParamType.Enum,
-                                                        ),
-                                                      }.withoutNulls,
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    width: 149.0,
-                                                    height: 50.0,
-                                                    decoration: BoxDecoration(
-                                                      gradient: LinearGradient(
-                                                        colors: [
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .gradient2,
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .aquaBreeze
-                                                        ],
-                                                        stops: [0.0, 1.0],
-                                                        begin:
-                                                            AlignmentDirectional(
-                                                                0.0, 1.0),
-                                                        end:
-                                                            AlignmentDirectional(
-                                                                0, -1.0),
+                                                  context.pushNamed(
+                                                    'Video',
+                                                    queryParameters: {
+                                                      'videoItem':
+                                                          serializeParam(
+                                                        lessonListCourseVideoRecordList[currentUserDocument!
+                                                                    .courseProgress
+                                                                    .refVideos
+                                                                    .length >
+                                                                0
+                                                            ? ((int?
+                                                                lastCompletedLessonIndex) {
+                                                                return lastCompletedLessonIndex !=
+                                                                        null
+                                                                    ? lastCompletedLessonIndex +
+                                                                        1
+                                                                    : 0;
+                                                              }(functions.videoIndexInList(
+                                                                currentUserDocument
+                                                                    ?.courseProgress
+                                                                    ?.refVideos
+                                                                    ?.last,
+                                                                lessonListCourseVideoRecordList
+                                                                    .toList())))
+                                                            : 0],
+                                                        ParamType.Document,
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'videoItem': lessonListCourseVideoRecordList[currentUserDocument!
+                                                                  .courseProgress
+                                                                  .refVideos
+                                                                  .length >
+                                                              0
+                                                          ? ((int?
+                                                              lastCompletedLessonIndex) {
+                                                              return lastCompletedLessonIndex !=
+                                                                      null
+                                                                  ? lastCompletedLessonIndex +
+                                                                      1
+                                                                  : 0;
+                                                            }(functions.videoIndexInList(
+                                                              currentUserDocument
+                                                                  ?.courseProgress
+                                                                  ?.refVideos
+                                                                  ?.last,
+                                                              lessonListCourseVideoRecordList
+                                                                  .toList())))
+                                                          : 0],
+                                                    },
+                                                  );
+                                                },
+                                                child: Container(
+                                                  width: 149.0,
+                                                  height: 50.0,
+                                                  decoration: BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .gradient2,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .aquaBreeze
+                                                      ],
+                                                      stops: [0.0, 1.0],
+                                                      begin:
+                                                          AlignmentDirectional(
+                                                              0.0, 1.0),
+                                                      end: AlignmentDirectional(
+                                                          0, -1.0),
                                                     ),
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            0.0, 0.0),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  7.0,
-                                                                  0.0,
-                                                                  7.0),
-                                                      child: Text(
-                                                        'Continue ',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .titleMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Sofia Pro',
-                                                              useGoogleFonts:
-                                                                  false,
-                                                              lineHeight: 1.16,
-                                                            ),
-                                                      ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 7.0,
+                                                                0.0, 7.0),
+                                                    child: Text(
+                                                      'Continue ',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Sofia Pro',
+                                                            useGoogleFonts:
+                                                                false,
+                                                            lineHeight: 1.16,
+                                                          ),
                                                     ),
                                                   ),
                                                 ),
                                               );
                                             } else {
-                                              return Visibility(
-                                                visible: !revenue_cat
-                                                    .activeEntitlementIds
-                                                    .contains(FFAppState()
-                                                        .entitlementID),
-                                                child: InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'COURSE_PAGE_Container_mhmj5gtc_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Container_backend_call');
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'COURSE_PAGE_Container_mhmj5gtc_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Container_backend_call');
 
-                                                    await currentUserReference!
-                                                        .update(
-                                                            createUsersRecordData(
-                                                      courseProgress:
-                                                          createCourseProgressStruct(
-                                                        refCourse: widget
-                                                            .courseItem
-                                                            ?.reference,
-                                                        fieldValues: {
-                                                          'ref_videos':
-                                                              FieldValue
-                                                                  .delete(),
-                                                        },
-                                                        clearUnsetFields: false,
+                                                  await currentUserReference!
+                                                      .update(
+                                                          createUsersRecordData(
+                                                    courseProgress:
+                                                        createCourseProgressStruct(
+                                                      refCourse: widget
+                                                          .courseItem
+                                                          ?.reference,
+                                                      fieldValues: {
+                                                        'ref_videos':
+                                                            FieldValue.delete(),
+                                                      },
+                                                      clearUnsetFields: false,
+                                                    ),
+                                                  ));
+                                                  logFirebaseEvent(
+                                                      'Container_navigate_to');
+
+                                                  context.pushNamed(
+                                                    'Video',
+                                                    queryParameters: {
+                                                      'videoItem':
+                                                          serializeParam(
+                                                        lessonListCourseVideoRecordList
+                                                            .first,
+                                                        ParamType.Document,
                                                       ),
-                                                    ));
-                                                    logFirebaseEvent(
-                                                        'Container_navigate_to');
-
-                                                    context.pushNamed(
-                                                      'Video',
-                                                      queryParameters: {
-                                                        'videoItem':
-                                                            serializeParam(
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'videoItem':
                                                           lessonListCourseVideoRecordList
                                                               .first,
-                                                          ParamType.Document,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        'videoItem':
-                                                            lessonListCourseVideoRecordList
-                                                                .first,
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    width: 149.0,
-                                                    height: 50.0,
-                                                    decoration: BoxDecoration(
-                                                      gradient: LinearGradient(
-                                                        colors: [
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .gradient2,
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .aquaBreeze
-                                                        ],
-                                                        stops: [0.0, 1.0],
-                                                        begin:
-                                                            AlignmentDirectional(
-                                                                0.0, 1.0),
-                                                        end:
-                                                            AlignmentDirectional(
-                                                                0, -1.0),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
+                                                    },
+                                                  );
+                                                },
+                                                child: Container(
+                                                  width: 149.0,
+                                                  height: 50.0,
+                                                  decoration: BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .gradient2,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .aquaBreeze
+                                                      ],
+                                                      stops: [0.0, 1.0],
+                                                      begin:
+                                                          AlignmentDirectional(
+                                                              0.0, 1.0),
+                                                      end: AlignmentDirectional(
+                                                          0, -1.0),
                                                     ),
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            0.0, 0.0),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  7.0,
-                                                                  0.0,
-                                                                  7.0),
-                                                      child: Text(
-                                                        'Enroll',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .titleMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Sofia Pro',
-                                                              useGoogleFonts:
-                                                                  false,
-                                                              lineHeight: 1.16,
-                                                            ),
-                                                      ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 7.0,
+                                                                0.0, 7.0),
+                                                    child: Text(
+                                                      'Enroll',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Sofia Pro',
+                                                            useGoogleFonts:
+                                                                false,
+                                                            lineHeight: 1.16,
+                                                          ),
                                                     ),
                                                   ),
                                                 ),

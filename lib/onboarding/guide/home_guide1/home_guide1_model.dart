@@ -61,7 +61,36 @@ class HomeGuide1Model extends FlutterFlowModel<HomeGuide1Widget> {
   TutorialCoachMark createPageWalkthrough(BuildContext context) =>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          logFirebaseEvent('HOME_GUIDE1_HomeGuide1_ON_WALKTHROUGH_CO');
+          logFirebaseEvent('HomeGuide1_navigate_to');
+
+          context.goNamed(
+            'AllCoursesGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        },
         onSkip: () {
+          logFirebaseEvent('HOME_GUIDE1_HomeGuide1_ON_WALKTHROUGH_SK');
+          logFirebaseEvent('HomeGuide1_navigate_to');
+
+          context.goNamed(
+            'AllCoursesGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
           return true;
         },
       );
