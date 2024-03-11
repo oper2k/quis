@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/custom_cloud_functions/custom_cloud_function_response_manager.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/nav_bar_widget.dart';
 import '/components/pick_bottom_sheet_widget.dart';
@@ -10,19 +10,17 @@ import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/interview/no_user_found_dialog/no_user_found_dialog_widget.dart';
-import '/interview/reminder_dialog/reminder_dialog_widget.dart';
 import '/interview/sorry_dialog/sorry_dialog_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
+import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
+import 'package:collection/collection.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -31,10 +29,10 @@ import 'practice_interview_model.dart';
 export 'practice_interview_model.dart';
 
 class PracticeInterviewWidget extends StatefulWidget {
-  const PracticeInterviewWidget({Key? key}) : super(key: key);
+  const PracticeInterviewWidget({super.key});
 
   @override
-  _PracticeInterviewWidgetState createState() =>
+  State<PracticeInterviewWidget> createState() =>
       _PracticeInterviewWidgetState();
 }
 
@@ -48,8 +46,12 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
     super.initState();
     _model = createModel(context, () => PracticeInterviewModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'PracticeInterview'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('PRACTICE_INTERVIEW_PracticeInterview_ON_');
+      logFirebaseEvent('PracticeInterview_timer');
       _model.timerController.onStartTimer();
     });
 
@@ -70,15 +72,6 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -108,7 +101,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Lottie.asset(
                           'assets/lottie_animations/animation_lodp1m2k.json',
                           width: 200.0,
@@ -119,7 +112,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -569,84 +562,62 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                       .toList()
                                                       .length >
                                                   0)) {
-                                            return Visibility(
-                                              visible: currentUserDocument
-                                                      ?.careerProfile?.role !=
-                                                  null,
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 10.0, 0.0, 0.0),
-                                                child: AuthUserStreamWidget(
-                                                  builder: (context) => InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {},
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                      ),
-                                                      child: Padding(
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 10.0, 0.0, 0.0),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(18.0, 11.0,
+                                                          18.0, 11.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
-                                                                    18.0,
-                                                                    11.0,
-                                                                    18.0,
-                                                                    11.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          5.0,
-                                                                          0.0,
-                                                                          5.0),
-                                                              child: Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                      ?.participants
-                                                                      ?.where((e) =>
-                                                                          e.user ==
-                                                                          currentUserReference)
-                                                                      .toList()
-                                                                      ?.first
-                                                                      ?.role,
-                                                                  'role',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro',
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                      lineHeight:
-                                                                          1.16,
-                                                                    ),
+                                                                    0.0,
+                                                                    5.0,
+                                                                    0.0,
+                                                                    5.0),
+                                                        child: Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                ?.participants
+                                                                ?.where((e) =>
+                                                                    e.user ==
+                                                                    currentUserReference)
+                                                                .toList()
+                                                                ?.first
+                                                                ?.role,
+                                                            'role',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                useGoogleFonts:
+                                                                    false,
+                                                                lineHeight:
+                                                                    1.16,
                                                               ),
-                                                            ),
-                                                          ],
                                                         ),
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
@@ -662,6 +633,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'PRACTICE_INTERVIEW_Container_ckvvmem9_ON');
+                                                  logFirebaseEvent(
+                                                      'Container_bottom_sheet');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -670,29 +645,33 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                     context: context,
                                                     builder: (context) {
                                                       return WebViewAware(
-                                                          child:
-                                                              GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child:
-                                                              PickBottomSheetWidget(
-                                                            stringList: FFAppState()
-                                                                .filterRoleList,
+                                                        child: GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                PickBottomSheetWidget(
+                                                              stringList:
+                                                                  FFAppState()
+                                                                      .filterRoleList,
+                                                              title:
+                                                                  'Choose from the list below',
+                                                            ),
                                                           ),
                                                         ),
-                                                      ));
+                                                      );
                                                     },
                                                   ).then((value) =>
                                                       safeSetState(() => _model
@@ -701,10 +680,14 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                   if (_model.roleOutput !=
                                                           null &&
                                                       _model.roleOutput != '') {
+                                                    logFirebaseEvent(
+                                                        'Container_update_page_state');
                                                     setState(() {
                                                       _model.pickedRole =
                                                           _model.roleOutput;
                                                     });
+                                                    logFirebaseEvent(
+                                                        'Container_update_page_state');
                                                     setState(() {
                                                       _model.isRoleValid = true;
                                                     });
@@ -745,8 +728,9 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 19.0, 0.0, 0.0),
-                                        child: Builder(
-                                          builder: (context) {
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
                                             if ((getCurrentTimestamp >
                                                     functions.timeMinusMinutes(
                                                         functions.getSameTime(
@@ -760,195 +744,326 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                             getRemoteConfigInt(
                                                                 'unixTimeSecForInterview'),
                                                             getCurrentTimestamp)!,
-                                                        '1435'))) {
-                                              return Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Builder(
-                                                    builder: (context) =>
-                                                        FFButtonWidget(
-                                                      onPressed: () async {
-                                                        var _shouldSetState =
-                                                            false;
-                                                        if ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
-                                                                null) &&
-                                                            (interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                    .participants
-                                                                    .where((e) =>
+                                                        '1435')))
+                                              Builder(
+                                                builder: (context) =>
+                                                    FFButtonWidget(
+                                                  onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'PRACTICE_INTERVIEW_JOIN_NOW_BTN_ON_TAP');
+                                                    var _shouldSetState = false;
+                                                    logFirebaseEvent(
+                                                        'Button_backend_call');
+
+                                                    await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                        .reference
+                                                        .update({
+                                                      ...mapToFirestore(
+                                                        {
+                                                          'joined_users':
+                                                              FieldValue
+                                                                  .arrayUnion([
+                                                            currentUserReference
+                                                          ]),
+                                                        },
+                                                      ),
+                                                    });
+                                                    if ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
+                                                            null) &&
+                                                        (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                .participants
+                                                                .where((e) =>
+                                                                    e.user ==
+                                                                    currentUserReference)
+                                                                .toList()
+                                                                .length >
+                                                            0)) {
+                                                      if (confirenceRoomItemConferenceRoomRecord !=
+                                                          null) {
+                                                        logFirebaseEvent(
+                                                            'Button_action_block');
+                                                        await _model
+                                                            .roomConnection(
+                                                          context,
+                                                          roomID:
+                                                              confirenceRoomItemConferenceRoomRecord
+                                                                  ?.reference
+                                                                  .id,
+                                                          uid: random_data
+                                                              .randomInteger(
+                                                                  10, 1000),
+                                                          userRef:
+                                                              confirenceRoomItemConferenceRoomRecord
+                                                                  ?.users
+                                                                  ?.where((e) =>
+                                                                      e !=
+                                                                      currentUserReference)
+                                                                  .toList()
+                                                                  ?.first,
+                                                          role:
+                                                              confirenceRoomItemConferenceRoomRecord
+                                                                  ?.role,
+                                                          roomDoc:
+                                                              confirenceRoomItemConferenceRoomRecord,
+                                                        );
+                                                      } else {
+                                                        logFirebaseEvent(
+                                                            'Button_firestore_query');
+                                                        _model.secondAttemptRoomQueryOutput =
+                                                            await queryConferenceRoomRecordOnce(
+                                                          queryBuilder:
+                                                              (conferenceRoomRecord) =>
+                                                                  conferenceRoomRecord
+                                                                      .where(
+                                                                        'date',
+                                                                        isEqualTo: functions.getSameTime(
+                                                                            getRemoteConfigInt('unixTimeSecForInterview'),
+                                                                            getCurrentTimestamp),
+                                                                      )
+                                                                      .where(
+                                                                        'users',
+                                                                        arrayContains:
+                                                                            currentUserReference,
+                                                                      ),
+                                                          singleRecord: true,
+                                                        ).then((s) =>
+                                                                s.firstOrNull);
+                                                        _shouldSetState = true;
+                                                        if (_model
+                                                                .secondAttemptRoomQueryOutput
+                                                                ?.reference !=
+                                                            null) {
+                                                          logFirebaseEvent(
+                                                              'Button_action_block');
+                                                          await _model
+                                                              .roomConnection(
+                                                            context,
+                                                            roomID: _model
+                                                                .secondAttemptRoomQueryOutput
+                                                                ?.reference
+                                                                .id,
+                                                            uid: random_data
+                                                                .randomInteger(
+                                                                    10, 1000),
+                                                            userRef: _model
+                                                                .secondAttemptRoomQueryOutput
+                                                                ?.users
+                                                                ?.where((e) =>
+                                                                    e !=
+                                                                    currentUserReference)
+                                                                .toList()
+                                                                ?.first,
+                                                            role: _model
+                                                                .secondAttemptRoomQueryOutput
+                                                                ?.role,
+                                                            roomDoc: _model
+                                                                .secondAttemptRoomQueryOutput,
+                                                          );
+                                                        } else {
+                                                          if ((interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                      .participants
+                                                                      .where((e) =>
+                                                                          e.user !=
+                                                                          currentUserReference)
+                                                                      .toList()
+                                                                      .length >
+                                                                  interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                      .takenUsers
+                                                                      .length) &&
+                                                              (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                      .participants
+                                                                      .where((e) =>
+                                                                          !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e
+                                                                              .user) &&
+                                                                          functions.checkUserKarmaMatch(
+                                                                              valueOrDefault(currentUserDocument?.karma, 0.0),
+                                                                              e.karma) &&
+                                                                          (e.user != currentUserReference) &&
+                                                                          (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord?.participants?.where((e) => e.user == currentUserReference).toList()?.first?.role))
+                                                                      .toList()
+                                                                      .length >
+                                                                  0)) {
+                                                            logFirebaseEvent(
+                                                                'Button_backend_call');
+
+                                                            var conferenceRoomRecordReference =
+                                                                ConferenceRoomRecord
+                                                                    .collection
+                                                                    .doc();
+                                                            await conferenceRoomRecordReference
+                                                                .set({
+                                                              ...createConferenceRoomRecordData(
+                                                                date: functions.getSameTime(
+                                                                    getRemoteConfigInt(
+                                                                        'unixTimeSecForInterview'),
+                                                                    getCurrentTimestamp),
+                                                                role: interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                    ?.participants
+                                                                    ?.where((e) =>
                                                                         e.user ==
                                                                         currentUserReference)
                                                                     .toList()
-                                                                    .length >
-                                                                0)) {
-                                                          if (confirenceRoomItemConferenceRoomRecord !=
-                                                              null) {
-                                                            setState(() {
-                                                              _model.roomID =
-                                                                  confirenceRoomItemConferenceRoomRecord
-                                                                      ?.roomId;
-                                                            });
-                                                          } else {
-                                                            if ((interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                        .participants
-                                                                        .where((e) =>
-                                                                            e.user !=
-                                                                            currentUserReference)
-                                                                        .toList()
-                                                                        .length >
-                                                                    interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                        .takenUsers
-                                                                        .length) &&
-                                                                (interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                        .participants
-                                                                        .where((e) =>
+                                                                    ?.first
+                                                                    ?.role,
+                                                              ),
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'users': [
+                                                                    interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                        ?.participants
+                                                                        ?.where((e) =>
                                                                             !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
                                                                             functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0),
                                                                                 e.karma) &&
-                                                                            (e.user != currentUserReference))
+                                                                            (e.user != currentUserReference) &&
+                                                                            (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord?.participants?.where((e) => e.user == currentUserReference).toList()?.first?.role))
                                                                         .toList()
-                                                                        .length >
-                                                                    0)) {
-                                                              setState(() {
-                                                                _model.roomID =
-                                                                    random_data
-                                                                        .randomInteger(
-                                                                            1000,
-                                                                            100000);
-                                                              });
+                                                                        ?.first
+                                                                        ?.user
+                                                                  ],
+                                                                },
+                                                              ),
+                                                            });
+                                                            _model.createdRoomOutput =
+                                                                ConferenceRoomRecord
+                                                                    .getDocumentFromData({
+                                                              ...createConferenceRoomRecordData(
+                                                                date: functions.getSameTime(
+                                                                    getRemoteConfigInt(
+                                                                        'unixTimeSecForInterview'),
+                                                                    getCurrentTimestamp),
+                                                                role: interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                    ?.participants
+                                                                    ?.where((e) =>
+                                                                        e.user ==
+                                                                        currentUserReference)
+                                                                    .toList()
+                                                                    ?.first
+                                                                    ?.role,
+                                                              ),
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'users': [
+                                                                    interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                        ?.participants
+                                                                        ?.where((e) =>
+                                                                            !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
+                                                                            functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0),
+                                                                                e.karma) &&
+                                                                            (e.user != currentUserReference) &&
+                                                                            (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord?.participants?.where((e) => e.user == currentUserReference).toList()?.first?.role))
+                                                                        .toList()
+                                                                        ?.first
+                                                                        ?.user
+                                                                  ],
+                                                                },
+                                                              ),
+                                                            }, conferenceRoomRecordReference);
+                                                            _shouldSetState =
+                                                                true;
+                                                            logFirebaseEvent(
+                                                                'Button_backend_call');
 
-                                                              var conferenceRoomRecordReference =
-                                                                  ConferenceRoomRecord
-                                                                      .collection
-                                                                      .doc();
-                                                              await conferenceRoomRecordReference
-                                                                  .set({
-                                                                ...createConferenceRoomRecordData(
-                                                                  date: functions.getSameTime(
-                                                                      getRemoteConfigInt(
-                                                                          'unixTimeSecForInterview'),
-                                                                      getCurrentTimestamp),
-                                                                  roomId: _model
-                                                                      .roomID,
-                                                                ),
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'users': [
-                                                                      interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                          ?.participants
-                                                                          ?.where((e) =>
-                                                                              !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
-                                                                              functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0), e.karma))
-                                                                          .toList()
-                                                                          ?.first
-                                                                          ?.user
-                                                                    ],
-                                                                  },
-                                                                ),
-                                                              });
-                                                              _model.createdRoomOutput =
-                                                                  ConferenceRoomRecord
-                                                                      .getDocumentFromData({
-                                                                ...createConferenceRoomRecordData(
-                                                                  date: functions.getSameTime(
-                                                                      getRemoteConfigInt(
-                                                                          'unixTimeSecForInterview'),
-                                                                      getCurrentTimestamp),
-                                                                  roomId: _model
-                                                                      .roomID,
-                                                                ),
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'users': [
-                                                                      interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                          ?.participants
-                                                                          ?.where((e) =>
-                                                                              !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
-                                                                              functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0), e.karma))
-                                                                          .toList()
-                                                                          ?.first
-                                                                          ?.user
-                                                                    ],
-                                                                  },
-                                                                ),
-                                                              }, conferenceRoomRecordReference);
-                                                              _shouldSetState =
-                                                                  true;
+                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                .reference
+                                                                .update({
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'taken_users':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    _model
+                                                                        .createdRoomOutput
+                                                                        ?.users
+                                                                        ?.first
+                                                                  ]),
+                                                                },
+                                                              ),
+                                                            });
+                                                            logFirebaseEvent(
+                                                                'Button_backend_call');
 
-                                                              await interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                  .reference
-                                                                  .update({
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'taken_users':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                          ?.participants
-                                                                          ?.where((e) =>
-                                                                              !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
-                                                                              functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0), e.karma))
-                                                                          .toList()
-                                                                          ?.first
-                                                                          ?.user
-                                                                    ]),
-                                                                  },
-                                                                ),
-                                                              });
+                                                            await _model
+                                                                .createdRoomOutput!
+                                                                .reference
+                                                                .update({
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'users':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    currentUserReference
+                                                                  ]),
+                                                                },
+                                                              ),
+                                                            });
+                                                            logFirebaseEvent(
+                                                                'Button_backend_call');
 
-                                                              await _model
-                                                                  .createdRoomOutput!
-                                                                  .reference
-                                                                  .update({
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'users':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      currentUserReference
-                                                                    ]),
-                                                                  },
-                                                                ),
-                                                              });
-
-                                                              await interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                  .reference
-                                                                  .update({
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'taken_users':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      currentUserReference
-                                                                    ]),
-                                                                  },
-                                                                ),
-                                                              });
-                                                            } else {
-                                                              await showAlignedDialog(
-                                                                context:
-                                                                    context,
-                                                                isGlobal: true,
-                                                                avoidOverflow:
-                                                                    false,
-                                                                targetAnchor:
-                                                                    AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                followerAnchor:
-                                                                    AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                builder:
-                                                                    (dialogContext) {
-                                                                  return Material(
-                                                                    color: Colors
-                                                                        .transparent,
-                                                                    child: WebViewAware(
-                                                                        child: GestureDetector(
+                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                .reference
+                                                                .update({
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'taken_users':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    currentUserReference
+                                                                  ]),
+                                                                },
+                                                              ),
+                                                            });
+                                                            logFirebaseEvent(
+                                                                'Button_action_block');
+                                                            await _model
+                                                                .roomConnection(
+                                                              context,
+                                                              roomID: _model
+                                                                  .createdRoomOutput
+                                                                  ?.reference
+                                                                  .id,
+                                                              uid: random_data
+                                                                  .randomInteger(
+                                                                      10, 1000),
+                                                              userRef: _model
+                                                                  .createdRoomOutput
+                                                                  ?.users
+                                                                  ?.where((e) =>
+                                                                      e !=
+                                                                      currentUserReference)
+                                                                  .toList()
+                                                                  ?.first,
+                                                              role: _model
+                                                                  .createdRoomOutput
+                                                                  ?.role,
+                                                              roomDoc: _model
+                                                                  .createdRoomOutput,
+                                                            );
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Button_alert_dialog');
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (dialogContext) {
+                                                                return Dialog(
+                                                                  elevation: 0,
+                                                                  insetPadding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  alignment: AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0)
+                                                                      .resolve(
+                                                                          Directionality.of(
+                                                                              context)),
+                                                                  child:
+                                                                      WebViewAware(
+                                                                    child:
+                                                                        GestureDetector(
                                                                       onTap: () => _model
                                                                               .unfocusNode
                                                                               .canRequestFocus
@@ -958,354 +1073,70 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                               .unfocus(),
                                                                       child:
                                                                           NoUserFoundDialogWidget(),
-                                                                    )),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  setState(
-                                                                      () {}));
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ).then((value) =>
+                                                                setState(
+                                                                    () {}));
 
-                                                              if (_shouldSetState)
-                                                                setState(() {});
-                                                              return;
-                                                            }
-                                                          }
-
-                                                          try {
-                                                            final result =
-                                                                await FirebaseFunctions
-                                                                    .instance
-                                                                    .httpsCallable(
-                                                                        'generateRtcTokenCall')
-                                                                    .call({
-                                                              "channelName":
-                                                                  _model.roomID!
-                                                                      .toString(),
-                                                              "uid": _model
-                                                                  .roomID!,
-                                                            });
-                                                            _model.cloudFunctions814 =
-                                                                GenerateRtcTokenCallCloudFunctionCallResponse(
-                                                              data: result.data,
-                                                              succeeded: true,
-                                                              resultAsString:
-                                                                  result.data
-                                                                      .toString(),
-                                                              jsonBody:
-                                                                  result.data,
-                                                            );
-                                                          } on FirebaseFunctionsException catch (error) {
-                                                            _model.cloudFunctions814 =
-                                                                GenerateRtcTokenCallCloudFunctionCallResponse(
-                                                              errorCode:
-                                                                  error.code,
-                                                              succeeded: false,
-                                                            );
-                                                          }
-
-                                                          _shouldSetState =
-                                                              true;
-                                                          if (_model
-                                                              .cloudFunctions814!
-                                                              .succeeded!) {
-                                                            context.pushNamed(
-                                                              'VideoConfPage',
-                                                              queryParameters: {
-                                                                'token':
-                                                                    serializeParam(
-                                                                  _model
-                                                                      .cloudFunctions814
-                                                                      ?.resultAsString,
-                                                                  ParamType
-                                                                      .String,
-                                                                ),
-                                                                'channelName':
-                                                                    serializeParam(
-                                                                  _model.roomID
-                                                                      ?.toString(),
-                                                                  ParamType
-                                                                      .String,
-                                                                ),
-                                                                'userProfileImage':
-                                                                    serializeParam(
-                                                                  currentUserPhoto,
-                                                                  ParamType
-                                                                      .String,
-                                                                ),
-                                                                'uid':
-                                                                    serializeParam(
-                                                                  _model.roomID,
-                                                                  ParamType.int,
-                                                                ),
-                                                                'userRef':
-                                                                    serializeParam(
-                                                                  confirenceRoomItemConferenceRoomRecord
-                                                                      ?.users
-                                                                      ?.where((e) =>
-                                                                          e !=
-                                                                          currentUserReference)
-                                                                      .toList()
-                                                                      ?.first,
-                                                                  ParamType
-                                                                      .DocumentReference,
-                                                                ),
-                                                              }.withoutNulls,
-                                                            );
-                                                          }
-                                                        } else {
-                                                          await showAlignedDialog(
-                                                            context: context,
-                                                            isGlobal: true,
-                                                            avoidOverflow:
-                                                                false,
-                                                            targetAnchor:
-                                                                AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0)
-                                                                    .resolve(
-                                                                        Directionality.of(
-                                                                            context)),
-                                                            followerAnchor:
-                                                                AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0)
-                                                                    .resolve(
-                                                                        Directionality.of(
-                                                                            context)),
-                                                            builder:
-                                                                (dialogContext) {
-                                                              return Material(
-                                                                color: Colors
-                                                                    .transparent,
-                                                                child:
-                                                                    WebViewAware(
-                                                                        child:
-                                                                            GestureDetector(
-                                                                  onTap: () => _model
-                                                                          .unfocusNode
-                                                                          .canRequestFocus
-                                                                      ? FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(_model
-                                                                              .unfocusNode)
-                                                                      : FocusScope.of(
-                                                                              context)
-                                                                          .unfocus(),
-                                                                  child:
-                                                                      SorryDialogWidget(),
-                                                                )),
-                                                              );
-                                                            },
-                                                          ).then((value) =>
-                                                              setState(() {}));
-
-                                                          if (_shouldSetState)
-                                                            setState(() {});
-                                                          return;
-                                                        }
-
-                                                        if (_shouldSetState)
-                                                          setState(() {});
-                                                      },
-                                                      text: 'Join now',
-                                                      options: FFButtonOptions(
-                                                        width: double.infinity,
-                                                        height: 52.0,
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    24.0,
-                                                                    0.0,
-                                                                    24.0,
-                                                                    0.0),
-                                                        iconPadding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .white,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                        elevation: 0.0,
-                                                        borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent,
-                                                          width: 0.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            } else {
-                                              return Builder(
-                                                builder: (context) =>
-                                                    FFButtonWidget(
-                                                  onPressed: (interviewParticipantsItemInterviewParticipantsOfDayRecord !=
-                                                              null) &&
-                                                          (interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                  .participants
-                                                                  .where((e) =>
-                                                                      e.user ==
-                                                                      currentUserReference)
-                                                                  .toList()
-                                                                  .length >
-                                                              0)
-                                                      ? null
-                                                      : () async {
-                                                          if (_model.pickedRole !=
-                                                                  null &&
-                                                              _model.pickedRole !=
-                                                                  '') {
-                                                            setState(() {
-                                                              _model.isRoleValid =
-                                                                  true;
-                                                            });
-                                                          } else {
-                                                            setState(() {
-                                                              _model.isRoleValid =
-                                                                  false;
-                                                            });
+                                                            if (_shouldSetState)
+                                                              setState(() {});
                                                             return;
                                                           }
-
-                                                          if (interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                  ?.date ==
-                                                              functions.getSameTime(
-                                                                  getRemoteConfigInt(
-                                                                      'unixTimeSecForInterview'),
-                                                                  getCurrentTimestamp)) {
-                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord!
-                                                                .reference
-                                                                .update({
-                                                              ...mapToFirestore(
-                                                                {
-                                                                  'participants':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    getInterviewParticipantFirestoreData(
-                                                                      createInterviewParticipantStruct(
-                                                                        user:
-                                                                            currentUserReference,
-                                                                        karma: valueOrDefault(
-                                                                            currentUserDocument?.karma,
-                                                                            0.0),
-                                                                        role: _model
-                                                                            .pickedRole,
-                                                                        clearUnsetFields:
-                                                                            false,
-                                                                      ),
-                                                                      true,
-                                                                    )
-                                                                  ]),
-                                                                },
-                                                              ),
-                                                            });
-                                                          } else {
-                                                            await InterviewParticipantsOfDayRecord
-                                                                .collection
-                                                                .doc()
-                                                                .set({
-                                                              ...createInterviewParticipantsOfDayRecordData(
-                                                                date: functions.getSameTime(
-                                                                    getRemoteConfigInt(
-                                                                        'unixTimeSecForInterview'),
-                                                                    getCurrentTimestamp),
-                                                              ),
-                                                              ...mapToFirestore(
-                                                                {
-                                                                  'participants':
-                                                                      [
-                                                                    getInterviewParticipantFirestoreData(
-                                                                      updateInterviewParticipantStruct(
-                                                                        InterviewParticipantStruct(
-                                                                          user:
-                                                                              currentUserReference,
-                                                                          karma: valueOrDefault(
-                                                                              currentUserDocument?.karma,
-                                                                              0.0),
-                                                                          role:
-                                                                              _model.pickedRole,
-                                                                        ),
-                                                                        clearUnsetFields:
-                                                                            false,
-                                                                        create:
-                                                                            true,
-                                                                      ),
-                                                                      true,
-                                                                    )
-                                                                  ],
-                                                                },
-                                                              ),
-                                                            });
-                                                          }
-
-                                                          await showAlignedDialog(
-                                                            context: context,
-                                                            isGlobal: true,
-                                                            avoidOverflow:
-                                                                false,
-                                                            targetAnchor:
-                                                                AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0)
-                                                                    .resolve(
-                                                                        Directionality.of(
-                                                                            context)),
-                                                            followerAnchor:
-                                                                AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0)
-                                                                    .resolve(
-                                                                        Directionality.of(
-                                                                            context)),
-                                                            builder:
-                                                                (dialogContext) {
-                                                              return Material(
-                                                                color: Colors
+                                                        }
+                                                      }
+                                                    } else {
+                                                      logFirebaseEvent(
+                                                          'Button_alert_dialog');
+                                                      await showDialog(
+                                                        context: context,
+                                                        builder:
+                                                            (dialogContext) {
+                                                          return Dialog(
+                                                            elevation: 0,
+                                                            insetPadding:
+                                                                EdgeInsets.zero,
+                                                            backgroundColor:
+                                                                Colors
                                                                     .transparent,
+                                                            alignment: AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                            child: WebViewAware(
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
+                                                                            context)
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
+                                                                            context)
+                                                                        .unfocus(),
                                                                 child:
-                                                                    WebViewAware(
-                                                                        child:
-                                                                            GestureDetector(
-                                                                  onTap: () => _model
-                                                                          .unfocusNode
-                                                                          .canRequestFocus
-                                                                      ? FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(_model
-                                                                              .unfocusNode)
-                                                                      : FocusScope.of(
-                                                                              context)
-                                                                          .unfocus(),
-                                                                  child:
-                                                                      ReminderDialogWidget(),
-                                                                )),
-                                                              );
-                                                            },
-                                                          ).then((value) =>
-                                                              setState(() {}));
+                                                                    SorryDialogWidget(),
+                                                              ),
+                                                            ),
+                                                          );
                                                         },
-                                                  text: 'Get Reminder',
+                                                      ).then((value) =>
+                                                          setState(() {}));
+
+                                                      if (_shouldSetState)
+                                                        setState(() {});
+                                                      return;
+                                                    }
+
+                                                    if (_shouldSetState)
+                                                      setState(() {});
+                                                  },
+                                                  text: 'Join now',
                                                   options: FFButtonOptions(
                                                     width: double.infinity,
                                                     height: 52.0,
@@ -1339,19 +1170,503 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
-                                                    disabledColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .accent2,
-                                                    disabledTextColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .accent3,
                                                   ),
                                                 ),
-                                              );
-                                            }
-                                          },
+                                              ),
+                                            if (!((getCurrentTimestamp >
+                                                        functions.timeMinusMinutes(
+                                                            functions.getSameTime(
+                                                                getRemoteConfigInt(
+                                                                    'unixTimeSecForInterview'),
+                                                                getCurrentTimestamp)!,
+                                                            '5')) ||
+                                                    (getCurrentTimestamp <
+                                                        functions.timeMinusMinutes(
+                                                            functions.getSameTime(
+                                                                getRemoteConfigInt(
+                                                                    'unixTimeSecForInterview'),
+                                                                getCurrentTimestamp)!,
+                                                            '1435'))) &&
+                                                responsiveVisibility(
+                                                  context: context,
+                                                  phone: false,
+                                                  tablet: false,
+                                                  tabletLandscape: false,
+                                                  desktop: false,
+                                                ))
+                                              FFButtonWidget(
+                                                onPressed: ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
+                                                            null) &&
+                                                        (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                .participants
+                                                                .where((e) =>
+                                                                    e.user ==
+                                                                    currentUserReference)
+                                                                .toList()
+                                                                .length >
+                                                            0))
+                                                    ? null
+                                                    : () async {
+                                                        logFirebaseEvent(
+                                                            'PRACTICE_INTERVIEW_GET_REMINDER_BTN_ON_T');
+                                                        if ((valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.interviewSessions,
+                                                                    0) >=
+                                                                2) &&
+                                                            !revenue_cat
+                                                                .activeEntitlementIds
+                                                                .contains(
+                                                                    FFAppState()
+                                                                        .entitlementID)) {
+                                                          logFirebaseEvent(
+                                                              'Button_navigate_to');
+
+                                                          context.pushNamed(
+                                                            'Pricing',
+                                                            queryParameters: {
+                                                              'offers':
+                                                                  serializeParam(
+                                                                PaywallPrice
+                                                                    .standard,
+                                                                ParamType.Enum,
+                                                              ),
+                                                            }.withoutNulls,
+                                                          );
+
+                                                          return;
+                                                        }
+                                                        if (_model.pickedRole !=
+                                                                null &&
+                                                            _model.pickedRole !=
+                                                                '') {
+                                                          logFirebaseEvent(
+                                                              'Button_update_page_state');
+                                                          setState(() {
+                                                            _model.isRoleValid =
+                                                                true;
+                                                          });
+                                                        } else {
+                                                          logFirebaseEvent(
+                                                              'Button_update_page_state');
+                                                          setState(() {
+                                                            _model.isRoleValid =
+                                                                false;
+                                                          });
+                                                          return;
+                                                        }
+
+                                                        if (interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                ?.date ==
+                                                            functions.getSameTime(
+                                                                getRemoteConfigInt(
+                                                                    'unixTimeSecForInterview'),
+                                                                getCurrentTimestamp)) {
+                                                          logFirebaseEvent(
+                                                              'Button_backend_call');
+
+                                                          await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                              .reference
+                                                              .update({
+                                                            ...mapToFirestore(
+                                                              {
+                                                                'participants':
+                                                                    FieldValue
+                                                                        .arrayUnion([
+                                                                  getInterviewParticipantFirestoreData(
+                                                                    createInterviewParticipantStruct(
+                                                                      user:
+                                                                          currentUserReference,
+                                                                      karma: valueOrDefault(
+                                                                          currentUserDocument
+                                                                              ?.karma,
+                                                                          0.0),
+                                                                      role: _model
+                                                                          .pickedRole,
+                                                                      clearUnsetFields:
+                                                                          false,
+                                                                    ),
+                                                                    true,
+                                                                  )
+                                                                ]),
+                                                              },
+                                                            ),
+                                                          });
+                                                        } else {
+                                                          logFirebaseEvent(
+                                                              'Button_backend_call');
+
+                                                          await InterviewParticipantsOfDayRecord
+                                                              .collection
+                                                              .doc()
+                                                              .set({
+                                                            ...createInterviewParticipantsOfDayRecordData(
+                                                              date: functions.getSameTime(
+                                                                  getRemoteConfigInt(
+                                                                      'unixTimeSecForInterview'),
+                                                                  getCurrentTimestamp),
+                                                              isChecked: false,
+                                                            ),
+                                                            ...mapToFirestore(
+                                                              {
+                                                                'participants':
+                                                                    [
+                                                                  getInterviewParticipantFirestoreData(
+                                                                    updateInterviewParticipantStruct(
+                                                                      InterviewParticipantStruct(
+                                                                        user:
+                                                                            currentUserReference,
+                                                                        karma: valueOrDefault(
+                                                                            currentUserDocument?.karma,
+                                                                            0.0),
+                                                                        role: _model
+                                                                            .pickedRole,
+                                                                      ),
+                                                                      clearUnsetFields:
+                                                                          false,
+                                                                      create:
+                                                                          true,
+                                                                    ),
+                                                                    true,
+                                                                  )
+                                                                ],
+                                                              },
+                                                            ),
+                                                          });
+                                                        }
+
+                                                        logFirebaseEvent(
+                                                            'Button_navigate_to');
+
+                                                        context.pushNamed(
+                                                            'ReminderPage');
+                                                      },
+                                                text: 'Get Reminder',
+                                                options: FFButtonOptions(
+                                                  width: double.infinity,
+                                                  height: 52.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          24.0, 0.0, 24.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .headlineLarge
+                                                      .override(
+                                                        fontFamily: 'Sofia Pro',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .white,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                  elevation: 0.0,
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 0.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  disabledColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .accent2,
+                                                  disabledTextColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .accent3,
+                                                ),
+                                              ),
+                                            if (!((getCurrentTimestamp >
+                                                    functions.timeMinusMinutes(
+                                                        functions.getSameTime(
+                                                            getRemoteConfigInt(
+                                                                'unixTimeSecForInterview'),
+                                                            getCurrentTimestamp)!,
+                                                        '5')) ||
+                                                (getCurrentTimestamp <
+                                                    functions.timeMinusMinutes(
+                                                        functions.getSameTime(
+                                                            getRemoteConfigInt(
+                                                                'unixTimeSecForInterview'),
+                                                            getCurrentTimestamp)!,
+                                                        '1435'))))
+                                              Builder(
+                                                builder: (context) {
+                                                  if (!((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
+                                                          null) &&
+                                                      (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                              .participants
+                                                              .where((e) =>
+                                                                  e.user ==
+                                                                  currentUserReference)
+                                                              .toList()
+                                                              .length >
+                                                          0))) {
+                                                    return InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'PRACTICE_INTERVIEW_Container_yeum8srd_ON');
+                                                        if (_model
+                                                            .getReminderButtonState) {
+                                                          logFirebaseEvent(
+                                                              'Container_update_page_state');
+                                                          setState(() {
+                                                            _model.getReminderButtonState =
+                                                                false;
+                                                          });
+                                                          if ((valueOrDefault(
+                                                                      currentUserDocument
+                                                                          ?.interviewSessions,
+                                                                      0) >=
+                                                                  2) &&
+                                                              !revenue_cat
+                                                                  .activeEntitlementIds
+                                                                  .contains(
+                                                                      FFAppState()
+                                                                          .entitlementID)) {
+                                                            logFirebaseEvent(
+                                                                'Container_navigate_to');
+
+                                                            context.pushNamed(
+                                                              'Pricing',
+                                                              queryParameters: {
+                                                                'offers':
+                                                                    serializeParam(
+                                                                  PaywallPrice
+                                                                      .standard,
+                                                                  ParamType
+                                                                      .Enum,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
+
+                                                            logFirebaseEvent(
+                                                                'Container_update_page_state');
+                                                            setState(() {
+                                                              _model.getReminderButtonState =
+                                                                  true;
+                                                            });
+                                                            return;
+                                                          }
+                                                          if (_model.pickedRole !=
+                                                                  null &&
+                                                              _model.pickedRole !=
+                                                                  '') {
+                                                            logFirebaseEvent(
+                                                                'Container_update_page_state');
+                                                            setState(() {
+                                                              _model.isRoleValid =
+                                                                  true;
+                                                            });
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Container_update_page_state');
+                                                            setState(() {
+                                                              _model.isRoleValid =
+                                                                  false;
+                                                            });
+                                                            logFirebaseEvent(
+                                                                'Container_update_page_state');
+                                                            setState(() {
+                                                              _model.getReminderButtonState =
+                                                                  true;
+                                                            });
+                                                            return;
+                                                          }
+
+                                                          if (interviewParticipantsItemInterviewParticipantsOfDayRecord
+                                                                  ?.date ==
+                                                              functions.getSameTime(
+                                                                  getRemoteConfigInt(
+                                                                      'unixTimeSecForInterview'),
+                                                                  getCurrentTimestamp)) {
+                                                            logFirebaseEvent(
+                                                                'Container_backend_call');
+
+                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                .reference
+                                                                .update({
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'participants':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    getInterviewParticipantFirestoreData(
+                                                                      createInterviewParticipantStruct(
+                                                                        user:
+                                                                            currentUserReference,
+                                                                        karma: valueOrDefault(
+                                                                            currentUserDocument?.karma,
+                                                                            0.0),
+                                                                        role: _model
+                                                                            .pickedRole,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                      true,
+                                                                    )
+                                                                  ]),
+                                                                },
+                                                              ),
+                                                            });
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Container_backend_call');
+
+                                                            await InterviewParticipantsOfDayRecord
+                                                                .collection
+                                                                .doc()
+                                                                .set({
+                                                              ...createInterviewParticipantsOfDayRecordData(
+                                                                date: functions.getSameTime(
+                                                                    getRemoteConfigInt(
+                                                                        'unixTimeSecForInterview'),
+                                                                    getCurrentTimestamp),
+                                                                isChecked:
+                                                                    false,
+                                                              ),
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'participants':
+                                                                      [
+                                                                    getInterviewParticipantFirestoreData(
+                                                                      updateInterviewParticipantStruct(
+                                                                        InterviewParticipantStruct(
+                                                                          user:
+                                                                              currentUserReference,
+                                                                          karma: valueOrDefault(
+                                                                              currentUserDocument?.karma,
+                                                                              0.0),
+                                                                          role:
+                                                                              _model.pickedRole,
+                                                                        ),
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                        create:
+                                                                            true,
+                                                                      ),
+                                                                      true,
+                                                                    )
+                                                                  ],
+                                                                },
+                                                              ),
+                                                            });
+                                                          }
+
+                                                          logFirebaseEvent(
+                                                              'Container_update_page_state');
+                                                          setState(() {
+                                                            _model.getReminderButtonState =
+                                                                true;
+                                                          });
+                                                          logFirebaseEvent(
+                                                              'Container_navigate_to');
+
+                                                          context.pushNamed(
+                                                              'ReminderPage');
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 52.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                            colors: [
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .gradient2,
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .aquaBreeze
+                                                            ],
+                                                            stops: [0.0, 1.0],
+                                                            begin:
+                                                                AlignmentDirectional(
+                                                                    0.0, 1.0),
+                                                            end:
+                                                                AlignmentDirectional(
+                                                                    0, -1.0),
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                        ),
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Text(
+                                                          'Get Reminder',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .headlineLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return Container(
+                                                      width: double.infinity,
+                                                      height: 52.0,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent2,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.0),
+                                                      ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0.0, 0.0),
+                                                      child: Text(
+                                                        'Get Reminder',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .accent3,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -1441,6 +1756,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                         if (shouldUpdate) setState(() {});
                                       },
                                       onEnded: () async {
+                                        logFirebaseEvent(
+                                            'PRACTICE_INTERVIEW_Timer_zez0eqa6_ON_TIM');
+                                        logFirebaseEvent(
+                                            'Timer_update_page_state');
                                         setState(() {
                                           _model.timer = true;
                                         });
@@ -1457,7 +1776,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 42.0, 0.0, 0.0),
@@ -1469,7 +1788,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
@@ -1479,6 +1798,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'PRACTICE_INTERVIEW_Text_xdsd7skk_ON_TAP');
+                              logFirebaseEvent('Text_navigate_to');
+
                               context.pushNamed('Add-ons');
                             },
                             child: Text(
@@ -1498,7 +1821,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-1.00, 0.00),
+                        alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 37.0, 0.0, 0.0),
@@ -1523,8 +1846,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                               Container(
                                 decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 16.0, 16.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
                                     color: Color(0x00000000),
@@ -1581,8 +1903,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                               Container(
                                 decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 16.0, 16.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
                                     color: Color(0x00000000),
@@ -1602,9 +1923,8 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: RichText(
-                                            textScaleFactor:
-                                                MediaQuery.of(context)
-                                                    .textScaleFactor,
+                                            textScaler: MediaQuery.of(context)
+                                                .textScaler,
                                             text: TextSpan(
                                               children: [
                                                 TextSpan(
@@ -1638,6 +1958,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                   recognizer:
                                                       TapGestureRecognizer()
                                                         ..onTap = () async {
+                                                          logFirebaseEvent(
+                                                              'PRACTICE_INTERVIEW_RichTextSpan_o9qu9uxq');
+                                                          logFirebaseEvent(
+                                                              'RichTextSpan_launch_u_r_l');
                                                           await launchURL(
                                                               'https://quisapp.notion.site/Karma-Karma-Exchange-5327c89c0dc04558add1d77aef5586b1');
                                                         },
@@ -1681,8 +2005,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                               Container(
                                 decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 16.0, 16.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
                                     color: Color(0x00000000),
@@ -1739,8 +2062,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                               Container(
                                 decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 16.0, 16.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
                                     color: Color(0x00000000),
@@ -1797,8 +2119,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                               Container(
                                 decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 16.0, 16.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
                                     color: Color(0x00000000),

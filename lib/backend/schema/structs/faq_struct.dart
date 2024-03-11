@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,7 +36,7 @@ class FaqStruct extends FFFirebaseStruct {
       );
 
   static FaqStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? FaqStruct.fromMap(data) : null;
+      data is Map ? FaqStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'question': _question,

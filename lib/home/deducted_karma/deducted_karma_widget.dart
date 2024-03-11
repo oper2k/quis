@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'deducted_karma_model.dart';
@@ -10,14 +9,14 @@ export 'deducted_karma_model.dart';
 
 class DeductedKarmaWidget extends StatefulWidget {
   const DeductedKarmaWidget({
-    Key? key,
+    super.key,
     required this.deductedKarma,
-  }) : super(key: key);
+  });
 
   final double? deductedKarma;
 
   @override
-  _DeductedKarmaWidgetState createState() => _DeductedKarmaWidgetState();
+  State<DeductedKarmaWidget> createState() => _DeductedKarmaWidgetState();
 }
 
 class _DeductedKarmaWidgetState extends State<DeductedKarmaWidget> {
@@ -44,10 +43,8 @@ class _DeductedKarmaWidgetState extends State<DeductedKarmaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -65,7 +62,7 @@ class _DeductedKarmaWidgetState extends State<DeductedKarmaWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
@@ -73,13 +70,16 @@ class _DeductedKarmaWidgetState extends State<DeductedKarmaWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'DEDUCTED_KARMA_Container_w36bchjv_ON_TAP');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -87,7 +87,7 @@ class _DeductedKarmaWidgetState extends State<DeductedKarmaWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -111,8 +111,10 @@ class _DeductedKarmaWidgetState extends State<DeductedKarmaWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(21.0, 22.0, 21.0, 0.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    logFirebaseEvent('DEDUCTED_KARMA_COMP_APPLY_BTN_ON_TAP');
+                    logFirebaseEvent('Button_dismiss_dialog');
+                    Navigator.pop(context, true);
                   },
                   text: 'Apply',
                   options: FFButtonOptions(

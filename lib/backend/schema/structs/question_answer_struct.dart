@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -27,8 +28,9 @@ class QuestionAnswerStruct extends FFFirebaseStruct {
         index: castToType<int>(data['index']),
       );
 
-  static QuestionAnswerStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? QuestionAnswerStruct.fromMap(data) : null;
+  static QuestionAnswerStruct? maybeFromMap(dynamic data) => data is Map
+      ? QuestionAnswerStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'index': _index,

@@ -1,18 +1,22 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'interview_questions_bottom_sheet_model.dart';
 export 'interview_questions_bottom_sheet_model.dart';
 
 class InterviewQuestionsBottomSheetWidget extends StatefulWidget {
-  const InterviewQuestionsBottomSheetWidget({Key? key}) : super(key: key);
+  const InterviewQuestionsBottomSheetWidget({
+    super.key,
+    required this.role,
+  });
+
+  final String? role;
 
   @override
-  _InterviewQuestionsBottomSheetWidgetState createState() =>
+  State<InterviewQuestionsBottomSheetWidget> createState() =>
       _InterviewQuestionsBottomSheetWidgetState();
 }
 
@@ -41,8 +45,6 @@ class _InterviewQuestionsBottomSheetWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -68,93 +70,100 @@ class _InterviewQuestionsBottomSheetWidgetState
             ),
             Container(
               constraints: BoxConstraints(
-                maxHeight: 150.0,
+                maxHeight: 250.0,
               ),
               decoration: BoxDecoration(),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          setState(() {});
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 15.0, 12.0, 15.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  FFIcons.kphQuestion,
-                                  color:
-                                      FlutterFlowTheme.of(context).powderBlue,
-                                  size: 24.0,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 9.0, 0.0, 9.0),
-                                    child: Text(
-                                      'Hello World',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                child: FutureBuilder<List<InterviewQuestionRecord>>(
+                  future: queryInterviewQuestionRecordOnce(
+                    queryBuilder: (interviewQuestionRecord) =>
+                        interviewQuestionRecord.where(
+                      'role',
+                      isEqualTo: widget.role,
+                    ),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
                             ),
                           ),
                         ),
-                      ),
-                    ]
-                        .divide(SizedBox(height: 8.0))
-                        .addToStart(SizedBox(height: 8.0))
-                        .addToEnd(SizedBox(height: 8.0)),
-                  ),
+                      );
+                    }
+                    List<InterviewQuestionRecord>
+                        listViewInterviewQuestionRecordList = snapshot.data!;
+                    return ListView.separated(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewInterviewQuestionRecordList.length,
+                      separatorBuilder: (_, __) => SizedBox(height: 8.0),
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewInterviewQuestionRecord =
+                            listViewInterviewQuestionRecordList[listViewIndex];
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_QUESTIONS_BOTTOM_SHEET_Contain');
+                            logFirebaseEvent(
+                                'Container_update_component_state');
+                            setState(() {
+                              _model.activeItem =
+                                  listViewInterviewQuestionRecord.question;
+                            });
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 15.0, 12.0, 15.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(
+                                    FFIcons.kphQuestion,
+                                    color:
+                                        FlutterFlowTheme.of(context).powderBlue,
+                                    size: 24.0,
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 9.0, 0.0, 9.0),
+                                      child: Text(
+                                        listViewInterviewQuestionRecord
+                                            .question,
+                                        textAlign: TextAlign.start,
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
-              ),
-            ),
-            FFButtonWidget(
-              onPressed: _model.activeItem == null || _model.activeItem == ''
-                  ? null
-                  : () async {
-                      Navigator.pop(context);
-                    },
-              text: 'Get Started',
-              options: FFButtonOptions(
-                width: double.infinity,
-                height: 52.0,
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: FlutterFlowTheme.of(context).primary,
-                textStyle: FlutterFlowTheme.of(context).headlineLarge.override(
-                      fontFamily: 'Sofia Pro',
-                      color: FlutterFlowTheme.of(context).white,
-                      useGoogleFonts: false,
-                    ),
-                elevation: 0.0,
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 0.0,
-                ),
-                borderRadius: BorderRadius.circular(10.0),
-                disabledColor: FlutterFlowTheme.of(context).secondary,
-                disabledTextColor: FlutterFlowTheme.of(context).white,
               ),
             ),
           ],

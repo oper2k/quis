@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,7 +36,7 @@ class VideoStruct extends FFFirebaseStruct {
       );
 
   static VideoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? VideoStruct.fromMap(data) : null;
+      data is Map ? VideoStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'video_path': _videoPath,

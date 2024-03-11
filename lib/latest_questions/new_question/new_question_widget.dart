@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/pick_bottom_sheet_widget.dart';
@@ -12,7 +13,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -21,10 +21,10 @@ import 'new_question_model.dart';
 export 'new_question_model.dart';
 
 class NewQuestionWidget extends StatefulWidget {
-  const NewQuestionWidget({Key? key}) : super(key: key);
+  const NewQuestionWidget({super.key});
 
   @override
-  _NewQuestionWidgetState createState() => _NewQuestionWidgetState();
+  State<NewQuestionWidget> createState() => _NewQuestionWidgetState();
 }
 
 class _NewQuestionWidgetState extends State<NewQuestionWidget> {
@@ -37,15 +37,17 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
     super.initState();
     _model = createModel(context, () => NewQuestionModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'NewQuestion'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('NEW_QUESTION_NewQuestion_ON_INIT_STATE');
+      logFirebaseEvent('NewQuestion_update_page_state');
       setState(() {
         _model.addToQuestionAnswerList(QuestionAnswerStruct(
           index: 1,
         ));
         _model.pickedMonth = functions.dateTimeToDate(getCurrentTimestamp);
         _model.currentMonth = functions.dateTimeToDate(getCurrentTimestamp);
-        _model.roleRef = currentUserDocument?.careerProfile?.role;
       });
     });
 
@@ -62,15 +64,6 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -93,13 +86,15 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('NEW_QUESTION_Container_kytb57gd_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -154,7 +149,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 23.0, 0.0, 0.0),
@@ -231,8 +226,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               ),
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context).white,
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 16.0, 16.0),
+                              contentPadding: EdgeInsets.all(16.0),
                             ),
                             style: FlutterFlowTheme.of(context).headlineSmall,
                             validator: _model.companyFieldControllerValidator
@@ -256,6 +250,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'NEW_QUESTION_Container_65tf7ws2_ON_TAP');
+                              logFirebaseEvent('Container_bottom_sheet');
                               await showModalBottomSheet(
                                 isScrollControlled: true,
                                 backgroundColor: Colors.transparent,
@@ -263,31 +260,35 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 context: context,
                                 builder: (context) {
                                   return WebViewAware(
-                                      child: GestureDetector(
-                                    onTap: () => _model
-                                            .unfocusNode.canRequestFocus
-                                        ? FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode)
-                                        : FocusScope.of(context).unfocus(),
-                                    child: Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: PickBottomSheetWidget(
-                                        stringList: roleListRoleRecordList
-                                            .where((e) =>
-                                                (e.name != 'Other') &&
-                                                (e.name != 'Unemployed'))
-                                            .toList()
-                                            .map((e) => e.name)
-                                            .toList(),
+                                    child: GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: PickBottomSheetWidget(
+                                          stringList: roleListRoleRecordList
+                                              .where((e) =>
+                                                  (e.name != 'Other') &&
+                                                  (e.name != 'Unemployed'))
+                                              .toList()
+                                              .map((e) => e.name)
+                                              .toList(),
+                                          title: 'Choose from the list below',
+                                        ),
                                       ),
                                     ),
-                                  ));
+                                  );
                                 },
                               ).then((value) => safeSetState(
                                   () => _model.roleOutput = value));
 
                               if (_model.roleOutput != null &&
                                   _model.roleOutput != '') {
+                                logFirebaseEvent('Container_update_page_state');
                                 setState(() {
                                   _model.roleRef = roleListRoleRecordList
                                       .where((e) => e.name == _model.roleOutput)
@@ -344,6 +345,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'NEW_QUESTION_Container_iuepnu27_ON_TAP');
+                              logFirebaseEvent('Container_bottom_sheet');
                               await showModalBottomSheet(
                                 isScrollControlled: true,
                                 backgroundColor: Colors.transparent,
@@ -351,25 +355,30 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 context: context,
                                 builder: (context) {
                                   return WebViewAware(
-                                      child: GestureDetector(
-                                    onTap: () => _model
-                                            .unfocusNode.canRequestFocus
-                                        ? FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode)
-                                        : FocusScope.of(context).unfocus(),
-                                    child: Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: PickBottomSheetWidget(
-                                        stringList: FFAppState().questionStage,
+                                    child: GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: PickBottomSheetWidget(
+                                          stringList:
+                                              FFAppState().questionStage,
+                                          title: 'Choose from the list below',
+                                        ),
                                       ),
                                     ),
-                                  ));
+                                  );
                                 },
                               ).then((value) => safeSetState(
                                   () => _model.stageOutput = value));
 
                               if (_model.stageOutput != null &&
                                   _model.stageOutput != '') {
+                                logFirebaseEvent('Container_update_page_state');
                                 setState(() {
                                   _model.pickedStage = _model.stageOutput;
                                   _model.isStageValid = true;
@@ -416,6 +425,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'NEW_QUESTION_Container_6lj8y6sh_ON_TAP');
+                              logFirebaseEvent('Container_bottom_sheet');
                               await showModalBottomSheet(
                                 isScrollControlled: true,
                                 backgroundColor: Colors.transparent,
@@ -423,25 +435,30 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 context: context,
                                 builder: (context) {
                                   return WebViewAware(
-                                      child: GestureDetector(
-                                    onTap: () => _model
-                                            .unfocusNode.canRequestFocus
-                                        ? FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode)
-                                        : FocusScope.of(context).unfocus(),
-                                    child: Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: PickBottomSheetWidget(
-                                        stringList: FFAppState().questionRound,
+                                    child: GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: PickBottomSheetWidget(
+                                          stringList:
+                                              FFAppState().questionRound,
+                                          title: 'Choose from the list below',
+                                        ),
                                       ),
                                     ),
-                                  ));
+                                  );
                                 },
                               ).then((value) => safeSetState(
                                   () => _model.roundOutput = value));
 
                               if (_model.roundOutput != null &&
                                   _model.roundOutput != '') {
+                                logFirebaseEvent('Container_update_page_state');
                                 setState(() {
                                   _model.pickedRound = _model.roundOutput;
                                   _model.isRoundValid = true;
@@ -536,6 +553,10 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'NEW_QUESTION_Container_z1i33dru_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_update_page_state');
                                           setState(() {
                                             _model.pickedMonth = functions
                                                 .decMonth(_model.pickedMonth!);
@@ -544,9 +565,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                         child: Container(
                                           decoration: BoxDecoration(),
                                           child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    3.0, 3.0, 3.0, 3.0),
+                                            padding: EdgeInsets.all(3.0),
                                             child: Icon(
                                               Icons.chevron_left_rounded,
                                               color:
@@ -563,6 +582,10 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'NEW_QUESTION_Container_dnsv51bj_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_update_page_state');
                                           setState(() {
                                             _model.pickedMonth = functions
                                                 .incMonth(_model.pickedMonth!);
@@ -571,9 +594,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                         child: Container(
                                           decoration: BoxDecoration(),
                                           child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    3.0, 3.0, 3.0, 3.0),
+                                            padding: EdgeInsets.all(3.0),
                                             child: Icon(
                                               Icons.chevron_right_rounded,
                                               color:
@@ -676,6 +697,10 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'NEW_QUESTION_Container_3cqbjq3w_ON_TAP');
+                                            logFirebaseEvent(
+                                                'calendarElement_update_page_state');
                                             setState(() {
                                               _model.pickedDate = dayItem;
                                               _model.isDateValid = true;
@@ -713,6 +738,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'NEW_QUESTION_Container_mr2tqq8s_ON_TAP');
+                            logFirebaseEvent('Container_update_page_state');
                             setState(() {
                               _model
                                   .addToQuestionAnswerList(QuestionAnswerStruct(
@@ -723,8 +751,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           child: Container(
                             decoration: BoxDecoration(),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 10.0),
+                              padding: EdgeInsets.all(10.0),
                               child: Text(
                                 'Add more question',
                                 style: FlutterFlowTheme.of(context)
@@ -744,20 +771,26 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               0.0, 12.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
+                              logFirebaseEvent(
+                                  'NEW_QUESTION_PAGE_SUBMIT_BTN_ON_TAP');
                               if (_model.roleRef != null) {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isRoleValidated = true;
                                 });
                               } else {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isRoleValidated = false;
                                 });
                                 if (_model.pickedStage != null &&
                                     _model.pickedStage != '') {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isStageValid = true;
                                   });
                                 } else {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isStageValid = false;
                                   });
@@ -765,25 +798,30 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
 
                                 if (_model.pickedRound != null &&
                                     _model.pickedRound != '') {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isRoundValid = true;
                                   });
                                 } else {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isRoundValid = false;
                                   });
                                 }
 
                                 if (_model.pickedDate != null) {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isDateValid = true;
                                   });
                                 } else {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isDateValid = false;
                                   });
                                 }
 
+                                logFirebaseEvent('Button_validate_form');
                                 if (_model.formKey.currentState == null ||
                                     !_model.formKey.currentState!.validate()) {
                                   return;
@@ -793,18 +831,22 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
 
                               if (_model.pickedStage != null &&
                                   _model.pickedStage != '') {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isStageValid = true;
                                 });
                               } else {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isStageValid = false;
                                 });
                                 if (_model.pickedDate != null) {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isDateValid = true;
                                   });
                                 } else {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isDateValid = false;
                                   });
@@ -812,15 +854,18 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
 
                                 if (_model.pickedRound != null &&
                                     _model.pickedRound != '') {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isRoundValid = true;
                                   });
                                 } else {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isRoundValid = false;
                                   });
                                 }
 
+                                logFirebaseEvent('Button_validate_form');
                                 if (_model.formKey.currentState == null ||
                                     !_model.formKey.currentState!.validate()) {
                                   return;
@@ -830,23 +875,28 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
 
                               if (_model.pickedRound != null &&
                                   _model.pickedRound != '') {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isRoundValid = true;
                                 });
                               } else {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isRoundValid = false;
                                 });
                                 if (_model.pickedDate != null) {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isDateValid = true;
                                   });
                                 } else {
+                                  logFirebaseEvent('Button_update_page_state');
                                   setState(() {
                                     _model.isDateValid = false;
                                   });
                                 }
 
+                                logFirebaseEvent('Button_validate_form');
                                 if (_model.formKey.currentState == null ||
                                     !_model.formKey.currentState!.validate()) {
                                   return;
@@ -855,13 +905,16 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               }
 
                               if (_model.pickedDate != null) {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isDateValid = true;
                                 });
                               } else {
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isDateValid = false;
                                 });
+                                logFirebaseEvent('Button_validate_form');
                                 if (_model.formKey.currentState == null ||
                                     !_model.formKey.currentState!.validate()) {
                                   return;
@@ -869,11 +922,14 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 return;
                               }
 
+                              logFirebaseEvent('Button_validate_form');
                               if (_model.formKey.currentState == null ||
                                   !_model.formKey.currentState!.validate()) {
                                 return;
                               }
                               while (_model.questionAnswerList.length > 0) {
+                                logFirebaseEvent('Button_backend_call');
+
                                 await InterviewQuestionRecord.collection
                                     .doc()
                                     .set(createInterviewQuestionRecordData(
@@ -905,19 +961,66 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                       roundPassed: _model.pickedRound,
                                       createdTime: getCurrentTimestamp,
                                     ));
+                                logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.removeAtIndexFromQuestionAnswerList(0);
                                 });
                               }
-
-                              await currentUserReference!.update({
-                                ...mapToFirestore(
-                                  {
-                                    'karma': FieldValue.increment(1.5),
-                                  },
+                              logFirebaseEvent('Button_backend_call');
+                              await BrevoGroup.sendAnEmailCall.call(
+                                userEmail: currentUserEmail,
+                                paramEmail: currentUserEmail,
+                                paramUserCompany:
+                                    _model.companyFieldController.text,
+                                paramStage: _model.pickedStage,
+                                paramInterviewRound: _model.pickedRound,
+                                paramInterviewQuestion: valueOrDefault<String>(
+                                  _model.questionAnswerElementModels
+                                      .getValues(
+                                        (m) => m.questionFieldController.text,
+                                      )
+                                      .first,
+                                  '-',
                                 ),
-                              });
-                              context.safePop();
+                                paramInterviewAnswer:
+                                    _model.questionAnswerElementModels
+                                        .getValues(
+                                          (m) => m.answerFieldController.text,
+                                        )
+                                        .first,
+                                paramDate: _model.pickedDate?.toString(),
+                                templateId: 17,
+                              );
+                              logFirebaseEvent('Button_backend_call');
+                              await BrevoGroup.sendAnEmailCall.call(
+                                userEmail: FFAppConstants.infoEmail,
+                                paramEmail: currentUserEmail,
+                                paramUserCompany:
+                                    _model.companyFieldController.text,
+                                paramStage: _model.pickedStage,
+                                paramInterviewRound: _model.pickedRound,
+                                paramInterviewQuestion: valueOrDefault<String>(
+                                  _model.questionAnswerElementModels
+                                      .getValues(
+                                        (m) => m.questionFieldController.text,
+                                      )
+                                      .first,
+                                  '-',
+                                ),
+                                paramInterviewAnswer:
+                                    _model.questionAnswerElementModels
+                                        .getValues(
+                                          (m) => m.answerFieldController.text,
+                                        )
+                                        .first,
+                                paramDate: _model.pickedDate?.toString(),
+                                templateId: 20,
+                              );
+                              logFirebaseEvent('Button_navigate_to');
+                              if (Navigator.of(context).canPop()) {
+                                context.pop();
+                              }
+                              context.pushNamed('ThankYouForQuestion');
                             },
                             text: 'Submit',
                             options: FFButtonOptions(

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -13,10 +14,12 @@ class ServiceStruct extends FFFirebaseStruct {
     String? name,
     double? priceKarma,
     double? price,
+    bool? hasAttach,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _name = name,
         _priceKarma = priceKarma,
         _price = price,
+        _hasAttach = hasAttach,
         super(firestoreUtilData);
 
   // "name" field.
@@ -39,19 +42,27 @@ class ServiceStruct extends FFFirebaseStruct {
   void incrementPrice(double amount) => _price = price + amount;
   bool hasPrice() => _price != null;
 
+  // "has_attach" field.
+  bool? _hasAttach;
+  bool get hasAttach => _hasAttach ?? false;
+  set hasAttach(bool? val) => _hasAttach = val;
+  bool hasHasAttach() => _hasAttach != null;
+
   static ServiceStruct fromMap(Map<String, dynamic> data) => ServiceStruct(
         name: data['name'] as String?,
         priceKarma: castToType<double>(data['priceKarma']),
         price: castToType<double>(data['price']),
+        hasAttach: data['has_attach'] as bool?,
       );
 
   static ServiceStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ServiceStruct.fromMap(data) : null;
+      data is Map ? ServiceStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'name': _name,
         'priceKarma': _priceKarma,
         'price': _price,
+        'has_attach': _hasAttach,
       }.withoutNulls;
 
   @override
@@ -67,6 +78,10 @@ class ServiceStruct extends FFFirebaseStruct {
         'price': serializeParam(
           _price,
           ParamType.double,
+        ),
+        'has_attach': serializeParam(
+          _hasAttach,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -87,6 +102,11 @@ class ServiceStruct extends FFFirebaseStruct {
           ParamType.double,
           false,
         ),
+        hasAttach: deserializeParam(
+          data['has_attach'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -97,17 +117,20 @@ class ServiceStruct extends FFFirebaseStruct {
     return other is ServiceStruct &&
         name == other.name &&
         priceKarma == other.priceKarma &&
-        price == other.price;
+        price == other.price &&
+        hasAttach == other.hasAttach;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([name, priceKarma, price]);
+  int get hashCode =>
+      const ListEquality().hash([name, priceKarma, price, hasAttach]);
 }
 
 ServiceStruct createServiceStruct({
   String? name,
   double? priceKarma,
   double? price,
+  bool? hasAttach,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -117,6 +140,7 @@ ServiceStruct createServiceStruct({
       name: name,
       priceKarma: priceKarma,
       price: price,
+      hasAttach: hasAttach,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

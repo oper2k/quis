@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'questions_filter_bottom_sheet_model.dart';
@@ -14,14 +13,14 @@ export 'questions_filter_bottom_sheet_model.dart';
 
 class QuestionsFilterBottomSheetWidget extends StatefulWidget {
   const QuestionsFilterBottomSheetWidget({
-    Key? key,
+    super.key,
     required this.filterList,
-  }) : super(key: key);
+  });
 
   final List<String>? filterList;
 
   @override
-  _QuestionsFilterBottomSheetWidgetState createState() =>
+  State<QuestionsFilterBottomSheetWidget> createState() =>
       _QuestionsFilterBottomSheetWidgetState();
 }
 
@@ -42,6 +41,8 @@ class _QuestionsFilterBottomSheetWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('QUESTIONS_FILTER_BOTTOM_SHEET_QuestionsF');
+      logFirebaseEvent('QuestionsFilterBottomSheet_update_compon');
       setState(() {
         _model.filterList = widget.filterList!.toList().cast<String>();
       });
@@ -97,11 +98,15 @@ class _QuestionsFilterBottomSheetWidgetState
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent(
+                          'QUESTIONS_FILTER_BOTTOM_SHEET_Hot_ON_TAP');
                       if (_model.filterList.contains('Hot')) {
+                        logFirebaseEvent('Hot_update_component_state');
                         setState(() {
                           _model.removeFromFilterList('Hot');
                         });
                       } else {
+                        logFirebaseEvent('Hot_update_component_state');
                         setState(() {
                           _model.addToFilterList('Hot');
                         });
@@ -110,8 +115,7 @@ class _QuestionsFilterBottomSheetWidgetState
                     child: Container(
                       decoration: BoxDecoration(),
                       child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -157,11 +161,15 @@ class _QuestionsFilterBottomSheetWidgetState
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent(
+                          'QUESTIONS_FILTER_BOTTOM_SHEET_Popular_ON');
                       if (_model.filterList.contains('Popular')) {
+                        logFirebaseEvent('Popular_update_component_state');
                         setState(() {
                           _model.removeFromFilterList('Popular');
                         });
                       } else {
+                        logFirebaseEvent('Popular_update_component_state');
                         setState(() {
                           _model.addToFilterList('Popular');
                         });
@@ -170,8 +178,7 @@ class _QuestionsFilterBottomSheetWidgetState
                     child: Container(
                       decoration: BoxDecoration(),
                       child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -217,11 +224,15 @@ class _QuestionsFilterBottomSheetWidgetState
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent(
+                          'QUESTIONS_FILTER_BOTTOM_SHEET_Newest_ON_');
                       if (_model.filterList.contains('Newest')) {
+                        logFirebaseEvent('Newest_update_component_state');
                         setState(() {
                           _model.removeFromFilterList('Newest');
                         });
                       } else {
+                        logFirebaseEvent('Newest_update_component_state');
                         setState(() {
                           _model.addToFilterList('Newest');
                         });
@@ -230,8 +241,7 @@ class _QuestionsFilterBottomSheetWidgetState
                     child: Container(
                       decoration: BoxDecoration(),
                       child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -275,7 +285,7 @@ class _QuestionsFilterBottomSheetWidgetState
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(-1.00, 0.00),
+              alignment: AlignmentDirectional(-1.0, 0.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 31.0, 0.0, 0.0),
                 child: Text(
@@ -306,11 +316,17 @@ class _QuestionsFilterBottomSheetWidgetState
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'QUESTIONS_FILTER_BOTTOM_SHEET_Container_');
                           if (_model.filterList.contains(roleItem)) {
+                            logFirebaseEvent(
+                                'filterElement_update_component_state');
                             setState(() {
                               _model.removeFromFilterList(roleItem);
                             });
                           } else {
+                            logFirebaseEvent(
+                                'filterElement_update_component_state');
                             setState(() {
                               _model.addToFilterList(roleItem);
                             });
@@ -336,6 +352,9 @@ class _QuestionsFilterBottomSheetWidgetState
                   Expanded(
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'QUESTIONS_FILTER_BOTTOM_SHEET_CANCEL_BTN');
+                        logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
                       },
                       text: 'Cancel',
@@ -364,6 +383,9 @@ class _QuestionsFilterBottomSheetWidgetState
                   Expanded(
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'QUESTIONS_FILTER_BOTTOM_SHEET_SAVE_BTN_O');
+                        logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context, _model.filterList);
                       },
                       text: 'Save',

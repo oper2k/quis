@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/feedback_pick_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -7,23 +8,25 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'interview_feedback_model.dart';
 export 'interview_feedback_model.dart';
 
 class InterviewFeedbackWidget extends StatefulWidget {
   const InterviewFeedbackWidget({
-    Key? key,
+    super.key,
     required this.userRef,
-  }) : super(key: key);
+    required this.roomDoc,
+    bool? isLike,
+  }) : this.isLike = isLike ?? false;
 
   final DocumentReference? userRef;
+  final ConferenceRoomRecord? roomDoc;
+  final bool isLike;
 
   @override
-  _InterviewFeedbackWidgetState createState() =>
+  State<InterviewFeedbackWidget> createState() =>
       _InterviewFeedbackWidgetState();
 }
 
@@ -37,8 +40,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
     super.initState();
     _model = createModel(context, () => InterviewFeedbackModel());
 
-    _model.improveFieldController ??= TextEditingController();
-    _model.improveFieldFocusNode ??= FocusNode();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'InterviewFeedback'});
+    _model.improveUserFieldController ??= TextEditingController();
+    _model.improveUserFieldFocusNode ??= FocusNode();
 
     _model.scaleFieldController ??= TextEditingController();
     _model.scaleFieldFocusNode ??= FocusNode();
@@ -46,8 +51,8 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
     _model.improvequisFieldController ??= TextEditingController();
     _model.improvequisFieldFocusNode ??= FocusNode();
 
-    _model.feedbackFieldController ??= TextEditingController();
-    _model.feedbackFieldFocusNode ??= FocusNode();
+    _model.appFeedbackFieldController ??= TextEditingController();
+    _model.appFeedbackFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -59,17 +64,6 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -90,13 +84,16 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.safePop();
+                  logFirebaseEvent('INTERVIEW_FEEDBACK_Container_jtjf436y_ON');
+                  logFirebaseEvent('Container_navigate_to');
+
+                  context.goNamed('Home');
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -156,6 +153,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_6e1td5c4_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.satisfactionInterview = true;
                             });
@@ -175,6 +176,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_grsb52c3_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.satisfactionInterview = false;
                             });
@@ -221,6 +226,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_k0wjc1g7_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.partner = 'Top 1%';
                             });
@@ -240,6 +249,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_cnk4ebr1_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.partner = '5%';
                             });
@@ -259,6 +272,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_wkibmes2_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.partner = '10%';
                             });
@@ -278,6 +295,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_aibllmvi_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.partner = '25%';
                             });
@@ -297,6 +318,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_wgc528o7_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.partner = '50%';
                             });
@@ -316,6 +341,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_mvgzu48j_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.partner = 'Not good';
                             });
@@ -363,6 +392,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_oqtbb99b_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.structure = true;
                             });
@@ -382,6 +415,10 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_Container_aveoh2r0_ON');
+                            logFirebaseEvent(
+                                'feedbackPickElement_update_page_state');
                             setState(() {
                               _model.structure = false;
                             });
@@ -418,8 +455,8 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
                       child: TextFormField(
-                        controller: _model.improveFieldController,
-                        focusNode: _model.improveFieldFocusNode,
+                        controller: _model.improveUserFieldController,
+                        focusNode: _model.improveUserFieldFocusNode,
                         obscureText: false,
                         decoration: InputDecoration(
                           hintText: 'Here you can share your thoughts',
@@ -437,7 +474,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                         ),
                         style: FlutterFlowTheme.of(context).bodyLarge,
                         maxLines: null,
-                        validator: _model.improveFieldControllerValidator
+                        validator: _model.improveUserFieldControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -550,8 +587,8 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
                       child: TextFormField(
-                        controller: _model.feedbackFieldController,
-                        focusNode: _model.feedbackFieldFocusNode,
+                        controller: _model.appFeedbackFieldController,
+                        focusNode: _model.appFeedbackFieldFocusNode,
                         obscureText: false,
                         decoration: InputDecoration(
                           hintText: 'Here you can share your thoughts',
@@ -569,7 +606,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                         ),
                         style: FlutterFlowTheme.of(context).bodyLarge,
                         maxLines: null,
-                        validator: _model.feedbackFieldControllerValidator
+                        validator: _model.appFeedbackFieldControllerValidator
                             .asValidator(context),
                       ),
                     ),
@@ -581,20 +618,25 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                     onPressed: !((_model.satisfactionInterview != null) ||
                             (_model.partner != null && _model.partner != '') ||
                             (_model.structure != null) ||
-                            (_model.improveFieldController.text != null &&
-                                _model.improveFieldController.text != '') ||
+                            (_model.improveUserFieldController.text != null &&
+                                _model.improveUserFieldController.text != '') ||
                             (_model.scaleFieldController.text != null &&
                                 _model.scaleFieldController.text != '') ||
                             (_model.improvequisFieldController.text != null &&
                                 _model.improvequisFieldController.text != '') ||
-                            (_model.feedbackFieldController.text != null &&
-                                _model.feedbackFieldController.text != ''))
+                            (_model.appFeedbackFieldController.text != null &&
+                                _model.appFeedbackFieldController.text != ''))
                         ? null
                         : () async {
+                            logFirebaseEvent(
+                                'INTERVIEW_FEEDBACK_SUBMIT_FEEDBACK_BTN_O');
+                            logFirebaseEvent('Button_backend_call');
                             _model.userOutput =
                                 await UsersRecord.getDocumentOnce(
                                     widget.userRef!);
                             if (_model.partner == 'Top 1%') {
+                              logFirebaseEvent('Button_backend_call');
+
                               await widget.userRef!.update({
                                 ...mapToFirestore(
                                   {
@@ -603,6 +645,8 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                                 ),
                               });
                             } else if (_model.partner == 'Not good') {
+                              logFirebaseEvent('Button_backend_call');
+
                               await widget.userRef!.update({
                                 ...createUsersRecordData(
                                   karma: functions.subtractToZero(
@@ -615,6 +659,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                                   },
                                 ),
                               });
+                              logFirebaseEvent('Button_backend_call');
 
                               await currentUserReference!.update({
                                 ...mapToFirestore(
@@ -626,34 +671,87 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                               });
                             }
 
-                            if (_model.improveFieldController.text != null &&
-                                _model.improveFieldController.text != '') {
-                              await launchUrl(Uri(
-                                  scheme: 'mailto',
-                                  path: _model.userOutput!.email,
-                                  query: {
-                                    'subject':
-                                        'Quis: User \"${'${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}'}\" has left feedback about you',
-                                    'body': _model.improveFieldController.text,
-                                  }
-                                      .entries
-                                      .map((MapEntry<String, String> e) =>
-                                          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                                      .join('&')));
+                            if (((currentUserDocument?.likedUsers?.toList() ??
+                                        [])
+                                    .where((e) => e.refUser == widget.userRef)
+                                    .toList()
+                                    .isNotEmpty) &&
+                                widget.isLike) {
+                              logFirebaseEvent('Button_backend_call');
+
+                              await currentUserReference!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'liked_users': FieldValue.arrayRemove([
+                                      getLikedUserItemFirestoreData(
+                                        updateLikedUserItemStruct(
+                                          (currentUserDocument?.likedUsers
+                                                      ?.toList() ??
+                                                  [])
+                                              .where((e) =>
+                                                  e.refUser == widget.userRef)
+                                              .toList()
+                                              .first,
+                                          clearUnsetFields: false,
+                                        ),
+                                        true,
+                                      )
+                                    ]),
+                                  },
+                                ),
+                              });
+                              logFirebaseEvent('Button_backend_call');
+
+                              await currentUserReference!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'liked_users': FieldValue.arrayUnion([
+                                      getLikedUserItemFirestoreData(
+                                        createLikedUserItemStruct(
+                                          refUser: widget.userRef,
+                                          date: widget.roomDoc?.date,
+                                          top: _model.partner,
+                                          clearUnsetFields: false,
+                                        ),
+                                        true,
+                                      )
+                                    ]),
+                                  },
+                                ),
+                              });
                             }
-                            await launchUrl(Uri(
-                                scheme: 'mailto',
-                                path: FFAppConstants.infoEmail,
-                                query: {
-                                  'subject':
-                                      'Quis: User \"${'${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}'}\" has left feedback ',
-                                  'body':
-                                      '${'Feedback about user \"${_model.userOutput?.firstName} ${_model.userOutput?.lastName}:  ${_model.improveFieldController.text}'} ${'Scale: ${_model.scaleFieldController.text}'} ${'Is there anything we could have done differently to improve Quis?: ${_model.improvequisFieldController.text}'} ${'Any feedback you want to share with us?: ${_model.feedbackFieldController.text}'}',
-                                }
-                                    .entries
-                                    .map((MapEntry<String, String> e) =>
-                                        '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                                    .join('&')));
+                            if (_model.improveUserFieldController.text !=
+                                    null &&
+                                _model.improveUserFieldController.text != '') {
+                              logFirebaseEvent('Button_backend_call');
+                              _model.apiResult3fr =
+                                  await BrevoGroup.sendAnEmailCall.call(
+                                userEmail: _model.userOutput?.email,
+                                templateId: 5,
+                                paramAboutInterviewPartner:
+                                    _model.improveUserFieldController.text,
+                              );
+                            }
+                            logFirebaseEvent('Button_backend_call');
+                            await BrevoGroup.sendAnEmailCall.call(
+                              userEmail: FFAppConstants.infoEmail,
+                              templateId: 24,
+                              paramEmail: currentUserEmail,
+                              paramAboutInterview:
+                                  _model.satisfactionInterview?.toString(),
+                              paramAboutInterviewPartner: _model.partner,
+                              paramPartnerStructure:
+                                  _model.structure?.toString(),
+                              paramPartnerImprove:
+                                  _model.improveUserFieldController.text,
+                              paramProductScale:
+                                  _model.scaleFieldController.text,
+                              paramProductImprove:
+                                  _model.improvequisFieldController.text,
+                              paramProductFeedback:
+                                  _model.appFeedbackFieldController.text,
+                            );
+                            logFirebaseEvent('Button_navigate_to');
 
                             context.goNamed('FeedbackThankyou');
 

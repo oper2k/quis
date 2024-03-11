@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'feedback_pick_element_model.dart';
@@ -11,16 +10,16 @@ export 'feedback_pick_element_model.dart';
 
 class FeedbackPickElementWidget extends StatefulWidget {
   const FeedbackPickElementWidget({
-    Key? key,
+    super.key,
     required this.isPicked,
     required this.text,
-  }) : super(key: key);
+  });
 
   final bool? isPicked;
   final String? text;
 
   @override
-  _FeedbackPickElementWidgetState createState() =>
+  State<FeedbackPickElementWidget> createState() =>
       _FeedbackPickElementWidgetState();
 }
 
@@ -48,12 +47,10 @@ class _FeedbackPickElementWidgetState extends State<FeedbackPickElementWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       decoration: BoxDecoration(),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+        padding: EdgeInsets.all(5.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -5,18 +5,18 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'leadership_model.dart';
 export 'leadership_model.dart';
 
 class LeadershipWidget extends StatefulWidget {
-  const LeadershipWidget({Key? key}) : super(key: key);
+  const LeadershipWidget({super.key});
 
   @override
-  _LeadershipWidgetState createState() => _LeadershipWidgetState();
+  State<LeadershipWidget> createState() => _LeadershipWidgetState();
 }
 
 class _LeadershipWidgetState extends State<LeadershipWidget> {
@@ -28,6 +28,8 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LeadershipModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Leadership'});
   }
 
   @override
@@ -39,17 +41,6 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<UsersRecord>>(
       future: queryUsersRecordOnce(
         queryBuilder: (usersRecord) =>
@@ -95,13 +86,15 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent('LEADERSHIP_Container_4la3ucq0_ON_TAP');
+                      logFirebaseEvent('Container_navigate_back');
                       context.safePop();
                     },
                     child: Container(
                       width: 40.0,
                       height: 40.0,
                       decoration: BoxDecoration(),
-                      alignment: AlignmentDirectional(-1.00, 0.00),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: Icon(
                         FFIcons.karrowBack,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -166,6 +159,11 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'LEADERSHIP_Container_3xa4zboz_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'avatar_navigate_to');
+
                                                 context.pushNamed(
                                                   'UserProfile',
                                                   queryParameters: {
@@ -198,7 +196,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                             ),
                                             Align(
                                               alignment: AlignmentDirectional(
-                                                  1.00, 1.00),
+                                                  1.0, 1.0),
                                               child: Container(
                                                 width: 18.0,
                                                 height: 18.0,
@@ -209,7 +207,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                   shape: BoxShape.circle,
                                                 ),
                                                 alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: Text(
                                                   '1',
                                                   style: FlutterFlowTheme.of(
@@ -287,7 +285,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                             children: [
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: Container(
                                                   width: 93.0,
                                                   height: 93.0,
@@ -308,7 +306,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               ),
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: AuthUserStreamWidget(
                                                   builder: (context) =>
                                                       wrapWithModel(
@@ -326,7 +324,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               ),
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    0.80, 0.80),
+                                                    0.8, 0.8),
                                                 child: Builder(
                                                   builder: (context) {
                                                     final userIndex =
@@ -358,7 +356,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                             ),
                                                             alignment:
                                                                 AlignmentDirectional(
-                                                                    0.00, 0.00),
+                                                                    0.0, 0.0),
                                                             child: Text(
                                                               (userIndexIndex +
                                                                       1)
@@ -437,126 +435,312 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                             child: Container(
                               width: 100.0,
                               decoration: BoxDecoration(),
-                              child: Visibility(
-                                visible: leadershipUsersRecordList[1] != null,
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 47.0, 0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        width: 60.0,
-                                        height: 60.0,
-                                        child: Stack(
+                              child: Builder(
+                                builder: (context) {
+                                  if (functions
+                                          .findUserIndexFromList(
+                                              leadershipUsersRecordList
+                                                  .toList(),
+                                              currentUserUid)
+                                          .toString() ==
+                                      '1') {
+                                    return Visibility(
+                                      visible: (leadershipUsersRecordList[2] !=
+                                              null) &&
+                                          (leadershipUsersRecordList[2]
+                                                  .reference !=
+                                              currentUserReference),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 47.0, 0.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  'UserProfile',
-                                                  queryParameters: {
-                                                    'userItem': serializeParam(
-                                                      leadershipUsersRecordList[
-                                                          1],
-                                                      ParamType.Document,
+                                            Container(
+                                              width: 60.0,
+                                              height: 60.0,
+                                              child: Stack(
+                                                children: [
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'LEADERSHIP_Container_1b50aj3v_ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'avatar_navigate_to');
+
+                                                      context.pushNamed(
+                                                        'UserProfile',
+                                                        queryParameters: {
+                                                          'userItem':
+                                                              serializeParam(
+                                                            leadershipUsersRecordList[
+                                                                2],
+                                                            ParamType.Document,
+                                                          ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'userItem':
+                                                              leadershipUsersRecordList[
+                                                                  2],
+                                                        },
+                                                      );
+                                                    },
+                                                    child: wrapWithModel(
+                                                      model:
+                                                          _model.avatarModel3,
+                                                      updateCallback: () =>
+                                                          setState(() {}),
+                                                      child: AvatarWidget(
+                                                        diameter: 60.0,
+                                                        imagePath:
+                                                            leadershipUsersRecordList[
+                                                                    2]
+                                                                .photoUrl,
+                                                        isPremium: false,
+                                                      ),
                                                     ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'userItem':
-                                                        leadershipUsersRecordList[
-                                                            1],
-                                                  },
-                                                );
-                                              },
-                                              child: wrapWithModel(
-                                                model: _model.avatarModel3,
-                                                updateCallback: () =>
-                                                    setState(() {}),
-                                                child: AvatarWidget(
-                                                  diameter: 60.0,
-                                                  imagePath:
-                                                      leadershipUsersRecordList[
-                                                              1]
-                                                          .photoUrl,
-                                                  isPremium: false,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.00, 1.00),
-                                              child: Container(
-                                                width: 18.0,
-                                                height: 18.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
-                                                child: Text(
-                                                  '2',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Sofia Pro',
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            1.0, 1.0),
+                                                    child: Container(
+                                                      width: 18.0,
+                                                      height: 18.0,
+                                                      decoration: BoxDecoration(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .white,
-                                                        fontSize: 13.0,
-                                                        useGoogleFonts: false,
+                                                                .primary,
+                                                        shape: BoxShape.circle,
                                                       ),
-                                                ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0.0, 0.0),
+                                                      child: Text(
+                                                        '3',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .white,
+                                                                  fontSize:
+                                                                      13.0,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 6.0, 0.0, 0.0),
+                                              child: Text(
+                                                leadershipUsersRecordList[2]
+                                                    .firstName,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro',
+                                                          useGoogleFonts: false,
+                                                          lineHeight: 1.16,
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                              child: Text(
+                                                (double? karma) {
+                                                  return karma != null
+                                                      ? karma.toStringAsFixed(1)
+                                                      : '0';
+                                                }(leadershipUsersRecordList[2]
+                                                    .karma),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro',
+                                                          useGoogleFonts: false,
+                                                          lineHeight: 1.16,
+                                                        ),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Padding(
+                                    );
+                                  } else {
+                                    return Visibility(
+                                      visible: (leadershipUsersRecordList[1] !=
+                                              null) &&
+                                          (leadershipUsersRecordList[1]
+                                                  .reference !=
+                                              currentUserReference),
+                                      child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 6.0, 0.0, 0.0),
-                                        child: Text(
-                                          leadershipUsersRecordList[1]
-                                              .firstName,
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .override(
-                                                fontFamily: 'Sofia Pro',
-                                                useGoogleFonts: false,
-                                                lineHeight: 1.16,
+                                            0.0, 47.0, 0.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: 60.0,
+                                              height: 60.0,
+                                              child: Stack(
+                                                children: [
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'LEADERSHIP_Container_ru2ofmy5_ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'avatar_navigate_to');
+
+                                                      context.pushNamed(
+                                                        'UserProfile',
+                                                        queryParameters: {
+                                                          'userItem':
+                                                              serializeParam(
+                                                            leadershipUsersRecordList[
+                                                                1],
+                                                            ParamType.Document,
+                                                          ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'userItem':
+                                                              leadershipUsersRecordList[
+                                                                  1],
+                                                        },
+                                                      );
+                                                    },
+                                                    child: wrapWithModel(
+                                                      model:
+                                                          _model.avatarModel4,
+                                                      updateCallback: () =>
+                                                          setState(() {}),
+                                                      child: AvatarWidget(
+                                                        diameter: 60.0,
+                                                        imagePath:
+                                                            leadershipUsersRecordList[
+                                                                    1]
+                                                                .photoUrl,
+                                                        isPremium: false,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            1.0, 1.0),
+                                                    child: Container(
+                                                      width: 18.0,
+                                                      height: 18.0,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0.0, 0.0),
+                                                      child: Text(
+                                                        '2',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .white,
+                                                                  fontSize:
+                                                                      13.0,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 6.0, 0.0, 0.0),
+                                              child: Text(
+                                                leadershipUsersRecordList[1]
+                                                    .firstName,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro',
+                                                          useGoogleFonts: false,
+                                                          lineHeight: 1.16,
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                              child: Text(
+                                                (double? karma) {
+                                                  return karma != null
+                                                      ? karma.toStringAsFixed(1)
+                                                      : '0';
+                                                }(leadershipUsersRecordList[1]
+                                                    .karma),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro',
+                                                          useGoogleFonts: false,
+                                                          lineHeight: 1.16,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 4.0, 0.0, 0.0),
-                                        child: Text(
-                                          (double? karma) {
-                                            return karma != null
-                                                ? karma.toStringAsFixed(1)
-                                                : '0';
-                                          }(leadershipUsersRecordList[1].karma),
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .override(
-                                                fontFamily: 'Sofia Pro',
-                                                useGoogleFonts: false,
-                                                lineHeight: 1.16,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                    );
+                                  }
+                                },
                               ),
                             ),
                           ),
@@ -574,82 +758,107 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                             children: List.generate(user.length, (userIndex) {
                               final userItem = user[userIndex];
                               return Visibility(
-                                visible: (userIndex >= 3) &&
-                                    (userItem.uid != currentUserReference?.id),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'UserProfile',
-                                      queryParameters: {
-                                        'userItem': serializeParam(
-                                          userItem,
-                                          ParamType.Document,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        'userItem': userItem,
-                                      },
-                                    );
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 35.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            (userIndex + 1).toString(),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
+                                visible: (functions.findUserIndexFromList(
+                                                leadershipUsersRecordList
+                                                    .toList(),
+                                                currentUserUid) >
+                                            2) ||
+                                        (functions.findUserIndexFromList(
+                                                leadershipUsersRecordList
+                                                    .toList(),
+                                                currentUserUid) <=
+                                            0)
+                                    ? ((userIndex >= 2) &&
+                                        (userItem.uid !=
+                                            currentUserReference?.id))
+                                    : ((userIndex >= 3) &&
+                                        (userItem.uid !=
+                                            currentUserReference?.id)),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 5.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'LEADERSHIP_Container_h3723ujt_ON_TAP');
+                                      logFirebaseEvent('Container_navigate_to');
+
+                                      context.pushNamed(
+                                        'UserProfile',
+                                        queryParameters: {
+                                          'userItem': serializeParam(
+                                            userItem,
+                                            ParamType.Document,
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    25.0, 0.0, 0.0, 0.0),
-                                            child: AvatarWidget(
-                                              key: Key(
-                                                  'Keyxun_${userIndex}_of_${user.length}'),
-                                              diameter: 40.0,
-                                              imagePath: userItem.photoUrl,
-                                              isPremium: false,
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'userItem': userItem,
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 15.0, 35.0, 15.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              (userIndex + 1).toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge,
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
+                                            Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                userItem.firstName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                      25.0, 0.0, 0.0, 0.0),
+                                              child: AvatarWidget(
+                                                key: Key(
+                                                    'Keyxun_${userIndex}_of_${user.length}'),
+                                                diameter: 40.0,
+                                                imagePath: userItem.photoUrl,
+                                                isPremium: false,
                                               ),
                                             ),
-                                          ),
-                                          Icon(
-                                            FFIcons.kchevronDownS,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                        ],
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        20.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  userItem.firstName,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelMedium,
+                                                ),
+                                              ),
+                                            ),
+                                            Icon(
+                                              FFIcons.kchevronDownS,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               );
-                            }).divide(SizedBox(height: 10.0)),
+                            }),
                           );
                         },
                       ),

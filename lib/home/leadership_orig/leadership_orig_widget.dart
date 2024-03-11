@@ -5,17 +5,16 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'leadership_orig_model.dart';
 export 'leadership_orig_model.dart';
 
 class LeadershipOrigWidget extends StatefulWidget {
-  const LeadershipOrigWidget({Key? key}) : super(key: key);
+  const LeadershipOrigWidget({super.key});
 
   @override
-  _LeadershipOrigWidgetState createState() => _LeadershipOrigWidgetState();
+  State<LeadershipOrigWidget> createState() => _LeadershipOrigWidgetState();
 }
 
 class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
@@ -27,6 +26,9 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LeadershipOrigModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'LeadershipOrig'});
   }
 
   @override
@@ -38,17 +40,6 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<UsersRecord>>(
       future: queryUsersRecordOnce(
         queryBuilder: (usersRecord) => usersRecord.orderBy('karma'),
@@ -95,13 +86,16 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'LEADERSHIP_ORIG_Container_hzboo74b_ON_TA');
+                          logFirebaseEvent('Container_navigate_back');
                           context.safePop();
                         },
                         child: Container(
                           width: 40.0,
                           height: 40.0,
                           decoration: BoxDecoration(),
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Icon(
                             FFIcons.karrowBack,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -146,6 +140,11 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'LEADERSHIP_ORIG_Container_sa1ns6qg_ON_TA');
+                                          logFirebaseEvent(
+                                              'avatar_navigate_to');
+
                                           context.pushNamed(
                                             'UserProfile',
                                             queryParameters: {
@@ -176,7 +175,7 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.00, 1.00),
+                                            AlignmentDirectional(1.0, 1.0),
                                         child: Container(
                                           width: 18.0,
                                           height: 18.0,
@@ -186,7 +185,7 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                             shape: BoxShape.circle,
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.00, 0.00),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             '1',
                                             style: FlutterFlowTheme.of(context)
@@ -248,8 +247,7 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                 child: Stack(
                                   children: [
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Container(
                                         width: 93.0,
                                         height: 93.0,
@@ -267,14 +265,18 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                       ),
                                     ),
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'LEADERSHIP_ORIG_Container_9b6ucyv9_ON_TA');
+                                          logFirebaseEvent(
+                                              'avatar_navigate_to');
+
                                           context.pushNamed(
                                             'UserProfile',
                                             queryParameters: {
@@ -305,8 +307,7 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                       ),
                                     ),
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.80, 0.80),
+                                      alignment: AlignmentDirectional(0.8, 0.8),
                                       child: Container(
                                         width: 18.0,
                                         height: 18.0,
@@ -316,7 +317,7 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                           shape: BoxShape.circle,
                                         ),
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.00),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           '1',
                                           style: FlutterFlowTheme.of(context)
@@ -385,6 +386,11 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'LEADERSHIP_ORIG_Container_jehfz85x_ON_TA');
+                                          logFirebaseEvent(
+                                              'avatar_navigate_to');
+
                                           context.pushNamed(
                                             'UserProfile',
                                             queryParameters: {
@@ -415,7 +421,7 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.00, 1.00),
+                                            AlignmentDirectional(1.0, 1.0),
                                         child: Container(
                                           width: 18.0,
                                           height: 18.0,
@@ -425,7 +431,7 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                             shape: BoxShape.circle,
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.00, 0.00),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             '2',
                                             style: FlutterFlowTheme.of(context)
@@ -498,6 +504,10 @@ class _LeadershipOrigWidgetState extends State<LeadershipOrigWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'LEADERSHIP_ORIG_Container_bvpebng2_ON_TA');
+                                  logFirebaseEvent('Container_navigate_to');
+
                                   context.pushNamed(
                                     'UserProfile',
                                     queryParameters: {

@@ -2,7 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'courses_list_component_model.dart';
@@ -10,14 +9,14 @@ export 'courses_list_component_model.dart';
 
 class CoursesListComponentWidget extends StatefulWidget {
   const CoursesListComponentWidget({
-    Key? key,
+    super.key,
     required this.courseItem,
-  }) : super(key: key);
+  });
 
   final CourseRecord? courseItem;
 
   @override
-  _CoursesListComponentWidgetState createState() =>
+  State<CoursesListComponentWidget> createState() =>
       _CoursesListComponentWidgetState();
 }
 
@@ -46,14 +45,15 @@ class _CoursesListComponentWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return InkWell(
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
+        logFirebaseEvent('COURSES_LIST_COMPONENT_Container_u1bms8f');
+        logFirebaseEvent('Container_navigate_to');
+
         context.pushNamed(
           'Course',
           queryParameters: {
@@ -74,7 +74,7 @@ class _CoursesListComponentWidgetState
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+          padding: EdgeInsets.all(8.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,

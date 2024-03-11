@@ -3,17 +3,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'earn_karma_model.dart';
 export 'earn_karma_model.dart';
 
 class EarnKarmaWidget extends StatefulWidget {
-  const EarnKarmaWidget({Key? key}) : super(key: key);
+  const EarnKarmaWidget({super.key});
 
   @override
-  _EarnKarmaWidgetState createState() => _EarnKarmaWidgetState();
+  State<EarnKarmaWidget> createState() => _EarnKarmaWidgetState();
 }
 
 class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
@@ -25,6 +24,8 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EarnKarmaModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EarnKarma'});
   }
 
   @override
@@ -36,17 +37,6 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -67,13 +57,15 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('EARN_KARMA_Container_7m8cxky7_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,

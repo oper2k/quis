@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +9,10 @@ import 'karma_shortage_dialog_model.dart';
 export 'karma_shortage_dialog_model.dart';
 
 class KarmaShortageDialogWidget extends StatefulWidget {
-  const KarmaShortageDialogWidget({Key? key}) : super(key: key);
+  const KarmaShortageDialogWidget({super.key});
 
   @override
-  _KarmaShortageDialogWidgetState createState() =>
+  State<KarmaShortageDialogWidget> createState() =>
       _KarmaShortageDialogWidgetState();
 }
 
@@ -41,10 +40,8 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -57,13 +54,16 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.00, 0.00),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent(
+                        'KARMA_SHORTAGE_DIALOG_Container_ac7ytkuy');
+                    logFirebaseEvent('Container_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -71,7 +71,7 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
                     height: 40.0,
                     decoration: BoxDecoration(),
                     child: Align(
-                      alignment: AlignmentDirectional(1.00, 0.00),
+                      alignment: AlignmentDirectional(1.0, 0.0),
                       child: Icon(
                         FFIcons.kcross,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -105,7 +105,13 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 25.0, 20.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent(
+                        'KARMA_SHORTAGE_DIALOG_BACK_TO_HOME_BTN_O');
+                    logFirebaseEvent('Button_dismiss_dialog');
                     Navigator.pop(context, true);
+                    logFirebaseEvent('Button_navigate_to');
+
+                    context.goNamed('Home');
                   },
                   text: 'Back to home page',
                   options: FFButtonOptions(

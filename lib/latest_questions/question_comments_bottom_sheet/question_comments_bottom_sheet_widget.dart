@@ -7,10 +7,8 @@ import '/components/message_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,14 +18,14 @@ export 'question_comments_bottom_sheet_model.dart';
 
 class QuestionCommentsBottomSheetWidget extends StatefulWidget {
   const QuestionCommentsBottomSheetWidget({
-    Key? key,
+    super.key,
     required this.questionRef,
-  }) : super(key: key);
+  });
 
   final DocumentReference? questionRef;
 
   @override
-  _QuestionCommentsBottomSheetWidgetState createState() =>
+  State<QuestionCommentsBottomSheetWidget> createState() =>
       _QuestionCommentsBottomSheetWidgetState();
 }
 
@@ -74,8 +72,6 @@ class _QuestionCommentsBottomSheetWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       height: MediaQuery.sizeOf(context).height * 0.5,
@@ -118,7 +114,7 @@ class _QuestionCommentsBottomSheetWidgetState
           return Container(
             decoration: BoxDecoration(),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(1.0, 1.0, 1.0, 1.0),
+              padding: EdgeInsets.all(1.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -201,6 +197,11 @@ class _QuestionCommentsBottomSheetWidgetState
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'QUESTION_COMMENTS_BOTTOM_SHEET_Container');
+                                              logFirebaseEvent(
+                                                  'avatar_navigate_to');
+
                                               context.pushNamed(
                                                 'UserProfile',
                                                 queryParameters: {
@@ -396,6 +397,11 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                             .transparent,
                                                                     onTap:
                                                                         () async {
+                                                                      logFirebaseEvent(
+                                                                          'QUESTION_COMMENTS_BOTTOM_SHEET_Container');
+                                                                      logFirebaseEvent(
+                                                                          'Container_backend_call');
+
                                                                       await commentItem
                                                                           .reference
                                                                           .update({
@@ -415,6 +421,8 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                           },
                                                                         ),
                                                                       });
+                                                                      logFirebaseEvent(
+                                                                          'Container_backend_call');
 
                                                                       await userRefItemUsersRecord
                                                                           .reference
@@ -426,6 +434,8 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                           },
                                                                         ),
                                                                       });
+                                                                      logFirebaseEvent(
+                                                                          'Container_trigger_push_notification');
                                                                       triggerPushNotification(
                                                                         notificationTitle:
                                                                             'Cheers to Your Insights! 🌐',
@@ -451,11 +461,8 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                           BoxDecoration(),
                                                                       child:
                                                                           Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            2.0,
-                                                                            2.0,
-                                                                            2.0,
-                                                                            2.0),
+                                                                        padding:
+                                                                            EdgeInsets.all(2.0),
                                                                         child:
                                                                             Icon(
                                                                           FFIcons
@@ -491,6 +498,11 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                               .transparent,
                                                                       onTap:
                                                                           () async {
+                                                                        logFirebaseEvent(
+                                                                            'QUESTION_COMMENTS_BOTTOM_SHEET_Container');
+                                                                        logFirebaseEvent(
+                                                                            'Container_backend_call');
+
                                                                         await commentItem
                                                                             .reference
                                                                             .update({
@@ -516,11 +528,8 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                             BoxDecoration(),
                                                                         child:
                                                                             Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              2.0,
-                                                                              2.0,
-                                                                              2.0,
-                                                                              2.0),
+                                                                          padding:
+                                                                              EdgeInsets.all(2.0),
                                                                           child:
                                                                               Icon(
                                                                             FFIcons.kthumbsDown,
@@ -563,8 +572,7 @@ class _QuestionCommentsBottomSheetWidgetState
                     color: FlutterFlowTheme.of(context).accent2,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                    padding: EdgeInsets.all(16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -631,8 +639,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                contentPadding: EdgeInsets.all(16.0),
                               ),
                               style: FlutterFlowTheme.of(context).headlineSmall,
                               validator: _model.textControllerValidator
@@ -647,8 +654,12 @@ class _QuestionCommentsBottomSheetWidgetState
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'QUESTION_COMMENTS_BOTTOM_SHEET_Container');
                               if (_model.textController.text != null &&
                                   _model.textController.text != '') {
+                                logFirebaseEvent('Container_backend_call');
+
                                 await CommentInterviewQuestionRecord.collection
                                     .doc()
                                     .set(
@@ -658,6 +669,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                       createdTime: getCurrentTimestamp,
                                       refQuestion: widget.questionRef,
                                     ));
+                                logFirebaseEvent('Container_backend_call');
 
                                 await currentUserReference!.update({
                                   ...mapToFirestore(
@@ -666,25 +678,26 @@ class _QuestionCommentsBottomSheetWidgetState
                                     },
                                   ),
                                 });
-                                await showAlignedDialog(
+                                logFirebaseEvent('Container_alert_dialog');
+                                await showDialog(
                                   context: context,
-                                  isGlobal: true,
-                                  avoidOverflow: false,
-                                  targetAnchor: AlignmentDirectional(0.0, 0.0)
-                                      .resolve(Directionality.of(context)),
-                                  followerAnchor: AlignmentDirectional(0.0, 0.0)
-                                      .resolve(Directionality.of(context)),
                                   builder: (dialogContext) {
-                                    return Material(
-                                      color: Colors.transparent,
+                                    return Dialog(
+                                      elevation: 0,
+                                      insetPadding: EdgeInsets.zero,
+                                      backgroundColor: Colors.transparent,
+                                      alignment: AlignmentDirectional(0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
                                       child: WebViewAware(
-                                          child: KarmaPlusDialogWidget(
-                                        karmaPoints: 0.5,
-                                      )),
+                                        child: KarmaPlusDialogWidget(
+                                          karmaPoints: 0.5,
+                                        ),
+                                      ),
                                     );
                                   },
                                 ).then((value) => setState(() {}));
 
+                                logFirebaseEvent('Container_reset_form_fields');
                                 setState(() {
                                   _model.textController?.clear();
                                 });

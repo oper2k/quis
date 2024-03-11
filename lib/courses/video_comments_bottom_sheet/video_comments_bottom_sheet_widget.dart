@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,14 +16,14 @@ export 'video_comments_bottom_sheet_model.dart';
 
 class VideoCommentsBottomSheetWidget extends StatefulWidget {
   const VideoCommentsBottomSheetWidget({
-    Key? key,
+    super.key,
     required this.videoRef,
-  }) : super(key: key);
+  });
 
   final DocumentReference? videoRef;
 
   @override
-  _VideoCommentsBottomSheetWidgetState createState() =>
+  State<VideoCommentsBottomSheetWidget> createState() =>
       _VideoCommentsBottomSheetWidgetState();
 }
 
@@ -71,8 +70,6 @@ class _VideoCommentsBottomSheetWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -113,7 +110,7 @@ class _VideoCommentsBottomSheetWidgetState
           return Container(
             decoration: BoxDecoration(),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(1.0, 1.0, 1.0, 1.0),
+              padding: EdgeInsets.all(1.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -135,13 +132,15 @@ class _VideoCommentsBottomSheetWidgetState
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'VIDEO_COMMENTS_BOTTOM_SHEET_Container_wg');
+                            logFirebaseEvent('Container_bottom_sheet');
                             Navigator.pop(context);
                           },
                           child: Container(
                             decoration: BoxDecoration(),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 5.0, 5.0, 5.0),
+                              padding: EdgeInsets.all(5.0),
                               child: Icon(
                                 FFIcons.kxmark,
                                 color:
@@ -217,6 +216,11 @@ class _VideoCommentsBottomSheetWidgetState
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'VIDEO_COMMENTS_BOTTOM_SHEET_Container_2y');
+                                              logFirebaseEvent(
+                                                  'avatar_navigate_to');
+
                                               context.pushNamed(
                                                 'UserProfile',
                                                 queryParameters: {
@@ -412,6 +416,11 @@ class _VideoCommentsBottomSheetWidgetState
                                                                             .transparent,
                                                                     onTap:
                                                                         () async {
+                                                                      logFirebaseEvent(
+                                                                          'VIDEO_COMMENTS_BOTTOM_SHEET_Container_5b');
+                                                                      logFirebaseEvent(
+                                                                          'Container_backend_call');
+
                                                                       await commentItem
                                                                           .reference
                                                                           .update({
@@ -431,6 +440,8 @@ class _VideoCommentsBottomSheetWidgetState
                                                                           },
                                                                         ),
                                                                       });
+                                                                      logFirebaseEvent(
+                                                                          'Container_trigger_push_notification');
                                                                       triggerPushNotification(
                                                                         notificationTitle:
                                                                             'Recognition Alert! ',
@@ -456,11 +467,8 @@ class _VideoCommentsBottomSheetWidgetState
                                                                           BoxDecoration(),
                                                                       child:
                                                                           Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            2.0,
-                                                                            2.0,
-                                                                            2.0,
-                                                                            2.0),
+                                                                        padding:
+                                                                            EdgeInsets.all(2.0),
                                                                         child:
                                                                             Icon(
                                                                           FFIcons
@@ -496,6 +504,11 @@ class _VideoCommentsBottomSheetWidgetState
                                                                               .transparent,
                                                                       onTap:
                                                                           () async {
+                                                                        logFirebaseEvent(
+                                                                            'VIDEO_COMMENTS_BOTTOM_SHEET_Container_o9');
+                                                                        logFirebaseEvent(
+                                                                            'Container_backend_call');
+
                                                                         await commentItem
                                                                             .reference
                                                                             .update({
@@ -521,11 +534,8 @@ class _VideoCommentsBottomSheetWidgetState
                                                                             BoxDecoration(),
                                                                         child:
                                                                             Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              2.0,
-                                                                              2.0,
-                                                                              2.0,
-                                                                              2.0),
+                                                                          padding:
+                                                                              EdgeInsets.all(2.0),
                                                                           child:
                                                                               Icon(
                                                                             FFIcons.kthumbsDown,
@@ -568,8 +578,7 @@ class _VideoCommentsBottomSheetWidgetState
                     color: FlutterFlowTheme.of(context).accent2,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                    padding: EdgeInsets.all(16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -636,8 +645,7 @@ class _VideoCommentsBottomSheetWidgetState
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                contentPadding: EdgeInsets.all(16.0),
                               ),
                               style: FlutterFlowTheme.of(context).headlineSmall,
                               validator: _model.textControllerValidator
@@ -651,8 +659,12 @@ class _VideoCommentsBottomSheetWidgetState
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'VIDEO_COMMENTS_BOTTOM_SHEET_Container_dv');
                             if (_model.textController.text != null &&
                                 _model.textController.text != '') {
+                              logFirebaseEvent('Container_backend_call');
+
                               await CommentRecord.collection
                                   .doc()
                                   .set(createCommentRecordData(
@@ -661,6 +673,7 @@ class _VideoCommentsBottomSheetWidgetState
                                     refVideo: widget.videoRef,
                                     createdTime: getCurrentTimestamp,
                                   ));
+                              logFirebaseEvent('Container_reset_form_fields');
                               setState(() {
                                 _model.textController?.clear();
                               });

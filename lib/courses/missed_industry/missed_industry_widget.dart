@@ -1,18 +1,20 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'missed_industry_model.dart';
 export 'missed_industry_model.dart';
 
 class MissedIndustryWidget extends StatefulWidget {
-  const MissedIndustryWidget({Key? key}) : super(key: key);
+  const MissedIndustryWidget({super.key});
 
   @override
-  _MissedIndustryWidgetState createState() => _MissedIndustryWidgetState();
+  State<MissedIndustryWidget> createState() => _MissedIndustryWidgetState();
 }
 
 class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
@@ -42,10 +44,8 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -63,13 +63,16 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'MISSED_INDUSTRY_Container_mbfx6zri_ON_TA');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -88,13 +91,16 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'MISSED_INDUSTRY_Container_ri45w9gd_ON_TA');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -102,7 +108,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -178,10 +184,24 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('MISSED_INDUSTRY_COMP_SEND_BTN_ON_TAP');
+                    logFirebaseEvent('Button_validate_form');
                     if (_model.formKey.currentState == null ||
                         !_model.formKey.currentState!.validate()) {
                       return;
                     }
+                    logFirebaseEvent('Button_backend_call');
+                    unawaited(
+                      () async {
+                        await BrevoGroup.sendAnEmailCall.call(
+                          userEmail: FFAppConstants.infoEmail,
+                          templateId: 18,
+                          paramEmail: currentUserEmail,
+                          paramComment: _model.textController.text,
+                        );
+                      }(),
+                    );
+                    logFirebaseEvent('Button_dismiss_dialog');
                     Navigator.pop(context, _model.textController.text);
                   },
                   text: 'Send',

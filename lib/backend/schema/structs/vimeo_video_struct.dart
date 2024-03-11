@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,8 +36,9 @@ class VimeoVideoStruct extends FFFirebaseStruct {
         vimeoVideoUrl: data['vimeo_video_url'] as String?,
       );
 
-  static VimeoVideoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? VimeoVideoStruct.fromMap(data) : null;
+  static VimeoVideoStruct? maybeFromMap(dynamic data) => data is Map
+      ? VimeoVideoStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'image_path': _imagePath,

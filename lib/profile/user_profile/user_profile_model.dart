@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'user_profile_widget.dart' show UserProfileWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -19,10 +18,12 @@ class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     avatarModel = createModel(context, () => AvatarModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     avatarModel.dispose();

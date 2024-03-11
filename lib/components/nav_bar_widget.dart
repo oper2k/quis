@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -11,14 +10,14 @@ export 'nav_bar_model.dart';
 
 class NavBarWidget extends StatefulWidget {
   const NavBarWidget({
-    Key? key,
+    super.key,
     required this.index,
-  }) : super(key: key);
+  });
 
   final int? index;
 
   @override
-  _NavBarWidgetState createState() => _NavBarWidgetState();
+  State<NavBarWidget> createState() => _NavBarWidgetState();
 }
 
 class _NavBarWidgetState extends State<NavBarWidget> {
@@ -60,8 +59,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Visibility(
       visible: !(isWeb
           ? MediaQuery.viewInsetsOf(context).bottom > 0
@@ -69,7 +66,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
       child: Stack(
         children: [
           Align(
-            alignment: AlignmentDirectional(0.00, 1.00),
+            alignment: AlignmentDirectional(0.0, 1.0),
             child: Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).white,
@@ -87,6 +84,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent('NAV_BAR_COMP_HomeButton_ON_TAP');
+                          logFirebaseEvent('HomeButton_navigate_to');
+
                           context.goNamed(
                             'Home',
                             extra: <String, dynamic>{
@@ -142,6 +142,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent('NAV_BAR_COMP_CourseButton1_ON_TAP');
+                          logFirebaseEvent('CourseButton1_navigate_to');
+
                           context.goNamed(
                             'AllCourses',
                             extra: <String, dynamic>{
@@ -190,12 +193,63 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         ),
                       ),
                     ),
-                    Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        shape: BoxShape.circle,
+                    Expanded(
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'NAV_BAR_COMP_PracticeButton_ON_TAP');
+                          logFirebaseEvent('PracticeButton_navigate_to');
+
+                          context.goNamed(
+                            'PracticeInterview',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FFIcons.kfluentPersonFeedback20Regular,
+                                color: widget.index == 2
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : FlutterFlowTheme.of(context).accent3,
+                                size: 24.0,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 6.0, 0.0, 0.0),
+                                child: Text(
+                                  'Practice',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                        fontFamily: 'Sofia Pro',
+                                        color: widget.index == 2
+                                            ? FlutterFlowTheme.of(context)
+                                                .primary
+                                            : FlutterFlowTheme.of(context)
+                                                .accent3,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     Expanded(
@@ -205,6 +259,10 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'NAV_BAR_COMP_QuestionButton_ON_TAP');
+                          logFirebaseEvent('QuestionButton_navigate_to');
+
                           context.goNamed(
                             'LatestInterviewQuestions',
                             extra: <String, dynamic>{
@@ -260,6 +318,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent('NAV_BAR_COMP_ProfileButton_ON_TAP');
+                          logFirebaseEvent('ProfileButton_navigate_to');
+
                           context.goNamed(
                             'MyProfile',
                             extra: <String, dynamic>{
@@ -309,55 +370,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       ),
                     ),
                   ],
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: AlignmentDirectional(0.00, 1.00),
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 44.4),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.goNamed(
-                    'PracticeInterview',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 0),
-                      ),
-                    },
-                  );
-                },
-                child: Container(
-                  width: 54.0,
-                  height: 54.0,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        FlutterFlowTheme.of(context).gradient2,
-                        FlutterFlowTheme.of(context).aquaBreeze
-                      ],
-                      stops: [0.0, 1.0],
-                      begin: AlignmentDirectional(0.0, 1.0),
-                      end: AlignmentDirectional(0, -1.0),
-                    ),
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: FlutterFlowTheme.of(context).white,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Icon(
-                    FFIcons.kclarityTalkBubblesLine,
-                    color: FlutterFlowTheme.of(context).white,
-                    size: 24.0,
-                  ),
                 ),
               ),
             ),

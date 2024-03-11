@@ -1,9 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import 'missed_industry_widget.dart' show MissedIndustryWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -25,10 +27,12 @@ class MissedIndustryModel extends FlutterFlowModel<MissedIndustryWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     textControllerValidator = _textControllerValidator;
   }
 
+  @override
   void dispose() {
     textFieldFocusNode?.dispose();
     textController?.dispose();

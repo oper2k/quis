@@ -1,20 +1,18 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'init_page_model.dart';
 export 'init_page_model.dart';
 
 class InitPageWidget extends StatefulWidget {
-  const InitPageWidget({Key? key}) : super(key: key);
+  const InitPageWidget({super.key});
 
   @override
-  _InitPageWidgetState createState() => _InitPageWidgetState();
+  State<InitPageWidget> createState() => _InitPageWidgetState();
 }
 
 class _InitPageWidgetState extends State<InitPageWidget> {
@@ -27,13 +25,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
     super.initState();
     _model = createModel(context, () => InitPageModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().DayVideoOfDay =
-            functions.dateTimeToDate(getCurrentTimestamp);
-      });
-    });
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'InitPage'});
   }
 
   @override
@@ -45,107 +37,249 @@ class _InitPageWidgetState extends State<InitPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primary,
-        body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Spacer(),
-              Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(0.0),
-                  child: Image.asset(
-                    'assets/images/Logo_-_Quis_1.webp',
-                    width: 310.0,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              Spacer(),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('Signup');
-                    },
-                    text: 'Sign up',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 52.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).white,
-                      textStyle:
-                          FlutterFlowTheme.of(context).headlineLarge.override(
-                                fontFamily: 'Sofia Pro',
-                                color: FlutterFlowTheme.of(context).primary,
-                                useGoogleFonts: false,
-                              ),
-                      elevation: 0.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 0.0,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  Padding(
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        body: SafeArea(
+          top: true,
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(0.0, -0.8),
+                  child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 13.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed('Login');
-                      },
-                      text: 'Log in',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 52.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).headlineLarge.override(
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(0.0),
+                          child: Image.asset(
+                            'assets/images/Num1App.webp',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 30.0, 0.0, 0.0),
+                          child: Text(
+                            'Take control of your career',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .displayMedium
+                                .override(
                                   fontFamily: 'Sofia Pro',
-                                  color: FlutterFlowTheme.of(context).white,
+                                  fontSize: 26.0,
+                                  fontWeight: FontWeight.w500,
                                   useGoogleFonts: false,
                                 ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).white,
-                          width: 0.0,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 0.0, 0.0),
+                          child: Text(
+                            '85% of users say Quis helped them boost their confidence',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .override(
+                                  fontFamily: 'Sofia Pro',
+                                  useGoogleFonts: false,
+                                  lineHeight: 1.33,
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              Spacer(),
-            ],
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 1.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 10.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent('INIT_PAGE_PAGE_Email_ON_TAP');
+                            logFirebaseEvent('Email_navigate_to');
+
+                            context.pushNamed('AuthEmailPage');
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 48.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).accent2,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 10.0, 16.0, 10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.mail,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 24.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Continue with email',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent('INIT_PAGE_PAGE_Apple_ON_TAP');
+                            logFirebaseEvent('Apple_auth');
+                            GoRouter.of(context).prepareAuthEvent();
+                            final user =
+                                await authManager.signInWithApple(context);
+                            if (user == null) {
+                              return;
+                            }
+
+                            context.goNamedAuth('SplashPage', context.mounted);
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 48.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).black,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 10.0, 16.0, 10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      'assets/images/Apple.webp',
+                                      width: 20.0,
+                                      height: 20.0,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Continue with Apple',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Sofia Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent('INIT_PAGE_PAGE_Google_ON_TAP');
+                            logFirebaseEvent('Google_auth');
+                            GoRouter.of(context).prepareAuthEvent();
+                            final user =
+                                await authManager.signInWithGoogle(context);
+                            if (user == null) {
+                              return;
+                            }
+
+                            context.goNamedAuth('SplashPage', context.mounted);
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 48.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).black,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 10.0, 16.0, 10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      'assets/images/_Google.webp',
+                                      width: 20.0,
+                                      height: 20.0,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Continue with Google',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Sofia Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ].divide(SizedBox(height: 8.0)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

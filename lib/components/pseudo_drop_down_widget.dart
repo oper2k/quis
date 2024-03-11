@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -10,16 +9,16 @@ export 'pseudo_drop_down_model.dart';
 
 class PseudoDropDownWidget extends StatefulWidget {
   const PseudoDropDownWidget({
-    Key? key,
+    super.key,
     required this.defText,
     this.text,
-  }) : super(key: key);
+  });
 
   final String? defText;
   final String? text;
 
   @override
-  _PseudoDropDownWidgetState createState() => _PseudoDropDownWidgetState();
+  State<PseudoDropDownWidget> createState() => _PseudoDropDownWidgetState();
 }
 
 class _PseudoDropDownWidgetState extends State<PseudoDropDownWidget> {
@@ -46,8 +45,6 @@ class _PseudoDropDownWidgetState extends State<PseudoDropDownWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,

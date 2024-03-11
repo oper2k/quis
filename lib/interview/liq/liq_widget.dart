@@ -1,13 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/like_profile_avatar_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/interview/match_dialog/match_dialog_widget.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -16,25 +18,101 @@ export 'liq_model.dart';
 
 class LiqWidget extends StatefulWidget {
   const LiqWidget({
-    Key? key,
+    super.key,
     required this.userItem,
-  }) : super(key: key);
+    required this.roomDoc,
+  });
 
   final DocumentReference? userItem;
+  final ConferenceRoomRecord? roomDoc;
 
   @override
-  _LiqWidgetState createState() => _LiqWidgetState();
+  State<LiqWidget> createState() => _LiqWidgetState();
 }
 
-class _LiqWidgetState extends State<LiqWidget> {
+class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
   late LiqModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'containerOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 500.ms,
+          begin: Offset(0.0, 200.0),
+          end: Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'likeProfileAvatarOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ShimmerEffect(
+          curve: Curves.easeInOut,
+          delay: 700.ms,
+          duration: 800.ms,
+          color: Color(0x80FFFFFF),
+          angle: 0.524,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => LiqModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'LIQ'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('LIQ_PAGE_LIQ_ON_INIT_STATE');
+      logFirebaseEvent('LIQ_backend_call');
+
+      await currentUserReference!.update({
+        ...mapToFirestore(
+          {
+            'karma': FieldValue.increment(0.5),
+          },
+        ),
+      });
+      if (((currentUserDocument?.likedUsers?.toList() ?? [])
+              .where((e) => e.refUser == widget.userItem)
+              .toList()
+              .isNotEmpty) ||
+          (currentUserDocument?.dislikedUsers?.toList() ?? [])
+              .contains(widget.userItem)) {
+        logFirebaseEvent('LIQ_navigate_to');
+
+        context.pushNamed(
+          'InterviewFeedback',
+          queryParameters: {
+            'userRef': serializeParam(
+              widget.userItem,
+              ParamType.DocumentReference,
+            ),
+            'roomDoc': serializeParam(
+              widget.roomDoc,
+              ParamType.Document,
+            ),
+          }.withoutNulls,
+          extra: <String, dynamic>{
+            'roomDoc': widget.roomDoc,
+          },
+        );
+      }
+    });
   }
 
   @override
@@ -46,17 +124,6 @@ class _LiqWidgetState extends State<LiqWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -72,32 +139,42 @@ class _LiqWidgetState extends State<LiqWidget> {
                     !UsersRecordDocumentEquality().equals(
                         userRefItemUsersRecord,
                         _model.userRefItemPreviousSnapshot)) {
-                  if (userRefItemUsersRecord.likedUsers
-                      .contains(currentUserReference)) {
-                    await showAlignedDialog(
-                      context: context,
-                      isGlobal: true,
-                      avoidOverflow: false,
-                      targetAnchor: AlignmentDirectional(0.0, 0.0)
-                          .resolve(Directionality.of(context)),
-                      followerAnchor: AlignmentDirectional(0.0, 0.0)
-                          .resolve(Directionality.of(context)),
-                      builder: (dialogContext) {
-                        return Material(
-                          color: Colors.transparent,
-                          child: WebViewAware(
+                  logFirebaseEvent('LIQ_PAGE_userRefItem_ON_DATA_CHANGE');
+                  if (_model.checker) {
+                    if (userRefItemUsersRecord.likedUsers
+                        .where((e) => e.refUser == currentUserReference)
+                        .toList()
+                        .isNotEmpty) {
+                      logFirebaseEvent('userRefItem_alert_dialog');
+                      await showDialog(
+                        context: context,
+                        builder: (dialogContext) {
+                          return Dialog(
+                            elevation: 0,
+                            insetPadding: EdgeInsets.zero,
+                            backgroundColor: Colors.transparent,
+                            alignment: AlignmentDirectional(0.0, 0.0)
+                                .resolve(Directionality.of(context)),
+                            child: WebViewAware(
                               child: GestureDetector(
-                            onTap: () => _model.unfocusNode.canRequestFocus
-                                ? FocusScope.of(context)
-                                    .requestFocus(_model.unfocusNode)
-                                : FocusScope.of(context).unfocus(),
-                            child: MatchDialogWidget(
-                              userItem: userRefItemUsersRecord,
+                                onTap: () => _model.unfocusNode.canRequestFocus
+                                    ? FocusScope.of(context)
+                                        .requestFocus(_model.unfocusNode)
+                                    : FocusScope.of(context).unfocus(),
+                                child: MatchDialogWidget(
+                                  userItem: userRefItemUsersRecord,
+                                ),
+                              ),
                             ),
-                          )),
-                        );
-                      },
-                    ).then((value) => setState(() {}));
+                          );
+                        },
+                      ).then((value) => setState(() {}));
+
+                      logFirebaseEvent('userRefItem_update_page_state');
+                      setState(() {
+                        _model.checker = false;
+                      });
+                    }
                   }
 
                   setState(() {});
@@ -128,16 +205,45 @@ class _LiqWidgetState extends State<LiqWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(1.00, -1.00),
-                        child: Container(
-                          decoration: BoxDecoration(),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 0.0, 10.0),
-                            child: Icon(
-                              FFIcons.kxmark,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24.0,
+                        alignment: AlignmentDirectional(1.0, -1.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'LIQ_PAGE_Container_9ritmqrp_ON_TAP');
+                            logFirebaseEvent('Container_navigate_to');
+
+                            context.goNamed(
+                              'InterviewFeedback',
+                              queryParameters: {
+                                'userRef': serializeParam(
+                                  widget.userItem,
+                                  ParamType.DocumentReference,
+                                ),
+                                'roomDoc': serializeParam(
+                                  widget.roomDoc,
+                                  ParamType.Document,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'roomDoc': widget.roomDoc,
+                              },
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 10.0, 0.0, 10.0),
+                              child: Icon(
+                                FFIcons.kxmark,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
                             ),
                           ),
                         ),
@@ -162,17 +268,16 @@ class _LiqWidgetState extends State<LiqWidget> {
                         height: MediaQuery.sizeOf(context).height * 0.5,
                         child: Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.network(
-                                userRefItemUsersRecord.photoUrl,
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
+                            wrapWithModel(
+                              model: _model.likeProfileAvatarModel,
+                              updateCallback: () => setState(() {}),
+                              child: LikeProfileAvatarWidget(
+                                avatar: userRefItemUsersRecord.photoUrl,
                               ),
-                            ),
+                            ).animateOnPageLoad(animationsMap[
+                                'likeProfileAvatarOnPageLoadAnimation']!),
                             Align(
-                              alignment: AlignmentDirectional(-1.00, 1.00),
+                              alignment: AlignmentDirectional(-1.0, 1.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     13.0, 0.0, 0.0, 30.0),
@@ -262,23 +367,51 @@ class _LiqWidgetState extends State<LiqWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              await widget.userItem!.update({
-                                ...mapToFirestore(
-                                  {
-                                    'disliked_by': FieldValue.arrayUnion(
-                                        [currentUserReference]),
-                                  },
-                                ),
-                              });
+                              logFirebaseEvent('LIQ_PAGE_dislike_ON_TAP');
+                              final firestoreBatch =
+                                  FirebaseFirestore.instance.batch();
+                              try {
+                                logFirebaseEvent('dislike_backend_call');
 
-                              await currentUserReference!.update({
-                                ...mapToFirestore(
-                                  {
-                                    'disliked_users': FieldValue.arrayUnion(
-                                        [widget.userItem]),
+                                firestoreBatch.update(widget.userItem!, {
+                                  ...mapToFirestore(
+                                    {
+                                      'disliked_by': FieldValue.arrayUnion(
+                                          [currentUserReference]),
+                                    },
+                                  ),
+                                });
+                                logFirebaseEvent('dislike_backend_call');
+
+                                firestoreBatch.update(currentUserReference!, {
+                                  ...mapToFirestore(
+                                    {
+                                      'disliked_users': FieldValue.arrayUnion(
+                                          [widget.userItem]),
+                                    },
+                                  ),
+                                });
+                                logFirebaseEvent('dislike_navigate_to');
+
+                                context.goNamed(
+                                  'InterviewFeedback',
+                                  queryParameters: {
+                                    'userRef': serializeParam(
+                                      widget.userItem,
+                                      ParamType.DocumentReference,
+                                    ),
+                                    'roomDoc': serializeParam(
+                                      widget.roomDoc,
+                                      ParamType.Document,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    'roomDoc': widget.roomDoc,
                                   },
-                                ),
-                              });
+                                );
+                              } finally {
+                                await firestoreBatch.commit();
+                              }
                             },
                             child: Container(
                               width: 70.0,
@@ -302,23 +435,63 @@ class _LiqWidgetState extends State<LiqWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              await widget.userItem!.update({
-                                ...mapToFirestore(
-                                  {
-                                    'liked_by': FieldValue.arrayUnion(
-                                        [currentUserReference]),
-                                  },
-                                ),
-                              });
+                              logFirebaseEvent('LIQ_PAGE_like_ON_TAP');
+                              final firestoreBatch =
+                                  FirebaseFirestore.instance.batch();
+                              try {
+                                logFirebaseEvent('like_backend_call');
 
-                              await currentUserReference!.update({
-                                ...mapToFirestore(
-                                  {
-                                    'liked_users': FieldValue.arrayUnion(
-                                        [widget.userItem]),
+                                firestoreBatch.update(widget.userItem!, {
+                                  ...mapToFirestore(
+                                    {
+                                      'liked_by': FieldValue.arrayUnion(
+                                          [currentUserReference]),
+                                    },
+                                  ),
+                                });
+                                logFirebaseEvent('like_backend_call');
+
+                                firestoreBatch.update(currentUserReference!, {
+                                  ...mapToFirestore(
+                                    {
+                                      'liked_users': FieldValue.arrayUnion([
+                                        getLikedUserItemFirestoreData(
+                                          createLikedUserItemStruct(
+                                            refUser: widget.userItem,
+                                            date: widget.roomDoc?.date,
+                                            clearUnsetFields: false,
+                                          ),
+                                          true,
+                                        )
+                                      ]),
+                                    },
+                                  ),
+                                });
+                                logFirebaseEvent('like_navigate_to');
+
+                                context.goNamed(
+                                  'InterviewFeedback',
+                                  queryParameters: {
+                                    'userRef': serializeParam(
+                                      widget.userItem,
+                                      ParamType.DocumentReference,
+                                    ),
+                                    'roomDoc': serializeParam(
+                                      widget.roomDoc,
+                                      ParamType.Document,
+                                    ),
+                                    'isLike': serializeParam(
+                                      true,
+                                      ParamType.bool,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    'roomDoc': widget.roomDoc,
                                   },
-                                ),
-                              });
+                                );
+                              } finally {
+                                await firestoreBatch.commit();
+                              }
                             },
                             child: Container(
                               width: 70.0,
@@ -344,7 +517,8 @@ class _LiqWidgetState extends State<LiqWidget> {
                         .addToEnd(SizedBox(height: 40.0)),
                   ),
                 ),
-              );
+              ).animateOnPageLoad(
+                  animationsMap['containerOnPageLoadAnimation']!);
             },
           ),
         ),

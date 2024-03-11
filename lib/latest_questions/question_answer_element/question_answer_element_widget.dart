@@ -2,17 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'question_answer_element_model.dart';
 export 'question_answer_element_model.dart';
 
 class QuestionAnswerElementWidget extends StatefulWidget {
-  const QuestionAnswerElementWidget({Key? key}) : super(key: key);
+  const QuestionAnswerElementWidget({super.key});
 
   @override
-  _QuestionAnswerElementWidgetState createState() =>
+  State<QuestionAnswerElementWidget> createState() =>
       _QuestionAnswerElementWidgetState();
 }
 
@@ -47,11 +46,9 @@ class _QuestionAnswerElementWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Form(
       key: _model.formKey,
-      autovalidateMode: AutovalidateMode.always,
+      autovalidateMode: AutovalidateMode.disabled,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,13 +67,17 @@ class _QuestionAnswerElementWidgetState
               '_model.questionFieldController',
               Duration(milliseconds: 2000),
               () async {
+                logFirebaseEvent('QUESTION_ANSWER_ELEMENT_QuestionField_ON');
+                logFirebaseEvent('QuestionField_update_component_state');
                 setState(() {
                   _model.questionState = _model.questionFieldController.text;
                 });
+                logFirebaseEvent('QuestionField_validate_form');
                 if (_model.formKey.currentState == null ||
                     !_model.formKey.currentState!.validate()) {
                   return;
                 }
+                logFirebaseEvent('QuestionField_update_component_state');
                 setState(() {
                   _model.isValid = false;
                 });
@@ -121,8 +122,7 @@ class _QuestionAnswerElementWidgetState
               ),
               filled: true,
               fillColor: FlutterFlowTheme.of(context).white,
-              contentPadding:
-                  EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+              contentPadding: EdgeInsets.all(16.0),
             ),
             style: FlutterFlowTheme.of(context).headlineSmall,
             maxLines: null,
@@ -147,13 +147,17 @@ class _QuestionAnswerElementWidgetState
                 '_model.answerFieldController',
                 Duration(milliseconds: 2000),
                 () async {
+                  logFirebaseEvent('QUESTION_ANSWER_ELEMENT_AnswerField_ON_T');
+                  logFirebaseEvent('AnswerField_update_component_state');
                   setState(() {
                     _model.answerState = _model.answerFieldController.text;
                   });
+                  logFirebaseEvent('AnswerField_validate_form');
                   if (_model.formKey.currentState == null ||
                       !_model.formKey.currentState!.validate()) {
                     return;
                   }
+                  logFirebaseEvent('AnswerField_update_component_state');
                   setState(() {
                     _model.isValid = true;
                   });
@@ -198,8 +202,7 @@ class _QuestionAnswerElementWidgetState
                 ),
                 filled: true,
                 fillColor: FlutterFlowTheme.of(context).white,
-                contentPadding:
-                    EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                contentPadding: EdgeInsets.all(16.0),
               ),
               style: FlutterFlowTheme.of(context).headlineSmall,
               validator:

@@ -1,10 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -14,14 +15,14 @@ export 'send_feedback_model.dart';
 
 class SendFeedbackWidget extends StatefulWidget {
   const SendFeedbackWidget({
-    Key? key,
+    super.key,
     required this.videoItem,
-  }) : super(key: key);
+  });
 
   final CourseVideoRecord? videoItem;
 
   @override
-  _SendFeedbackWidgetState createState() => _SendFeedbackWidgetState();
+  State<SendFeedbackWidget> createState() => _SendFeedbackWidgetState();
 }
 
 class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
@@ -36,6 +37,8 @@ class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
     super.initState();
     _model = createModel(context, () => SendFeedbackModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'SendFeedback'});
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -61,17 +64,6 @@ class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -92,13 +84,15 @@ class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('SEND_FEEDBACK_Container_fvfsp2an_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -128,7 +122,7 @@ class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
                 ? MediaQuery.viewInsetsOf(context).bottom > 0
                 : _isKeyboardVisible))
               Align(
-                alignment: AlignmentDirectional(0.00, 1.00),
+                alignment: AlignmentDirectional(0.0, 1.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Column(
@@ -138,8 +132,57 @@ class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'SEND_FEEDBACK_SEND_FEEDBACK_BTN_ON_TAP');
+                            logFirebaseEvent('Button_backend_call');
+                            _model.apiResultc0d =
+                                await BrevoGroup.sendAnEmailCall.call(
+                              userEmail: FFAppConstants.infoEmail,
+                              templateId: 1,
+                              paramUsername:
+                                  '${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}',
+                              paramComment: _model.textController.text,
+                              paramEmail: currentUserEmail,
+                            );
+                            if ((_model.apiResultc0d?.succeeded ?? true)) {
+                              logFirebaseEvent('Button_show_snack_bar');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Thank you',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                ),
+                              );
+                            } else {
+                              logFirebaseEvent('Button_show_snack_bar');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Internal problem. Please try later',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                ),
+                              );
+                            }
+
+                            logFirebaseEvent('Button_navigate_back');
+                            context.safePop();
+
+                            setState(() {});
                           },
                           text: 'Send feedback',
                           options: FFButtonOptions(
@@ -182,7 +225,7 @@ class _SendFeedbackWidgetState extends State<SendFeedbackWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Lottie.asset(
                         'assets/lottie_animations/animation_lo7x2gpx.json',
                         width: 220.0,

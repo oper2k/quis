@@ -1,9 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/back_button_widget.dart';
 import '/components/course_button_widget.dart';
-import '/components/subscription_required_dialog_widget.dart';
 import '/components/video_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,28 +11,25 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'course_model.dart';
 export 'course_model.dart';
 
 class CourseWidget extends StatefulWidget {
   const CourseWidget({
-    Key? key,
+    super.key,
     required this.courseItem,
-  }) : super(key: key);
+  });
 
   final CourseRecord? courseItem;
 
   @override
-  _CourseWidgetState createState() => _CourseWidgetState();
+  State<CourseWidget> createState() => _CourseWidgetState();
 }
 
 class _CourseWidgetState extends State<CourseWidget> {
@@ -45,6 +41,8 @@ class _CourseWidgetState extends State<CourseWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CourseModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Course'});
   }
 
   @override
@@ -56,15 +54,6 @@ class _CourseWidgetState extends State<CourseWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -74,6 +63,51 @@ class _CourseWidgetState extends State<CourseWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  logFirebaseEvent('COURSE_PAGE_Container_49s67uio_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
+                  context.safePop();
+                },
+                child: Container(
+                  width: 40.0,
+                  height: 40.0,
+                  decoration: BoxDecoration(),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  child: Icon(
+                    FFIcons.karrowBack,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 30.0,
+                  ),
+                ),
+              ),
+              Text(
+                'Expert Video Answers',
+                style: FlutterFlowTheme.of(context).headlineLarge,
+              ),
+              Container(
+                width: 40.0,
+                height: 40.0,
+                decoration: BoxDecoration(),
+              ),
+            ],
+          ),
+          actions: [],
+          centerTitle: false,
+          toolbarHeight: 40.0,
+          elevation: 0.0,
+        ),
         body: StreamBuilder<List<CourseVideoRecord>>(
           stream: queryCourseVideoRecord(
             queryBuilder: (courseVideoRecord) => courseVideoRecord
@@ -146,7 +180,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                             children: [
                               Container(
                                 width: double.infinity,
-                                height: 250.0,
+                                height: MediaQuery.sizeOf(context).width / 1.72,
                                 child: Stack(
                                   children: [
                                     Container(
@@ -202,7 +236,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                     ))
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.20),
+                                            AlignmentDirectional(0.0, 0.2),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -257,24 +291,44 @@ class _CourseWidgetState extends State<CourseWidget> {
                                           ),
                                         ),
                                       ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 50.0, 0.0, 0.0),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.safePop();
-                                        },
-                                        child: wrapWithModel(
-                                          model: _model.backButtonModel,
-                                          updateCallback: () => setState(() {}),
-                                          child: BackButtonWidget(),
+                                    if (isAndroid)
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(1.0, 1.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 6.0, 6.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'COURSE_PAGE_Container_pect157s_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Container_launch_u_r_l');
+                                              await launchURL(widget.courseItem!
+                                                  .previewVimeoVideoUrl);
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(10.0),
+                                                child: Icon(
+                                                  FFIcons
+                                                      .kmaterialSymbolsLightFullscreen,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 24.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -387,56 +441,212 @@ class _CourseWidgetState extends State<CourseWidget> {
                                             ],
                                           ),
                                         ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed('Pricing');
-                                          },
-                                          child: Container(
-                                            width: 80.0,
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  FlutterFlowTheme.of(context)
-                                                      .gradient2,
-                                                  FlutterFlowTheme.of(context)
-                                                      .aquaBreeze
-                                                ],
-                                                stops: [0.0, 1.0],
-                                                begin: AlignmentDirectional(
-                                                    0.0, 1.0),
-                                                end: AlignmentDirectional(
-                                                    0, -1.0),
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                            ),
-                                            alignment: AlignmentDirectional(
-                                                0.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 7.0, 0.0, 7.0),
-                                              child: Text(
-                                                'Upgrade',
-                                                textAlign: TextAlign.center,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyLarge
-                                                    .override(
-                                                      fontFamily: 'Sofia Pro',
-                                                      color:
+                                        Builder(
+                                          builder: (context) {
+                                            if (widget.courseItem?.reference ==
+                                                currentUserDocument
+                                                    ?.courseProgress
+                                                    ?.refCourse) {
+                                              return Visibility(
+                                                visible: !revenue_cat
+                                                    .activeEntitlementIds
+                                                    .contains(FFAppState()
+                                                        .entitlementID),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'COURSE_PAGE_Container_zhks4ukg_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Container_navigate_to');
+
+                                                    context.pushNamed(
+                                                      'Pricing',
+                                                      queryParameters: {
+                                                        'offers':
+                                                            serializeParam(
+                                                          PaywallPrice.standard,
+                                                          ParamType.Enum,
+                                                        ),
+                                                      }.withoutNulls,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    width: 149.0,
+                                                    height: 50.0,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .white,
-                                                      useGoogleFonts: false,
-                                                      lineHeight: 1.16,
+                                                              .gradient2,
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .aquaBreeze
+                                                        ],
+                                                        stops: [0.0, 1.0],
+                                                        begin:
+                                                            AlignmentDirectional(
+                                                                0.0, 1.0),
+                                                        end:
+                                                            AlignmentDirectional(
+                                                                0, -1.0),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
                                                     ),
-                                              ),
-                                            ),
-                                          ),
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  7.0,
+                                                                  0.0,
+                                                                  7.0),
+                                                      child: Text(
+                                                        'Continue ',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .titleMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Sofia Pro',
+                                                              useGoogleFonts:
+                                                                  false,
+                                                              lineHeight: 1.16,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            } else {
+                                              return Visibility(
+                                                visible: !revenue_cat
+                                                    .activeEntitlementIds
+                                                    .contains(FFAppState()
+                                                        .entitlementID),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'COURSE_PAGE_Container_mhmj5gtc_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Container_backend_call');
+
+                                                    await currentUserReference!
+                                                        .update(
+                                                            createUsersRecordData(
+                                                      courseProgress:
+                                                          createCourseProgressStruct(
+                                                        refCourse: widget
+                                                            .courseItem
+                                                            ?.reference,
+                                                        fieldValues: {
+                                                          'ref_videos':
+                                                              FieldValue
+                                                                  .delete(),
+                                                        },
+                                                        clearUnsetFields: false,
+                                                      ),
+                                                    ));
+                                                    logFirebaseEvent(
+                                                        'Container_navigate_to');
+
+                                                    context.pushNamed(
+                                                      'Video',
+                                                      queryParameters: {
+                                                        'videoItem':
+                                                            serializeParam(
+                                                          lessonListCourseVideoRecordList
+                                                              .first,
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'videoItem':
+                                                            lessonListCourseVideoRecordList
+                                                                .first,
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    width: 149.0,
+                                                    height: 50.0,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .gradient2,
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .aquaBreeze
+                                                        ],
+                                                        stops: [0.0, 1.0],
+                                                        begin:
+                                                            AlignmentDirectional(
+                                                                0.0, 1.0),
+                                                        end:
+                                                            AlignmentDirectional(
+                                                                0, -1.0),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                    ),
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  7.0,
+                                                                  0.0,
+                                                                  7.0),
+                                                      child: Text(
+                                                        'Enroll',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .titleMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Sofia Pro',
+                                                              useGoogleFonts:
+                                                                  false,
+                                                              lineHeight: 1.16,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
                                         ),
                                       ],
                                     ),
@@ -529,6 +739,10 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'COURSE_PAGE_Container_u9p59p6v_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'courseButton_update_page_state');
                                                 setState(() {
                                                   _model.activeButton =
                                                       'lessons';
@@ -556,6 +770,10 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'COURSE_PAGE_Container_6bugh5ru_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'courseButton_update_page_state');
                                                 setState(() {
                                                   _model.activeButton =
                                                       'masterclass';
@@ -583,6 +801,10 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'COURSE_PAGE_Container_hnhbwbci_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'courseButton_update_page_state');
                                                 setState(() {
                                                   _model.activeButton = 'faq';
                                                 });
@@ -637,6 +859,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'COURSE_PAGE_Container_7w6pc9f0_ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'videoElement_navigate_to');
+
                                                           context.pushNamed(
                                                             'Video',
                                                             queryParameters: {
@@ -695,103 +922,72 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                       final masterclassItem =
                                                           masterclass[
                                                               masterclassIndex];
-                                                      return Builder(
-                                                        builder: (context) =>
-                                                            InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            if (revenue_cat
-                                                                .activeEntitlementIds
-                                                                .contains(
-                                                                    FFAppState()
-                                                                        .entitlementID)) {
-                                                              context.pushNamed(
-                                                                'VideoVimeo',
-                                                                queryParameters:
-                                                                    {
-                                                                  'videoVimeoURL':
-                                                                      serializeParam(
-                                                                    masterclassItem
-                                                                        .vimeoVideoUrl,
-                                                                    ParamType
-                                                                        .String,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                              );
-                                                            } else {
-                                                              await showAlignedDialog(
-                                                                context:
-                                                                    context,
-                                                                isGlobal: true,
-                                                                avoidOverflow:
-                                                                    false,
-                                                                targetAnchor:
-                                                                    AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                followerAnchor:
-                                                                    AlignmentDirectional(
-                                                                            0.0,
-                                                                            0.0)
-                                                                        .resolve(
-                                                                            Directionality.of(context)),
-                                                                builder:
-                                                                    (dialogContext) {
-                                                                  return Material(
-                                                                    color: Colors
-                                                                        .transparent,
-                                                                    child: WebViewAware(
-                                                                        child: GestureDetector(
-                                                                      onTap: () => _model
-                                                                              .unfocusNode
-                                                                              .canRequestFocus
-                                                                          ? FocusScope.of(context).requestFocus(_model
-                                                                              .unfocusNode)
-                                                                          : FocusScope.of(context)
-                                                                              .unfocus(),
-                                                                      child:
-                                                                          SubscriptionRequiredDialogWidget(
-                                                                        text:
-                                                                            'To watch masterclass video, please subscribe',
-                                                                        action:
-                                                                            () async {},
-                                                                      ),
-                                                                    )),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  setState(
-                                                                      () {}));
-                                                            }
-                                                          },
-                                                          child: wrapWithModel(
-                                                            model: _model
-                                                                .videoElementModels2
-                                                                .getModel(
-                                                              masterclassIndex
-                                                                  .toString(),
-                                                              masterclassIndex,
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'COURSE_PAGE_Container_hi2rspr0_ON_TAP');
+                                                          if (revenue_cat
+                                                              .activeEntitlementIds
+                                                              .contains(FFAppState()
+                                                                  .entitlementID)) {
+                                                            logFirebaseEvent(
+                                                                'videoElement_navigate_to');
+
+                                                            context.pushNamed(
+                                                              'VideoVimeo',
+                                                              queryParameters: {
+                                                                'videoVimeoURL':
+                                                                    serializeParam(
+                                                                  masterclassItem
+                                                                      .vimeoVideoUrl,
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'videoElement_navigate_to');
+
+                                                            context.pushNamed(
+                                                              'Pricing',
+                                                              queryParameters: {
+                                                                'offers':
+                                                                    serializeParam(
+                                                                  PaywallPrice
+                                                                      .standard,
+                                                                  ParamType
+                                                                      .Enum,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
+                                                          }
+                                                        },
+                                                        child: wrapWithModel(
+                                                          model: _model
+                                                              .videoElementModels2
+                                                              .getModel(
+                                                            masterclassIndex
+                                                                .toString(),
+                                                            masterclassIndex,
+                                                          ),
+                                                          updateCallback: () =>
+                                                              setState(() {}),
+                                                          child:
+                                                              VideoElementWidget(
+                                                            key: Key(
+                                                              'Keyhi2_${masterclassIndex.toString()}',
                                                             ),
-                                                            updateCallback:
-                                                                () => setState(
-                                                                    () {}),
-                                                            child:
-                                                                VideoElementWidget(
-                                                              key: Key(
-                                                                'Keyhi2_${masterclassIndex.toString()}',
-                                                              ),
-                                                              videoItem:
-                                                                  masterclassItem,
-                                                            ),
+                                                            videoItem:
+                                                                masterclassItem,
                                                           ),
                                                         ),
                                                       );
@@ -828,11 +1024,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                 BoxDecoration(),
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16.0,
-                                                                          16.0,
-                                                                          16.0,
+                                                                  EdgeInsets
+                                                                      .all(
                                                                           16.0),
                                                               child: Container(
                                                                 width: double
@@ -841,6 +1034,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                     0x00000000),
                                                                 child:
                                                                     ExpandableNotifier(
+                                                                  initialExpanded:
+                                                                      false,
                                                                   child:
                                                                       ExpandablePanel(
                                                                     header:
@@ -918,23 +1113,59 @@ class _CourseWidgetState extends State<CourseWidget> {
                             ].addToEnd(SizedBox(height: 110.0)),
                           ),
                         ),
-                        Align(
-                          alignment: AlignmentDirectional(0.00, 1.00),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 40.0),
-                            child: Builder(
-                              builder: (context) {
-                                if (widget.courseItem?.reference ==
-                                    currentUserDocument
-                                        ?.courseProgress?.refCourse) {
-                                  return FFButtonWidget(
-                                    onPressed: () async {
-                                      context.pushNamed(
-                                        'Video',
-                                        queryParameters: {
-                                          'videoItem': serializeParam(
-                                            lessonListCourseVideoRecordList[
+                        if (responsiveVisibility(
+                          context: context,
+                          phone: false,
+                          tablet: false,
+                          tabletLandscape: false,
+                          desktop: false,
+                        ))
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 40.0),
+                              child: Builder(
+                                builder: (context) {
+                                  if (widget.courseItem?.reference ==
+                                      currentUserDocument
+                                          ?.courseProgress?.refCourse) {
+                                    return FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'COURSE_PAGE_CONTINUE_LEARNING_BTN_ON_TAP');
+                                        logFirebaseEvent('Button_navigate_to');
+
+                                        context.pushNamed(
+                                          'Video',
+                                          queryParameters: {
+                                            'videoItem': serializeParam(
+                                              lessonListCourseVideoRecordList[
+                                                  currentUserDocument!
+                                                              .courseProgress
+                                                              .refVideos
+                                                              .length >
+                                                          0
+                                                      ? ((int?
+                                                          lastCompletedLessonIndex) {
+                                                          return lastCompletedLessonIndex !=
+                                                                  null
+                                                              ? lastCompletedLessonIndex +
+                                                                  1
+                                                              : 0;
+                                                        }(functions.videoIndexInList(
+                                                          currentUserDocument
+                                                              ?.courseProgress
+                                                              ?.refVideos
+                                                              ?.last,
+                                                          lessonListCourseVideoRecordList
+                                                              .toList())))
+                                                      : 0],
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'videoItem': lessonListCourseVideoRecordList[
                                                 currentUserDocument!
                                                             .courseProgress
                                                             .refVideos
@@ -955,122 +1186,109 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                         lessonListCourseVideoRecordList
                                                             .toList())))
                                                     : 0],
-                                            ParamType.Document,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'videoItem': lessonListCourseVideoRecordList[
-                                              currentUserDocument!
-                                                          .courseProgress
-                                                          .refVideos
-                                                          .length >
-                                                      0
-                                                  ? ((int?
-                                                      lastCompletedLessonIndex) {
-                                                      return lastCompletedLessonIndex !=
-                                                              null
-                                                          ? lastCompletedLessonIndex +
-                                                              1
-                                                          : 0;
-                                                    }(functions.videoIndexInList(
-                                                      currentUserDocument
-                                                          ?.courseProgress
-                                                          ?.refVideos
-                                                          ?.last,
-                                                      lessonListCourseVideoRecordList
-                                                          .toList())))
-                                                  : 0],
-                                        },
-                                      );
-                                    },
-                                    text: 'Continue Learning',
-                                    options: FFButtonOptions(
-                                      width: double.infinity,
-                                      height: 52.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .override(
-                                            fontFamily: 'Sofia Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            useGoogleFonts: false,
-                                          ),
-                                      elevation: 0.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 0.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  );
-                                } else {
-                                  return FFButtonWidget(
-                                    onPressed: () async {
-                                      await currentUserReference!
-                                          .update(createUsersRecordData(
-                                        courseProgress:
-                                            createCourseProgressStruct(
-                                          refCourse:
-                                              widget.courseItem?.reference,
-                                          clearUnsetFields: false,
+                                          },
+                                        );
+                                      },
+                                      text: 'Continue Learning',
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 52.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily: 'Sofia Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              useGoogleFonts: false,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 0.0,
                                         ),
-                                      ));
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    );
+                                  } else {
+                                    return FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'COURSE_PAGE_START_LEARNING_BTN_ON_TAP');
+                                        logFirebaseEvent('Button_backend_call');
 
-                                      context.pushNamed(
-                                        'Video',
-                                        queryParameters: {
-                                          'videoItem': serializeParam(
-                                            lessonListCourseVideoRecordList
-                                                .first,
-                                            ParamType.Document,
+                                        await currentUserReference!
+                                            .update(createUsersRecordData(
+                                          courseProgress:
+                                              createCourseProgressStruct(
+                                            refCourse:
+                                                widget.courseItem?.reference,
+                                            fieldValues: {
+                                              'ref_videos': FieldValue.delete(),
+                                            },
+                                            clearUnsetFields: false,
                                           ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'videoItem':
+                                        ));
+                                        logFirebaseEvent('Button_navigate_to');
+
+                                        context.pushNamed(
+                                          'Video',
+                                          queryParameters: {
+                                            'videoItem': serializeParam(
                                               lessonListCourseVideoRecordList
                                                   .first,
-                                        },
-                                      );
-                                    },
-                                    text: 'Start Learning',
-                                    options: FFButtonOptions(
-                                      width: double.infinity,
-                                      height: 52.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .override(
-                                            fontFamily: 'Sofia Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            useGoogleFonts: false,
-                                          ),
-                                      elevation: 0.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 0.0,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'videoItem':
+                                                lessonListCourseVideoRecordList
+                                                    .first,
+                                          },
+                                        );
+                                      },
+                                      text: 'Start Learning',
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 52.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily: 'Sofia Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              useGoogleFonts: false,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 0.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  );
-                                }
-                              },
+                                    );
+                                  }
+                                },
+                              ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   );

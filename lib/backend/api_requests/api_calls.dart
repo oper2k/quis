@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import '../cloud_functions/cloud_functions.dart';
+import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -11,13 +13,11 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Brevo Group Code
 
 class BrevoGroup {
-  static String baseUrl = 'https://api.brevo.com/v3';
-  static Map<String, String> headers = {
-    'api-key': '[api-key]',
-  };
   static CreateAContactCall createAContactCall = CreateAContactCall();
   static UpdateAContactCall updateAContactCall = UpdateAContactCall();
-  static SendAWelcomeEmailCall sendAWelcomeEmailCall = SendAWelcomeEmailCall();
+  static SendAnEmailCall sendAnEmailCall = SendAnEmailCall();
+  static SendAScheduledEmailCall sendAScheduledEmailCall =
+      SendAScheduledEmailCall();
 }
 
 class CreateAContactCall {
@@ -26,29 +26,21 @@ class CreateAContactCall {
     String? lastname = '',
     String? email = '',
     String? apiKey =
-        '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',
+        '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',
   }) async {
-    final ffApiRequestBody = '''
-{
-  "email": "${email}",
-  "FIRSTNAME": "${firstname}",
-  "LASTNAME": "${lastname}"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Create a contact',
-      apiUrl: '${BrevoGroup.baseUrl}/contacts',
-      callType: ApiCallType.POST,
-      headers: {
-        'api-key': '${apiKey}',
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'CreateAContactCall',
+        'variables': {
+          'firstname': firstname,
+          'lastname': lastname,
+          'email': email,
+          'apiKey': apiKey,
+        },
       },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   dynamic brevoID(dynamic response) => getJsonField(
@@ -63,68 +55,115 @@ class UpdateAContactCall {
     String? lastname = '',
     String? identifier = '',
     String? apiKey =
-        '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',
+        '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',
   }) async {
-    final ffApiRequestBody = '''
-{
-  "attributes": {
-    "FIRSTNAME": "${firstname}",
-    "LASTNAME": "${lastname}"
-  }
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Update a contact',
-      apiUrl: '${BrevoGroup.baseUrl}/contacts/${identifier}',
-      callType: ApiCallType.PUT,
-      headers: {
-        'api-key': '${apiKey}',
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'UpdateAContactCall',
+        'variables': {
+          'firstname': firstname,
+          'lastname': lastname,
+          'identifier': identifier,
+          'apiKey': apiKey,
+        },
       },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
-class SendAWelcomeEmailCall {
+class SendAnEmailCall {
   Future<ApiCallResponse> call({
     String? userEmail = '',
-    int? emailID = 2,
+    int? templateId,
+    String? paramUsername = '',
+    String? paramComment = '',
+    String? paramEmail = '',
+    String? paramFeedback = '',
+    String? paramTopic = '',
+    String? paramServiceName = '',
+    String? paramUserCompany = '',
+    String? paramUserRole = '',
+    String? paramStage = '',
+    String? paramInterviewRound = '',
+    String? paramInterviewQuestion = '',
+    String? paramInterviewAnswer = '',
+    String? paramDate = '',
+    String? paramAboutInterview = '',
+    String? paramAboutInterviewPartner = '',
+    String? paramPartnerStructure = '',
+    String? paramPartnerImprove = '',
+    String? paramProductScale = '',
+    String? paramProductImprove = '',
+    String? paramProductFeedback = '',
+    String? paramAttachLink = '',
+    String? paramUserIndustry = '',
+    String? paramQuantity = '',
     String? apiKey =
-        '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',
+        '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',
   }) async {
-    final ffApiRequestBody = '''
-{
-  "sender": {
-    "name": "Quis",
-    "email": "info@quis-hq.com"
-  },
-  "to": [
-    {
-      "email": "${userEmail}"
-    }
-  ],
-  "templateId": ${emailID}
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Send a welcome email',
-      apiUrl: '${BrevoGroup.baseUrl}/smtp/email',
-      callType: ApiCallType.POST,
-      headers: {
-        'api-key': '${apiKey}',
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'SendAnEmailCall',
+        'variables': {
+          'userEmail': userEmail,
+          'templateId': templateId,
+          'paramUsername': paramUsername,
+          'paramComment': paramComment,
+          'paramEmail': paramEmail,
+          'paramFeedback': paramFeedback,
+          'paramTopic': paramTopic,
+          'paramServiceName': paramServiceName,
+          'paramUserCompany': paramUserCompany,
+          'paramUserRole': paramUserRole,
+          'paramStage': paramStage,
+          'paramInterviewRound': paramInterviewRound,
+          'paramInterviewQuestion': paramInterviewQuestion,
+          'paramInterviewAnswer': paramInterviewAnswer,
+          'paramDate': paramDate,
+          'paramAboutInterview': paramAboutInterview,
+          'paramAboutInterviewPartner': paramAboutInterviewPartner,
+          'paramPartnerStructure': paramPartnerStructure,
+          'paramPartnerImprove': paramPartnerImprove,
+          'paramProductScale': paramProductScale,
+          'paramProductImprove': paramProductImprove,
+          'paramProductFeedback': paramProductFeedback,
+          'paramAttachLink': paramAttachLink,
+          'paramUserIndustry': paramUserIndustry,
+          'paramQuantity': paramQuantity,
+          'apiKey': apiKey,
+        },
       },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class SendAScheduledEmailCall {
+  Future<ApiCallResponse> call({
+    String? time = '',
+    String? userEmail = '',
+    int? templateId,
+    String? paramFeedback = '',
+    String? apiKey =
+        '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',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'SendAScheduledEmailCall',
+        'variables': {
+          'time': time,
+          'userEmail': userEmail,
+          'templateId': templateId,
+          'paramFeedback': paramFeedback,
+          'apiKey': apiKey,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 

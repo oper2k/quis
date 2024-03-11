@@ -13,11 +13,10 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:aligned_dialog/aligned_dialog.dart';
+import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -26,10 +25,10 @@ import 'edit_profile_model.dart';
 export 'edit_profile_model.dart';
 
 class EditProfileWidget extends StatefulWidget {
-  const EditProfileWidget({Key? key}) : super(key: key);
+  const EditProfileWidget({super.key});
 
   @override
-  _EditProfileWidgetState createState() => _EditProfileWidgetState();
+  State<EditProfileWidget> createState() => _EditProfileWidgetState();
 }
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {
@@ -44,8 +43,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     super.initState();
     _model = createModel(context, () => EditProfileModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditProfile'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('EDIT_PROFILE_EditProfile_ON_INIT_STATE');
+      logFirebaseEvent('EditProfile_update_page_state');
       setState(() {
         _model.groupRef = currentUserDocument?.group;
         _model.roleRef = currentUserDocument?.careerProfile?.role;
@@ -92,15 +94,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -123,13 +116,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('EDIT_PROFILE_Container_5x9g51n1_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -235,7 +230,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             children: [
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                    0.0, 0.0),
                                                 child: AuthUserStreamWidget(
                                                   builder: (context) =>
                                                       wrapWithModel(
@@ -252,14 +247,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                           ? _model
                                                               .uploadedFileUrl
                                                           : currentUserPhoto,
-                                                      isPremium: false,
+                                                      isPremium: revenue_cat
+                                                          .activeEntitlementIds
+                                                          .contains(FFAppState()
+                                                              .entitlementID),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    1.00, 1.00),
+                                                    1.0, 1.0),
                                                 child: InkWell(
                                                   splashColor:
                                                       Colors.transparent,
@@ -270,6 +268,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'EDIT_PROFILE_Container_wtol2icx_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Container_upload_media_to_firebase');
                                                     final selectedMedia =
                                                         await selectMediaWithSourceBottomSheet(
                                                       context: context,
@@ -559,6 +561,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'EDIT_PROFILE_Container_01bupm16_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'pseudoDropDown_bottom_sheet');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -567,32 +573,35 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     context: context,
                                                     builder: (context) {
                                                       return WebViewAware(
-                                                          child:
-                                                              GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child:
-                                                              PickBottomSheetWidget(
-                                                            stringList:
-                                                                groupListGroupRecordList
-                                                                    .map((e) =>
-                                                                        e.name)
-                                                                    .toList(),
+                                                        child: GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                PickBottomSheetWidget(
+                                                              stringList:
+                                                                  groupListGroupRecordList
+                                                                      .map((e) =>
+                                                                          e.name)
+                                                                      .toList(),
+                                                              title:
+                                                                  'Choose from the industries below',
+                                                            ),
                                                           ),
                                                         ),
-                                                      ));
+                                                      );
                                                     },
                                                   ).then((value) =>
                                                       safeSetState(() =>
@@ -603,6 +612,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                           null &&
                                                       _model.groupOutput !=
                                                           '') {
+                                                    logFirebaseEvent(
+                                                        'pseudoDropDown_update_page_state');
                                                     setState(() {
                                                       _model.groupRef =
                                                           groupListGroupRecordList
@@ -706,6 +717,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                   Colors
                                                                       .transparent,
                                                               onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'EDIT_PROFILE_Container_7q8ndzyq_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'PickComponent_bottom_sheet');
                                                                 await showModalBottomSheet(
                                                                   isScrollControlled:
                                                                       true,
@@ -719,29 +734,25 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                   builder:
                                                                       (context) {
                                                                     return WebViewAware(
-                                                                        child:
-                                                                            GestureDetector(
-                                                                      onTap: () => _model
-                                                                              .unfocusNode
-                                                                              .canRequestFocus
-                                                                          ? FocusScope.of(context).requestFocus(_model
-                                                                              .unfocusNode)
-                                                                          : FocusScope.of(context)
-                                                                              .unfocus(),
                                                                       child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
+                                                                          GestureDetector(
+                                                                        onTap: () => _model.unfocusNode.canRequestFocus
+                                                                            ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                            : FocusScope.of(context).unfocus(),
                                                                         child:
-                                                                            PickBottomSheetWidget(
-                                                                          stringList: roleListRoleRecordList
-                                                                              .where((e) => e.group == _model.groupRef)
-                                                                              .toList()
-                                                                              .map((e) => e.name)
-                                                                              .toList(),
+                                                                            Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
+                                                                          child:
+                                                                              PickBottomSheetWidget(
+                                                                            stringList:
+                                                                                roleListRoleRecordList.where((e) => e.group == _model.groupRef).toList().map((e) => e.name).toList(),
+                                                                            title:
+                                                                                'Choose from the roles below',
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ));
+                                                                    );
                                                                   },
                                                                 ).then((value) =>
                                                                     safeSetState(() =>
@@ -752,6 +763,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                         null &&
                                                                     _model.roleOutput !=
                                                                         '') {
+                                                                  logFirebaseEvent(
+                                                                      'PickComponent_update_page_state');
                                                                   setState(() {
                                                                     _model.roleRef = roleListRoleRecordList
                                                                         .where((e) =>
@@ -838,6 +851,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                   Colors
                                                                       .transparent,
                                                               onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'EDIT_PROFILE_Container_y1qvmwga_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'PickComponent_bottom_sheet');
                                                                 await showModalBottomSheet(
                                                                   isScrollControlled:
                                                                       true,
@@ -851,27 +868,25 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                   builder:
                                                                       (context) {
                                                                     return WebViewAware(
-                                                                        child:
-                                                                            GestureDetector(
-                                                                      onTap: () => _model
-                                                                              .unfocusNode
-                                                                              .canRequestFocus
-                                                                          ? FocusScope.of(context).requestFocus(_model
-                                                                              .unfocusNode)
-                                                                          : FocusScope.of(context)
-                                                                              .unfocus(),
                                                                       child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
+                                                                          GestureDetector(
+                                                                        onTap: () => _model.unfocusNode.canRequestFocus
+                                                                            ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                            : FocusScope.of(context).unfocus(),
                                                                         child:
-                                                                            PickBottomSheetWidget(
-                                                                          stringList: containerGoalRoleRecordList
-                                                                              .map((e) => e.name)
-                                                                              .toList(),
+                                                                            Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
+                                                                          child:
+                                                                              PickBottomSheetWidget(
+                                                                            stringList:
+                                                                                containerGoalRoleRecordList.map((e) => e.name).toList(),
+                                                                            title:
+                                                                                'Choose from the roles below',
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ));
+                                                                    );
                                                                   },
                                                                 ).then((value) =>
                                                                     safeSetState(() =>
@@ -882,6 +897,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                         null &&
                                                                     _model.goalroleOutput !=
                                                                         '') {
+                                                                  logFirebaseEvent(
+                                                                      'PickComponent_update_page_state');
                                                                   setState(() {
                                                                     _model.goalRoleRef = containerGoalRoleRecordList
                                                                         .where((e) =>
@@ -969,6 +986,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                   Colors
                                                                       .transparent,
                                                               onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'EDIT_PROFILE_Container_hxuk2n79_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'PickComponent_bottom_sheet');
                                                                 await showModalBottomSheet(
                                                                   isScrollControlled:
                                                                       true,
@@ -982,26 +1003,25 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                   builder:
                                                                       (context) {
                                                                     return WebViewAware(
-                                                                        child:
-                                                                            GestureDetector(
-                                                                      onTap: () => _model
-                                                                              .unfocusNode
-                                                                              .canRequestFocus
-                                                                          ? FocusScope.of(context).requestFocus(_model
-                                                                              .unfocusNode)
-                                                                          : FocusScope.of(context)
-                                                                              .unfocus(),
                                                                       child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
+                                                                          GestureDetector(
+                                                                        onTap: () => _model.unfocusNode.canRequestFocus
+                                                                            ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                            : FocusScope.of(context).unfocus(),
                                                                         child:
-                                                                            PickBottomSheetWidget(
-                                                                          stringList:
-                                                                              functions.generateExpYears(20),
+                                                                            Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
+                                                                          child:
+                                                                              PickBottomSheetWidget(
+                                                                            stringList:
+                                                                                functions.generateExpYears(20),
+                                                                            title:
+                                                                                'Please pick a number',
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ));
+                                                                    );
                                                                   },
                                                                 ).then((value) =>
                                                                     safeSetState(() =>
@@ -1012,10 +1032,12 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                         null &&
                                                                     _model.expYearsOutput !=
                                                                         '') {
+                                                                  logFirebaseEvent(
+                                                                      'PickComponent_update_page_state');
                                                                   setState(() {
                                                                     _model.expYears =
                                                                         int.parse(
-                                                                            _model.expYearsOutput!);
+                                                                            (_model.expYearsOutput!));
                                                                   });
                                                                 }
 
@@ -1212,7 +1234,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0.00, 1.00),
+                                alignment: AlignmentDirectional(0.0, 1.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -1222,6 +1244,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             16.0, 0.0, 16.0, 10.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EDIT_PROFILE_PAGE_SAVE_BTN_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button_backend_call');
+
                                             await currentUserReference!
                                                 .update(createUsersRecordData(
                                               phoneNumber: _model
@@ -1243,6 +1270,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                               ),
                                             ));
                                             if (_model.roleRef == null) {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
+
                                               await currentUserReference!
                                                   .update(createUsersRecordData(
                                                 careerProfile:
@@ -1258,6 +1288,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             if (_model.uploadedFileUrl !=
                                                     null &&
                                                 _model.uploadedFileUrl != '') {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
+
                                               await currentUserReference!
                                                   .update(createUsersRecordData(
                                                 photoUrl:
@@ -1295,6 +1328,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     currentUserDocument!
                                                         .careerProfile
                                                         .hasExpYears())) {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
+
                                               await currentUserReference!
                                                   .update({
                                                 ...createUsersRecordData(
@@ -1308,42 +1344,41 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                   },
                                                 ),
                                               });
-                                              await showAlignedDialog(
+                                              logFirebaseEvent(
+                                                  'Button_alert_dialog');
+                                              await showDialog(
                                                 context: context,
-                                                isGlobal: true,
-                                                avoidOverflow: false,
-                                                targetAnchor:
-                                                    AlignmentDirectional(
-                                                            0.0, 0.0)
-                                                        .resolve(
-                                                            Directionality.of(
-                                                                context)),
-                                                followerAnchor:
-                                                    AlignmentDirectional(
-                                                            0.0, 0.0)
-                                                        .resolve(
-                                                            Directionality.of(
-                                                                context)),
                                                 builder: (dialogContext) {
-                                                  return Material(
-                                                    color: Colors.transparent,
+                                                  return Dialog(
+                                                    elevation: 0,
+                                                    insetPadding:
+                                                        EdgeInsets.zero,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                                0.0, 0.0)
+                                                            .resolve(
+                                                                Directionality.of(
+                                                                    context)),
                                                     child: WebViewAware(
-                                                        child: GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child:
-                                                          KarmaPlusDialogWidget(
-                                                        karmaPoints: 0.5,
+                                                      child: GestureDetector(
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
+                                                        child:
+                                                            KarmaPlusDialogWidget(
+                                                          karmaPoints: 0.5,
+                                                        ),
                                                       ),
-                                                    )),
+                                                    ),
                                                   );
                                                 },
                                               ).then(
@@ -1354,6 +1389,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                         ?.brevoId,
                                                     0) !=
                                                 null) {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
                                               await BrevoGroup
                                                   .updateAContactCall
                                                   .call(
@@ -1366,6 +1403,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 identifier: currentUserEmail,
                                               );
                                             } else {
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
                                               _model.apiResultsj66 =
                                                   await BrevoGroup
                                                       .createAContactCall
@@ -1381,6 +1420,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                               if ((_model.apiResultsj66
                                                       ?.succeeded ??
                                                   true)) {
+                                                logFirebaseEvent(
+                                                    'Button_backend_call');
+
                                                 await currentUserReference!
                                                     .update(
                                                         createUsersRecordData(
@@ -1394,6 +1436,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 ));
                                               }
                                             }
+
+                                            logFirebaseEvent(
+                                                'Button_navigate_to');
 
                                             context.goNamed('MyProfile');
 

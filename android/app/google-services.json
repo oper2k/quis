@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "263957136102-ar1132cemaqepgvec974pa7dfb5t6rvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appfyl.quis",
+            "certificate_hash": "e072a7aba7883f94cfeb2f54a70e8dd150bbee54"
+          }
+        },
+        {
           "client_id": "263957136102-rg1dqg00poldr5odcc82cmdb1ht7j9mv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -39,10 +47,11 @@
               "client_type": 3
             },
             {
-              "client_id": "263957136102-8rot7sa82aht7k0540r5rk9m3qjh5rt1.apps.googleusercontent.com",
+              "client_id": "263957136102-2s40ueh7nggke0d7mo4964drm9jl3aps.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.appfyl.quis"
+                "bundle_id": "com.appfyl.quis",
+                "app_store_id": "6470997709"
               }
             }
           ]

@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -118,11 +119,6 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get likedQuestions => _likedQuestions ?? const [];
   bool hasLikedQuestions() => _likedQuestions != null;
 
-  // "liked_users" field.
-  List<DocumentReference>? _likedUsers;
-  List<DocumentReference> get likedUsers => _likedUsers ?? const [];
-  bool hasLikedUsers() => _likedUsers != null;
-
   // "disliked_users" field.
   List<DocumentReference>? _dislikedUsers;
   List<DocumentReference> get dislikedUsers => _dislikedUsers ?? const [];
@@ -164,6 +160,45 @@ class UsersRecord extends FirestoreRecord {
   int get dailyPushId => _dailyPushId ?? 0;
   bool hasDailyPushId() => _dailyPushId != null;
 
+  // "date_for_daily" field.
+  DateTime? _dateForDaily;
+  DateTime? get dateForDaily => _dateForDaily;
+  bool hasDateForDaily() => _dateForDaily != null;
+
+  // "is_welcome_announcement_email_sent" field.
+  bool? _isWelcomeAnnouncementEmailSent;
+  bool get isWelcomeAnnouncementEmailSent =>
+      _isWelcomeAnnouncementEmailSent ?? false;
+  bool hasIsWelcomeAnnouncementEmailSent() =>
+      _isWelcomeAnnouncementEmailSent != null;
+
+  // "is_first_enter_information_shown" field.
+  bool? _isFirstEnterInformationShown;
+  bool get isFirstEnterInformationShown =>
+      _isFirstEnterInformationShown ?? false;
+  bool hasIsFirstEnterInformationShown() =>
+      _isFirstEnterInformationShown != null;
+
+  // "liked_users" field.
+  List<LikedUserItemStruct>? _likedUsers;
+  List<LikedUserItemStruct> get likedUsers => _likedUsers ?? const [];
+  bool hasLikedUsers() => _likedUsers != null;
+
+  // "is_onboarding_completed" field.
+  bool? _isOnboardingCompleted;
+  bool get isOnboardingCompleted => _isOnboardingCompleted ?? false;
+  bool hasIsOnboardingCompleted() => _isOnboardingCompleted != null;
+
+  // "is_3day_offer_shown" field.
+  bool? _is3dayOfferShown;
+  bool get is3dayOfferShown => _is3dayOfferShown ?? false;
+  bool hasIs3dayOfferShown() => _is3dayOfferShown != null;
+
+  // "is_7day_offer_shown" field.
+  bool? _is7dayOfferShown;
+  bool get is7dayOfferShown => _is7dayOfferShown ?? false;
+  bool hasIs7dayOfferShown() => _is7dayOfferShown != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
@@ -187,7 +222,6 @@ class UsersRecord extends FirestoreRecord {
     _courseProgress =
         CourseProgressStruct.maybeFromMap(snapshotData['course_progress']);
     _likedQuestions = getDataList(snapshotData['liked_questions']);
-    _likedUsers = getDataList(snapshotData['liked_users']);
     _dislikedUsers = getDataList(snapshotData['disliked_users']);
     _likedBy = getDataList(snapshotData['liked_by']);
     _dislikedBy = getDataList(snapshotData['disliked_by']);
@@ -196,6 +230,18 @@ class UsersRecord extends FirestoreRecord {
     _interviewSessions = castToType<int>(snapshotData['interview_sessions']);
     _brevoId = castToType<int>(snapshotData['brevo_id']);
     _dailyPushId = castToType<int>(snapshotData['daily_push_id']);
+    _dateForDaily = snapshotData['date_for_daily'] as DateTime?;
+    _isWelcomeAnnouncementEmailSent =
+        snapshotData['is_welcome_announcement_email_sent'] as bool?;
+    _isFirstEnterInformationShown =
+        snapshotData['is_first_enter_information_shown'] as bool?;
+    _likedUsers = getStructList(
+      snapshotData['liked_users'],
+      LikedUserItemStruct.fromMap,
+    );
+    _isOnboardingCompleted = snapshotData['is_onboarding_completed'] as bool?;
+    _is3dayOfferShown = snapshotData['is_3day_offer_shown'] as bool?;
+    _is7dayOfferShown = snapshotData['is_7day_offer_shown'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -254,6 +300,12 @@ Map<String, dynamic> createUsersRecordData({
   int? interviewSessions,
   int? brevoId,
   int? dailyPushId,
+  DateTime? dateForDaily,
+  bool? isWelcomeAnnouncementEmailSent,
+  bool? isFirstEnterInformationShown,
+  bool? isOnboardingCompleted,
+  bool? is3dayOfferShown,
+  bool? is7dayOfferShown,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -279,6 +331,12 @@ Map<String, dynamic> createUsersRecordData({
       'interview_sessions': interviewSessions,
       'brevo_id': brevoId,
       'daily_push_id': dailyPushId,
+      'date_for_daily': dateForDaily,
+      'is_welcome_announcement_email_sent': isWelcomeAnnouncementEmailSent,
+      'is_first_enter_information_shown': isFirstEnterInformationShown,
+      'is_onboarding_completed': isOnboardingCompleted,
+      'is_3day_offer_shown': is3dayOfferShown,
+      'is_7day_offer_shown': is7dayOfferShown,
     }.withoutNulls,
   );
 
@@ -317,7 +375,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isProfileCompleted == e2?.isProfileCompleted &&
         e1?.courseProgress == e2?.courseProgress &&
         listEquality.equals(e1?.likedQuestions, e2?.likedQuestions) &&
-        listEquality.equals(e1?.likedUsers, e2?.likedUsers) &&
         listEquality.equals(e1?.dislikedUsers, e2?.dislikedUsers) &&
         listEquality.equals(e1?.likedBy, e2?.likedBy) &&
         listEquality.equals(e1?.dislikedBy, e2?.dislikedBy) &&
@@ -325,7 +382,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.endorsement == e2?.endorsement &&
         e1?.interviewSessions == e2?.interviewSessions &&
         e1?.brevoId == e2?.brevoId &&
-        e1?.dailyPushId == e2?.dailyPushId;
+        e1?.dailyPushId == e2?.dailyPushId &&
+        e1?.dateForDaily == e2?.dateForDaily &&
+        e1?.isWelcomeAnnouncementEmailSent ==
+            e2?.isWelcomeAnnouncementEmailSent &&
+        e1?.isFirstEnterInformationShown == e2?.isFirstEnterInformationShown &&
+        listEquality.equals(e1?.likedUsers, e2?.likedUsers) &&
+        e1?.isOnboardingCompleted == e2?.isOnboardingCompleted &&
+        e1?.is3dayOfferShown == e2?.is3dayOfferShown &&
+        e1?.is7dayOfferShown == e2?.is7dayOfferShown;
   }
 
   @override
@@ -350,7 +415,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isProfileCompleted,
         e?.courseProgress,
         e?.likedQuestions,
-        e?.likedUsers,
         e?.dislikedUsers,
         e?.likedBy,
         e?.dislikedBy,
@@ -358,7 +422,14 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.endorsement,
         e?.interviewSessions,
         e?.brevoId,
-        e?.dailyPushId
+        e?.dailyPushId,
+        e?.dateForDaily,
+        e?.isWelcomeAnnouncementEmailSent,
+        e?.isFirstEnterInformationShown,
+        e?.likedUsers,
+        e?.isOnboardingCompleted,
+        e?.is3dayOfferShown,
+        e?.is7dayOfferShown
       ]);
 
   @override

@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'earn_karma_widget.dart' show EarnKarmaWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +38,7 @@ class EarnKarmaModel extends FlutterFlowModel<EarnKarmaWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     karmaListItemModel1 = createModel(context, () => KarmaListItemModel());
     karmaListItemModel2 = createModel(context, () => KarmaListItemModel());
@@ -54,6 +54,7 @@ class EarnKarmaModel extends FlutterFlowModel<EarnKarmaWidget> {
     karmaListItemModel12 = createModel(context, () => KarmaListItemModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     karmaListItemModel1.dispose();

@@ -1,17 +1,16 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'back_button_model.dart';
 export 'back_button_model.dart';
 
 class BackButtonWidget extends StatefulWidget {
-  const BackButtonWidget({Key? key}) : super(key: key);
+  const BackButtonWidget({super.key});
 
   @override
-  _BackButtonWidgetState createState() => _BackButtonWidgetState();
+  State<BackButtonWidget> createState() => _BackButtonWidgetState();
 }
 
 class _BackButtonWidgetState extends State<BackButtonWidget> {
@@ -38,8 +37,6 @@ class _BackButtonWidgetState extends State<BackButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: 40.0,
       height: 40.0,

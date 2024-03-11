@@ -1,17 +1,16 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'missed_industry_thankyou_model.dart';
 export 'missed_industry_thankyou_model.dart';
 
 class MissedIndustryThankyouWidget extends StatefulWidget {
-  const MissedIndustryThankyouWidget({Key? key}) : super(key: key);
+  const MissedIndustryThankyouWidget({super.key});
 
   @override
-  _MissedIndustryThankyouWidgetState createState() =>
+  State<MissedIndustryThankyouWidget> createState() =>
       _MissedIndustryThankyouWidgetState();
 }
 
@@ -40,10 +39,8 @@ class _MissedIndustryThankyouWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -61,7 +58,7 @@ class _MissedIndustryThankyouWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
@@ -69,7 +66,7 @@ class _MissedIndustryThankyouWidgetState
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(0.0),
                       child: Image.asset(
@@ -80,13 +77,16 @@ class _MissedIndustryThankyouWidgetState
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'MISSED_INDUSTRY_THANKYOU_Container_8fpsz');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -94,7 +94,7 @@ class _MissedIndustryThankyouWidgetState
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,

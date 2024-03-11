@@ -15,6 +15,9 @@ class FFIcons {
   static const String _icomoon9Family = 'Icomoon9';
   static const String _icomoon10Family = 'Icomoon10';
   static const String _icomoon11Family = 'Icomoon11';
+  static const String _icomoon12Family = 'Icomoon12';
+  static const String _icomoon13Family = 'Icomoon13';
+  static const String _icomoon14Family = 'Icomoon14';
 
   // icomoon
   static const IconData kslected = IconData(0xe903, fontFamily: _icomoonFamily);
@@ -127,4 +130,16 @@ class FFIcons {
   // icomoon11
   static const IconData ksystemUiconsShare2 =
       IconData(0xe900, fontFamily: _icomoon11Family);
+
+  // icomoon12
+
+  // icomoon13
+  static const IconData kdoc1 = IconData(0xe900, fontFamily: _icomoon13Family);
+  static const IconData kdoc2 = IconData(0xe901, fontFamily: _icomoon13Family);
+
+  // icomoon14
+  static const IconData kcupConverted =
+      IconData(0xe900, fontFamily: _icomoon14Family);
+  static const IconData kmaterialSymbolsLightFullscreen =
+      IconData(0xe901, fontFamily: _icomoon14Family);
 }

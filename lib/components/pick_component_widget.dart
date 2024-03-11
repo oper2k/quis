@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -11,18 +10,18 @@ export 'pick_component_model.dart';
 
 class PickComponentWidget extends StatefulWidget {
   const PickComponentWidget({
-    Key? key,
+    super.key,
     this.pickedItem,
     required this.isNotEmpty,
     required this.def,
-  }) : super(key: key);
+  });
 
   final String? pickedItem;
   final bool? isNotEmpty;
   final String? def;
 
   @override
-  _PickComponentWidgetState createState() => _PickComponentWidgetState();
+  State<PickComponentWidget> createState() => _PickComponentWidgetState();
 }
 
 class _PickComponentWidgetState extends State<PickComponentWidget> {
@@ -49,19 +48,20 @@ class _PickComponentWidgetState extends State<PickComponentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
+      constraints: BoxConstraints(
+        minHeight: 43.0,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         border: Border.all(
           color: FlutterFlowTheme.of(context).primary,
         ),
       ),
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+        padding: EdgeInsets.all(10.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

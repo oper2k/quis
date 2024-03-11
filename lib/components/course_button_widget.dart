@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'course_button_model.dart';
@@ -9,17 +8,16 @@ export 'course_button_model.dart';
 
 class CourseButtonWidget extends StatefulWidget {
   const CourseButtonWidget({
-    Key? key,
+    super.key,
     required this.text,
     bool? isActive,
-  })  : this.isActive = isActive ?? false,
-        super(key: key);
+  }) : this.isActive = isActive ?? false;
 
   final String? text;
   final bool isActive;
 
   @override
-  _CourseButtonWidgetState createState() => _CourseButtonWidgetState();
+  State<CourseButtonWidget> createState() => _CourseButtonWidgetState();
 }
 
 class _CourseButtonWidgetState extends State<CourseButtonWidget> {
@@ -46,18 +44,16 @@ class _CourseButtonWidgetState extends State<CourseButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       height: 39.0,
       decoration: BoxDecoration(
         color: widget.isActive
             ? FlutterFlowTheme.of(context).primary
-            : FlutterFlowTheme.of(context).white,
+            : FlutterFlowTheme.of(context).blueOcean,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Text(
         widget.text!,
         style: FlutterFlowTheme.of(context).headlineSmall.override(

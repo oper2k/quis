@@ -1,33 +1,53 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'reset_password_confirm_model.dart';
 export 'reset_password_confirm_model.dart';
 
 class ResetPasswordConfirmWidget extends StatefulWidget {
-  const ResetPasswordConfirmWidget({Key? key}) : super(key: key);
+  const ResetPasswordConfirmWidget({super.key});
 
   @override
-  _ResetPasswordConfirmWidgetState createState() =>
+  State<ResetPasswordConfirmWidget> createState() =>
       _ResetPasswordConfirmWidgetState();
 }
 
-class _ResetPasswordConfirmWidgetState
-    extends State<ResetPasswordConfirmWidget> {
+class _ResetPasswordConfirmWidgetState extends State<ResetPasswordConfirmWidget>
+    with TickerProviderStateMixin {
   late ResetPasswordConfirmModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 1000.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ResetPasswordConfirmModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ResetPasswordConfirm'});
   }
 
   @override
@@ -39,17 +59,6 @@ class _ResetPasswordConfirmWidgetState
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -70,13 +79,15 @@ class _ResetPasswordConfirmWidgetState
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('RESET_PASSWORD_CONFIRM_Container_7213d62');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -114,7 +125,7 @@ class _ResetPasswordConfirmWidgetState
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -124,7 +135,7 @@ class _ResetPasswordConfirmWidgetState
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -136,7 +147,7 @@ class _ResetPasswordConfirmWidgetState
               ),
               Spacer(),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                   child: InkWell(
@@ -145,16 +156,17 @@ class _ResetPasswordConfirmWidgetState
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent(
+                          'RESET_PASSWORD_CONFIRM_Container_mlvojoz');
+                      logFirebaseEvent('Container_auth');
                       await authManager.sendEmailVerification();
                     },
                     child: Container(
                       decoration: BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: RichText(
-                          textScaleFactor:
-                              MediaQuery.of(context).textScaleFactor,
+                          textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
                               TextSpan(
@@ -183,7 +195,7 @@ class _ResetPasswordConfirmWidgetState
                 ),
               ),
             ].addToEnd(SizedBox(height: 50.0)),
-          ),
+          ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation']!),
         ),
       ),
     );

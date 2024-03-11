@@ -5,14 +5,16 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/profile/delete_account_dialog/delete_account_dialog_widget.dart';
 import 'settings_widget.dart' show SettingsWidget;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
 class SettingsModel extends FlutterFlowModel<SettingsWidget> {
+  ///  Local state fields for this page.
+
+  bool isButtonPressed = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -27,12 +29,14 @@ class SettingsModel extends FlutterFlowModel<SettingsWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     menuItemModel1 = createModel(context, () => MenuItemModel());
     menuItemModel2 = createModel(context, () => MenuItemModel());
     menuItemModel3 = createModel(context, () => MenuItemModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     menuItemModel1.dispose();

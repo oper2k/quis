@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -45,10 +46,9 @@ class InterviewParticipantStruct extends FFFirebaseStruct {
         role: data['role'] as String?,
       );
 
-  static InterviewParticipantStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? InterviewParticipantStruct.fromMap(data)
-          : null;
+  static InterviewParticipantStruct? maybeFromMap(dynamic data) => data is Map
+      ? InterviewParticipantStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'user': _user,

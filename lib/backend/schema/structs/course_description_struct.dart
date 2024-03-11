@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -37,10 +38,9 @@ class CourseDescriptionStruct extends FFFirebaseStruct {
         included: getDataList(data['included']),
       );
 
-  static CourseDescriptionStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? CourseDescriptionStruct.fromMap(data)
-          : null;
+  static CourseDescriptionStruct? maybeFromMap(dynamic data) => data is Map
+      ? CourseDescriptionStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'text': _text,

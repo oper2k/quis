@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -37,8 +38,9 @@ class CourseProgressStruct extends FFFirebaseStruct {
         refVideos: getDataList(data['ref_videos']),
       );
 
-  static CourseProgressStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? CourseProgressStruct.fromMap(data) : null;
+  static CourseProgressStruct? maybeFromMap(dynamic data) => data is Map
+      ? CourseProgressStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'ref_course': _refCourse,

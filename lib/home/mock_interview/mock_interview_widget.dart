@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/pick_bottom_sheet_widget.dart';
@@ -5,9 +6,7 @@ import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/home/deducted_karma/deducted_karma_widget.dart';
 import '/actions/actions.dart' as action_blocks;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +19,10 @@ import 'mock_interview_model.dart';
 export 'mock_interview_model.dart';
 
 class MockInterviewWidget extends StatefulWidget {
-  const MockInterviewWidget({Key? key}) : super(key: key);
+  const MockInterviewWidget({super.key});
 
   @override
-  _MockInterviewWidgetState createState() => _MockInterviewWidgetState();
+  State<MockInterviewWidget> createState() => _MockInterviewWidgetState();
 }
 
 class _MockInterviewWidgetState extends State<MockInterviewWidget> {
@@ -36,6 +35,8 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
     super.initState();
     _model = createModel(context, () => MockInterviewModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'MockInterview'});
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -62,15 +63,6 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -93,13 +85,15 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('MOCK_INTERVIEW_Container_jodfw904_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -116,7 +110,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                 width: 40.0,
                 height: 40.0,
                 decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: AlignmentDirectional(-1.0, 0.0),
               ),
             ],
           ),
@@ -133,7 +127,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lnz09grs.json',
                     width: 220.0,
@@ -168,8 +162,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          10.0, 10.0, 10.0, 10.0),
+                      padding: EdgeInsets.all(10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -372,7 +365,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
@@ -396,6 +389,9 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent(
+                          'MOCK_INTERVIEW_Container_xk8zx0m2_ON_TAP');
+                      logFirebaseEvent('Container_bottom_sheet');
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
@@ -403,27 +399,30 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         context: context,
                         builder: (context) {
                           return WebViewAware(
-                              child: GestureDetector(
-                            onTap: () => _model.unfocusNode.canRequestFocus
-                                ? FocusScope.of(context)
-                                    .requestFocus(_model.unfocusNode)
-                                : FocusScope.of(context).unfocus(),
-                            child: Padding(
-                              padding: MediaQuery.viewInsetsOf(context),
-                              child: PickBottomSheetWidget(
-                                stringList: FFAppState()
-                                    .MockInterviewServices
-                                    .map((e) => e.name)
-                                    .toList(),
+                            child: GestureDetector(
+                              onTap: () => _model.unfocusNode.canRequestFocus
+                                  ? FocusScope.of(context)
+                                      .requestFocus(_model.unfocusNode)
+                                  : FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: PickBottomSheetWidget(
+                                  stringList: FFAppState()
+                                      .MockInterviewServices
+                                      .map((e) => e.name)
+                                      .toList(),
+                                  title: 'Choose from the list below',
+                                ),
                               ),
                             ),
-                          ));
+                          );
                         },
                       ).then((value) =>
                           safeSetState(() => _model.serviceOutput = value));
 
                       if (_model.serviceOutput != null &&
                           _model.serviceOutput != '') {
+                        logFirebaseEvent('Container_update_page_state');
                         setState(() {
                           _model.activeService = FFAppState()
                               .MockInterviewServices
@@ -464,7 +463,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(-1.00, 0.00),
+                        alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 11.0, 0.0, 0.0),
@@ -529,8 +528,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            contentPadding: EdgeInsets.all(16.0),
                           ),
                           style: FlutterFlowTheme.of(context).headlineSmall,
                           keyboardType: TextInputType.number,
@@ -543,7 +541,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-1.00, 0.00),
+                        alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 11.0, 0.0, 0.0),
@@ -607,8 +605,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            contentPadding: EdgeInsets.all(16.0),
                           ),
                           style: FlutterFlowTheme.of(context).headlineSmall,
                           maxLines: null,
@@ -621,7 +618,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(1.00, 0.00),
+                  alignment: AlignmentDirectional(1.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
@@ -671,93 +668,75 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                     ),
                   ),
                 ),
-                Builder(
-                  builder: (context) => Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        if (_model.activeService != null) {
-                          setState(() {
-                            _model.isServicePicked = true;
-                          });
-                        } else {
-                          setState(() {
-                            _model.isServicePicked = false;
-                          });
-                          if (_model.formKey.currentState == null ||
-                              !_model.formKey.currentState!.validate()) {
-                            return;
-                          }
-                          return;
-                        }
-
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'MOCK_INTERVIEW_PAGE_BOOK_NOW_BTN_ON_TAP');
+                      var _shouldSetState = false;
+                      if (_model.activeService != null) {
+                        logFirebaseEvent('Button_update_page_state');
+                        setState(() {
+                          _model.isServicePicked = true;
+                        });
+                      } else {
+                        logFirebaseEvent('Button_update_page_state');
+                        setState(() {
+                          _model.isServicePicked = false;
+                        });
+                        logFirebaseEvent('Button_validate_form');
                         if (_model.formKey.currentState == null ||
                             !_model.formKey.currentState!.validate()) {
                           return;
                         }
-                        await showAlignedDialog(
-                          context: context,
-                          isGlobal: true,
-                          avoidOverflow: false,
-                          targetAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
-                          followerAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
-                          builder: (dialogContext) {
-                            return Material(
-                              color: Colors.transparent,
-                              child: WebViewAware(
-                                  child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: DeductedKarmaWidget(
-                                  deductedKarma:
-                                      _model.activeService!.priceKarma,
-                                ),
-                              )),
-                            );
-                          },
-                        ).then((value) => setState(() {}));
+                        if (_shouldSetState) setState(() {});
+                        return;
+                      }
 
-                        await action_blocks.payByKarma(
-                          context,
-                          karmaAmount: (int quantity, double? servicePrice) {
-                            return servicePrice != null
-                                ? servicePrice * quantity
-                                : 0.0;
-                          }(_model.quantity, _model.activeService?.priceKarma),
-                        );
-                      },
-                      text: 'Book now',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 52.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).headlineLarge.override(
-                                  fontFamily: 'Sofia Pro',
-                                  color: FlutterFlowTheme.of(context).white,
-                                  useGoogleFonts: false,
-                                ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 0.0,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
+                      logFirebaseEvent('Button_validate_form');
+                      if (_model.formKey.currentState == null ||
+                          !_model.formKey.currentState!.validate()) {
+                        return;
+                      }
+                      logFirebaseEvent('Button_action_block');
+                      _model.paymentOutput = await action_blocks.payByKarma(
+                        context,
+                        karmaAmount: _model.activeService?.priceKarma,
+                        serviceName: 'Mock Interview',
+                        quantity: _model.quantity,
+                        comment: _model.textController2.text,
+                        userEmail: currentUserEmail,
+                      );
+                      _shouldSetState = true;
+                      if (_shouldSetState) setState(() {});
+                    },
+                    text: 'Book now',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 52.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: 'Sofia Pro',
+                                color: FlutterFlowTheme.of(context).white,
+                                useGoogleFonts: false,
+                              ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 0.0,
                       ),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
@@ -782,8 +761,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -802,8 +780,8 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: RichText(
-                                      textScaleFactor: MediaQuery.of(context)
-                                          .textScaleFactor,
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
@@ -831,6 +809,10 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                                                 SystemMouseCursors.click,
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () async {
+                                                logFirebaseEvent(
+                                                    'MOCK_INTERVIEW_RichTextSpan_k9ekb44h_ON_');
+                                                logFirebaseEvent(
+                                                    'RichTextSpan_launch_u_r_l');
                                                 await launchURL(
                                                     'https://quisapp.notion.site/Karma-Karma-Exchange-5327c89c0dc04558add1d77aef5586b1');
                                               },
@@ -871,8 +853,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -926,8 +907,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -981,8 +961,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1036,8 +1015,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1091,8 +1069,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1146,8 +1123,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1201,8 +1177,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1256,8 +1231,7 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1276,8 +1250,8 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: RichText(
-                                      textScaleFactor: MediaQuery.of(context)
-                                          .textScaleFactor,
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
@@ -1304,6 +1278,10 @@ class _MockInterviewWidgetState extends State<MockInterviewWidget> {
                                                 SystemMouseCursors.click,
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () async {
+                                                logFirebaseEvent(
+                                                    'MOCK_INTERVIEW_RichTextSpan_qi97u9fv_ON_');
+                                                logFirebaseEvent(
+                                                    'RichTextSpan_launch_u_r_l');
                                                 await launchURL(
                                                     'info@quis-hq.com');
                                               },

@@ -5,17 +5,16 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'favorite_videos_model.dart';
 export 'favorite_videos_model.dart';
 
 class FavoriteVideosWidget extends StatefulWidget {
-  const FavoriteVideosWidget({Key? key}) : super(key: key);
+  const FavoriteVideosWidget({super.key});
 
   @override
-  _FavoriteVideosWidgetState createState() => _FavoriteVideosWidgetState();
+  State<FavoriteVideosWidget> createState() => _FavoriteVideosWidgetState();
 }
 
 class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
@@ -27,6 +26,9 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => FavoriteVideosModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'FavoriteVideos'});
   }
 
   @override
@@ -38,17 +40,6 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -69,13 +60,15 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('FAVORITE_VIDEOS_Container_bp61r46a_ON_TA');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -160,6 +153,10 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'FAVORITE_VIDEOS_Container_9t8cwwbg_ON_TA');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'Video',
                                       queryParameters: {
@@ -180,8 +177,7 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                   child: Container(
                                     decoration: BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 8.0, 8.0, 8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -219,47 +215,14 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 8.0, 0.0, 0.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      containerCourseVideoRecord
-                                                          .rating.rating
-                                                          .toString(),
-                                                      style:
-                                                          GoogleFonts.getFont(
-                                                        'Roboto',
-                                                        fontSize: 9.63,
-                                                      ),
-                                                    ),
-                                                    Icon(
-                                                      FFIcons
-                                                          .kmaterialSymbolsStar,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .orange,
-                                                      size: 13.7,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Text(
-                                                  'Learn more',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(1.0, 0.0),
+                                            child: Text(
+                                              'Learn more',
+                                              textAlign: TextAlign.end,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
                                                       .bodySmall
                                                       .override(
                                                         fontFamily: 'Sofia Pro',
@@ -270,8 +233,6 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                                         useGoogleFonts: false,
                                                         lineHeight: 1.16,
                                                       ),
-                                                ),
-                                              ],
                                             ),
                                           ),
                                         ],

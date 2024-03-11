@@ -2,17 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'no_user_found_dialog_model.dart';
 export 'no_user_found_dialog_model.dart';
 
 class NoUserFoundDialogWidget extends StatefulWidget {
-  const NoUserFoundDialogWidget({Key? key}) : super(key: key);
+  const NoUserFoundDialogWidget({super.key});
 
   @override
-  _NoUserFoundDialogWidgetState createState() =>
+  State<NoUserFoundDialogWidget> createState() =>
       _NoUserFoundDialogWidgetState();
 }
 
@@ -40,10 +39,8 @@ class _NoUserFoundDialogWidgetState extends State<NoUserFoundDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -61,7 +58,7 @@ class _NoUserFoundDialogWidgetState extends State<NoUserFoundDialogWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
@@ -69,13 +66,16 @@ class _NoUserFoundDialogWidgetState extends State<NoUserFoundDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'NO_USER_FOUND_DIALOG_Container_handns8q_');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -83,7 +83,7 @@ class _NoUserFoundDialogWidgetState extends State<NoUserFoundDialogWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -96,8 +96,8 @@ class _NoUserFoundDialogWidgetState extends State<NoUserFoundDialogWidget> {
                 ],
               ),
               Text(
-                'Sorry, no partner found. \nTry next time',
-                textAlign: TextAlign.center,
+                'Unfortunately, we were unable to find a partner for you to practice with today; \n\nSometimes, this happens due to a low number of people who registered for practice.\n\nWhat should you do?\n\n- Register for a new Practice Interview.\n- Log in 5 minutes prior to the Practice Interview start and tap \"Join Now.\"\n\n(If you are on Freemium, we will not count this attempt since you haven\'t practiced yet.)',
+                textAlign: TextAlign.start,
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Sofia Pro',
                       fontWeight: FontWeight.w300,
@@ -109,6 +109,8 @@ class _NoUserFoundDialogWidgetState extends State<NoUserFoundDialogWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(21.0, 22.0, 21.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('NO_USER_FOUND_DIALOG_COMP_OK_BTN_ON_TAP');
+                    logFirebaseEvent('Button_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   text: 'OK',

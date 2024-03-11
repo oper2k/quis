@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'karma_list_item_model.dart';
@@ -9,16 +8,16 @@ export 'karma_list_item_model.dart';
 
 class KarmaListItemWidget extends StatefulWidget {
   const KarmaListItemWidget({
-    Key? key,
+    super.key,
     required this.text,
     required this.points,
-  }) : super(key: key);
+  });
 
   final String? text;
   final String? points;
 
   @override
-  _KarmaListItemWidgetState createState() => _KarmaListItemWidgetState();
+  State<KarmaListItemWidget> createState() => _KarmaListItemWidgetState();
 }
 
 class _KarmaListItemWidgetState extends State<KarmaListItemWidget> {
@@ -45,8 +44,6 @@ class _KarmaListItemWidgetState extends State<KarmaListItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,

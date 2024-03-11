@@ -6,7 +6,6 @@ import 'dart:async';
 import 'send_feedback_bottom_sheet_widget.dart'
     show SendFeedbackBottomSheetWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -23,8 +22,10 @@ class SendFeedbackBottomSheetModel
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {
     textFieldFocusNode?.dispose();
     textController?.dispose();

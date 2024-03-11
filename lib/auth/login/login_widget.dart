@@ -8,7 +8,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -16,10 +15,10 @@ import 'login_model.dart';
 export 'login_model.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+  const LoginWidget({super.key});
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  State<LoginWidget> createState() => _LoginWidgetState();
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
@@ -34,6 +33,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.initState();
     _model = createModel(context, () => LoginModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -62,17 +62,6 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -93,13 +82,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('LOGIN_PAGE_Container_dl0duntu_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -156,6 +147,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                             '_model.emailFieldController',
                             Duration(milliseconds: 100),
                             () async {
+                              logFirebaseEvent(
+                                  'LOGIN_EmailField_ON_TEXTFIELD_CHANGE');
+                              logFirebaseEvent('EmailField_update_page_state');
                               setState(() {
                                 _model.isEmailValid = functions.emailValidation(
                                     _model.emailFieldController.text);
@@ -204,8 +198,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            contentPadding: EdgeInsets.all(16.0),
                           ),
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
@@ -220,7 +213,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(1.00, 0.00),
+                        alignment: AlignmentDirectional(1.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 16.0, 0.0),
@@ -257,6 +250,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                     '_model.passwordFieldController',
                     Duration(milliseconds: 100),
                     () async {
+                      logFirebaseEvent(
+                          'LOGIN_PasswordField_ON_TEXTFIELD_CHANGE');
+                      logFirebaseEvent('PasswordField_update_page_state');
                       setState(() {
                         _model.isPasswordValid = functions.passwordValidation(
                             _model.passwordFieldController.text);
@@ -303,8 +299,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).white,
-                    contentPadding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                    contentPadding: EdgeInsets.all(16.0),
                     suffixIcon: InkWell(
                       onTap: () => setState(
                         () => _model.passwordFieldVisibility =
@@ -330,13 +325,16 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(1.00, 0.00),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('LOGIN_PAGE_Container_1r1s6ctr_ON_TAP');
+                    logFirebaseEvent('Container_navigate_to');
+
                     context.pushNamed('ResetPassword');
                   },
                   child: Container(
@@ -360,10 +358,12 @@ class _LoginWidgetState extends State<LoginWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: FFButtonWidget(
-                  onPressed: !_model.isEmailValid || !_model.isPasswordValid
+                  onPressed: (!_model.isEmailValid || !_model.isPasswordValid)
                       ? null
                       : () async {
+                          logFirebaseEvent('LOGIN_PAGE_LOG_IN_BTN_ON_TAP');
                           await authManager.refreshUser();
+                          logFirebaseEvent('Button_auth');
                           GoRouter.of(context).prepareAuthEvent();
 
                           final user = await authManager.signInWithEmail(
@@ -376,8 +376,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                           }
 
                           if (currentUserEmailVerified) {
+                            logFirebaseEvent('Button_navigate_to');
+
                             context.goNamedAuth('Home', context.mounted);
                           } else {
+                            logFirebaseEvent('Button_navigate_to');
+
                             context.goNamedAuth(
                                 'ConfirmEmail', context.mounted);
                           }
@@ -452,6 +456,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent('LOGIN_PAGE_google_ON_TAP');
+                        logFirebaseEvent('google_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         final user =
                             await authManager.signInWithGoogle(context);
@@ -459,7 +465,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           return;
                         }
 
-                        context.goNamedAuth('ConfirmEmail', context.mounted);
+                        context.goNamedAuth('SplashPage', context.mounted);
                       },
                       child: Container(
                         width: 108.0,
@@ -495,13 +501,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent('LOGIN_PAGE_apple_ON_TAP');
+                        logFirebaseEvent('apple_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         final user = await authManager.signInWithApple(context);
                         if (user == null) {
                           return;
                         }
 
-                        context.goNamedAuth('ConfirmEmail', context.mounted);
+                        context.goNamedAuth('SplashPage', context.mounted);
                       },
                       child: Container(
                         width: 108.0,
@@ -539,26 +547,26 @@ class _LoginWidgetState extends State<LoginWidget> {
                   ? MediaQuery.viewInsetsOf(context).bottom > 0
                   : _isKeyboardVisible))
                 Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent('LOGIN_PAGE_Container_z8tm5jmz_ON_TAP');
+                      logFirebaseEvent('Container_navigate_to');
                       if (Navigator.of(context).canPop()) {
                         context.pop();
                       }
-                      context.pushNamed('Signup');
+                      context.pushNamed('SignupOld');
                     },
                     child: Container(
                       decoration: BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: RichText(
-                          textScaleFactor:
-                              MediaQuery.of(context).textScaleFactor,
+                          textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
                               TextSpan(

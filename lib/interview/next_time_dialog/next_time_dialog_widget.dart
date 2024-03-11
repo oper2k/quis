@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +9,10 @@ import 'next_time_dialog_model.dart';
 export 'next_time_dialog_model.dart';
 
 class NextTimeDialogWidget extends StatefulWidget {
-  const NextTimeDialogWidget({Key? key}) : super(key: key);
+  const NextTimeDialogWidget({super.key});
 
   @override
-  _NextTimeDialogWidgetState createState() => _NextTimeDialogWidgetState();
+  State<NextTimeDialogWidget> createState() => _NextTimeDialogWidgetState();
 }
 
 class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
@@ -40,10 +39,8 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -61,7 +58,7 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
@@ -80,13 +77,16 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'NEXT_TIME_DIALOG_Container_3w9a1cz1_ON_T');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -94,7 +94,7 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -122,6 +122,9 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent(
+                        'NEXT_TIME_DIALOG_GET_NEW_REMINDER_BTN_ON');
+                    logFirebaseEvent('Button_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   text: 'Get new reminder',

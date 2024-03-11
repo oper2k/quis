@@ -2,17 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'change_password_dialog_model.dart';
 export 'change_password_dialog_model.dart';
 
 class ChangePasswordDialogWidget extends StatefulWidget {
-  const ChangePasswordDialogWidget({Key? key}) : super(key: key);
+  const ChangePasswordDialogWidget({super.key});
 
   @override
-  _ChangePasswordDialogWidgetState createState() =>
+  State<ChangePasswordDialogWidget> createState() =>
       _ChangePasswordDialogWidgetState();
 }
 
@@ -41,10 +40,8 @@ class _ChangePasswordDialogWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -57,13 +54,16 @@ class _ChangePasswordDialogWidgetState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.00, 0.00),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent(
+                        'CHANGE_PASSWORD_DIALOG_Container_1ptz5t2');
+                    logFirebaseEvent('Container_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -71,7 +71,7 @@ class _ChangePasswordDialogWidgetState
                     height: 40.0,
                     decoration: BoxDecoration(),
                     child: Align(
-                      alignment: AlignmentDirectional(1.00, 0.00),
+                      alignment: AlignmentDirectional(1.0, 0.0),
                       child: Icon(
                         FFIcons.kcross,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -102,6 +102,9 @@ class _ChangePasswordDialogWidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'CHANGE_PASSWORD_DIALOG_NO_BTN_ON_TAP');
+                          logFirebaseEvent('Button_dismiss_dialog');
                           Navigator.pop(context);
                         },
                         text: 'No',
@@ -125,6 +128,9 @@ class _ChangePasswordDialogWidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'CHANGE_PASSWORD_DIALOG_YES_BTN_ON_TAP');
+                          logFirebaseEvent('Button_dismiss_dialog');
                           Navigator.pop(context, true);
                         },
                         text: 'Yes',

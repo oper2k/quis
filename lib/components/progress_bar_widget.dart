@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -10,16 +9,16 @@ export 'progress_bar_model.dart';
 
 class ProgressBarWidget extends StatefulWidget {
   const ProgressBarWidget({
-    Key? key,
+    super.key,
     required this.value,
     required this.width,
-  }) : super(key: key);
+  });
 
   final double? value;
   final double? width;
 
   @override
-  _ProgressBarWidgetState createState() => _ProgressBarWidgetState();
+  State<ProgressBarWidget> createState() => _ProgressBarWidgetState();
 }
 
 class _ProgressBarWidgetState extends State<ProgressBarWidget> {
@@ -46,8 +45,6 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: widget.width,
       decoration: BoxDecoration(),
@@ -62,11 +59,11 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                  width: widget.width! * widget.value! - 25,
+                  width: (widget.width!) * (widget.value!) - 25,
                   decoration: BoxDecoration(),
                 ),
                 Text(
-                  '${((widget.value! * 100).round()).toString()}%',
+                  '${(((widget.value!) * 100).round()).toString()}%',
                   style: GoogleFonts.getFont(
                     'Inter',
                     color: FlutterFlowTheme.of(context).primary,

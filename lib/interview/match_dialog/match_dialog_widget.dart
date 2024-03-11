@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -12,14 +11,14 @@ export 'match_dialog_model.dart';
 
 class MatchDialogWidget extends StatefulWidget {
   const MatchDialogWidget({
-    Key? key,
+    super.key,
     required this.userItem,
-  }) : super(key: key);
+  });
 
   final UsersRecord? userItem;
 
   @override
-  _MatchDialogWidgetState createState() => _MatchDialogWidgetState();
+  State<MatchDialogWidget> createState() => _MatchDialogWidgetState();
 }
 
 class _MatchDialogWidgetState extends State<MatchDialogWidget> {
@@ -46,10 +45,8 @@ class _MatchDialogWidgetState extends State<MatchDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -67,7 +64,7 @@ class _MatchDialogWidgetState extends State<MatchDialogWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
@@ -86,13 +83,16 @@ class _MatchDialogWidgetState extends State<MatchDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'MATCH_DIALOG_Container_c3oa8gyd_ON_TAP');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -100,7 +100,7 @@ class _MatchDialogWidgetState extends State<MatchDialogWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -128,6 +128,27 @@ class _MatchDialogWidgetState extends State<MatchDialogWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('MATCH_DIALOG_VIEW_PROFILE_BTN_ON_TAP');
+                    logFirebaseEvent('Button_navigate_to');
+
+                    context.pushNamed(
+                      'UserProfile',
+                      queryParameters: {
+                        'userItem': serializeParam(
+                          widget.userItem,
+                          ParamType.Document,
+                        ),
+                        'isLinkedIn': serializeParam(
+                          true,
+                          ParamType.bool,
+                        ),
+                      }.withoutNulls,
+                      extra: <String, dynamic>{
+                        'userItem': widget.userItem,
+                      },
+                    );
+
+                    logFirebaseEvent('Button_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   text: 'View profile',

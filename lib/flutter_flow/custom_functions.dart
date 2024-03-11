@@ -11,6 +11,7 @@ import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
 bool emailValidation(String? email) {
@@ -46,7 +47,7 @@ DateTime datePlusDays(
   return date.add(Duration(days: days));
 }
 
-int? findUserIndexFromList(
+int findUserIndexFromList(
   List<UsersRecord> userList,
   String userID,
 ) {
@@ -56,7 +57,7 @@ int? findUserIndexFromList(
       return i;
     }
   }
-  return null;
+  return -1;
 }
 
 bool customSearching(
@@ -138,15 +139,28 @@ DateTime? getSameTime(
   int unixTimeInt,
   DateTime userTime,
 ) {
-  DateTime unixTime = DateTime.fromMillisecondsSinceEpoch(unixTimeInt * 1000);
+// Получаем смещение часового пояса пользователя относительно UTC в минутах
+  Duration timezoneOffset = DateTime.now().timeZoneOffset;
 
-  int hour = unixTime.hour;
-  int minute = unixTime.minute;
+  // Преобразуем unixTimeInt в DateTime с учетом UTC
+  DateTime utcTime =
+      DateTime.fromMillisecondsSinceEpoch(unixTimeInt * 1000, isUtc: true);
 
-  DateTime DisTime =
+  // Преобразуем utcTime в локальное время пользователя, применяя смещение часового пояса
+  DateTime localTime = utcTime.add(timezoneOffset);
+
+  // Получаем часы и минуты из локального времени
+  int hour = localTime.hour;
+  int minute = localTime.minute;
+
+  // Создаем новый DateTime с годом, месяцем и днем из userTime, но временем из localTime
+  DateTime targetTime =
       DateTime(userTime.year, userTime.month, userTime.day, hour, minute);
 
-  return userTime.isAfter(DisTime) ? DisTime.add(Duration(days: 1)) : DisTime;
+  // Если targetTime уже прошло, возвращаем его с добавлением одного дня
+  return userTime.isAfter(targetTime)
+      ? targetTime.add(Duration(days: 1))
+      : targetTime;
 }
 
 int getYearInInt(DateTime dateTime) {
@@ -292,4 +306,36 @@ double subtractToZero(
   double subtractValue,
 ) {
   return original != null ? math.max(original - subtractValue, 0) : 0;
+}
+
+int getUserIndexInList(
+  DocumentReference userRef,
+  List<DocumentReference> userList,
+) {
+  for (int i = 0; i < userList.length; i++) {
+    if (userList[i].id == userRef.id) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+String timeToRFC3339(DateTime time) {
+  // time To RFC3339 in GST zone
+  final formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+  print(formatter);
+  // formatter.timeZone = 'GMT+4';
+  return formatter.format(time.toUtc());
+}
+
+DateTime timePlusMinutes(
+  DateTime dateTime,
+  String? minutes,
+) {
+  // dateTime minus minutes
+  if (minutes == null) {
+    return dateTime;
+  }
+  final int minutesInt = int.tryParse(minutes) ?? 0;
+  return dateTime.add(Duration(minutes: minutesInt));
 }

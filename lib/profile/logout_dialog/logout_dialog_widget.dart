@@ -2,17 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'logout_dialog_model.dart';
 export 'logout_dialog_model.dart';
 
 class LogoutDialogWidget extends StatefulWidget {
-  const LogoutDialogWidget({Key? key}) : super(key: key);
+  const LogoutDialogWidget({super.key});
 
   @override
-  _LogoutDialogWidgetState createState() => _LogoutDialogWidgetState();
+  State<LogoutDialogWidget> createState() => _LogoutDialogWidgetState();
 }
 
 class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
@@ -39,10 +38,8 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -55,13 +52,15 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.00, 0.00),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('LOGOUT_DIALOG_Container_ro7mhtfb_ON_TAP');
+                    logFirebaseEvent('Container_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -69,7 +68,7 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
                     height: 40.0,
                     decoration: BoxDecoration(),
                     child: Align(
-                      alignment: AlignmentDirectional(1.00, 0.00),
+                      alignment: AlignmentDirectional(1.0, 0.0),
                       child: Icon(
                         FFIcons.kcross,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -100,6 +99,8 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent('LOGOUT_DIALOG_COMP_NO_BTN_ON_TAP');
+                          logFirebaseEvent('Button_dismiss_dialog');
                           Navigator.pop(context);
                         },
                         text: 'No',
@@ -123,6 +124,9 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'LOGOUT_DIALOG_COMP_LOG_OUT_BTN_ON_TAP');
+                          logFirebaseEvent('Button_dismiss_dialog');
                           Navigator.pop(context, true);
                         },
                         text: 'Log out',

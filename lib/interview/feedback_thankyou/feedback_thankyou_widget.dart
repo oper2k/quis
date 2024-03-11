@@ -1,19 +1,21 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'feedback_thankyou_model.dart';
 export 'feedback_thankyou_model.dart';
 
 class FeedbackThankyouWidget extends StatefulWidget {
-  const FeedbackThankyouWidget({Key? key}) : super(key: key);
+  const FeedbackThankyouWidget({super.key});
 
   @override
-  _FeedbackThankyouWidgetState createState() => _FeedbackThankyouWidgetState();
+  State<FeedbackThankyouWidget> createState() => _FeedbackThankyouWidgetState();
 }
 
 class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
@@ -25,6 +27,9 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => FeedbackThankyouModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'FeedbackThankyou'});
   }
 
   @override
@@ -36,17 +41,6 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -60,14 +54,34 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.00, -1.00),
+                alignment: AlignmentDirectional(1.0, -1.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.goNamed('Home');
+                    logFirebaseEvent(
+                        'FEEDBACK_THANKYOU_Container_5wtqhdiw_ON_');
+                    if (valueOrDefault(
+                            currentUserDocument?.interviewSessions, 0) ==
+                        1) {
+                      logFirebaseEvent('Container_navigate_to');
+
+                      context.pushNamed(
+                        'Pricing',
+                        queryParameters: {
+                          'offers': serializeParam(
+                            PaywallPrice.off25,
+                            ParamType.Enum,
+                          ),
+                        }.withoutNulls,
+                      );
+                    } else {
+                      logFirebaseEvent('Container_navigate_to');
+
+                      context.goNamed('Home');
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(),
@@ -87,7 +101,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                 'assets/lottie_animations/animation_loeodjhs.json',
                 width: MediaQuery.sizeOf(context).width * 1.0,
                 height: 276.0,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 animate: true,
               ),
               Spacer(),
@@ -99,7 +113,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Text(
-                  'We glad seeing your improvement and your help us to improve Quis at the same time!',
+                  'We glad seeing your improvement and your help to improve Quis at the same time!',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Sofia Pro',
@@ -111,7 +125,26 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
               Spacer(),
               FFButtonWidget(
                 onPressed: () async {
-                  context.goNamed('Home');
+                  logFirebaseEvent('FEEDBACK_THANKYOU_BACK_HOME_BTN_ON_TAP');
+                  if (valueOrDefault(
+                          currentUserDocument?.interviewSessions, 0) ==
+                      1) {
+                    logFirebaseEvent('Button_navigate_to');
+
+                    context.pushNamed(
+                      'Pricing',
+                      queryParameters: {
+                        'offers': serializeParam(
+                          PaywallPrice.off25,
+                          ParamType.Enum,
+                        ),
+                      }.withoutNulls,
+                    );
+                  } else {
+                    logFirebaseEvent('Button_navigate_to');
+
+                    context.goNamed('Home');
+                  }
                 },
                 text: 'Back home',
                 options: FFButtonOptions(
@@ -135,33 +168,45 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    context.goNamed('PracticeInterview');
-                  },
-                  text: 'Get new reminder',
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 52.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle:
-                        FlutterFlowTheme.of(context).headlineLarge.override(
-                              fontFamily: 'Sofia Pro',
-                              color: FlutterFlowTheme.of(context).white,
-                              useGoogleFonts: false,
-                            ),
-                    elevation: 0.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 0.0,
+              Builder(
+                builder: (context) => Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'FEEDBACK_THANKYOU_SHARE_WITH_FRIENDS_BTN');
+                      logFirebaseEvent('Button_share');
+                      await Share.share(
+                        'Join me on Quis to supercharge your Interview Skills! All you need to do is download the Quis app: https://quisapp.click/referral_link ',
+                        sharePositionOrigin: getWidgetBoundingBox(context),
+                      );
+                    },
+                    text: 'Share with friends',
+                    icon: Icon(
+                      FFIcons.ksystemUiconsShare2,
+                      size: 24.0,
                     ),
-                    borderRadius: BorderRadius.circular(10.0),
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 52.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 3.0, 5.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: 'Sofia Pro',
+                                color: FlutterFlowTheme.of(context).white,
+                                useGoogleFonts: false,
+                              ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 0.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                   ),
                 ),
               ),

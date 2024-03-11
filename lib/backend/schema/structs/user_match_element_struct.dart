@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -44,10 +45,9 @@ class UserMatchElementStruct extends FFFirebaseStruct {
         refMainUser: data['ref_main_user'] as DocumentReference?,
       );
 
-  static UserMatchElementStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? UserMatchElementStruct.fromMap(data)
-          : null;
+  static UserMatchElementStruct? maybeFromMap(dynamic data) => data is Map
+      ? UserMatchElementStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'ref_user': _refUser,

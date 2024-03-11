@@ -2,7 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'video_element_model.dart';
@@ -10,14 +9,14 @@ export 'video_element_model.dart';
 
 class VideoElementWidget extends StatefulWidget {
   const VideoElementWidget({
-    Key? key,
+    super.key,
     required this.videoItem,
-  }) : super(key: key);
+  });
 
   final CourseVideoRecord? videoItem;
 
   @override
-  _VideoElementWidgetState createState() => _VideoElementWidgetState();
+  State<VideoElementWidget> createState() => _VideoElementWidgetState();
 }
 
 class _VideoElementWidgetState extends State<VideoElementWidget> {
@@ -44,8 +43,6 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: Container(
@@ -71,7 +68,7 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Icon(
                       FFIcons.kocticonPlay24,
                       color: FlutterFlowTheme.of(context).white,

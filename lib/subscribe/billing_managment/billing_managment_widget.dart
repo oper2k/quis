@@ -1,20 +1,20 @@
+import '/backend/schema/enums/enums.dart';
 import '/components/menu_item_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'billing_managment_model.dart';
 export 'billing_managment_model.dart';
 
 class BillingManagmentWidget extends StatefulWidget {
-  const BillingManagmentWidget({Key? key}) : super(key: key);
+  const BillingManagmentWidget({super.key});
 
   @override
-  _BillingManagmentWidgetState createState() => _BillingManagmentWidgetState();
+  State<BillingManagmentWidget> createState() => _BillingManagmentWidgetState();
 }
 
 class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
@@ -26,6 +26,9 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BillingManagmentModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'BillingManagment'});
   }
 
   @override
@@ -37,15 +40,6 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -68,13 +62,15 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('BILLING_MANAGMENT_Container_4fyas3vi_ON_');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -147,7 +143,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              alignment: AlignmentDirectional(0.00, 0.00),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
@@ -206,7 +202,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                                 color: FlutterFlowTheme.of(context).accent2,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              alignment: AlignmentDirectional(0.00, 0.00),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
@@ -250,7 +246,19 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed('Pricing');
+                              logFirebaseEvent(
+                                  'BILLING_MANAGMENT_Container_p1a1ph17_ON_');
+                              logFirebaseEvent('Container_navigate_to');
+
+                              context.pushNamed(
+                                'Pricing',
+                                queryParameters: {
+                                  'offers': serializeParam(
+                                    PaywallPrice.standard,
+                                    ParamType.Enum,
+                                  ),
+                                }.withoutNulls,
+                              );
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -324,16 +332,49 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('Pricing');
+                        logFirebaseEvent(
+                            'BILLING_MANAGMENT_Container_recag8eh_ON_');
+                        logFirebaseEvent('MenuItem_navigate_to');
+
+                        context.pushNamed(
+                          'Pricing',
+                          queryParameters: {
+                            'offers': serializeParam(
+                              PaywallPrice.standard,
+                              ParamType.Enum,
+                            ),
+                          }.withoutNulls,
+                        );
                       },
                       child: wrapWithModel(
-                        model: _model.menuItemModel,
+                        model: _model.menuItemModel1,
                         updateCallback: () => setState(() {}),
                         child: MenuItemWidget(
                           text: 'Change subscription',
                         ),
                       ),
                     ),
+                    if (isAndroid)
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'BILLING_MANAGMENT_Container_rf6ya40h_ON_');
+                          logFirebaseEvent('MenuItem_launch_u_r_l');
+                          await launchURL(
+                              'https://play.google.com/store/account/subscriptions');
+                        },
+                        child: wrapWithModel(
+                          model: _model.menuItemModel2,
+                          updateCallback: () => setState(() {}),
+                          child: MenuItemWidget(
+                            text: 'Cancel Subscription',
+                          ),
+                        ),
+                      ),
                   ].divide(SizedBox(height: 8.0)),
                 ),
               ),

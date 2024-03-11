@@ -112,12 +112,12 @@ class ParameterData {
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
   'Home': ParameterData.none(),
-  'Onboarding': ParameterData.none(),
+  'OnboardingOld': ParameterData.none(),
   'Login': ParameterData.none(),
-  'Signup': ParameterData.none(),
+  'SignupOld': ParameterData.none(),
   'Pricing': (data) async => ParameterData(
         allParams: {
-          'isFirst': getParameter<bool>(data, 'isFirst'),
+          'isInOnboarding': getParameter<bool>(data, 'isInOnboarding'),
         },
       ),
   'ConfirmEmail': (data) async => ParameterData(
@@ -179,12 +179,17 @@ final parametersBuilderMap =
   'InterviewFeedback': (data) async => ParameterData(
         allParams: {
           'userRef': getParameter<DocumentReference>(data, 'userRef'),
+          'roomDoc': await getDocumentParameter<ConferenceRoomRecord>(
+              data, 'roomDoc', ConferenceRoomRecord.fromSnapshot),
+          'isLike': getParameter<bool>(data, 'isLike'),
         },
       ),
   'FeedbackThankyou': ParameterData.none(),
   'LIQ': (data) async => ParameterData(
         allParams: {
           'userItem': getParameter<DocumentReference>(data, 'userItem'),
+          'roomDoc': await getDocumentParameter<ConferenceRoomRecord>(
+              data, 'roomDoc', ConferenceRoomRecord.fromSnapshot),
         },
       ),
   'LatestInterviewQuestions': ParameterData.none(),
@@ -195,7 +200,6 @@ final parametersBuilderMap =
               data, 'welcomeVideo', WelcomeVideoRecord.fromSnapshot),
         },
       ),
-  'Add-onsCopy': ParameterData.none(),
   'Question': (data) async => ParameterData(
         allParams: {
           'questionItem': await getDocumentParameter<InterviewQuestionRecord>(
@@ -209,16 +213,65 @@ final parametersBuilderMap =
           'userProfileImage': getParameter<String>(data, 'userProfileImage'),
           'uid': getParameter<int>(data, 'uid'),
           'userRef': getParameter<DocumentReference>(data, 'userRef'),
+          'role': getParameter<String>(data, 'role'),
+          'roomDoc': await getDocumentParameter<ConferenceRoomRecord>(
+              data, 'roomDoc', ConferenceRoomRecord.fromSnapshot),
         },
       ),
   'ThankYouForQuestion': ParameterData.none(),
   'BillingManagment': ParameterData.none(),
-  'ThankYouForSubscription': ParameterData.none(),
+  'ThankYouForSubscription': (data) async => ParameterData(
+        allParams: {
+          'isInOnboarding': getParameter<bool>(data, 'isInOnboarding'),
+        },
+      ),
   'VideoVimeo': (data) async => ParameterData(
         allParams: {
           'videoVimeoURL': getParameter<String>(data, 'videoVimeoURL'),
         },
       ),
+  'ConfirmEmailCopy': (data) async => ParameterData(
+        allParams: {
+          'isAfterReg': getParameter<bool>(data, 'isAfterReg'),
+        },
+      ),
+  'ReminderPage': ParameterData.none(),
+  'InitPageOld': ParameterData.none(),
+  'PricingOld': (data) async => ParameterData(
+        allParams: {
+          'isFirst': getParameter<bool>(data, 'isFirst'),
+        },
+      ),
+  'AuthEmailPage': ParameterData.none(),
+  'Onboarding01': ParameterData.none(),
+  'Onboarding02': ParameterData.none(),
+  'Onboarding03name': ParameterData.none(),
+  'Onboarding04': ParameterData.none(),
+  'Onboarding05': ParameterData.none(),
+  'Onboarding06industry': ParameterData.none(),
+  'Onboarding07': ParameterData.none(),
+  'Onboarding08': ParameterData.none(),
+  'Onboarding18time': ParameterData.none(),
+  'Onboarding09experienceYears': ParameterData.none(),
+  'Onboarding10role': ParameterData.none(),
+  'Onboarding11improve': ParameterData.none(),
+  'Onboarding12referral': ParameterData.none(),
+  'Onboarding13': ParameterData.none(),
+  'Onboarding14practiceGoal': ParameterData.none(),
+  'Onboarding15': ParameterData.none(),
+  'Onboarding16': ParameterData.none(),
+  'SplashPage': ParameterData.none(),
+  'ResetPasswordOld': ParameterData.none(),
+  'Onboarding17LinkedIn': ParameterData.none(),
+  'Onboarding19ONBCOMPLETED': ParameterData.none(),
+  'Onboarding20afterPricing': ParameterData.none(),
+  'Onboarding21gift': ParameterData.none(),
+  'Guide1': ParameterData.none(),
+  'HomeGuide1': ParameterData.none(),
+  'AllCoursesGuide': ParameterData.none(),
+  'LatestInterviewQuestionsGuide': ParameterData.none(),
+  'HomeGuide2': ParameterData.none(),
+  'test': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

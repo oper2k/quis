@@ -4,11 +4,9 @@ import '/components/karma_plus_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -16,10 +14,10 @@ import 'thank_you_for_question_model.dart';
 export 'thank_you_for_question_model.dart';
 
 class ThankYouForQuestionWidget extends StatefulWidget {
-  const ThankYouForQuestionWidget({Key? key}) : super(key: key);
+  const ThankYouForQuestionWidget({super.key});
 
   @override
-  _ThankYouForQuestionWidgetState createState() =>
+  State<ThankYouForQuestionWidget> createState() =>
       _ThankYouForQuestionWidgetState();
 }
 
@@ -33,8 +31,13 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
     super.initState();
     _model = createModel(context, () => ThankYouForQuestionModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ThankYouForQuestion'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('THANK_YOU_FOR_QUESTION_ThankYouForQuesti');
+      logFirebaseEvent('ThankYouForQuestion_backend_call');
+
       await currentUserReference!.update({
         ...mapToFirestore(
           {
@@ -42,26 +45,26 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
           },
         ),
       });
-      await showAlignedDialog(
+      logFirebaseEvent('ThankYouForQuestion_alert_dialog');
+      await showDialog(
         context: context,
-        isGlobal: true,
-        avoidOverflow: false,
-        targetAnchor:
-            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-        followerAnchor:
-            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
         builder: (dialogContext) {
-          return Material(
-            color: Colors.transparent,
+          return Dialog(
+            elevation: 0,
+            insetPadding: EdgeInsets.zero,
+            backgroundColor: Colors.transparent,
+            alignment: AlignmentDirectional(0.0, 0.0)
+                .resolve(Directionality.of(context)),
             child: WebViewAware(
-                child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
-              child: KarmaPlusDialogWidget(
-                karmaPoints: 0.5,
+              child: GestureDetector(
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
+                child: KarmaPlusDialogWidget(
+                  karmaPoints: 0.5,
+                ),
               ),
-            )),
+            ),
           );
         },
       ).then((value) => setState(() {}));
@@ -77,17 +80,6 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return Builder(
       builder: (context) => GestureDetector(
         onTap: () => _model.unfocusNode.canRequestFocus
@@ -102,13 +94,17 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(1.00, -1.00),
+                  alignment: AlignmentDirectional(1.0, -1.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent(
+                          'THANK_YOU_FOR_QUESTION_Container_hmd3n14');
+                      logFirebaseEvent('Container_navigate_to');
+
                       context.pushNamed('LatestInterviewQuestions');
                     },
                     child: Container(
@@ -139,7 +135,7 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 33.0, 0.0, 0.0),
                   child: Text(
-                    'TexttwxttextTexttwxttextTexttwxttextTexttwxttextTexttwxttext!',
+                    'Thank you!!!',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).headlineLarge,
                   ),
@@ -147,7 +143,7 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 33.0, 0.0, 0.0),
                   child: Text(
-                    'TexttwxttextTexttwxttextTexttwxttextTexttwxttextTexttwxttextTexttwxttext',
+                    ' We appreciate your contribution to our community! ',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Sofia Pro',

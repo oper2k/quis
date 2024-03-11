@@ -3,10 +3,9 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -14,10 +13,10 @@ import 'change_password_model.dart';
 export 'change_password_model.dart';
 
 class ChangePasswordWidget extends StatefulWidget {
-  const ChangePasswordWidget({Key? key}) : super(key: key);
+  const ChangePasswordWidget({super.key});
 
   @override
-  _ChangePasswordWidgetState createState() => _ChangePasswordWidgetState();
+  State<ChangePasswordWidget> createState() => _ChangePasswordWidgetState();
 }
 
 class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
@@ -29,6 +28,28 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ChangePasswordModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ChangePassword'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CHANGE_PASSWORD_ChangePassword_ON_INIT_S');
+      logFirebaseEvent('ChangePassword_auth');
+      if (currentUserEmail.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Email required!',
+            ),
+          ),
+        );
+        return;
+      }
+      await authManager.resetPassword(
+        email: currentUserEmail,
+        context: context,
+      );
+    });
   }
 
   @override
@@ -40,17 +61,6 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -71,13 +81,15 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('CHANGE_PASSWORD_Container_c9vawlvp_ON_TA');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -119,7 +131,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -129,7 +141,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -145,7 +157,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               ),
               Spacer(),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Builder(
                   builder: (context) => Padding(
                     padding:
@@ -156,6 +168,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'CHANGE_PASSWORD_Container_skm4bgdf_ON_TA');
+                        logFirebaseEvent('Container_auth');
                         if (currentUserEmail.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -170,25 +185,26 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           email: currentUserEmail,
                           context: context,
                         );
-                        await showAlignedDialog(
+                        logFirebaseEvent('Container_alert_dialog');
+                        await showDialog(
                           context: context,
-                          isGlobal: true,
-                          avoidOverflow: false,
-                          targetAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
-                          followerAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
                           builder: (dialogContext) {
-                            return Material(
-                              color: Colors.transparent,
+                            return Dialog(
+                              elevation: 0,
+                              insetPadding: EdgeInsets.zero,
+                              backgroundColor: Colors.transparent,
+                              alignment: AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
                               child: WebViewAware(
-                                  child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: EmailDialogWidget(),
-                              )),
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: EmailDialogWidget(),
+                                ),
+                              ),
                             );
                           },
                         ).then((value) => setState(() {}));
@@ -196,11 +212,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       child: Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(

@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'message_element_model.dart';
@@ -11,14 +10,14 @@ export 'message_element_model.dart';
 
 class MessageElementWidget extends StatefulWidget {
   const MessageElementWidget({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   final String? text;
 
   @override
-  _MessageElementWidgetState createState() => _MessageElementWidgetState();
+  State<MessageElementWidget> createState() => _MessageElementWidgetState();
 }
 
 class _MessageElementWidgetState extends State<MessageElementWidget> {
@@ -37,6 +36,8 @@ class _MessageElementWidgetState extends State<MessageElementWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MESSAGE_ELEMENT_messageElement_ON_INIT_S');
+      logFirebaseEvent('messageElement_update_component_state');
       setState(() {
         _model.shrinkedText = (String text) {
           return text.length > 300 ? text.substring(0, 300) : text;
@@ -54,19 +55,20 @@ class _MessageElementWidgetState extends State<MessageElementWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return InkWell(
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
+        logFirebaseEvent('MESSAGE_ELEMENT_Container_ngzggshd_ON_TA');
         if (_model.isExpand) {
+          logFirebaseEvent('Container_update_component_state');
           setState(() {
             _model.isExpand = false;
           });
         } else {
+          logFirebaseEvent('Container_update_component_state');
           setState(() {
             _model.isExpand = true;
           });
@@ -96,7 +98,7 @@ class _MessageElementWidgetState extends State<MessageElementWidget> {
                     }(widget.text)) >
                     300)) {
               return RichText(
-                textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                textScaler: MediaQuery.of(context).textScaler,
                 text: TextSpan(
                   children: [
                     TextSpan(

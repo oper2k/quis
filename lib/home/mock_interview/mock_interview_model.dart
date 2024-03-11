@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/pick_bottom_sheet_widget.dart';
@@ -5,10 +6,8 @@ import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/home/deducted_karma/deducted_karma_widget.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'mock_interview_widget.dart' show MockInterviewWidget;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +60,8 @@ class MockInterviewModel extends FlutterFlowModel<MockInterviewWidget> {
     return null;
   }
 
+  // Stores action output result for [Action Block - payByKarma] action in Button widget.
+  bool? paymentOutput;
   // State field(s) for Expandable widget.
   late ExpandableController expandableController1;
 
@@ -90,12 +91,14 @@ class MockInterviewModel extends FlutterFlowModel<MockInterviewWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     pseudoDropDownModel = createModel(context, () => PseudoDropDownModel());
     textController1Validator = _textController1Validator;
     textController2Validator = _textController2Validator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     pseudoDropDownModel.dispose();

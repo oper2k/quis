@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'karma_plus_dialog_model.dart';
@@ -10,14 +9,14 @@ export 'karma_plus_dialog_model.dart';
 
 class KarmaPlusDialogWidget extends StatefulWidget {
   const KarmaPlusDialogWidget({
-    Key? key,
+    super.key,
     required this.karmaPoints,
-  }) : super(key: key);
+  });
 
   final double? karmaPoints;
 
   @override
-  _KarmaPlusDialogWidgetState createState() => _KarmaPlusDialogWidgetState();
+  State<KarmaPlusDialogWidget> createState() => _KarmaPlusDialogWidgetState();
 }
 
 class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
@@ -44,10 +43,8 @@ class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).white,
@@ -84,6 +81,8 @@ class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('KARMA_PLUS_DIALOG_HOORAY!_BTN_ON_TAP');
+                    logFirebaseEvent('Button_bottom_sheet');
                     Navigator.pop(context);
                   },
                   text: 'Hooray!',

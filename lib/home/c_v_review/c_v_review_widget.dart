@@ -3,26 +3,23 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import '/home/deducted_karma/deducted_karma_widget.dart';
 import '/actions/actions.dart' as action_blocks;
-import 'package:aligned_dialog/aligned_dialog.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'c_v_review_model.dart';
 export 'c_v_review_model.dart';
 
 class CVReviewWidget extends StatefulWidget {
-  const CVReviewWidget({Key? key}) : super(key: key);
+  const CVReviewWidget({super.key});
 
   @override
-  _CVReviewWidgetState createState() => _CVReviewWidgetState();
+  State<CVReviewWidget> createState() => _CVReviewWidgetState();
 }
 
 class _CVReviewWidgetState extends State<CVReviewWidget> {
@@ -35,6 +32,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
     super.initState();
     _model = createModel(context, () => CVReviewModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'CVReview'});
     _model.emailFieldController ??= TextEditingController();
     _model.emailFieldFocusNode ??= FocusNode();
 
@@ -54,17 +52,6 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -85,13 +72,15 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('C_V_REVIEW_Container_1tjp73qh_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -108,7 +97,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                 width: 40.0,
                 height: 40.0,
                 decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: AlignmentDirectional(-1.0, 0.0),
               ),
             ],
           ),
@@ -125,7 +114,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lo4e868o.json',
                     width: 220.0,
@@ -160,8 +149,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          10.0, 10.0, 10.0, 10.0),
+                      padding: EdgeInsets.all(10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -413,7 +401,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
@@ -441,6 +429,9 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         '_model.emailFieldController',
                         Duration(milliseconds: 100),
                         () async {
+                          logFirebaseEvent(
+                              'C_V_REVIEW_EmailField_ON_TEXTFIELD_CHANG');
+                          logFirebaseEvent('EmailField_update_page_state');
                           setState(() {});
                         },
                       ),
@@ -485,8 +476,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         ),
                         filled: true,
                         fillColor: FlutterFlowTheme.of(context).white,
-                        contentPadding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 16.0, 16.0, 16.0),
+                        contentPadding: EdgeInsets.all(16.0),
                       ),
                       style:
                           FlutterFlowTheme.of(context).headlineSmall.override(
@@ -501,7 +491,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
@@ -533,7 +523,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -560,6 +550,12 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'C_V_REVIEW_Container_4dks9xqu_ON_TAP');
+                              logFirebaseEvent('Container_custom_action');
+                              await actions.dismissKeyboard();
+                              logFirebaseEvent(
+                                  'Container_upload_file_to_firebase');
                               final selectedFiles = await selectFiles(
                                 multiFile: false,
                               );
@@ -603,17 +599,40 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                 }
                               }
 
+                              logFirebaseEvent('Container_show_snack_bar');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Uploading document....',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          fontFamily: 'Sofia Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
+                                  duration: Duration(milliseconds: 3000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                              );
+                              logFirebaseEvent('Container_update_page_state');
                               setState(() {
                                 _model.isCVvalidated = true;
                               });
                             },
                             child: Container(
                               decoration: BoxDecoration(),
-                              child: Icon(
-                                FFIcons.kiconamoonAttachmentLight1,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
+                              child: Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Icon(
+                                  FFIcons.kiconamoonAttachmentLight1,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
                               ),
                             ),
                           ),
@@ -623,7 +642,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(1.00, 0.00),
+                  alignment: AlignmentDirectional(1.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
@@ -667,89 +686,72 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                     ),
                   ),
                 ),
-                Builder(
-                  builder: (context) => Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        if (_model.uploadedFileUrl != null &&
-                            _model.uploadedFileUrl != '') {
-                          setState(() {
-                            _model.isCVvalidated = true;
-                          });
-                          if (_model.formKey.currentState == null ||
-                              !_model.formKey.currentState!.validate()) {
-                            return;
-                          }
-                        } else {
-                          setState(() {
-                            _model.isCVvalidated = false;
-                          });
-                          if (_model.formKey.currentState == null ||
-                              !_model.formKey.currentState!.validate()) {
-                            return;
-                          }
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'C_V_REVIEW_PAGE_SUBMIT_MY_C_V_BTN_ON_TAP');
+                      if (_model.uploadedFileUrl != null &&
+                          _model.uploadedFileUrl != '') {
+                        logFirebaseEvent('Button_update_page_state');
+                        setState(() {
+                          _model.isCVvalidated = true;
+                        });
+                        logFirebaseEvent('Button_validate_form');
+                        if (_model.formKey.currentState == null ||
+                            !_model.formKey.currentState!.validate()) {
                           return;
                         }
+                      } else {
+                        logFirebaseEvent('Button_update_page_state');
+                        setState(() {
+                          _model.isCVvalidated = false;
+                        });
+                        logFirebaseEvent('Button_validate_form');
+                        if (_model.formKey.currentState == null ||
+                            !_model.formKey.currentState!.validate()) {
+                          return;
+                        }
+                        return;
+                      }
 
-                        await showAlignedDialog(
-                          context: context,
-                          isGlobal: true,
-                          avoidOverflow: false,
-                          targetAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
-                          followerAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
-                          builder: (dialogContext) {
-                            return Material(
-                              color: Colors.transparent,
-                              child: WebViewAware(
-                                  child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: DeductedKarmaWidget(
-                                  deductedKarma: 10.0,
-                                ),
-                              )),
-                            );
-                          },
-                        ).then((value) => setState(() {}));
-
-                        await action_blocks.payByKarma(
-                          context,
-                          karmaAmount: 10.0,
-                        );
-                      },
-                      text: 'Submit my CV',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 52.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).headlineLarge.override(
-                                  fontFamily: 'Sofia Pro',
-                                  color: FlutterFlowTheme.of(context).white,
-                                  useGoogleFonts: false,
-                                ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 0.0,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
+                      logFirebaseEvent('Button_action_block');
+                      await action_blocks.payByKarma(
+                        context,
+                        karmaAmount: 10.0,
+                        serviceName: 'CV  Review',
+                        quantity: 1,
+                        attachmentlink: _model.uploadedFileUrl,
+                        userEmail: _model.emailFieldController.text,
+                      );
+                    },
+                    text: 'Submit my CV',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 52.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: 'Sofia Pro',
+                                color: FlutterFlowTheme.of(context).white,
+                                useGoogleFonts: false,
+                              ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 0.0,
                       ),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
@@ -774,8 +776,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -794,8 +795,8 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: RichText(
-                                      textScaleFactor: MediaQuery.of(context)
-                                          .textScaleFactor,
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
@@ -823,6 +824,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                                 SystemMouseCursors.click,
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () async {
+                                                logFirebaseEvent(
+                                                    'C_V_REVIEW_RichTextSpan_li9lzbff_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'RichTextSpan_launch_u_r_l');
                                                 await launchURL(
                                                     'https://quisapp.notion.site/Karma-Karma-Exchange-5327c89c0dc04558add1d77aef5586b1');
                                               },
@@ -863,8 +868,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -918,8 +922,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -973,8 +976,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1028,8 +1030,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         Container(
                           decoration: BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               color: Color(0x00000000),
@@ -1048,8 +1049,8 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: RichText(
-                                      textScaleFactor: MediaQuery.of(context)
-                                          .textScaleFactor,
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
@@ -1076,6 +1077,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                                 SystemMouseCursors.click,
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () async {
+                                                logFirebaseEvent(
+                                                    'C_V_REVIEW_RichTextSpan_7gxd9osx_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'RichTextSpan_launch_u_r_l');
                                                 await launchURL(
                                                     'info@quis-hq.com');
                                               },

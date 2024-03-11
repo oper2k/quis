@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,8 +36,9 @@ class LikeDislikeStruct extends FFFirebaseStruct {
         isLike: data['is_like'] as bool?,
       );
 
-  static LikeDislikeStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? LikeDislikeStruct.fromMap(data) : null;
+  static LikeDislikeStruct? maybeFromMap(dynamic data) => data is Map
+      ? LikeDislikeStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'user': _user,

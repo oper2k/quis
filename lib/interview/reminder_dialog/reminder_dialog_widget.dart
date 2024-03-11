@@ -1,11 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -13,10 +9,10 @@ import 'reminder_dialog_model.dart';
 export 'reminder_dialog_model.dart';
 
 class ReminderDialogWidget extends StatefulWidget {
-  const ReminderDialogWidget({Key? key}) : super(key: key);
+  const ReminderDialogWidget({super.key});
 
   @override
-  _ReminderDialogWidgetState createState() => _ReminderDialogWidgetState();
+  State<ReminderDialogWidget> createState() => _ReminderDialogWidgetState();
 }
 
 class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
@@ -43,10 +39,8 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -64,7 +58,7 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
@@ -83,13 +77,16 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'REMINDER_DIALOG_Container_in5mvqo1_ON_TA');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -97,7 +94,7 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -122,7 +119,7 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
                   clipBehavior: Clip.none,
                   children: [
                     Text(
-                      'Please log in 5 minutes prior to starting ',
+                      'Registration is successful! Please log in 5 minutes prior to starting ☺️',
                       textAlign: TextAlign.center,
                       style:
                           FlutterFlowTheme.of(context).headlineSmall.override(
@@ -131,93 +128,14 @@ class _ReminderDialogWidgetState extends State<ReminderDialogWidget> {
                                 lineHeight: 1.16,
                               ),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/lqihi_.webp',
-                        width: 16.0,
-                        height: 19.0,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
                   ],
                 ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FFButtonWidget(
-                  onPressed: () async {
-                    await actions.awesomeNotificationSchedule(
-                      random_data.randomInteger(0, 10000),
-                      'Your Interview is in 15 Minutes!',
-                      'Your dream job awaits – let\'s get you ready! ✨',
-                      functions.getHourInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '15')),
-                      functions.getMinutesInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '15')),
-                      functions.getYearInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '15')),
-                      functions.getMonthInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '15')),
-                      functions.getDayInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '15')),
-                      null,
-                      null,
-                      null,
-                      false,
-                      true,
-                    );
-                    await actions.awesomeNotificationSchedule(
-                      random_data.randomInteger(0, 10000),
-                      'Join Quis Practice Interview Session in 1 Hour! 💼',
-                      'Don\'t wait to be ready. Start preparing for your Interview today! ',
-                      functions.getHourInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '60')),
-                      functions.getMinutesInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '60')),
-                      functions.getYearInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '60')),
-                      functions.getMonthInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '60')),
-                      functions.getDayInInt(functions.timeMinusMinutes(
-                          functions.getSameTime(
-                              getRemoteConfigInt('unixTimeSecForInterview'),
-                              getCurrentTimestamp)!,
-                          '60')),
-                      null,
-                      null,
-                      null,
-                      false,
-                      true,
-                    );
-                    Navigator.pop(context);
+                  onPressed: () {
+                    print('Button pressed ...');
                   },
                   text: 'Get Reminder',
                   options: FFButtonOptions(

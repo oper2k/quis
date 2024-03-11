@@ -14,10 +14,10 @@ import 'referral_model.dart';
 export 'referral_model.dart';
 
 class ReferralWidget extends StatefulWidget {
-  const ReferralWidget({Key? key}) : super(key: key);
+  const ReferralWidget({super.key});
 
   @override
-  _ReferralWidgetState createState() => _ReferralWidgetState();
+  State<ReferralWidget> createState() => _ReferralWidgetState();
 }
 
 class _ReferralWidgetState extends State<ReferralWidget> {
@@ -29,6 +29,8 @@ class _ReferralWidgetState extends State<ReferralWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ReferralModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Referral'});
   }
 
   @override
@@ -40,17 +42,6 @@ class _ReferralWidgetState extends State<ReferralWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -71,13 +62,15 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('REFERRAL_PAGE_Container_4pjmlbg1_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -109,7 +102,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lnvylqq4.json',
                     width: 220.0,
@@ -119,7 +112,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
@@ -176,8 +169,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                             .secondaryBackground,
                                         shape: BoxShape.circle,
                                       ),
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         '1',
                                         style: FlutterFlowTheme.of(context)
@@ -221,8 +213,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                             .secondaryBackground,
                                         shape: BoxShape.circle,
                                       ),
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         '2',
                                         style: FlutterFlowTheme.of(context)
@@ -266,8 +257,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                             .secondaryBackground,
                                         shape: BoxShape.circle,
                                       ),
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         '3',
                                         style: FlutterFlowTheme.of(context)
@@ -373,9 +363,13 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'REFERRAL_PAGE_Container_7bo0duu2_ON_TAP');
+                              logFirebaseEvent('Container_copy_to_clipboard');
                               await Clipboard.setData(ClipboardData(
                                   text: valueOrDefault(
                                       currentUserDocument?.refCode, '')));
+                              logFirebaseEvent('Container_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -394,8 +388,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                             child: Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    4.0, 4.0, 4.0, 4.0),
+                                padding: EdgeInsets.all(4.0),
                                 child: Icon(
                                   FFIcons.kocticonCopy24,
                                   color: FlutterFlowTheme.of(context)
@@ -420,8 +413,11 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'REFERRAL_PAGE_Container_dgnftky3_ON_TAP');
+                        logFirebaseEvent('Container_share');
                         await Share.share(
-                          'Hey! Sign up using my Referral Code and start your Interview Success with Quis! Referral Code:  ${valueOrDefault(currentUserDocument?.refCode, '')}',
+                          'Download Quis and use my referral code: ${valueOrDefault(currentUserDocument?.refCode, '')} Get your dream job! Available on IOS & Android',
                           sharePositionOrigin: getWidgetBoundingBox(context),
                         );
                       },
@@ -461,6 +457,10 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'REFERRAL_PAGE_Container_9ax95qrd_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Container_copy_to_clipboard');
                                   await Clipboard.setData(ClipboardData(
                                       text: valueOrDefault(
                                           currentUserDocument?.refCode, '')));
@@ -468,8 +468,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                 child: Container(
                                   decoration: BoxDecoration(),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4.0, 4.0, 4.0, 4.0),
+                                    padding: EdgeInsets.all(4.0),
                                     child: Icon(
                                       FFIcons.kocticonShare24,
                                       color: FlutterFlowTheme.of(context).white,
@@ -550,9 +549,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    6.0, 6.0, 6.0, 6.0),
+                                            padding: EdgeInsets.all(6.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -569,7 +566,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                   ),
                                                   alignment:
                                                       AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     functions
                                                         .getInitialsFromName(

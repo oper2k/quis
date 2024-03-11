@@ -6,17 +6,16 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'confirmed_email_model.dart';
 export 'confirmed_email_model.dart';
 
 class ConfirmedEmailWidget extends StatefulWidget {
-  const ConfirmedEmailWidget({Key? key}) : super(key: key);
+  const ConfirmedEmailWidget({super.key});
 
   @override
-  _ConfirmedEmailWidgetState createState() => _ConfirmedEmailWidgetState();
+  State<ConfirmedEmailWidget> createState() => _ConfirmedEmailWidgetState();
 }
 
 class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
@@ -29,8 +28,13 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
     super.initState();
     _model = createModel(context, () => ConfirmedEmailModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ConfirmedEmail'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CONFIRMED_EMAIL_ConfirmedEmail_ON_INIT_S');
+      logFirebaseEvent('ConfirmedEmail_backend_call');
+
       await currentUserReference!.update(createUsersRecordData(
         isEmailPageViewed: true,
       ));
@@ -46,17 +50,6 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -75,7 +68,7 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                 width: 40.0,
                 height: 40.0,
                 decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: AlignmentDirectional(-1.0, 0.0),
               ),
               Text(
                 'Sign up',
@@ -111,7 +104,7 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -121,7 +114,7 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -136,19 +129,15 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('CONFIRMED_EMAIL_GET_STARTED_BTN_ON_TAP');
+                    logFirebaseEvent('Button_backend_call');
+
                     await currentUserReference!.update(createUsersRecordData(
                       isEmailPageViewed: true,
                     ));
+                    logFirebaseEvent('Button_navigate_to');
 
-                    context.goNamed(
-                      'Pricing',
-                      queryParameters: {
-                        'isFirst': serializeParam(
-                          true,
-                          ParamType.bool,
-                        ),
-                      }.withoutNulls,
-                    );
+                    context.goNamed('Home');
                   },
                   text: 'Get Started',
                   options: FFButtonOptions(

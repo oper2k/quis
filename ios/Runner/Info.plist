@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.263957136102-8rot7sa82aht7k0540r5rk9m3qjh5rt1</string>
+                <string>com.googleusercontent.apps.263957136102-2s40ueh7nggke0d7mo4964drm9jl3aps</string>
                 
             </array>
         </dict>
@@ -54,13 +54,13 @@
 	<true/>
 
 	<key>NSCameraUsageDescription</key>
-    <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+    <string>In order to upload your profile picture, this app requires permission to access the camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>In order to upload data, this app requires permission to access the photo library.</string>
+    <string>In order to upload your profile picture, this app requires permission to access the photo library</string>
 	<key>PermissionGroupNotification</key>
-    <string>“Quis” Would Like to Send you Notifications</string>
+    <string>“Quis” Would Like to Send you Notifications about new features and reminders</string>
 	<key>NSMicrophoneUsageDescription</key>
-    <string>“Quis” requires the access to Microphone </string>
+    <string>In order to create video calls, this app requires the access to microphone </string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>
@@ -88,5 +88,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

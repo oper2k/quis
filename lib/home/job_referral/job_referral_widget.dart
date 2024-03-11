@@ -7,11 +7,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import '/home/deducted_karma/deducted_karma_widget.dart';
 import '/actions/actions.dart' as action_blocks;
-import 'package:aligned_dialog/aligned_dialog.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +18,10 @@ import 'job_referral_model.dart';
 export 'job_referral_model.dart';
 
 class JobReferralWidget extends StatefulWidget {
-  const JobReferralWidget({Key? key}) : super(key: key);
+  const JobReferralWidget({super.key});
 
   @override
-  _JobReferralWidgetState createState() => _JobReferralWidgetState();
+  State<JobReferralWidget> createState() => _JobReferralWidgetState();
 }
 
 class _JobReferralWidgetState extends State<JobReferralWidget> {
@@ -36,6 +34,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
     super.initState();
     _model = createModel(context, () => JobReferralModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'JobReferral'});
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -52,17 +51,6 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -83,13 +71,15 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('JOB_REFERRAL_Container_o5nu5zrc_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -106,7 +96,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                 width: 40.0,
                 height: 40.0,
                 decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: AlignmentDirectional(-1.0, 0.0),
               ),
             ],
           ),
@@ -164,7 +154,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.00, 0.00),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Lottie.asset(
                                 'assets/lottie_animations/animation_lo30k8t3.json',
                                 width: 220.0,
@@ -203,8 +193,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 10.0, 10.0, 10.0),
+                                  padding: EdgeInsets.all(10.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -544,6 +533,10 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'JOB_REFERRAL_Container_o5bpl2d5_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_bottom_sheet');
                                           await showModalBottomSheet(
                                             isScrollControlled: true,
                                             backgroundColor: Colors.transparent,
@@ -551,32 +544,40 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                             context: context,
                                             builder: (context) {
                                               return WebViewAware(
-                                                  child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: PickBottomSheetWidget(
-                                                    stringList:
-                                                        groupListGroupRecordList
-                                                            .map((e) => e.name)
-                                                            .toList(),
+                                                child: GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child:
+                                                        PickBottomSheetWidget(
+                                                      stringList:
+                                                          groupListGroupRecordList
+                                                              .map(
+                                                                  (e) => e.name)
+                                                              .toList(),
+                                                      title:
+                                                          'Choose from the list below',
+                                                    ),
                                                   ),
                                                 ),
-                                              ));
+                                              );
                                             },
                                           ).then((value) => safeSetState(() =>
                                               _model.groupOutput = value));
 
                                           if (_model.groupOutput != null &&
                                               _model.groupOutput != '') {
+                                            logFirebaseEvent(
+                                                'Container_update_page_state');
                                             setState(() {
                                               _model.pickedIndustry =
                                                   groupListGroupRecordList
@@ -641,6 +642,10 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'JOB_REFERRAL_Container_u2os7s8o_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_bottom_sheet');
                                           await showModalBottomSheet(
                                             isScrollControlled: true,
                                             backgroundColor: Colors.transparent,
@@ -648,40 +653,48 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                             context: context,
                                             builder: (context) {
                                               return WebViewAware(
-                                                  child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: PickBottomSheetWidget(
-                                                    stringList: roleListRoleRecordList
-                                                        .where((e) =>
-                                                            (e.group ==
-                                                                _model
-                                                                    .pickedIndustry
-                                                                    ?.reference) &&
-                                                            (e.name !=
-                                                                'Unemployed') &&
-                                                            (e.name != 'Other'))
-                                                        .toList()
-                                                        .map((e) => e.name)
-                                                        .toList(),
+                                                child: GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child:
+                                                        PickBottomSheetWidget(
+                                                      stringList: roleListRoleRecordList
+                                                          .where((e) =>
+                                                              (e.group ==
+                                                                  _model
+                                                                      .pickedIndustry
+                                                                      ?.reference) &&
+                                                              (e.name !=
+                                                                  'Unemployed') &&
+                                                              (e.name !=
+                                                                  'Other'))
+                                                          .toList()
+                                                          .map((e) => e.name)
+                                                          .toList(),
+                                                      title:
+                                                          'Choose from the list below',
+                                                    ),
                                                   ),
                                                 ),
-                                              ));
+                                              );
                                             },
                                           ).then((value) => safeSetState(
                                               () => _model.roleOutput = value));
 
                                           if (_model.roleOutput != null &&
                                               _model.roleOutput != '') {
+                                            logFirebaseEvent(
+                                                'Container_update_page_state');
                                             setState(() {
                                               _model.pickedRole =
                                                   roleListRoleRecordList
@@ -801,9 +814,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .white,
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 16.0, 16.0, 16.0),
+                                          contentPadding: EdgeInsets.all(16.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall,
@@ -888,6 +899,14 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'JOB_REFERRAL_Container_2dv9fdu7_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Container_custom_action');
+                                                  await actions
+                                                      .dismissKeyboard();
+                                                  logFirebaseEvent(
+                                                      'Container_upload_file_to_firebase');
                                                   final selectedFiles =
                                                       await selectFiles(
                                                     multiFile: false,
@@ -953,6 +972,8 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                     }
                                                   }
 
+                                                  logFirebaseEvent(
+                                                      'Container_update_page_state');
                                                   setState(() {
                                                     _model.isCVvalidated = true;
                                                   });
@@ -1053,9 +1074,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .white,
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 16.0, 16.0, 16.0),
+                                          contentPadding: EdgeInsets.all(16.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall,
@@ -1071,7 +1090,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.00, 0.00),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
@@ -1091,7 +1110,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(1.00, 0.00),
+                              alignment: AlignmentDirectional(1.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 23.0, 0.0, 0.0),
@@ -1140,56 +1159,43 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                 ),
                               ),
                             ),
-                            Builder(
-                              builder: (context) => Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    if ((_model.pickedRole != null) &&
-                                        (_model.pickedIndustry != null)) {
-                                      setState(() {
-                                        _model.isRoleGroupValidated = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        _model.isRoleGroupValidated = false;
-                                      });
-                                      if (_model.uploadedFileUrl != null &&
-                                          _model.uploadedFileUrl != '') {
-                                        setState(() {
-                                          _model.isCVvalidated = true;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          _model.isCVvalidated = false;
-                                        });
-                                      }
-
-                                      if (_model.formKey.currentState == null ||
-                                          !_model.formKey.currentState!
-                                              .validate()) {
-                                        return;
-                                      }
-                                      if (_model.uploadedFileUrl == null ||
-                                          _model.uploadedFileUrl.isEmpty) {
-                                        return;
-                                      }
-                                      return;
-                                    }
-
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 30.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'JOB_REFERRAL_GET_A_REFERRAL_BTN_ON_TAP');
+                                  var _shouldSetState = false;
+                                  if ((_model.pickedRole != null) &&
+                                      (_model.pickedIndustry != null)) {
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    setState(() {
+                                      _model.isRoleGroupValidated = true;
+                                    });
+                                  } else {
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    setState(() {
+                                      _model.isRoleGroupValidated = false;
+                                    });
                                     if (_model.uploadedFileUrl != null &&
                                         _model.uploadedFileUrl != '') {
+                                      logFirebaseEvent(
+                                          'Button_update_page_state');
                                       setState(() {
                                         _model.isCVvalidated = true;
                                       });
                                     } else {
+                                      logFirebaseEvent(
+                                          'Button_update_page_state');
                                       setState(() {
                                         _model.isCVvalidated = false;
                                       });
-                                      return;
                                     }
 
+                                    logFirebaseEvent('Button_validate_form');
                                     if (_model.formKey.currentState == null ||
                                         !_model.formKey.currentState!
                                             .validate()) {
@@ -1199,65 +1205,75 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                         _model.uploadedFileUrl.isEmpty) {
                                       return;
                                     }
-                                    await showAlignedDialog(
-                                      context: context,
-                                      isGlobal: true,
-                                      avoidOverflow: false,
-                                      targetAnchor: AlignmentDirectional(
-                                              0.0, 0.0)
-                                          .resolve(Directionality.of(context)),
-                                      followerAnchor: AlignmentDirectional(
-                                              0.0, 0.0)
-                                          .resolve(Directionality.of(context)),
-                                      builder: (dialogContext) {
-                                        return Material(
-                                          color: Colors.transparent,
-                                          child: WebViewAware(
-                                              child: GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: DeductedKarmaWidget(
-                                              deductedKarma: 15.0,
-                                            ),
-                                          )),
-                                        );
-                                      },
-                                    ).then((value) => setState(() {}));
+                                    if (_shouldSetState) setState(() {});
+                                    return;
+                                  }
 
-                                    await action_blocks.payByKarma(
-                                      context,
-                                      karmaAmount: 15.0,
-                                    );
-                                  },
-                                  text: 'Get a Referral',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 52.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .override(
-                                          fontFamily: 'Sofia Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          useGoogleFonts: false,
-                                        ),
-                                    elevation: 0.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 0.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10.0),
+                                  if (_model.uploadedFileUrl != null &&
+                                      _model.uploadedFileUrl != '') {
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    setState(() {
+                                      _model.isCVvalidated = true;
+                                    });
+                                  } else {
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    setState(() {
+                                      _model.isCVvalidated = false;
+                                    });
+                                    if (_shouldSetState) setState(() {});
+                                    return;
+                                  }
+
+                                  logFirebaseEvent('Button_validate_form');
+                                  if (_model.formKey.currentState == null ||
+                                      !_model.formKey.currentState!
+                                          .validate()) {
+                                    return;
+                                  }
+                                  if (_model.uploadedFileUrl == null ||
+                                      _model.uploadedFileUrl.isEmpty) {
+                                    return;
+                                  }
+                                  logFirebaseEvent('Button_action_block');
+                                  _model.payByKarmaOutput =
+                                      await action_blocks.payByKarma(
+                                    context,
+                                    karmaAmount: 15.0,
+                                    serviceName: 'Job Referral',
+                                    quantity: 1,
+                                    comment: _model.textController2.text,
+                                    userRole: _model.pickedRole?.name,
+                                    userIndustry: _model.pickedIndustry?.name,
+                                    userEmail: _model.textController1.text,
+                                  );
+                                  _shouldSetState = true;
+                                  if (_shouldSetState) setState(() {});
+                                },
+                                text: 'Get a Referral',
+                                options: FFButtonOptions(
+                                  width: double.infinity,
+                                  height: 52.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .headlineLarge
+                                      .override(
+                                        fontFamily: 'Sofia Pro',
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
+                                        useGoogleFonts: false,
+                                      ),
+                                  elevation: 0.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 0.0,
                                   ),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
                             ),

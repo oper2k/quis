@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'calendar_element_model.dart';
@@ -9,16 +8,16 @@ export 'calendar_element_model.dart';
 
 class CalendarElementWidget extends StatefulWidget {
   const CalendarElementWidget({
-    Key? key,
+    super.key,
     required this.date,
     required this.isActive,
-  }) : super(key: key);
+  });
 
   final DateTime? date;
   final bool? isActive;
 
   @override
-  _CalendarElementWidgetState createState() => _CalendarElementWidgetState();
+  State<CalendarElementWidget> createState() => _CalendarElementWidgetState();
 }
 
 class _CalendarElementWidgetState extends State<CalendarElementWidget> {
@@ -45,8 +44,6 @@ class _CalendarElementWidgetState extends State<CalendarElementWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Visibility(
       visible: widget.date!.secondsSinceEpoch >= 0,
       child: Container(
@@ -58,7 +55,7 @@ class _CalendarElementWidgetState extends State<CalendarElementWidget> {
               : FlutterFlowTheme.of(context).white,
           borderRadius: BorderRadius.circular(10.0),
         ),
-        alignment: AlignmentDirectional(0.00, 0.00),
+        alignment: AlignmentDirectional(0.0, 0.0),
         child: Text(
           dateTimeFormat('dd', widget.date),
           style: FlutterFlowTheme.of(context).headlineMedium.override(

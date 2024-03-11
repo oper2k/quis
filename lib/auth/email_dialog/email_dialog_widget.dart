@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -9,10 +8,10 @@ import 'email_dialog_model.dart';
 export 'email_dialog_model.dart';
 
 class EmailDialogWidget extends StatefulWidget {
-  const EmailDialogWidget({Key? key}) : super(key: key);
+  const EmailDialogWidget({super.key});
 
   @override
-  _EmailDialogWidgetState createState() => _EmailDialogWidgetState();
+  State<EmailDialogWidget> createState() => _EmailDialogWidgetState();
 }
 
 class _EmailDialogWidgetState extends State<EmailDialogWidget> {
@@ -39,10 +38,8 @@ class _EmailDialogWidgetState extends State<EmailDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -60,13 +57,16 @@ class _EmailDialogWidgetState extends State<EmailDialogWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'EMAIL_DIALOG_Container_ib60told_ON_TAP');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -77,7 +77,7 @@ class _EmailDialogWidgetState extends State<EmailDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Lottie.asset(
                       'assets/lottie_animations/animation_lnv2c0x7.json',
                       width: 150.0,
@@ -87,13 +87,16 @@ class _EmailDialogWidgetState extends State<EmailDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'EMAIL_DIALOG_Container_xdc51d6x_ON_TAP');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -101,7 +104,7 @@ class _EmailDialogWidgetState extends State<EmailDialogWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,

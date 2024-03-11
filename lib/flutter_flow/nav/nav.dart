@@ -6,6 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -82,14 +83,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? ConfirmEmailWidget() : OnboardingWidget(),
+          appStateNotifier.loggedIn ? SplashPageWidget() : InitPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? ConfirmEmailWidget()
-              : OnboardingWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? SplashPageWidget() : InitPageWidget(),
         ),
         FFRoute(
           name: 'Home',
@@ -97,9 +97,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
-          name: 'Onboarding',
-          path: '/onboarding',
-          builder: (context, params) => OnboardingWidget(),
+          name: 'OnboardingOld',
+          path: '/onboardingOld',
+          builder: (context, params) => OnboardingOldWidget(),
         ),
         FFRoute(
           name: 'Login',
@@ -107,15 +107,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'Signup',
-          path: '/signup',
-          builder: (context, params) => SignupWidget(),
+          name: 'SignupOld',
+          path: '/signupOld',
+          builder: (context, params) => SignupOldWidget(),
         ),
         FFRoute(
           name: 'Pricing',
           path: '/pricing',
           builder: (context, params) => PricingWidget(
-            isFirst: params.getParam('isFirst', ParamType.bool),
+            isInOnboarding: params.getParam('isInOnboarding', ParamType.bool),
+            offers: params.getParam<PaywallPrice>('offers', ParamType.Enum),
           ),
         ),
         FFRoute(
@@ -294,9 +295,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'InterviewFeedback',
           path: '/interviewFeedback',
+          asyncParams: {
+            'roomDoc':
+                getDoc(['conference_room'], ConferenceRoomRecord.fromSnapshot),
+          },
           builder: (context, params) => InterviewFeedbackWidget(
             userRef: params.getParam(
                 'userRef', ParamType.DocumentReference, false, ['users']),
+            roomDoc: params.getParam('roomDoc', ParamType.Document),
+            isLike: params.getParam('isLike', ParamType.bool),
           ),
         ),
         FFRoute(
@@ -307,9 +314,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'LIQ',
           path: '/liq',
+          asyncParams: {
+            'roomDoc':
+                getDoc(['conference_room'], ConferenceRoomRecord.fromSnapshot),
+          },
           builder: (context, params) => LiqWidget(
             userItem: params.getParam(
                 'userItem', ParamType.DocumentReference, false, ['users']),
+            roomDoc: params.getParam('roomDoc', ParamType.Document),
           ),
         ),
         FFRoute(
@@ -334,11 +346,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'Add-onsCopy',
-          path: '/addOnsCopy',
-          builder: (context, params) => AddOnsCopyWidget(),
-        ),
-        FFRoute(
           name: 'Question',
           path: '/question',
           asyncParams: {
@@ -352,6 +359,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'VideoConfPage',
           path: '/videoConfPage',
+          asyncParams: {
+            'roomDoc':
+                getDoc(['conference_room'], ConferenceRoomRecord.fromSnapshot),
+          },
           builder: (context, params) => VideoConfPageWidget(
             token: params.getParam('token', ParamType.String),
             channelName: params.getParam('channelName', ParamType.String),
@@ -360,6 +371,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             uid: params.getParam('uid', ParamType.int),
             userRef: params.getParam(
                 'userRef', ParamType.DocumentReference, false, ['users']),
+            role: params.getParam('role', ParamType.String),
+            roomDoc: params.getParam('roomDoc', ParamType.Document),
           ),
         ),
         FFRoute(
@@ -375,7 +388,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ThankYouForSubscription',
           path: '/thankYouForSubscription',
-          builder: (context, params) => ThankYouForSubscriptionWidget(),
+          builder: (context, params) => ThankYouForSubscriptionWidget(
+            isInOnboarding: params.getParam('isInOnboarding', ParamType.bool),
+          ),
         ),
         FFRoute(
           name: 'VideoVimeo',
@@ -383,6 +398,180 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => VideoVimeoWidget(
             videoVimeoURL: params.getParam('videoVimeoURL', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'ConfirmEmailCopy',
+          path: '/confirmEmailCopy',
+          builder: (context, params) => ConfirmEmailCopyWidget(
+            isAfterReg: params.getParam('isAfterReg', ParamType.bool),
+          ),
+        ),
+        FFRoute(
+          name: 'ReminderPage',
+          path: '/reminderPage',
+          builder: (context, params) => ReminderPageWidget(),
+        ),
+        FFRoute(
+          name: 'InitPageOld',
+          path: '/initPageOld',
+          builder: (context, params) => InitPageOldWidget(),
+        ),
+        FFRoute(
+          name: 'PricingOld',
+          path: '/pricingOld',
+          builder: (context, params) => PricingOldWidget(
+            isFirst: params.getParam('isFirst', ParamType.bool),
+          ),
+        ),
+        FFRoute(
+          name: 'AuthEmailPage',
+          path: '/authEmailPage',
+          builder: (context, params) => AuthEmailPageWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding01',
+          path: '/onboarding01',
+          builder: (context, params) => Onboarding01Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding02',
+          path: '/onboarding02',
+          builder: (context, params) => Onboarding02Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding03name',
+          path: '/onboarding03name',
+          builder: (context, params) => Onboarding03nameWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding04',
+          path: '/onboarding04',
+          builder: (context, params) => Onboarding04Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding05',
+          path: '/onboarding05',
+          builder: (context, params) => Onboarding05Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding06industry',
+          path: '/onboarding06industry',
+          builder: (context, params) => Onboarding06industryWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding07',
+          path: '/onboarding07',
+          builder: (context, params) => Onboarding07Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding08',
+          path: '/onboarding08',
+          builder: (context, params) => Onboarding08Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding18time',
+          path: '/onboarding18time',
+          builder: (context, params) => Onboarding18timeWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding09experienceYears',
+          path: '/onboarding09experienceYears',
+          builder: (context, params) => Onboarding09experienceYearsWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding10role',
+          path: '/onboarding10role',
+          builder: (context, params) => Onboarding10roleWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding11improve',
+          path: '/onboarding11improve',
+          builder: (context, params) => Onboarding11improveWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding12referral',
+          path: '/onboarding12referral',
+          builder: (context, params) => Onboarding12referralWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding13',
+          path: '/onboarding13',
+          builder: (context, params) => Onboarding13Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding14practiceGoal',
+          path: '/onboarding14practiceGoal',
+          builder: (context, params) => Onboarding14practiceGoalWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding15',
+          path: '/onboarding15',
+          builder: (context, params) => Onboarding15Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding16',
+          path: '/onboarding16',
+          builder: (context, params) => Onboarding16Widget(),
+        ),
+        FFRoute(
+          name: 'SplashPage',
+          path: '/splashPage',
+          builder: (context, params) => SplashPageWidget(),
+        ),
+        FFRoute(
+          name: 'ResetPasswordOld',
+          path: '/resetPasswordOld',
+          builder: (context, params) => ResetPasswordOldWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding17LinkedIn',
+          path: '/onboarding17LinkedIn',
+          builder: (context, params) => Onboarding17LinkedInWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding19ONBCOMPLETED',
+          path: '/onboarding19ONBCOMPLETED',
+          builder: (context, params) => Onboarding19ONBCOMPLETEDWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding20afterPricing',
+          path: '/onboarding20afterPricing',
+          builder: (context, params) => Onboarding20afterPricingWidget(),
+        ),
+        FFRoute(
+          name: 'Onboarding21gift',
+          path: '/onboarding21gift',
+          builder: (context, params) => Onboarding21giftWidget(),
+        ),
+        FFRoute(
+          name: 'Guide1',
+          path: '/guide1',
+          builder: (context, params) => Guide1Widget(),
+        ),
+        FFRoute(
+          name: 'HomeGuide1',
+          path: '/homeGuide1',
+          builder: (context, params) => HomeGuide1Widget(),
+        ),
+        FFRoute(
+          name: 'AllCoursesGuide',
+          path: '/allCoursesGuide',
+          builder: (context, params) => AllCoursesGuideWidget(),
+        ),
+        FFRoute(
+          name: 'LatestInterviewQuestionsGuide',
+          path: '/latestInterviewQuestionsGuide',
+          builder: (context, params) => LatestInterviewQuestionsGuideWidget(),
+        ),
+        FFRoute(
+          name: 'HomeGuide2',
+          path: '/homeGuide2',
+          builder: (context, params) => HomeGuide2Widget(),
+        ),
+        FFRoute(
+          name: 'test',
+          path: '/test',
+          builder: (context, params) => TestWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -549,11 +738,12 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/onboarding';
+            return '/initPage';
           }
           return null;
         },
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(
@@ -580,13 +770,20 @@ class FFRoute {
                   key: state.pageKey,
                   child: child,
                   transitionDuration: transitionInfo.duration,
-                  transitionsBuilder: PageTransition(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          PageTransition(
                     type: transitionInfo.transitionType,
                     duration: transitionInfo.duration,
                     reverseDuration: transitionInfo.duration,
                     alignment: transitionInfo.alignment,
                     child: child,
-                  ).transitionsBuilder,
+                  ).buildTransitions(
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ),
                 )
               : MaterialPage(key: state.pageKey, child: child);
         },

@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'pick_bottom_sheet_model.dart';
@@ -10,14 +9,16 @@ export 'pick_bottom_sheet_model.dart';
 
 class PickBottomSheetWidget extends StatefulWidget {
   const PickBottomSheetWidget({
-    Key? key,
+    super.key,
     required this.stringList,
-  }) : super(key: key);
+    required this.title,
+  });
 
   final List<String>? stringList;
+  final String? title;
 
   @override
-  _PickBottomSheetWidgetState createState() => _PickBottomSheetWidgetState();
+  State<PickBottomSheetWidget> createState() => _PickBottomSheetWidgetState();
 }
 
 class _PickBottomSheetWidgetState extends State<PickBottomSheetWidget> {
@@ -44,8 +45,6 @@ class _PickBottomSheetWidgetState extends State<PickBottomSheetWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -58,10 +57,42 @@ class _PickBottomSheetWidgetState extends State<PickBottomSheetWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 40.0),
+        padding: EdgeInsetsDirectional.fromSTEB(16.0, 14.0, 16.0, 40.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Align(
+              alignment: AlignmentDirectional(1.0, -1.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  logFirebaseEvent('PICK_BOTTOM_SHEET_Container_8lqatrk0_ON_');
+                  logFirebaseEvent('Container_bottom_sheet');
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  decoration: BoxDecoration(),
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Icon(
+                      FFIcons.kxmark,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+              child: Text(
+                widget.title!,
+                style: FlutterFlowTheme.of(context).headlineMedium,
+              ),
+            ),
             Container(
               constraints: BoxConstraints(
                 maxHeight: 150.0,
@@ -83,6 +114,10 @@ class _PickBottomSheetWidgetState extends State<PickBottomSheetWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'PICK_BOTTOM_SHEET_Container_hzmaghag_ON_');
+                              logFirebaseEvent(
+                                  'Container_update_component_state');
                               setState(() {
                                 _model.activeItem = stringItem;
                               });
@@ -109,7 +144,7 @@ class _PickBottomSheetWidgetState extends State<PickBottomSheetWidget> {
                                             ? FlutterFlowTheme.of(context)
                                                 .primary
                                             : FlutterFlowTheme.of(context)
-                                                .accent2,
+                                                .secondary,
                                         useGoogleFonts: false,
                                       ),
                                 ),
@@ -127,9 +162,12 @@ class _PickBottomSheetWidgetState extends State<PickBottomSheetWidget> {
               ),
             ),
             FFButtonWidget(
-              onPressed: _model.activeItem == null || _model.activeItem == ''
+              onPressed: (_model.activeItem == null || _model.activeItem == '')
                   ? null
                   : () async {
+                      logFirebaseEvent(
+                          'PICK_BOTTOM_SHEET_COMP_SAVE_BTN_ON_TAP');
+                      logFirebaseEvent('Button_bottom_sheet');
                       Navigator.pop(context, _model.activeItem);
                     },
               text: 'Save',

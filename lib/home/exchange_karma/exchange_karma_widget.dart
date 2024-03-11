@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +9,10 @@ import 'exchange_karma_model.dart';
 export 'exchange_karma_model.dart';
 
 class ExchangeKarmaWidget extends StatefulWidget {
-  const ExchangeKarmaWidget({Key? key}) : super(key: key);
+  const ExchangeKarmaWidget({super.key});
 
   @override
-  _ExchangeKarmaWidgetState createState() => _ExchangeKarmaWidgetState();
+  State<ExchangeKarmaWidget> createState() => _ExchangeKarmaWidgetState();
 }
 
 class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
@@ -25,6 +24,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ExchangeKarmaModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ExchangeKarma'});
   }
 
   @override
@@ -36,17 +38,6 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -67,13 +58,15 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('EXCHANGE_KARMA_Container_5hefjryh_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -101,7 +94,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Align(
-              alignment: AlignmentDirectional(0.00, 0.00),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Lottie.asset(
                 'assets/lottie_animations/animation_lnz09grs.json',
                 width: 220.0,
@@ -144,6 +137,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'EXCHANGE_KARMA_PAGE_Container_ON_TAP');
+                        logFirebaseEvent('Container_update_page_state');
                         setState(() {
                           _model.pickedService = 'Job Referral';
                         });
@@ -161,8 +157,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              9.0, 9.0, 9.0, 9.0),
+                          padding: EdgeInsets.all(9.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -214,6 +209,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'EXCHANGE_KARMA_PAGE_Container_ON_TAP');
+                        logFirebaseEvent('Container_update_page_state');
                         setState(() {
                           _model.pickedService = 'CV Feedback Review';
                         });
@@ -231,8 +229,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              9.0, 9.0, 9.0, 9.0),
+                          padding: EdgeInsets.all(9.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -289,6 +286,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'EXCHANGE_KARMA_PAGE_Container_ON_TAP');
+                              logFirebaseEvent('Container_update_page_state');
                               setState(() {
                                 _model.pickedService =
                                     'Mock Interview with Recruiter';
@@ -310,8 +310,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    9.0, 9.0, 9.0, 9.0),
+                                padding: EdgeInsets.all(9.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -359,7 +358,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(1.00, -1.00),
+                            alignment: AlignmentDirectional(1.0, -1.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 7.0, 4.0, 0.0),
@@ -388,6 +387,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'EXCHANGE_KARMA_PAGE_Container_ON_TAP');
+                              logFirebaseEvent('Container_update_page_state');
                               setState(() {
                                 _model.pickedService = '1х1 Coaching Session';
                               });
@@ -407,8 +409,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    9.0, 9.0, 9.0, 9.0),
+                                padding: EdgeInsets.all(9.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -456,7 +457,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(1.00, -1.00),
+                            alignment: AlignmentDirectional(1.0, -1.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 7.0, 4.0, 0.0),
@@ -483,16 +484,16 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
             ),
             Spacer(),
             Align(
-              alignment: AlignmentDirectional(0.00, 1.00),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 50.0),
                 child: FFButtonWidget(
-                  onPressed:
-                      _model.pickedService != null && _model.pickedService != ''
-                          ? null
-                          : () {
-                              print('Button pressed ...');
-                            },
+                  onPressed: (_model.pickedService != null &&
+                          _model.pickedService != '')
+                      ? null
+                      : () {
+                          print('Button pressed ...');
+                        },
                   text: 'Exchange',
                   options: FFButtonOptions(
                     width: double.infinity,

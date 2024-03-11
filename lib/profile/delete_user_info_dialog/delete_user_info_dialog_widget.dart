@@ -2,17 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'delete_user_info_dialog_model.dart';
 export 'delete_user_info_dialog_model.dart';
 
 class DeleteUserInfoDialogWidget extends StatefulWidget {
-  const DeleteUserInfoDialogWidget({Key? key}) : super(key: key);
+  const DeleteUserInfoDialogWidget({super.key});
 
   @override
-  _DeleteUserInfoDialogWidgetState createState() =>
+  State<DeleteUserInfoDialogWidget> createState() =>
       _DeleteUserInfoDialogWidgetState();
 }
 
@@ -41,10 +40,8 @@ class _DeleteUserInfoDialogWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -57,13 +54,16 @@ class _DeleteUserInfoDialogWidgetState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.00, 0.00),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent(
+                        'DELETE_USER_INFO_DIALOG_Container_9yp83d');
+                    logFirebaseEvent('Container_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -71,7 +71,7 @@ class _DeleteUserInfoDialogWidgetState
                     height: 40.0,
                     decoration: BoxDecoration(),
                     child: Align(
-                      alignment: AlignmentDirectional(1.00, 0.00),
+                      alignment: AlignmentDirectional(1.0, 0.0),
                       child: Icon(
                         FFIcons.kcross,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -102,6 +102,9 @@ class _DeleteUserInfoDialogWidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'DELETE_USER_INFO_DIALOG_NO_BTN_ON_TAP');
+                          logFirebaseEvent('Button_dismiss_dialog');
                           Navigator.pop(context);
                         },
                         text: 'No',
@@ -125,6 +128,9 @@ class _DeleteUserInfoDialogWidgetState
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'DELETE_USER_INFO_DIALOG_DELETE_BTN_ON_TA');
+                          logFirebaseEvent('Button_dismiss_dialog');
                           Navigator.pop(context, true);
                         },
                         text: 'Delete',

@@ -10,7 +10,6 @@ import 'video_comments_bottom_sheet_widget.dart'
     show VideoCommentsBottomSheetWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -30,12 +29,14 @@ class VideoCommentsBottomSheetModel
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     messageElementModels =
         FlutterFlowDynamicModels(() => MessageElementModel());
     avatarModel2 = createModel(context, () => AvatarModel());
   }
 
+  @override
   void dispose() {
     messageElementModels.dispose();
     avatarModel2.dispose();

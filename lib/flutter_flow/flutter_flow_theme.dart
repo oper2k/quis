@@ -46,6 +46,8 @@ abstract class FlutterFlowTheme {
   late Color customColor3;
   late Color customColor4;
   late Color gradient1;
+  late Color profileBgr;
+  late Color blueLink;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -149,6 +151,8 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color customColor3 = Color(0xFFB06327);
   late Color customColor4 = Color(0xFF295B61);
   late Color gradient1 = Color(0xFF7FFBE5);
+  late Color profileBgr = Color(0xFF323232);
+  late Color blueLink = Color(0xFF0A66C2);
 }
 
 abstract class Typography {

@@ -4,11 +4,9 @@ import '/components/karma_plus_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -16,10 +14,15 @@ import 'thank_you_for_subscription_model.dart';
 export 'thank_you_for_subscription_model.dart';
 
 class ThankYouForSubscriptionWidget extends StatefulWidget {
-  const ThankYouForSubscriptionWidget({Key? key}) : super(key: key);
+  const ThankYouForSubscriptionWidget({
+    super.key,
+    bool? isInOnboarding,
+  }) : this.isInOnboarding = isInOnboarding ?? false;
+
+  final bool isInOnboarding;
 
   @override
-  _ThankYouForSubscriptionWidgetState createState() =>
+  State<ThankYouForSubscriptionWidget> createState() =>
       _ThankYouForSubscriptionWidgetState();
 }
 
@@ -34,8 +37,13 @@ class _ThankYouForSubscriptionWidgetState
     super.initState();
     _model = createModel(context, () => ThankYouForSubscriptionModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ThankYouForSubscription'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('THANK_YOU_FOR_SUBSCRIPTION_ThankYouForSu');
+      logFirebaseEvent('ThankYouForSubscription_backend_call');
+
       await currentUserReference!.update({
         ...mapToFirestore(
           {
@@ -43,26 +51,26 @@ class _ThankYouForSubscriptionWidgetState
           },
         ),
       });
-      await showAlignedDialog(
+      logFirebaseEvent('ThankYouForSubscription_alert_dialog');
+      await showDialog(
         context: context,
-        isGlobal: true,
-        avoidOverflow: false,
-        targetAnchor:
-            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-        followerAnchor:
-            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
         builder: (dialogContext) {
-          return Material(
-            color: Colors.transparent,
+          return Dialog(
+            elevation: 0,
+            insetPadding: EdgeInsets.zero,
+            backgroundColor: Colors.transparent,
+            alignment: AlignmentDirectional(0.0, 0.0)
+                .resolve(Directionality.of(context)),
             child: WebViewAware(
-                child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
-              child: KarmaPlusDialogWidget(
-                karmaPoints: 2.0,
+              child: GestureDetector(
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
+                child: KarmaPlusDialogWidget(
+                  karmaPoints: 2.0,
+                ),
               ),
-            )),
+            ),
           );
         },
       ).then((value) => setState(() {}));
@@ -78,17 +86,6 @@ class _ThankYouForSubscriptionWidgetState
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return Builder(
       builder: (context) => GestureDetector(
         onTap: () => _model.unfocusNode.canRequestFocus
@@ -103,14 +100,24 @@ class _ThankYouForSubscriptionWidgetState
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(1.00, -1.00),
+                  alignment: AlignmentDirectional(1.0, -1.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed('LatestInterviewQuestions');
+                      logFirebaseEvent(
+                          'THANK_YOU_FOR_SUBSCRIPTION_Container_d00');
+                      if (widget.isInOnboarding) {
+                        logFirebaseEvent('Container_navigate_to');
+
+                        context.goNamed('Onboarding20afterPricing');
+                      } else {
+                        logFirebaseEvent('Container_navigate_to');
+
+                        context.goNamed('MyProfile');
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(),

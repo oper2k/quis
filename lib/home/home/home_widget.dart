@@ -1,56 +1,77 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/components/avatar_widget.dart';
 import '/components/nav_bar_widget.dart';
-import '/components/subscription_required_dialog_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
 class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+  const HomeWidget({super.key});
 
   @override
-  _HomeWidgetState createState() => _HomeWidgetState();
+  State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
   late HomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 100.ms,
+          duration: 400.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 100.ms,
+          duration: 300.ms,
+          begin: Offset(0.0, 100.0),
+          end: Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => HomeModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Home'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOME_PAGE_Home_ON_INIT_STATE');
       if (functions.dateTimeToDate(getCurrentTimestamp) !=
-          FFAppState().DayVideoOfDay) {
-        setState(() {
-          FFAppState().DayVideoOfDay =
-              functions.dateTimeToDate(getCurrentTimestamp);
-        });
+          currentUserDocument?.dateForDaily) {
+        logFirebaseEvent('Home_firestore_query');
         _model.videoDayListOutput = await queryCourseVideoRecordOnce(
           queryBuilder: (courseVideoRecord) => courseVideoRecord.where(
             'is_expert_video_of_day',
@@ -58,6 +79,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           ),
         );
         if (_model.videoDayListOutput!.length > 0) {
+          logFirebaseEvent('Home_update_app_state');
           setState(() {
             FFAppState().VideoOfTheDay = _model
                 .videoDayListOutput?[random_data.randomInteger(
@@ -65,117 +87,137 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ?.reference;
           });
         } else {
+          logFirebaseEvent('Home_update_app_state');
           setState(() {
             FFAppState().VideoOfTheDay = null;
           });
         }
+      }
+      if (valueOrDefault<bool>(
+              currentUserDocument?.isFirstEnterInformationShown, false) ==
+          true) {
+        if (functions.dateTimeToDate(getCurrentTimestamp) !=
+            currentUserDocument?.dateForDaily) {
+          logFirebaseEvent('Home_backend_call');
 
-        await currentUserReference!.update({
-          ...mapToFirestore(
-            {
-              'karma': FieldValue.increment(0.1),
-            },
-          ),
-        });
-      }
-      if (!(valueOrDefault(currentUserDocument?.brevoId, 0) != null)) {
-        _model.apiResultsj6 = await BrevoGroup.createAContactCall.call(
-          firstname: valueOrDefault(currentUserDocument?.firstName, ''),
-          lastname: valueOrDefault(currentUserDocument?.lastName, ''),
-          email: currentUserEmail,
-        );
-        if ((_model.apiResultsj6?.succeeded ?? true)) {
-          await currentUserReference!.update(createUsersRecordData(
-            brevoId: BrevoGroup.createAContactCall.brevoID(
-              (_model.apiResultsj6?.jsonBody ?? ''),
+          await currentUserReference!.update({
+            ...createUsersRecordData(
+              dateForDaily: functions.dateTimeToDate(getCurrentTimestamp),
             ),
-          ));
+            ...mapToFirestore(
+              {
+                'karma': FieldValue.increment(0.1),
+              },
+            ),
+          });
         }
-      }
-      if (!(FFAppState().dailyNotificationID != null)) {
-        setState(() {
-          FFAppState().dailyNotificationID =
-              random_data.randomInteger(100, 10000);
-        });
-        await actions.awesomeNotificationSchedule(
-          FFAppState().dailyNotificationID,
-          'Hooray! You\'ve just earned Karma ☯️',
-          'Tap to find out more',
-          12,
-          00,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          true,
-          true,
+      } else {
+        logFirebaseEvent('Home_backend_call');
+
+        await currentUserReference!.update(createUsersRecordData(
+          isFirstEnterInformationShown: true,
+        ));
+        logFirebaseEvent('Home_backend_call');
+        _model.email = await BrevoGroup.sendAScheduledEmailCall.call(
+          time: functions.timeToRFC3339(
+              functions.timePlusMinutes(getCurrentTimestamp, '3')),
+          userEmail: currentUserEmail,
+          templateId: 2,
+        );
+        logFirebaseEvent('Home_navigate_to');
+
+        context.pushNamed(
+          'Pricing',
+          queryParameters: {
+            'offers': serializeParam(
+              PaywallPrice.standard,
+              ParamType.Enum,
+            ),
+          }.withoutNulls,
         );
       }
-      if (!FFAppState().IslastLoginHappened) {
-        if (getCurrentTimestamp >
-            functions.datePlusDays(FFAppState().lastloginTime!, 1)) {
-          setState(() {
-            FFAppState().IslastLoginHappened = true;
-          });
-          await actions.awesomeNotificationSchedule(
-            FFAppState().lastLoginNotificationID,
-            null!,
-            null!,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false,
-            false,
-          );
-        } else {
-          await actions.awesomeNotificationSchedule(
-            FFAppState().lastLoginNotificationID,
-            null!,
-            null!,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false,
-            false,
-          );
-          setState(() {
-            FFAppState().lastLoginNotificationID =
-                random_data.randomInteger(100, 10000);
-            FFAppState().lastloginTime = getCurrentTimestamp;
-          });
-          await actions.awesomeNotificationSchedule(
-            FFAppState().lastLoginNotificationID,
-            'Missed Us? 🌟',
-            'We\'ve noticed you haven\'t been around in the past 24 hours, don\'t miss out on refining your Interview skills! ',
-            functions.getHourInInt(
-                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
-            functions.getMinutesInInt(
-                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
-            null,
-            functions.getMonthInInt(
-                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
-            functions.getDayInInt(
-                functions.datePlusDays(FFAppState().lastloginTime!, 1)),
-            null,
-            null,
-            null,
-            false,
-            true,
-          );
-        }
+
+      if ((valueOrDefault<bool>(currentUserDocument?.is3dayOfferShown, false) !=
+              true) &&
+          (getCurrentTimestamp >=
+              functions.datePlusDays(currentUserDocument!.createdTime!, 3))) {
+        logFirebaseEvent('Home_backend_call');
+        unawaited(
+          () async {
+            await currentUserReference!.update(createUsersRecordData(
+              is3dayOfferShown: true,
+            ));
+          }(),
+        );
+        logFirebaseEvent('Home_navigate_to');
+
+        context.pushNamed(
+          'Pricing',
+          queryParameters: {
+            'offers': serializeParam(
+              PaywallPrice.off25,
+              ParamType.Enum,
+            ),
+          }.withoutNulls,
+        );
       }
+      if ((valueOrDefault<bool>(currentUserDocument?.is7dayOfferShown, false) !=
+              true) &&
+          (getCurrentTimestamp >=
+              functions.datePlusDays(currentUserDocument!.createdTime!, 7))) {
+        logFirebaseEvent('Home_backend_call');
+        unawaited(
+          () async {
+            await currentUserReference!.update(createUsersRecordData(
+              is7dayOfferShown: true,
+            ));
+          }(),
+        );
+        logFirebaseEvent('Home_navigate_to');
+
+        context.pushNamed(
+          'Pricing',
+          queryParameters: {
+            'offers': serializeParam(
+              PaywallPrice.off50,
+              ParamType.Enum,
+            ),
+          }.withoutNulls,
+        );
+      }
+      logFirebaseEvent('Home_custom_action');
+      await actions.awesomeNotificationScheduleLocal(
+        int.parse(currentUserReference!.id),
+        null!,
+        null!,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        false,
+        false,
+      );
+      logFirebaseEvent('Home_custom_action');
+      await actions.awesomeNotificationScheduleLocal(
+        int.parse(currentUserReference!.id),
+        'Missed Us? 🌟',
+        'We\'ve noticed you haven\'t been around in the past 24 hours, don\'t miss out on refining your Interview skills! ',
+        functions.getHourInInt(functions.datePlusDays(getCurrentTimestamp, 1)),
+        functions
+            .getMinutesInInt(functions.datePlusDays(getCurrentTimestamp, 1)),
+        null,
+        functions.getMonthInInt(functions.datePlusDays(getCurrentTimestamp, 1)),
+        functions.getDayInInt(functions.datePlusDays(getCurrentTimestamp, 1)),
+        null,
+        null,
+        null,
+        false,
+        true,
+      );
     });
   }
 
@@ -188,15 +230,6 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -213,6 +246,9 @@ class _HomeWidgetState extends State<HomeWidget> {
               children: [
                 Container(
                   width: double.infinity,
+                  constraints: BoxConstraints(
+                    minHeight: 150.0,
+                  ),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -243,6 +279,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent('HOME_PAGE_Row_n7w8k8pf_ON_TAP');
+                              logFirebaseEvent('Row_navigate_to');
+
                               context.goNamed('MyProfile');
                             },
                             child: Row(
@@ -360,6 +399,66 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             ),
                                           ),
                                         ),
+                                        if (currentUserDocument
+                                                ?.careerProfile?.role !=
+                                            null)
+                                          AuthUserStreamWidget(
+                                            builder: (context) => Container(
+                                              decoration: BoxDecoration(),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 5.0, 0.0, 0.0),
+                                                child:
+                                                    FutureBuilder<RoleRecord>(
+                                                  future: RoleRecord
+                                                      .getDocumentOnce(
+                                                          currentUserDocument!
+                                                              .careerProfile
+                                                              .role!),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            valueColor:
+                                                                AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    final textRoleRecord =
+                                                        snapshot.data!;
+                                                    return Text(
+                                                      textRoleRecord.name,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent2,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                       ],
                                     ),
                                   ),
@@ -368,35 +467,153 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ),
                           ),
                         ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('Add-ons');
-                          },
-                          child: Container(
-                            width: 80.0,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).primary,
-                              borderRadius: BorderRadius.circular(5.0),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'HOME_PAGE_Container_vqwmhi1x_ON_TAP');
+                                logFirebaseEvent('Container_navigate_to');
+
+                                context.pushNamed('Add-ons');
+                              },
+                              child: Container(
+                                width: 80.0,
+                                height: 32.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Text(
+                                  'Add-ons',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Sofia Pro',
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
+                                        useGoogleFonts: false,
+                                        lineHeight: 1.16,
+                                      ),
+                                ),
+                              ),
                             ),
-                            alignment: AlignmentDirectional(0.00, 0.00),
-                            child: Text(
-                              'Add-ons',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyLarge
-                                  .override(
-                                    fontFamily: 'Sofia Pro',
-                                    color: FlutterFlowTheme.of(context).white,
-                                    useGoogleFonts: false,
-                                    lineHeight: 1.16,
-                                  ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: Builder(
+                                builder: (context) {
+                                  if (revenue_cat.activeEntitlementIds
+                                      .contains(FFAppState().entitlementID)) {
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'HOME_PAGE_Container_ua126iqq_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Container_navigate_to');
+
+                                        context.pushNamed('Onboarding01');
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .champagnePink,
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 2.0, 8.0, 2.0),
+                                          child: Text(
+                                            'Premium',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge
+                                                .override(
+                                                  fontFamily: 'Sofia Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  useGoogleFonts: false,
+                                                  lineHeight: 1.16,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'HOME_PAGE_Container_6j9r95x7_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Container_navigate_to');
+
+                                        context.pushNamed(
+                                          'Pricing',
+                                          queryParameters: {
+                                            'offers': serializeParam(
+                                              PaywallPrice.standard,
+                                              ParamType.Enum,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .blueOcean,
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 2.0, 8.0, 2.0),
+                                          child: Text(
+                                            'Free',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge
+                                                .override(
+                                                  fontFamily: 'Sofia Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .white,
+                                                  useGoogleFonts: false,
+                                                  lineHeight: 1.16,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
@@ -465,6 +682,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOME_PAGE_Image_0he2iav5_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Image_navigate_to');
+
                                                 context.pushNamed(
                                                   'WelcomeVideo',
                                                   queryParameters: {
@@ -480,21 +702,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   },
                                                 );
                                               },
-                                              child: Hero(
-                                                tag:
-                                                    containerWelcomeVideoRecord!
-                                                        .vimeoVideo.imagePath,
-                                                transitionOnUserGestures: true,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: Image.network(
-                                                    containerWelcomeVideoRecord!
-                                                        .vimeoVideo.imagePath,
-                                                    width: double.infinity,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                child: Image.asset(
+                                                  'assets/images/1.webp',
+                                                  width: double.infinity,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
@@ -510,6 +724,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOME_PAGE_Image_ohe4jkpd_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Image_launch_u_r_l');
                                                 await launchURL(
                                                     'https://quisapp.notion.site/861b4762e223478c8518cdd934142215?v=959e87c0ddad47e1b3b18fc15fc04e24');
                                               },
@@ -528,8 +746,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       ),
                                     ),
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 1.00),
+                                      alignment: AlignmentDirectional(0.0, 1.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 12.0),
@@ -574,6 +791,71 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 18.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'HOME_PAGE_Container_v1yhllch_ON_TAP');
+                              logFirebaseEvent('Container_navigate_to');
+
+                              context.goNamed('PracticeInterview');
+                            },
+                            child: Container(
+                              height: 54.0,
+                              decoration: BoxDecoration(
+                                color:
+                                    FlutterFlowTheme.of(context).champagnePink,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    22.0, 0.0, 22.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(),
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Icon(
+                                          FFIcons.kclarityTalkBubblesLine,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          size: 20.0,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Register For Practice Interview Now',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Sofia Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'My progress',
@@ -603,29 +885,34 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: Builder(
-                                          builder: (context) {
-                                            if (revenue_cat.activeEntitlementIds
-                                                .contains(FFAppState()
-                                                    .entitlementID)) {
-                                              return Container(
-                                                width: double.infinity,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(19.0),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(9.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOME_PAGE_Container_lnv3bk51_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
+                                                context.pushNamed('Leadership');
+                                              },
+                                              child: Container(
                                                 decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .gradient2,
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .aquaBreeze
-                                                    ],
-                                                    stops: [0.0, 1.0],
-                                                    begin: AlignmentDirectional(
-                                                        0.0, 1.0),
-                                                    end: AlignmentDirectional(
-                                                        0, -1.0),
-                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .powderBlue,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
@@ -633,177 +920,60 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          11.0, 0.0, 11.0, 0.0),
-                                                  child: Column(
+                                                          10.0, 0.0, 10.0, 0.0),
+                                                  child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                        MainAxisAlignment.start,
                                                     children: [
-                                                      Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0x6FFFFFFF),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      10.0,
-                                                                      12.0,
-                                                                      10.0,
-                                                                      12.0),
-                                                          child: Text(
-                                                            'PREMIUM',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .white,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(),
+                                                          child: Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0.0, 0.0),
+                                                            child: Icon(
+                                                              FFIcons
+                                                                  .kcupConverted,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .white,
+                                                              size: 24.0,
+                                                            ),
                                                           ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 5,
+                                                        child: Text(
+                                                          ' Leadership Board',
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .white,
+                                                                fontSize: 16.0,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                              );
-                                            } else {
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    'Pricing',
-                                                    queryParameters: {
-                                                      'isFirst': serializeParam(
-                                                        false,
-                                                        ParamType.bool,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                },
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(11.0, 0.0,
-                                                                11.0, 0.0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      10.0,
-                                                                      0.0,
-                                                                      10.0,
-                                                                      12.0),
-                                                          child: Text(
-                                                            'Freemium',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            gradient:
-                                                                LinearGradient(
-                                                              colors: [
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .gradient2,
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .aquaBreeze
-                                                              ],
-                                                              stops: [0.0, 1.0],
-                                                              begin:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 1.0),
-                                                              end:
-                                                                  AlignmentDirectional(
-                                                                      0, -1.0),
-                                                            ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10.0),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        20.0,
-                                                                        7.0,
-                                                                        20.0,
-                                                                        7.0),
-                                                            child: Text(
-                                                              'Upgrade',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .headlineSmall
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .white,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                    lineHeight:
-                                                                        1.16,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                          },
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       Expanded(
@@ -820,6 +990,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'HOME_PAGE_Container_jxzq2xpe_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Container_navigate_to');
+
                                                   context.pushNamed('Karma');
                                                 },
                                                 child: Container(
@@ -1033,6 +1208,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     highlightColor:
                                                         Colors.transparent,
                                                     onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'HOME_PAGE_Container_skt0tbbm_ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'Container_navigate_to');
+
                                                       context.pushNamed(
                                                           'Leadership');
                                                     },
@@ -1100,7 +1280,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                         String>(
                                                                       containerUsersRecordList.where((e) => e.reference == currentUserReference).toList().length >
                                                                               0
-                                                                          ? (functions.findUserIndexFromList(containerUsersRecordList.toList(), currentUserReference!.id)! + 1)
+                                                                          ? (functions.findUserIndexFromList(containerUsersRecordList.toList(), currentUserReference!.id) + 1)
                                                                               .toString()
                                                                           : '-',
                                                                       '-',
@@ -1179,6 +1359,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOME_PAGE_CourseRefItem_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'CourseRefItem_navigate_to');
+
                                                 context.pushNamed(
                                                   'Course',
                                                   queryParameters: {
@@ -1214,12 +1399,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           (courseVideoRecord) =>
                                                               courseVideoRecord
                                                                   .where(
-                                                        'course',
-                                                        isEqualTo:
-                                                            currentUserDocument
-                                                                ?.courseProgress
-                                                                ?.refCourse,
-                                                      ),
+                                                                    'course',
+                                                                    isEqualTo: currentUserDocument
+                                                                        ?.courseProgress
+                                                                        ?.refCourse,
+                                                                  )
+                                                                  .where(
+                                                                    'type',
+                                                                    isEqualTo:
+                                                                        'lesson',
+                                                                  ),
                                                     ),
                                                     builder:
                                                         (context, snapshot) {
@@ -1287,8 +1476,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   Align(
                                                                     alignment:
                                                                         AlignmentDirectional(
-                                                                            0.00,
-                                                                            0.00),
+                                                                            0.0,
+                                                                            0.0),
                                                                     child:
                                                                         Column(
                                                                       mainAxisSize:
@@ -1394,147 +1583,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 5.0, 16.0, 0.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(19.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  9.0, 9.0, 9.0, 9.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.pushNamed('Leadership');
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).powderBlue,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        13.0, 20.0, 13.0, 20.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            'Leadership Board',
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineMedium
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .white,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ),
-                                        Icon(
-                                          FFIcons.kchevronDownS,
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          size: 24.0,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (!valueOrDefault<bool>(
-                            currentUserDocument?.isProfileCompleted, false))
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 18.0, 16.0, 0.0),
-                            child: AuthUserStreamWidget(
-                              builder: (context) => InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.pushNamed('EditProfile');
-                                },
-                                child: Container(
-                                  height: 56.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        15.0, 11.0, 15.0, 11.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                'Getting Started Checklist',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro',
-                                                          useGoogleFonts: false,
-                                                          lineHeight: 1.16,
-                                                        ),
-                                              ),
-                                              Text(
-                                                '+0,5',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Sofia Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .black,
-                                                      useGoogleFonts: false,
-                                                      lineHeight: 1.16,
-                                                    ),
-                                              ),
-                                              Icon(
-                                                FFIcons.kgameIconsYinYang,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 16.0,
-                                              ),
-                                            ].divide(SizedBox(width: 5.0)),
-                                          ),
-                                        ),
-                                        Icon(
-                                          FFIcons.kchevronDownS,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
                         if ((currentUserDocument?.favoriteVideos?.toList() ??
                                     [])
                                 .length >
@@ -1566,6 +1614,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'HOME_PAGE_Container_hvrbzdjg_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container_navigate_to');
+
                                             context.pushNamed('FavoriteVideos');
                                           },
                                           child: Container(
@@ -1661,6 +1714,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'HOME_PAGE_Container_kge6rjhn_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Container_navigate_to');
+
                                                         context.pushNamed(
                                                           'Video',
                                                           queryParameters: {
@@ -1688,12 +1746,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                             BoxDecoration(),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      9.0,
-                                                                      9.0,
-                                                                      9.0,
-                                                                      9.0),
+                                                              EdgeInsets.all(
+                                                                  9.0),
                                                           child: Column(
                                                             mainAxisSize:
                                                                 MainAxisSize
@@ -1724,9 +1778,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       ),
                                                                     ),
                                                                     Align(
-                                                                      alignment: AlignmentDirectional(
-                                                                          0.00,
-                                                                          0.00),
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
                                                                       child:
                                                                           Icon(
                                                                         FFIcons
@@ -1847,6 +1902,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     highlightColor:
                                                         Colors.transparent,
                                                     onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'HOME_PAGE_Image_9zhdusxq_ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'Image_navigate_to');
+
                                                       context.pushNamed(
                                                         'Video',
                                                         queryParameters: {
@@ -1881,98 +1941,59 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  if (revenue_cat
+                                                  if (!revenue_cat
                                                       .activeEntitlementIds
                                                       .contains(FFAppState()
                                                           .entitlementID))
-                                                    Builder(
-                                                      builder: (context) =>
-                                                          InkWell(
-                                                        splashColor:
-                                                            Colors.transparent,
-                                                        focusColor:
-                                                            Colors.transparent,
-                                                        hoverColor:
-                                                            Colors.transparent,
-                                                        highlightColor:
-                                                            Colors.transparent,
-                                                        onTap: () async {
-                                                          await showAlignedDialog(
-                                                            context: context,
-                                                            isGlobal: true,
-                                                            avoidOverflow:
-                                                                false,
-                                                            targetAnchor:
-                                                                AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0)
-                                                                    .resolve(
-                                                                        Directionality.of(
-                                                                            context)),
-                                                            followerAnchor:
-                                                                AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0)
-                                                                    .resolve(
-                                                                        Directionality.of(
-                                                                            context)),
-                                                            builder:
-                                                                (dialogContext) {
-                                                              return Material(
-                                                                color: Colors
-                                                                    .transparent,
-                                                                child:
-                                                                    WebViewAware(
-                                                                        child:
-                                                                            GestureDetector(
-                                                                  onTap: () => _model
-                                                                          .unfocusNode
-                                                                          .canRequestFocus
-                                                                      ? FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(_model
-                                                                              .unfocusNode)
-                                                                      : FocusScope.of(
-                                                                              context)
-                                                                          .unfocus(),
-                                                                  child:
-                                                                      SubscriptionRequiredDialogWidget(
-                                                                    text:
-                                                                        'To watch expert video of the day, please subscribe',
-                                                                    action:
-                                                                        () async {},
-                                                                  ),
-                                                                )),
-                                                              );
-                                                            },
-                                                          ).then((value) =>
-                                                              setState(() {}));
-                                                        },
-                                                        child: Container(
-                                                          width:
-                                                              double.infinity,
-                                                          height:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Color(
-                                                                0xB81A1919),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10.0),
-                                                          ),
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  0.00, 0.00),
-                                                          child: Icon(
-                                                            FFIcons
-                                                                .kocticonLock24,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .white,
-                                                            size: 30.0,
-                                                          ),
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'HOME_PAGE_Container_1tx3xqax_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Container_navigate_to');
+
+                                                        context.pushNamed(
+                                                          'Pricing',
+                                                          queryParameters: {
+                                                            'offers':
+                                                                serializeParam(
+                                                              PaywallPrice
+                                                                  .standard,
+                                                              ParamType.Enum,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Color(0xB81A1919),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                        ),
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Icon(
+                                                          FFIcons
+                                                              .kocticonLock24,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .white,
+                                                          size: 30.0,
                                                         ),
                                                       ),
                                                     ),
@@ -1980,17 +2001,25 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 0.0),
-                                            child: Text(
-                                              videoOfDayCourseVideoRecord.name,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineSmall,
+                                          if (responsiveVisibility(
+                                            context: context,
+                                            phone: false,
+                                            tablet: false,
+                                            tabletLandscape: false,
+                                            desktop: false,
+                                          ))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 10.0, 0.0, 0.0),
+                                              child: Text(
+                                                videoOfDayCourseVideoRecord
+                                                    .name,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineSmall,
+                                              ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -2035,6 +2064,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'HOME_PAGE_Container_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_navigate_to');
+
                                           context.pushNamed('JobReferral');
                                         },
                                         child: Container(
@@ -2047,9 +2081,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    9.0, 9.0, 9.0, 9.0),
+                                            padding: EdgeInsets.all(9.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -2110,6 +2142,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'HOME_PAGE_Container_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_navigate_to');
+
                                           context.pushNamed('CVReview');
                                         },
                                         child: Container(
@@ -2122,9 +2159,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    9.0, 9.0, 9.0, 9.0),
+                                            padding: EdgeInsets.all(9.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -2190,6 +2225,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOME_PAGE_Container_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
                                                 context
                                                     .pushNamed('MockInterview');
                                               },
@@ -2205,9 +2245,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           10.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          9.0, 9.0, 9.0, 9.0),
+                                                  padding: EdgeInsets.all(9.0),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -2270,7 +2308,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             ),
                                             Align(
                                               alignment: AlignmentDirectional(
-                                                  1.00, -1.00),
+                                                  1.0, -1.0),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -2302,6 +2340,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOME_PAGE_Container_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
                                                 context
                                                     .pushNamed('MockInterview');
                                               },
@@ -2317,9 +2360,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           10.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          9.0, 9.0, 9.0, 9.0),
+                                                  padding: EdgeInsets.all(9.0),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -2382,7 +2423,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             ),
                                             Align(
                                               alignment: AlignmentDirectional(
-                                                  1.00, -1.00),
+                                                  1.0, -1.0),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -2428,10 +2469,25 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Company profiles',
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineMedium,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Icon(
+                                        FFIcons.kdoc2,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 20.0,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            6.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Company profiles',
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -2447,103 +2503,73 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           ),
                                     ),
                                   ),
-                                  Builder(
-                                    builder: (context) => Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 14.0, 0.0, 0.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          if (revenue_cat.activeEntitlementIds
-                                              .contains(revenue_cat
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 14.0, 0.0, 0.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'HOME_PAGE_VIEW_PROFILES_BTN_ON_TAP');
+                                        if (revenue_cat.activeEntitlementIds
+                                            .contains(
+                                                FFAppState().entitlementID)) {
+                                          logFirebaseEvent(
+                                              'Button_launch_u_r_l');
+                                          await launchURL(
+                                              'https://drive.google.com/drive/folders/1uyzytR52SgooMlcKR5UTFWE2kNBCQCeF?usp=sharing');
+                                        } else {
+                                          logFirebaseEvent(
+                                              'Button_navigate_to');
+
+                                          context.pushNamed(
+                                            'Pricing',
+                                            queryParameters: {
+                                              'offers': serializeParam(
+                                                PaywallPrice.standard,
+                                                ParamType.Enum,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        }
+                                      },
+                                      text: 'View Profiles',
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 52.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: Color(0x00073763),
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily: 'Sofia Pro',
+                                              color: revenue_cat
+                                                      .activeEntitlementIds
+                                                      .contains(FFAppState()
+                                                          .entitlementID)
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primary
+                                                  : FlutterFlowTheme.of(context)
+                                                      .accent2,
+                                              useGoogleFonts: false,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: revenue_cat
                                                   .activeEntitlementIds
                                                   .contains(FFAppState()
                                                       .entitlementID)
-                                                  .toString())) {
-                                            await launchURL(
-                                                'https://drive.google.com/drive/folders/1uyzytR52SgooMlcKR5UTFWE2kNBCQCeF?usp=sharing');
-                                          } else {
-                                            await showAlignedDialog(
-                                              context: context,
-                                              isGlobal: true,
-                                              avoidOverflow: false,
-                                              targetAnchor:
-                                                  AlignmentDirectional(0.0, 0.0)
-                                                      .resolve(
-                                                          Directionality.of(
-                                                              context)),
-                                              followerAnchor:
-                                                  AlignmentDirectional(0.0, 0.0)
-                                                      .resolve(
-                                                          Directionality.of(
-                                                              context)),
-                                              builder: (dialogContext) {
-                                                return Material(
-                                                  color: Colors.transparent,
-                                                  child: WebViewAware(
-                                                      child: GestureDetector(
-                                                    onTap: () => _model
-                                                            .unfocusNode
-                                                            .canRequestFocus
-                                                        ? FocusScope.of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode)
-                                                        : FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child:
-                                                        SubscriptionRequiredDialogWidget(
-                                                      text:
-                                                          'Company profiles are available upon subscription',
-                                                      action: () async {},
-                                                    ),
-                                                  )),
-                                                );
-                                              },
-                                            ).then((value) => setState(() {}));
-                                          }
-                                        },
-                                        text: 'View Profiles',
-                                        options: FFButtonOptions(
-                                          width: double.infinity,
-                                          height: 52.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 0.0, 24.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: Color(0x00073763),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .override(
-                                                    fontFamily: 'Sofia Pro',
-                                                    color: revenue_cat
-                                                            .activeEntitlementIds
-                                                            .contains(FFAppState()
-                                                                .entitlementID)
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .accent2,
-                                                    useGoogleFonts: false,
-                                                  ),
-                                          elevation: 0.0,
-                                          borderSide: BorderSide(
-                                            color: revenue_cat
-                                                    .activeEntitlementIds
-                                                    .contains(FFAppState()
-                                                        .entitlementID)
-                                                ? FlutterFlowTheme.of(context)
-                                                    .primary
-                                                : FlutterFlowTheme.of(context)
-                                                    .accent3,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              ? FlutterFlowTheme.of(context)
+                                                  .primary
+                                              : FlutterFlowTheme.of(context)
+                                                  .accent3,
+                                          width: 1.0,
                                         ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
                                     ),
                                   ),
@@ -2554,12 +2580,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ),
                       ].addToEnd(SizedBox(height: 100.0)),
                     ),
-                  ),
+                  ).animateOnPageLoad(
+                      animationsMap['columnOnPageLoadAnimation']!),
                 ),
               ],
             ),
             Align(
-              alignment: AlignmentDirectional(0.00, 1.00),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.navBarModel,
                 updateCallback: () => setState(() {}),

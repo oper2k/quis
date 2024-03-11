@@ -4,9 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/profile/delete_account_dialog/delete_account_dialog_widget.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -14,10 +12,10 @@ import 'settings_model.dart';
 export 'settings_model.dart';
 
 class SettingsWidget extends StatefulWidget {
-  const SettingsWidget({Key? key}) : super(key: key);
+  const SettingsWidget({super.key});
 
   @override
-  _SettingsWidgetState createState() => _SettingsWidgetState();
+  State<SettingsWidget> createState() => _SettingsWidgetState();
 }
 
 class _SettingsWidgetState extends State<SettingsWidget> {
@@ -29,6 +27,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SettingsModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Settings'});
   }
 
   @override
@@ -40,17 +40,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -71,13 +60,15 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('SETTINGS_PAGE_Container_syd898w8_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -117,6 +108,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'SETTINGS_PAGE_Container_bi5ky3tj_ON_TAP');
+                        logFirebaseEvent('MenuItem_navigate_to');
+
                         context.pushNamed('BillingManagment');
                       },
                       child: wrapWithModel(
@@ -133,20 +128,9 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        if (currentUserEmail.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Email required!',
-                              ),
-                            ),
-                          );
-                          return;
-                        }
-                        await authManager.resetPassword(
-                          email: currentUserEmail,
-                          context: context,
-                        );
+                        logFirebaseEvent(
+                            'SETTINGS_PAGE_Container_2utkbqg6_ON_TAP');
+                        logFirebaseEvent('MenuItem_navigate_to');
 
                         context.pushNamed('ChangePassword');
                       },
@@ -165,32 +149,35 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          await showAlignedDialog(
+                          logFirebaseEvent(
+                              'SETTINGS_PAGE_Container_93n4vlon_ON_TAP');
+                          logFirebaseEvent('MenuItem_alert_dialog');
+                          await showDialog(
                             context: context,
-                            isGlobal: true,
-                            avoidOverflow: false,
-                            targetAnchor: AlignmentDirectional(0.0, 0.0)
-                                .resolve(Directionality.of(context)),
-                            followerAnchor: AlignmentDirectional(0.0, 0.0)
-                                .resolve(Directionality.of(context)),
                             builder: (dialogContext) {
-                              return Material(
-                                color: Colors.transparent,
+                              return Dialog(
+                                elevation: 0,
+                                insetPadding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                alignment: AlignmentDirectional(0.0, 0.0)
+                                    .resolve(Directionality.of(context)),
                                 child: WebViewAware(
-                                    child: GestureDetector(
-                                  onTap: () =>
-                                      _model.unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
-                                  child: DeleteAccountDialogWidget(),
-                                )),
+                                  child: GestureDetector(
+                                    onTap: () => _model
+                                            .unfocusNode.canRequestFocus
+                                        ? FocusScope.of(context)
+                                            .requestFocus(_model.unfocusNode)
+                                        : FocusScope.of(context).unfocus(),
+                                    child: DeleteAccountDialogWidget(),
+                                  ),
+                                ),
                               );
                             },
                           ).then((value) =>
                               safeSetState(() => _model.deleteOutput = value));
 
                           if (_model.deleteOutput!) {
+                            logFirebaseEvent('MenuItem_show_snack_bar');
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -224,11 +211,14 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'SETTINGS_PAGE_Container_gg86xr1t_ON_TAP');
+                        logFirebaseEvent('Container_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();
 
-                        context.goNamedAuth('Onboarding', context.mounted);
+                        context.goNamedAuth('InitPage', context.mounted);
                       },
                       child: Container(
                         decoration: BoxDecoration(

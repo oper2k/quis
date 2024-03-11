@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,8 +36,9 @@ class VideoTextGuideStruct extends FFFirebaseStruct {
         textHtml: data['text_html'] as String?,
       );
 
-  static VideoTextGuideStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? VideoTextGuideStruct.fromMap(data) : null;
+  static VideoTextGuideStruct? maybeFromMap(dynamic data) => data is Map
+      ? VideoTextGuideStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'title': _title,

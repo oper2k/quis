@@ -2,17 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'sorry_dialog_model.dart';
 export 'sorry_dialog_model.dart';
 
 class SorryDialogWidget extends StatefulWidget {
-  const SorryDialogWidget({Key? key}) : super(key: key);
+  const SorryDialogWidget({super.key});
 
   @override
-  _SorryDialogWidgetState createState() => _SorryDialogWidgetState();
+  State<SorryDialogWidget> createState() => _SorryDialogWidgetState();
 }
 
 class _SorryDialogWidgetState extends State<SorryDialogWidget> {
@@ -39,10 +38,8 @@ class _SorryDialogWidgetState extends State<SorryDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -60,7 +57,7 @@ class _SorryDialogWidgetState extends State<SorryDialogWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
@@ -68,13 +65,16 @@ class _SorryDialogWidgetState extends State<SorryDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.00, -1.00),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'SORRY_DIALOG_Container_13fdthbj_ON_TAP');
+                        logFirebaseEvent('Container_dismiss_dialog');
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -82,7 +82,7 @@ class _SorryDialogWidgetState extends State<SorryDialogWidget> {
                         height: 40.0,
                         decoration: BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.00, 0.00),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -108,6 +108,8 @@ class _SorryDialogWidgetState extends State<SorryDialogWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(21.0, 22.0, 21.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('SORRY_DIALOG_COMP_OK_BTN_ON_TAP');
+                    logFirebaseEvent('Button_dismiss_dialog');
                     Navigator.pop(context);
                   },
                   text: 'OK',

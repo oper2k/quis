@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/backend/schema/structs/index.dart';
@@ -7,11 +9,13 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/home/succesful_purchase_dialog/succesful_purchase_dialog_widget.dart';
+import 'dart:async';
+import '/custom_code/actions/index.dart' as actions;
 import 'add_ons_widget.dart' show AddOnsWidget;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +57,10 @@ class AddOnsModel extends FlutterFlowModel<AddOnsWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
+  // Stores action output result for [Backend Call - API (Send an email)] action in Button widget.
+  ApiCallResponse? apiResult8hg;
+  // Stores action output result for [Backend Call - API (Send an email)] action in Button widget.
+  ApiCallResponse? apiResult8hge;
   // State field(s) for Expandable widget.
   late ExpandableController expandableController1;
 
@@ -86,16 +94,15 @@ class AddOnsModel extends FlutterFlowModel<AddOnsWidget> {
   // State field(s) for Expandable widget.
   late ExpandableController expandableController11;
 
-  // State field(s) for Expandable widget.
-  late ExpandableController expandableController12;
-
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     pseudoDropDownModel = createModel(context, () => PseudoDropDownModel());
     textControllerValidator = _textControllerValidator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     pseudoDropDownModel.dispose();
@@ -113,7 +120,6 @@ class AddOnsModel extends FlutterFlowModel<AddOnsWidget> {
     expandableController9.dispose();
     expandableController10.dispose();
     expandableController11.dispose();
-    expandableController12.dispose();
   }
 
   /// Action blocks are added here.

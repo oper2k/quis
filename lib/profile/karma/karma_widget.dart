@@ -4,17 +4,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'karma_model.dart';
 export 'karma_model.dart';
 
 class KarmaWidget extends StatefulWidget {
-  const KarmaWidget({Key? key}) : super(key: key);
+  const KarmaWidget({super.key});
 
   @override
-  _KarmaWidgetState createState() => _KarmaWidgetState();
+  State<KarmaWidget> createState() => _KarmaWidgetState();
 }
 
 class _KarmaWidgetState extends State<KarmaWidget> {
@@ -26,6 +25,8 @@ class _KarmaWidgetState extends State<KarmaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => KarmaModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Karma'});
   }
 
   @override
@@ -37,17 +38,6 @@ class _KarmaWidgetState extends State<KarmaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -68,13 +58,15 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('KARMA_PAGE_Container_fe7m7p7h_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -148,6 +140,9 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('KARMA_PAGE_Container_ends9jkz_ON_TAP');
+                    logFirebaseEvent('MenuItem_navigate_to');
+
                     context.pushNamed('EarnKarma');
                   },
                   child: wrapWithModel(
@@ -166,6 +161,8 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent('KARMA_PAGE_Container_n5przux8_ON_TAP');
+                      logFirebaseEvent('MenuItem_launch_u_r_l');
                       await launchURL(
                           'https://quisapp.notion.site/5327c89c0dc04558add1d77aef5586b1?pvs=25');
                     },

@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/backend/schema/structs/index.dart';
@@ -7,10 +9,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/home/succesful_purchase_dialog/succesful_purchase_dialog_widget.dart';
+import 'dart:async';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -19,10 +23,10 @@ import 'add_ons_model.dart';
 export 'add_ons_model.dart';
 
 class AddOnsWidget extends StatefulWidget {
-  const AddOnsWidget({Key? key}) : super(key: key);
+  const AddOnsWidget({super.key});
 
   @override
-  _AddOnsWidgetState createState() => _AddOnsWidgetState();
+  State<AddOnsWidget> createState() => _AddOnsWidgetState();
 }
 
 class _AddOnsWidgetState extends State<AddOnsWidget> {
@@ -35,6 +39,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
     super.initState();
     _model = createModel(context, () => AddOnsModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Add-ons'});
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -51,8 +56,6 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
         ExpandableController(initialExpanded: false);
     _model.expandableController11 =
         ExpandableController(initialExpanded: false);
-    _model.expandableController12 =
-        ExpandableController(initialExpanded: false);
   }
 
   @override
@@ -64,15 +67,6 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -95,13 +89,15 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('ADD_ONS_PAGE_Container_xeepsquk_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -117,7 +113,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                 width: 40.0,
                 height: 40.0,
                 decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.00, 0.00),
+                alignment: AlignmentDirectional(-1.0, 0.0),
               ),
             ],
           ),
@@ -136,7 +132,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Lottie.asset(
                         'assets/lottie_animations/animation_lnz09grs.json',
                         width: 220.0,
@@ -166,7 +162,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1.00, 0.00),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
@@ -192,6 +188,9 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'ADD_ONS_PAGE_Container_nxg4daed_ON_TAP');
+                          logFirebaseEvent('Container_bottom_sheet');
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
@@ -199,27 +198,31 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             context: context,
                             builder: (context) {
                               return WebViewAware(
-                                  child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: PickBottomSheetWidget(
-                                    stringList: FFAppState()
-                                        .addOns
-                                        .map((e) => e.name)
-                                        .toList(),
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child: PickBottomSheetWidget(
+                                      stringList: FFAppState()
+                                          .addOns
+                                          .map((e) => e.name)
+                                          .toList(),
+                                      title: 'Choose from the list below',
+                                    ),
                                   ),
                                 ),
-                              ));
+                              );
                             },
                           ).then((value) =>
                               safeSetState(() => _model.serviceOutput = value));
 
                           if (_model.serviceOutput != null &&
                               _model.serviceOutput != '') {
+                            logFirebaseEvent('Container_update_page_state');
                             setState(() {
                               _model.pickedAddon = FFAppState()
                                   .addOns
@@ -254,7 +257,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1.00, 0.00),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
@@ -321,8 +324,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            contentPadding: EdgeInsets.all(16.0),
                           ),
                           style: FlutterFlowTheme.of(context).headlineSmall,
                           maxLines: null,
@@ -332,14 +334,16 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                         ),
                       ),
                     ),
-                    if ((_model.pickedAddon?.name == 'CV writing') ||
-                        (_model.pickedAddon?.name == 'CV review'))
+                    if (valueOrDefault<bool>(
+                      _model.pickedAddon?.hasAttach,
+                      false,
+                    ))
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(-1.00, 0.00),
+                            alignment: AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
@@ -374,7 +378,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                               ),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
+                                    16.0, 0.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -405,6 +409,13 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
+                                        logFirebaseEvent(
+                                            'ADD_ONS_PAGE_Container_1mok4h73_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Container_custom_action');
+                                        await actions.dismissKeyboard();
+                                        logFirebaseEvent(
+                                            'Container_upload_file_to_firebase');
                                         final selectedFiles = await selectFiles(
                                           multiFile: false,
                                         );
@@ -454,17 +465,48 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                           }
                                         }
 
+                                        logFirebaseEvent(
+                                            'Container_show_snack_bar');
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Uploading document....',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .override(
+                                                        fontFamily: 'Sofia Pro',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 3000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        logFirebaseEvent(
+                                            'Container_update_page_state');
                                         setState(() {
                                           _model.isCVValidated = true;
                                         });
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(),
-                                        child: Icon(
-                                          FFIcons.kiconamoonAttachmentLight1,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(10.0),
+                                          child: Icon(
+                                            FFIcons.kiconamoonAttachmentLight1,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -476,7 +518,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                         ],
                       ),
                     Align(
-                      alignment: AlignmentDirectional(1.00, 0.00),
+                      alignment: AlignmentDirectional(1.0, 0.0),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
@@ -499,7 +541,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 '${valueOrDefault<String>(
                                   _model.pickedAddon?.price?.toString(),
                                   '0',
-                                )} AED',
+                                )}USD',
                                 style:
                                     FlutterFlowTheme.of(context).headlineLarge,
                               ),
@@ -508,80 +550,151 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          if (_model.pickedAddon != null) {
-                            setState(() {
-                              _model.isServiceValidated = true;
-                            });
-                          } else {
-                            setState(() {
-                              _model.isServiceValidated = false;
-                            });
-                            if (_model.uploadedFileUrl != null &&
-                                _model.uploadedFileUrl != '') {
+                    Builder(
+                      builder: (context) => Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'ADD_ONS_PAGE_ORDER_SERVICE_BTN_ON_TAP');
+                            var _shouldSetState = false;
+                            if (_model.pickedAddon != null) {
+                              logFirebaseEvent('Button_update_page_state');
                               setState(() {
-                                _model.isCVValidated = true;
+                                _model.isServiceValidated = true;
                               });
                             } else {
+                              logFirebaseEvent('Button_update_page_state');
                               setState(() {
-                                _model.isCVValidated = false;
+                                _model.isServiceValidated = false;
                               });
-                            }
+                              if (_model.uploadedFileUrl != null &&
+                                  _model.uploadedFileUrl != '') {
+                                logFirebaseEvent('Button_update_page_state');
+                                setState(() {
+                                  _model.isCVValidated = true;
+                                });
+                              } else {
+                                logFirebaseEvent('Button_update_page_state');
+                                setState(() {
+                                  _model.isCVValidated = false;
+                                });
+                              }
 
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
+                              logFirebaseEvent('Button_validate_form');
+                              if (_model.formKey.currentState == null ||
+                                  !_model.formKey.currentState!.validate()) {
+                                return;
+                              }
+                              if (_shouldSetState) setState(() {});
                               return;
                             }
-                            return;
-                          }
 
-                          if (_model.uploadedFileUrl != null &&
-                              _model.uploadedFileUrl != '') {
-                            setState(() {
-                              _model.isCVValidated = true;
-                            });
-                          } else {
-                            setState(() {
-                              _model.isCVValidated = false;
-                            });
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              return;
+                            if (_model.pickedAddon!.hasAttach) {
+                              if (_model.uploadedFileUrl != null &&
+                                  _model.uploadedFileUrl != '') {
+                                logFirebaseEvent('Button_update_page_state');
+                                setState(() {
+                                  _model.isCVValidated = true;
+                                });
+                              } else {
+                                logFirebaseEvent('Button_update_page_state');
+                                setState(() {
+                                  _model.isCVValidated = false;
+                                });
+                                logFirebaseEvent('Button_validate_form');
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
+                                if (_shouldSetState) setState(() {});
+                                return;
+                              }
                             }
-                            return;
-                          }
-                        },
-                        text: 'Order Service',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 52.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .headlineLarge
-                              .override(
-                                fontFamily: 'Sofia Pro',
-                                color: FlutterFlowTheme.of(context).white,
-                                useGoogleFonts: false,
-                              ),
-                          elevation: 0.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 0.0,
+                            logFirebaseEvent('Button_backend_call');
+                            unawaited(
+                              () async {
+                                _model.apiResult8hg =
+                                    await BrevoGroup.sendAnEmailCall.call(
+                                  userEmail: currentUserEmail,
+                                  templateId: 23,
+                                  paramServiceName: _model.pickedAddon?.name,
+                                );
+                              }(),
+                            );
+                            _shouldSetState = true;
+                            logFirebaseEvent('Button_backend_call');
+                            unawaited(
+                              () async {
+                                _model.apiResult8hge =
+                                    await BrevoGroup.sendAnEmailCall.call(
+                                  userEmail: FFAppConstants.infoEmail,
+                                  templateId: 22,
+                                  paramServiceName: _model.pickedAddon?.name,
+                                  paramEmail: currentUserEmail,
+                                  paramComment: _model.textController.text,
+                                  paramAttachLink: _model.uploadedFileUrl,
+                                );
+                              }(),
+                            );
+                            _shouldSetState = true;
+                            logFirebaseEvent('Button_alert_dialog');
+                            await showDialog(
+                              context: context,
+                              builder: (dialogContext) {
+                                return Dialog(
+                                  elevation: 0,
+                                  insetPadding: EdgeInsets.zero,
+                                  backgroundColor: Colors.transparent,
+                                  alignment: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  child: WebViewAware(
+                                    child: GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: SuccesfulPurchaseDialogWidget(),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ).then((value) => setState(() {}));
+
+                            logFirebaseEvent('Button_navigate_back');
+                            context.safePop();
+                            if (_shouldSetState) setState(() {});
+                          },
+                          text: 'Order Service',
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 52.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Sofia Pro',
+                                  color: FlutterFlowTheme.of(context).white,
+                                  useGoogleFonts: false,
+                                ),
+                            elevation: 0.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 0.0,
+                            ),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1.00, 0.00),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
@@ -606,8 +719,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
@@ -662,8 +774,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
@@ -718,8 +829,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
@@ -774,8 +884,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
@@ -830,8 +939,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
@@ -886,8 +994,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
@@ -942,69 +1049,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController7,
-                                    child: ExpandablePanel(
-                                      header: Text(
-                                        'Who are Quis Coaches?',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium,
-                                      ),
-                                      collapsed: Container(
-                                        decoration: BoxDecoration(),
-                                      ),
-                                      expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 16.0, 0.0, 0.0),
-                                        child: Text(
-                                          'Quis Coaches are current Recruiters, ex-Recruiters and industry experts who have been hand-picked and vetted by Quis. Coaches are rigorously selected and checked before providing any kind of services.',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineSmall
-                                              .override(
-                                                fontFamily: 'Sofia Pro',
-                                                useGoogleFonts: false,
-                                                lineHeight: 1.16,
-                                              ),
-                                        ),
-                                      ),
-                                      theme: ExpandableThemeData(
-                                        tapHeaderToExpand: true,
-                                        tapBodyToExpand: false,
-                                        tapBodyToCollapse: false,
-                                        headerAlignment:
-                                            ExpandablePanelHeaderAlignment
-                                                .center,
-                                        hasIcon: true,
-                                        expandIcon: FFIcons.kplus,
-                                        collapseIcon: FFIcons.kxmark,
-                                        iconSize: 24.0,
-                                        iconColor: FlutterFlowTheme.of(context)
-                                            .primary,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Divider(
-                              thickness: 3.0,
-                              color: Color(0x4DD8DADC),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  color: Color(0x00000000),
-                                  child: ExpandableNotifier(
-                                    controller: _model.expandableController8,
                                     child: ExpandablePanel(
                                       header: Text(
                                         'Can I get a refund for an unused session?',
@@ -1018,9 +1068,8 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: RichText(
-                                          textScaleFactor:
-                                              MediaQuery.of(context)
-                                                  .textScaleFactor,
+                                          textScaler:
+                                              MediaQuery.of(context).textScaler,
                                           text: TextSpan(
                                             children: [
                                               TextSpan(
@@ -1052,6 +1101,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () async {
+                                                        logFirebaseEvent(
+                                                            'ADD_ONS_RichTextSpan_h3gy7hd8_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'RichTextSpan_launch_u_r_l');
                                                         await launchURL(
                                                             'info@quis-hq.com');
                                                       },
@@ -1093,13 +1146,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
                                   child: ExpandableNotifier(
-                                    controller: _model.expandableController9,
+                                    controller: _model.expandableController8,
                                     child: ExpandablePanel(
                                       header: Text(
                                         'I need coaching ASAP!',
@@ -1113,7 +1165,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
-                                          'Please fill up the Add-ons [LINK to ADD-ONS] form and we will get in touch with you.',
+                                          'Please fill up the Add-ons form and we will get in touch with you.',
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall
                                               .override(
@@ -1149,13 +1201,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
                                   child: ExpandableNotifier(
-                                    controller: _model.expandableController10,
+                                    controller: _model.expandableController9,
                                     child: ExpandablePanel(
                                       header: Text(
                                         'Does my coaching purchase the membership of Quis?',
@@ -1205,13 +1256,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
                                   child: ExpandableNotifier(
-                                    controller: _model.expandableController11,
+                                    controller: _model.expandableController10,
                                     child: ExpandablePanel(
                                       header: Text(
                                         'What if I need to cancel my session or miss my session?',
@@ -1261,13 +1311,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             Container(
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
                                   color: Color(0x00000000),
                                   child: ExpandableNotifier(
-                                    controller: _model.expandableController12,
+                                    controller: _model.expandableController11,
                                     child: ExpandablePanel(
                                       header: Text(
                                         'I have a question which is not answered here',
@@ -1281,9 +1330,8 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: RichText(
-                                          textScaleFactor:
-                                              MediaQuery.of(context)
-                                                  .textScaleFactor,
+                                          textScaler:
+                                              MediaQuery.of(context).textScaler,
                                           text: TextSpan(
                                             children: [
                                               TextSpan(
@@ -1315,6 +1363,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () async {
+                                                        logFirebaseEvent(
+                                                            'ADD_ONS_RichTextSpan_xz3bid8w_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'RichTextSpan_launch_u_r_l');
                                                         await launchURL(
                                                             'info@quis-hq.com');
                                                       },

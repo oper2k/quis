@@ -7,7 +7,6 @@ import '/latest_questions/question_comments_bottom_sheet/question_comments_botto
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -16,14 +15,14 @@ export 'question_model.dart';
 
 class QuestionWidget extends StatefulWidget {
   const QuestionWidget({
-    Key? key,
+    super.key,
     required this.questionItem,
-  }) : super(key: key);
+  });
 
   final InterviewQuestionRecord? questionItem;
 
   @override
-  _QuestionWidgetState createState() => _QuestionWidgetState();
+  State<QuestionWidget> createState() => _QuestionWidgetState();
 }
 
 class _QuestionWidgetState extends State<QuestionWidget> {
@@ -36,8 +35,11 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     super.initState();
     _model = createModel(context, () => QuestionModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Question'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('QUESTION_PAGE_Question_ON_INIT_STATE');
+      logFirebaseEvent('Question_update_page_state');
       setState(() {
         _model.isFavorite =
             (currentUserDocument?.favoriteQuestions?.toList() ?? [])
@@ -55,17 +57,6 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -86,13 +77,15 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('QUESTION_PAGE_Container_r1pjft1x_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -107,8 +100,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    logFirebaseEvent('QUESTION_PAGE_Row_zxa54tr3_ON_TAP');
+                    logFirebaseEvent('Row_share');
                     await Share.share(
-                      widget.questionItem!.question,
+                      'Look what I found: ${widget.questionItem?.question} Download Quis: Interview Prep Tool today! Get your dream job!  IOS & Android Available!',
                       sharePositionOrigin: getWidgetBoundingBox(context),
                     );
                   },
@@ -178,6 +173,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'QUESTION_PAGE_Container_d59aykm4_ON_TAP');
+                                    logFirebaseEvent('Container_backend_call');
+
                                     await currentUserReference!.update({
                                       ...mapToFirestore(
                                         {
@@ -188,6 +187,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                         },
                                       ),
                                     });
+                                    logFirebaseEvent(
+                                        'Container_update_page_state');
                                     setState(() {
                                       _model.isFavorite = false;
                                     });
@@ -195,8 +196,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                   child: Container(
                                     decoration: BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 8.0, 8.0, 8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Icon(
                                         FFIcons.ksubwayHurt,
                                         color:
@@ -213,6 +213,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'QUESTION_PAGE_Container_e1u9vwj5_ON_TAP');
+                                    logFirebaseEvent('Container_backend_call');
+
                                     await currentUserReference!.update({
                                       ...mapToFirestore(
                                         {
@@ -223,6 +227,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                         },
                                       ),
                                     });
+                                    logFirebaseEvent(
+                                        'Container_update_page_state');
                                     setState(() {
                                       _model.isFavorite = true;
                                     });
@@ -230,8 +236,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                   child: Container(
                                     decoration: BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 8.0, 8.0, 8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Icon(
                                         FFIcons.ksubwayHurt1,
                                         color:
@@ -278,7 +283,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.00, 1.00),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.questionCommentsBottomSheetModel,
                 updateCallback: () => setState(() {}),

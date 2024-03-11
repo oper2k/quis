@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -32,6 +33,16 @@ class InterviewParticipantsOfDayRecord extends FirestoreRecord {
   List<DocumentReference> get takenUsers => _takenUsers ?? const [];
   bool hasTakenUsers() => _takenUsers != null;
 
+  // "joined_users" field.
+  List<DocumentReference>? _joinedUsers;
+  List<DocumentReference> get joinedUsers => _joinedUsers ?? const [];
+  bool hasJoinedUsers() => _joinedUsers != null;
+
+  // "is_checked" field.
+  bool? _isChecked;
+  bool get isChecked => _isChecked ?? false;
+  bool hasIsChecked() => _isChecked != null;
+
   void _initializeFields() {
     _date = snapshotData['date'] as DateTime?;
     _participants = getStructList(
@@ -39,6 +50,8 @@ class InterviewParticipantsOfDayRecord extends FirestoreRecord {
       InterviewParticipantStruct.fromMap,
     );
     _takenUsers = getDataList(snapshotData['taken_users']);
+    _joinedUsers = getDataList(snapshotData['joined_users']);
+    _isChecked = snapshotData['is_checked'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -82,10 +95,12 @@ class InterviewParticipantsOfDayRecord extends FirestoreRecord {
 
 Map<String, dynamic> createInterviewParticipantsOfDayRecordData({
   DateTime? date,
+  bool? isChecked,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'date': date,
+      'is_checked': isChecked,
     }.withoutNulls,
   );
 
@@ -102,12 +117,14 @@ class InterviewParticipantsOfDayRecordDocumentEquality
     const listEquality = ListEquality();
     return e1?.date == e2?.date &&
         listEquality.equals(e1?.participants, e2?.participants) &&
-        listEquality.equals(e1?.takenUsers, e2?.takenUsers);
+        listEquality.equals(e1?.takenUsers, e2?.takenUsers) &&
+        listEquality.equals(e1?.joinedUsers, e2?.joinedUsers) &&
+        e1?.isChecked == e2?.isChecked;
   }
 
   @override
-  int hash(InterviewParticipantsOfDayRecord? e) =>
-      const ListEquality().hash([e?.date, e?.participants, e?.takenUsers]);
+  int hash(InterviewParticipantsOfDayRecord? e) => const ListEquality().hash(
+      [e?.date, e?.participants, e?.takenUsers, e?.joinedUsers, e?.isChecked]);
 
   @override
   bool isValidKey(Object? o) => o is InterviewParticipantsOfDayRecord;

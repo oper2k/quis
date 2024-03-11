@@ -1,6 +1,7 @@
 // Automatic FlutterFlow imports
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -384,56 +385,6 @@ class _VideoConfWidgetState extends State<VideoConfWidget> {
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          if (widget.onChatTap != null) {
-                                            widget.onChatTap!();
-                                          }
-                                        },
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Container(
-                                              width: 70,
-                                              height: 70,
-                                              decoration: const BoxDecoration(
-                                                color: Color(0x2B010101),
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Icon(
-                                                FFIcons.kchat,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .white,
-                                                size: 30,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(0, 9, 0, 0),
-                                              child: Text(
-                                                'Chat',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .headlineMedium
-                                                    .override(
-                                                      fontFamily: 'Sofia Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .accent3,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      useGoogleFonts: false,
-                                                    ),
-                                              ),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                     ),

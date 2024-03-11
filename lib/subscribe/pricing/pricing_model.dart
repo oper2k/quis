@@ -1,131 +1,85 @@
-import '/components/feature_list_item_widget.dart';
+import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/subscribe/pricing_option/pricing_option_widget.dart';
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
-import 'package:smooth_page_indicator/smooth_page_indicator.dart'
-    as smooth_page_indicator;
 import 'pricing_widget.dart' show PricingWidget;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
 class PricingModel extends FlutterFlowModel<PricingWidget> {
+  ///  Local state fields for this page.
+
+  PaywallPickedOption? pickedOption = PaywallPickedOption.month3;
+
+  bool isOpen = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for PageView widget.
-  PageController? pageViewController;
+  // State field(s) for Carousel widget.
+  CarouselController? carouselController;
 
-  int get pageViewCurrentIndex => pageViewController != null &&
-          pageViewController!.hasClients &&
-          pageViewController!.page != null
-      ? pageViewController!.page!.round()
-      : 0;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel1;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel2;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel3;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel4;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel5;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel6;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel7;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel8;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel9;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel10;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel11;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel12;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel13;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel14;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel15;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel16;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel17;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel18;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel19;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel20;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel21;
-  // Model for featureListItem component.
-  late FeatureListItemModel featureListItemModel22;
+  int carouselCurrentIndex = 0;
+
+  // State field(s) for RatingBar widget.
+  double? ratingBarValue1;
+  // State field(s) for RatingBar widget.
+  double? ratingBarValue2;
+  // State field(s) for RatingBar widget.
+  double? ratingBarValue3;
+  // Model for pricingOption3months25off.
+  late PricingOptionModel pricingOption3months25offModel;
+  // Model for pricingOption3months50off.
+  late PricingOptionModel pricingOption3months50offModel;
+  // Model for pricingOption3monthsStandard.
+  late PricingOptionModel pricingOption3monthsStandardModel;
+  // Model for pricingOption1month.
+  late PricingOptionModel pricingOption1monthModel;
+  // Model for pricingOption1week.
+  late PricingOptionModel pricingOption1weekModel;
   // Stores action output result for [RevenueCat - Purchase] action in Button widget.
   bool? monthlysubscriptionOutput;
   // Stores action output result for [RevenueCat - Purchase] action in Button widget.
-  bool? yearlysubscriptionOutput;
+  bool? weeklysubscriptionOutput;
   // Stores action output result for [RevenueCat - Purchase] action in Button widget.
-  bool? onetimeOutput;
+  bool? months3Subscription25OffOutput;
+  // Stores action output result for [RevenueCat - Purchase] action in Button widget.
+  bool? months3Subscription50OffOutput;
+  // Stores action output result for [RevenueCat - Purchase] action in Button widget.
+  bool? months3SubscriptionOutput;
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
-    featureListItemModel1 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel2 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel3 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel4 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel5 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel6 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel7 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel8 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel9 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel10 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel11 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel12 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel13 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel14 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel15 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel16 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel17 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel18 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel19 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel20 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel21 = createModel(context, () => FeatureListItemModel());
-    featureListItemModel22 = createModel(context, () => FeatureListItemModel());
+    pricingOption3months25offModel =
+        createModel(context, () => PricingOptionModel());
+    pricingOption3months50offModel =
+        createModel(context, () => PricingOptionModel());
+    pricingOption3monthsStandardModel =
+        createModel(context, () => PricingOptionModel());
+    pricingOption1monthModel = createModel(context, () => PricingOptionModel());
+    pricingOption1weekModel = createModel(context, () => PricingOptionModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
-    featureListItemModel1.dispose();
-    featureListItemModel2.dispose();
-    featureListItemModel3.dispose();
-    featureListItemModel4.dispose();
-    featureListItemModel5.dispose();
-    featureListItemModel6.dispose();
-    featureListItemModel7.dispose();
-    featureListItemModel8.dispose();
-    featureListItemModel9.dispose();
-    featureListItemModel10.dispose();
-    featureListItemModel11.dispose();
-    featureListItemModel12.dispose();
-    featureListItemModel13.dispose();
-    featureListItemModel14.dispose();
-    featureListItemModel15.dispose();
-    featureListItemModel16.dispose();
-    featureListItemModel17.dispose();
-    featureListItemModel18.dispose();
-    featureListItemModel19.dispose();
-    featureListItemModel20.dispose();
-    featureListItemModel21.dispose();
-    featureListItemModel22.dispose();
+    pricingOption3months25offModel.dispose();
+    pricingOption3months50offModel.dispose();
+    pricingOption3monthsStandardModel.dispose();
+    pricingOption1monthModel.dispose();
+    pricingOption1weekModel.dispose();
   }
 
   /// Action blocks are added here.

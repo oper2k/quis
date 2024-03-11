@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -26,9 +27,21 @@ class GroupRecord extends FirestoreRecord {
   String get icon => _icon ?? '';
   bool hasIcon() => _icon != null;
 
+  // "description" field.
+  String? _description;
+  String get description => _description ?? '';
+  bool hasDescription() => _description != null;
+
+  // "sort" field.
+  int? _sort;
+  int get sort => _sort ?? 0;
+  bool hasSort() => _sort != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _icon = snapshotData['icon'] as String?;
+    _description = snapshotData['description'] as String?;
+    _sort = castToType<int>(snapshotData['sort']);
   }
 
   static CollectionReference get collection =>
@@ -67,11 +80,15 @@ class GroupRecord extends FirestoreRecord {
 Map<String, dynamic> createGroupRecordData({
   String? name,
   String? icon,
+  String? description,
+  int? sort,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'name': name,
       'icon': icon,
+      'description': description,
+      'sort': sort,
     }.withoutNulls,
   );
 
@@ -83,11 +100,15 @@ class GroupRecordDocumentEquality implements Equality<GroupRecord> {
 
   @override
   bool equals(GroupRecord? e1, GroupRecord? e2) {
-    return e1?.name == e2?.name && e1?.icon == e2?.icon;
+    return e1?.name == e2?.name &&
+        e1?.icon == e2?.icon &&
+        e1?.description == e2?.description &&
+        e1?.sort == e2?.sort;
   }
 
   @override
-  int hash(GroupRecord? e) => const ListEquality().hash([e?.name, e?.icon]);
+  int hash(GroupRecord? e) =>
+      const ListEquality().hash([e?.name, e?.icon, e?.description, e?.sort]);
 
   @override
   bool isValidKey(Object? o) => o is GroupRecord;

@@ -1,14 +1,15 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/profile/support_letter_dialog/support_letter_dialog_widget.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
+import 'dart:async';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -17,10 +18,10 @@ import 'support_model.dart';
 export 'support_model.dart';
 
 class SupportWidget extends StatefulWidget {
-  const SupportWidget({Key? key}) : super(key: key);
+  const SupportWidget({super.key});
 
   @override
-  _SupportWidgetState createState() => _SupportWidgetState();
+  State<SupportWidget> createState() => _SupportWidgetState();
 }
 
 class _SupportWidgetState extends State<SupportWidget> {
@@ -33,6 +34,7 @@ class _SupportWidgetState extends State<SupportWidget> {
     super.initState();
     _model = createModel(context, () => SupportModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Support'});
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -64,15 +66,6 @@ class _SupportWidgetState extends State<SupportWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -95,13 +88,15 @@ class _SupportWidgetState extends State<SupportWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('SUPPORT_PAGE_Container_bgraeu8x_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -133,7 +128,7 @@ class _SupportWidgetState extends State<SupportWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lnvyjnau.json',
                     width: 226.0,
@@ -143,7 +138,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Text(
                     'Assistance at Your Fingertips',
                     textAlign: TextAlign.center,
@@ -170,6 +165,9 @@ class _SupportWidgetState extends State<SupportWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent(
+                          'SUPPORT_PAGE_Container_6pwrskdx_ON_TAP');
+                      logFirebaseEvent('Container_bottom_sheet');
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
@@ -177,27 +175,31 @@ class _SupportWidgetState extends State<SupportWidget> {
                         context: context,
                         builder: (context) {
                           return WebViewAware(
-                              child: GestureDetector(
-                            onTap: () => _model.unfocusNode.canRequestFocus
-                                ? FocusScope.of(context)
-                                    .requestFocus(_model.unfocusNode)
-                                : FocusScope.of(context).unfocus(),
-                            child: Padding(
-                              padding: MediaQuery.viewInsetsOf(context),
-                              child: PickBottomSheetWidget(
-                                stringList: FFAppState().supportTopicList,
+                            child: GestureDetector(
+                              onTap: () => _model.unfocusNode.canRequestFocus
+                                  ? FocusScope.of(context)
+                                      .requestFocus(_model.unfocusNode)
+                                  : FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: PickBottomSheetWidget(
+                                  stringList: FFAppState().supportTopicList,
+                                  title: 'Choose from the list below',
+                                ),
                               ),
                             ),
-                          ));
+                          );
                         },
                       ).then((value) =>
                           safeSetState(() => _model.topicOutput = value));
 
                       if (_model.topicOutput != null &&
                           _model.topicOutput != '') {
+                        logFirebaseEvent('Container_update_page_state');
                         setState(() {
                           _model.pickedTopic = _model.topicOutput;
                         });
+                        logFirebaseEvent('Container_update_page_state');
                         setState(() {
                           _model.isTopicValidated = true;
                         });
@@ -288,8 +290,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                         ),
                         filled: true,
                         fillColor: FlutterFlowTheme.of(context).white,
-                        contentPadding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 16.0, 16.0, 16.0),
+                        contentPadding: EdgeInsets.all(16.0),
                       ),
                       style: FlutterFlowTheme.of(context).headlineSmall,
                       maxLines: null,
@@ -306,15 +307,19 @@ class _SupportWidgetState extends State<SupportWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent('SUPPORT_PAGE_SUBMIT_BTN_ON_TAP');
                         if (_model.pickedTopic != null &&
                             _model.pickedTopic != '') {
+                          logFirebaseEvent('Button_update_page_state');
                           setState(() {
                             _model.isTopicValidated = true;
                           });
                         } else {
+                          logFirebaseEvent('Button_update_page_state');
                           setState(() {
                             _model.isTopicValidated = false;
                           });
+                          logFirebaseEvent('Button_validate_form');
                           if (_model.formKey.currentState == null ||
                               !_model.formKey.currentState!.validate()) {
                             return;
@@ -322,32 +327,58 @@ class _SupportWidgetState extends State<SupportWidget> {
                           return;
                         }
 
+                        logFirebaseEvent('Button_validate_form');
                         if (_model.formKey.currentState == null ||
                             !_model.formKey.currentState!.validate()) {
                           return;
                         }
-                        await showAlignedDialog(
+                        logFirebaseEvent('Button_backend_call');
+                        unawaited(
+                          () async {
+                            await BrevoGroup.sendAnEmailCall.call(
+                              userEmail: currentUserEmail,
+                              templateId: 11,
+                            );
+                          }(),
+                        );
+                        logFirebaseEvent('Button_backend_call');
+                        unawaited(
+                          () async {
+                            await BrevoGroup.sendAnEmailCall.call(
+                              userEmail: FFAppConstants.infoEmail,
+                              templateId: 19,
+                              paramEmail: currentUserEmail,
+                              paramComment: _model.textController.text,
+                              paramTopic: _model.pickedTopic,
+                            );
+                          }(),
+                        );
+                        logFirebaseEvent('Button_alert_dialog');
+                        await showDialog(
                           context: context,
-                          isGlobal: true,
-                          avoidOverflow: false,
-                          targetAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
-                          followerAnchor: AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
                           builder: (dialogContext) {
-                            return Material(
-                              color: Colors.transparent,
+                            return Dialog(
+                              elevation: 0,
+                              insetPadding: EdgeInsets.zero,
+                              backgroundColor: Colors.transparent,
+                              alignment: AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
                               child: WebViewAware(
-                                  child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: SupportLetterDialogWidget(),
-                              )),
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: SupportLetterDialogWidget(),
+                                ),
+                              ),
                             );
                           },
                         ).then((value) => setState(() {}));
+
+                        logFirebaseEvent('Button_navigate_back');
+                        context.safePop();
                       },
                       text: 'Submit',
                       options: FFButtonOptions(
@@ -408,8 +439,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -463,8 +493,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -518,8 +547,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -573,8 +601,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -628,8 +655,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -683,8 +709,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -703,8 +728,8 @@ class _SupportWidgetState extends State<SupportWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: RichText(
-                                    textScaleFactor:
-                                        MediaQuery.of(context).textScaleFactor,
+                                    textScaler:
+                                        MediaQuery.of(context).textScaler,
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
@@ -730,6 +755,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                           mouseCursor: SystemMouseCursors.click,
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
+                                              logFirebaseEvent(
+                                                  'SUPPORT_RichTextSpan_j0ntj2w2_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'RichTextSpan_launch_u_r_l');
                                               await launchURL(
                                                   'info@quis-hq.com');
                                             },
@@ -797,8 +826,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -852,8 +880,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -907,8 +934,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -962,8 +988,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -1017,8 +1042,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -1072,8 +1096,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -1127,8 +1150,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                       Container(
                         decoration: BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             color: Color(0x00000000),
@@ -1147,8 +1169,8 @@ class _SupportWidgetState extends State<SupportWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: RichText(
-                                    textScaleFactor:
-                                        MediaQuery.of(context).textScaleFactor,
+                                    textScaler:
+                                        MediaQuery.of(context).textScaler,
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
@@ -1174,6 +1196,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                           mouseCursor: SystemMouseCursors.click,
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
+                                              logFirebaseEvent(
+                                                  'SUPPORT_RichTextSpan_9wvdvdbs_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'RichTextSpan_launch_u_r_l');
                                               await launchURL(
                                                   'info@quis-hq.com');
                                             },

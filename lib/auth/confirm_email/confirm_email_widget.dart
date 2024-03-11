@@ -1,19 +1,20 @@
 import '/auth/email_dialog/email_dialog_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
+import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -22,64 +23,114 @@ export 'confirm_email_model.dart';
 
 class ConfirmEmailWidget extends StatefulWidget {
   const ConfirmEmailWidget({
-    Key? key,
+    super.key,
     bool? isAfterReg,
-  })  : this.isAfterReg = isAfterReg ?? false,
-        super(key: key);
+  }) : this.isAfterReg = isAfterReg ?? false;
 
   final bool isAfterReg;
 
   @override
-  _ConfirmEmailWidgetState createState() => _ConfirmEmailWidgetState();
+  State<ConfirmEmailWidget> createState() => _ConfirmEmailWidgetState();
 }
 
-class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
+class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget>
+    with TickerProviderStateMixin {
   late ConfirmEmailModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 500.ms,
+          duration: 300.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ConfirmEmailModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ConfirmEmail'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CONFIRM_EMAIL_ConfirmEmail_ON_INIT_STATE');
       await authManager.refreshUser();
       if (widget.isAfterReg) {
+        logFirebaseEvent('ConfirmEmail_update_page_state');
         setState(() {
           _model.isSendEmailVisible = false;
         });
+        logFirebaseEvent('ConfirmEmail_wait__delay');
+        await Future.delayed(const Duration(milliseconds: 1000));
+        logFirebaseEvent('ConfirmEmail_timer');
         _model.timerController.onStartTimer();
       }
       if (!(valueOrDefault(currentUserDocument?.refCode, '') != null &&
           valueOrDefault(currentUserDocument?.refCode, '') != '')) {
-        await currentUserReference!.update(createUsersRecordData(
-          refCode: functions.generateRefCode(),
-        ));
+        logFirebaseEvent('ConfirmEmail_backend_call');
+        unawaited(
+          () async {
+            await currentUserReference!.update(createUsersRecordData(
+              refCode: functions.generateRefCode(),
+            ));
+          }(),
+        );
       }
       if ((FFAppState().refUser != null) &&
           (currentUserDocument?.refUser == null)) {
-        await currentUserReference!.update(createUsersRecordData(
-          refUser: FFAppState().refUser,
-        ));
-
-        await FFAppState().refUser!.update({
-          ...mapToFirestore(
-            {
-              'karma': FieldValue.increment(2.0),
-            },
-          ),
-        });
+        logFirebaseEvent('ConfirmEmail_backend_call');
+        unawaited(
+          () async {
+            await currentUserReference!.update(createUsersRecordData(
+              refUser: FFAppState().refUser,
+            ));
+          }(),
+        );
+        logFirebaseEvent('ConfirmEmail_backend_call');
+        unawaited(
+          () async {
+            await FFAppState().refUser!.update({
+              ...mapToFirestore(
+                {
+                  'karma': FieldValue.increment(5.0),
+                },
+              ),
+            });
+          }(),
+        );
       }
       if (currentUserEmailVerified) {
-        context.goNamed('Home');
+        logFirebaseEvent('ConfirmEmail_navigate_to');
+
+        context.goNamed(
+          'Home',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: Duration(milliseconds: 0),
+            ),
+          },
+        );
       } else {
+        logFirebaseEvent('ConfirmEmail_start_periodic_action');
         _model.instantTimer = InstantTimer.periodic(
           duration: Duration(milliseconds: 3000),
           callback: (timer) async {
             if (currentUserEmailVerified) {
+              logFirebaseEvent('ConfirmEmail_stop_periodic_action');
               _model.instantTimer?.cancel();
+              logFirebaseEvent('ConfirmEmail_navigate_to');
 
               context.goNamed('ConfirmedEmail');
             }
@@ -101,15 +152,6 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -132,17 +174,19 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('CONFIRM_EMAIL_Container_y9yrraf3_ON_TAP');
+                  logFirebaseEvent('Container_auth');
                   GoRouter.of(context).prepareAuthEvent();
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth('Onboarding', context.mounted);
+                  context.goNamedAuth('InitPage', context.mounted);
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -184,7 +228,7 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -194,7 +238,7 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
@@ -205,137 +249,133 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget> {
                 ),
               ),
               Spacer(),
-              Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
-                child: Builder(
-                  builder: (context) {
-                    if (!_model.isSendEmailVisible) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FlutterFlowTimer(
-                            initialTime: _model.timerMilliseconds,
-                            getDisplayTime: (value) =>
-                                StopWatchTimer.getDisplayTime(
-                              value,
-                              hours: false,
-                              milliSecond: false,
-                            ),
-                            controller: _model.timerController,
-                            updateStateInterval: Duration(milliseconds: 1000),
-                            onChanged: (value, displayTime, shouldUpdate) {
-                              _model.timerMilliseconds = value;
-                              _model.timerValue = displayTime;
-                              if (shouldUpdate) setState(() {});
-                            },
-                            onEnded: () async {
-                              setState(() {
-                                _model.isSendEmailVisible = true;
-                              });
-                            },
-                            textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context).headlineSmall,
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              'minutes to \'Resend\' availability.',
-                              style: FlutterFlowTheme.of(context).headlineSmall,
-                            ),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Builder(
-                        builder: (context) => Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 0.0, 20.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              await showAlignedDialog(
-                                context: context,
-                                isGlobal: true,
-                                avoidOverflow: false,
-                                targetAnchor: AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                followerAnchor: AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                builder: (dialogContext) {
-                                  return Material(
-                                    color: Colors.transparent,
-                                    child: WebViewAware(
-                                        child: GestureDetector(
-                                      onTap: () => _model
-                                              .unfocusNode.canRequestFocus
+              if (!_model.isSendEmailVisible)
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FlutterFlowTimer(
+                      initialTime: _model.timerMilliseconds,
+                      getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
+                        value,
+                        hours: false,
+                        milliSecond: false,
+                      ),
+                      controller: _model.timerController,
+                      updateStateInterval: Duration(milliseconds: 1000),
+                      onChanged: (value, displayTime, shouldUpdate) {
+                        _model.timerMilliseconds = value;
+                        _model.timerValue = displayTime;
+                        if (shouldUpdate) setState(() {});
+                      },
+                      onEnded: () async {
+                        logFirebaseEvent(
+                            'CONFIRM_EMAIL_Timer_0e9ooyxl_ON_TIMER_EN');
+                        logFirebaseEvent('Timer_update_page_state');
+                        setState(() {
+                          _model.isSendEmailVisible = true;
+                        });
+                      },
+                      textAlign: TextAlign.start,
+                      style: FlutterFlowTheme.of(context).headlineSmall,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'minutes to \'Resend\' availability.',
+                        style: FlutterFlowTheme.of(context).headlineSmall,
+                      ),
+                    ),
+                  ],
+                ),
+              if (_model.isSendEmailVisible)
+                Builder(
+                  builder: (context) => Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        logFirebaseEvent(
+                            'CONFIRM_EMAIL_Container_usejle6w_ON_TAP');
+                        logFirebaseEvent('Container_alert_dialog');
+                        showDialog(
+                          context: context,
+                          builder: (dialogContext) {
+                            return Dialog(
+                              elevation: 0,
+                              insetPadding: EdgeInsets.zero,
+                              backgroundColor: Colors.transparent,
+                              alignment: AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
+                              child: WebViewAware(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
                                           ? FocusScope.of(context)
                                               .requestFocus(_model.unfocusNode)
                                           : FocusScope.of(context).unfocus(),
-                                      child: EmailDialogWidget(),
-                                    )),
-                                  );
-                                },
-                              ).then((value) => setState(() {}));
-
-                              setState(() {
-                                _model.isSendEmailVisible = false;
-                              });
-                              _model.timerController.onResetTimer();
-
-                              await authManager.sendEmailVerification();
-                              _model.timerController.onStartTimer();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 10.0),
-                                child: RichText(
-                                  textScaleFactor:
-                                      MediaQuery.of(context).textScaleFactor,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            'Check your spam folder for an email from *** or ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                      TextSpan(
-                                        text: 'send again.',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .override(
-                                              fontFamily: 'Sofia Pro',
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              useGoogleFonts: false,
-                                            ),
-                                      )
-                                    ],
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                  ),
-                                  textAlign: TextAlign.center,
+                                  child: EmailDialogWidget(),
                                 ),
                               ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+
+                        logFirebaseEvent('Container_update_page_state');
+                        setState(() {
+                          _model.isSendEmailVisible = false;
+                        });
+                        logFirebaseEvent('Container_timer');
+                        _model.timerController.onResetTimer();
+
+                        logFirebaseEvent('Container_timer');
+                        _model.timerController.onStartTimer();
+                        logFirebaseEvent('Container_auth');
+                        await authManager.sendEmailVerification();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: RichText(
+                            textScaler: MediaQuery.of(context).textScaler,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text:
+                                      'Check your spam folder for an email from *** or ',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                                TextSpan(
+                                  text: 'send again.',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Sofia Pro',
+                                        decoration: TextDecoration.underline,
+                                        useGoogleFonts: false,
+                                      ),
+                                )
+                              ],
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                      );
-                    }
-                  },
+                      ),
+                    ),
+                  ),
                 ),
-              ),
             ]
                 .addToStart(SizedBox(height: 50.0))
                 .addToEnd(SizedBox(height: 50.0)),
-          ),
+          ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation']!),
         ),
       ),
     );

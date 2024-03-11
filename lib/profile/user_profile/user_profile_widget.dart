@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'user_profile_model.dart';
@@ -13,17 +12,16 @@ export 'user_profile_model.dart';
 
 class UserProfileWidget extends StatefulWidget {
   const UserProfileWidget({
-    Key? key,
+    super.key,
     required this.userItem,
     bool? isLinkedIn,
-  })  : this.isLinkedIn = isLinkedIn ?? false,
-        super(key: key);
+  }) : this.isLinkedIn = isLinkedIn ?? false;
 
   final UsersRecord? userItem;
   final bool isLinkedIn;
 
   @override
-  _UserProfileWidgetState createState() => _UserProfileWidgetState();
+  State<UserProfileWidget> createState() => _UserProfileWidgetState();
 }
 
 class _UserProfileWidgetState extends State<UserProfileWidget> {
@@ -35,6 +33,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => UserProfileModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'UserProfile'});
   }
 
   @override
@@ -46,17 +46,6 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -77,13 +66,15 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('USER_PROFILE_Container_baldbt05_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -174,6 +165,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'USER_PROFILE_Container_l79clnki_ON_TAP');
+                        logFirebaseEvent('Container_launch_u_r_l');
                         await launchURL(widget.userItem!.linkedinLink);
                       },
                       child: Container(
@@ -277,6 +271,12 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         final roleRefItemRoleRecord =
                                             snapshot.data!;
                                         return Container(
+                                          constraints: BoxConstraints(
+                                            minWidth: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.27,
+                                            minHeight: 50.0,
+                                          ),
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
@@ -289,7 +289,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                             ),
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.00, 0.00),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -361,6 +361,12 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         final goalRoleRefItemGoalRoleRecord =
                                             snapshot.data!;
                                         return Container(
+                                          constraints: BoxConstraints(
+                                            minWidth: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.27,
+                                            minHeight: 50.0,
+                                          ),
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
@@ -373,7 +379,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                             ),
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.00, 0.00),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -422,6 +428,12 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 9.0, 0.0, 0.0),
                                     child: Container(
+                                      constraints: BoxConstraints(
+                                        minWidth:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.27,
+                                        minHeight: 50.0,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
@@ -432,8 +444,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                               .primary,
                                         ),
                                       ),
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 11.0, 12.0, 11.0),
@@ -609,7 +620,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                                               widget
                                                                   .userItem!
                                                                   .reference
-                                                                  .id)! +
+                                                                  .id) +
                                                           1)
                                                       .toString()
                                                   : '-',

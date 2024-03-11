@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
@@ -23,12 +24,6 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _VideoOfTheDay =
           prefs.getString('ff_VideoOfTheDay')?.ref ?? _VideoOfTheDay;
-    });
-    _safeInit(() {
-      _DayVideoOfDay = prefs.containsKey('ff_DayVideoOfDay')
-          ? DateTime.fromMillisecondsSinceEpoch(
-              prefs.getInt('ff_DayVideoOfDay')!)
-          : _DayVideoOfDay;
     });
     _safeInit(() {
       _refUser = prefs.getString('ff_refUser')?.ref ?? _refUser;
@@ -54,6 +49,22 @@ class FFAppState extends ChangeNotifier {
       _IslastLoginHappened =
           prefs.getBool('ff_IslastLoginHappened') ?? _IslastLoginHappened;
     });
+    _safeInit(() {
+      _improvementList = prefs
+              .getStringList('ff_improvementList')
+              ?.map((x) {
+                try {
+                  return ImprovementItemStruct.fromSerializableMap(
+                      jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _improvementList;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -65,7 +76,7 @@ class FFAppState extends ChangeNotifier {
 
   List<ServiceStruct> _addOns = [
     ServiceStruct.fromSerializableMap(jsonDecode(
-        '{\"name\":\"CV Writing Service\",\"priceKarma\":\"0\",\"price\":\"300\"}')),
+        '{\"name\":\"CV Writing Service\",\"priceKarma\":\"0\",\"price\":\"300\",\"has_attach\":\"true\"}')),
     ServiceStruct.fromSerializableMap(jsonDecode(
         '{\"name\":\"1x1 Coaching \",\"priceKarma\":\"0\",\"price\":\"500\"}')),
     ServiceStruct.fromSerializableMap(jsonDecode(
@@ -140,15 +151,6 @@ class FFAppState extends ChangeNotifier {
     _value != null
         ? prefs.setString('ff_VideoOfTheDay', _value.path)
         : prefs.remove('ff_VideoOfTheDay');
-  }
-
-  DateTime? _DayVideoOfDay = DateTime.fromMillisecondsSinceEpoch(92034000000);
-  DateTime? get DayVideoOfDay => _DayVideoOfDay;
-  set DayVideoOfDay(DateTime? _value) {
-    _DayVideoOfDay = _value;
-    _value != null
-        ? prefs.setInt('ff_DayVideoOfDay', _value.millisecondsSinceEpoch)
-        : prefs.remove('ff_DayVideoOfDay');
   }
 
   List<String> _interviewRoles = ['Waiter'];
@@ -360,16 +362,57 @@ class FFAppState extends ChangeNotifier {
     _IslastLoginHappened = _value;
     prefs.setBool('ff_IslastLoginHappened', _value);
   }
-}
 
-LatLng? _latLngFromString(String? val) {
-  if (val == null) {
-    return null;
+  List<ImprovementItemStruct> _improvementList = [
+    ImprovementItemStruct.fromSerializableMap(jsonDecode(
+        '{\"title\":\"Interview Process Awareness 💡\",\"description\":\" \",\"sort\":\"1\"}')),
+    ImprovementItemStruct.fromSerializableMap(jsonDecode(
+        '{\"title\":\"Get out from feeling of stuck 🤝 \",\"description\":\" \",\"sort\":\"3\"}')),
+    ImprovementItemStruct.fromSerializableMap(jsonDecode(
+        '{\"title\":\"Get more Confidence 🍀\",\"description\":\" \",\"sort\":\"3\"}')),
+    ImprovementItemStruct.fromSerializableMap(jsonDecode(
+        '{\"title\":\"Interview Questions 💬\",\"description\":\"Many failed because they did not know what to expect. We aim to change that!\",\"sort\":\"4\"}'))
+  ];
+  List<ImprovementItemStruct> get improvementList => _improvementList;
+  set improvementList(List<ImprovementItemStruct> _value) {
+    _improvementList = _value;
+    prefs.setStringList(
+        'ff_improvementList', _value.map((x) => x.serialize()).toList());
   }
-  final split = val.split(',');
-  final lat = double.parse(split.first);
-  final lng = double.parse(split.last);
-  return LatLng(lat, lng);
+
+  void addToImprovementList(ImprovementItemStruct _value) {
+    _improvementList.add(_value);
+    prefs.setStringList('ff_improvementList',
+        _improvementList.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromImprovementList(ImprovementItemStruct _value) {
+    _improvementList.remove(_value);
+    prefs.setStringList('ff_improvementList',
+        _improvementList.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromImprovementList(int _index) {
+    _improvementList.removeAt(_index);
+    prefs.setStringList('ff_improvementList',
+        _improvementList.map((x) => x.serialize()).toList());
+  }
+
+  void updateImprovementListAtIndex(
+    int _index,
+    ImprovementItemStruct Function(ImprovementItemStruct) updateFn,
+  ) {
+    _improvementList[_index] = updateFn(_improvementList[_index]);
+    prefs.setStringList('ff_improvementList',
+        _improvementList.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInImprovementList(
+      int _index, ImprovementItemStruct _value) {
+    _improvementList.insert(_index, _value);
+    prefs.setStringList('ff_improvementList',
+        _improvementList.map((x) => x.serialize()).toList());
+  }
 }
 
 void _safeInit(Function() initializeField) {

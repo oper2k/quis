@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'video_vimeo_model.dart';
@@ -11,14 +10,14 @@ export 'video_vimeo_model.dart';
 
 class VideoVimeoWidget extends StatefulWidget {
   const VideoVimeoWidget({
-    Key? key,
+    super.key,
     required this.videoVimeoURL,
-  }) : super(key: key);
+  });
 
   final String? videoVimeoURL;
 
   @override
-  _VideoVimeoWidgetState createState() => _VideoVimeoWidgetState();
+  State<VideoVimeoWidget> createState() => _VideoVimeoWidgetState();
 }
 
 class _VideoVimeoWidgetState extends State<VideoVimeoWidget> {
@@ -30,6 +29,8 @@ class _VideoVimeoWidgetState extends State<VideoVimeoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => VideoVimeoModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'VideoVimeo'});
   }
 
   @override
@@ -41,17 +42,6 @@ class _VideoVimeoWidgetState extends State<VideoVimeoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -63,12 +53,15 @@ class _VideoVimeoWidgetState extends State<VideoVimeoWidget> {
           top: true,
           child: Stack(
             children: [
-              FlutterFlowWebView(
-                content: widget.videoVimeoURL!,
-                bypass: false,
-                height: MediaQuery.sizeOf(context).height * 1.0,
-                verticalScroll: false,
-                horizontalScroll: false,
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: FlutterFlowWebView(
+                  content: widget.videoVimeoURL!,
+                  bypass: false,
+                  height: MediaQuery.sizeOf(context).height * 0.8,
+                  verticalScroll: false,
+                  horizontalScroll: false,
+                ),
               ),
               InkWell(
                 splashColor: Colors.transparent,
@@ -76,6 +69,8 @@ class _VideoVimeoWidgetState extends State<VideoVimeoWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  logFirebaseEvent('VIDEO_VIMEO_Container_pwp3jx2r_ON_TAP');
+                  logFirebaseEvent('Container_navigate_back');
                   context.safePop();
                 },
                 child: Container(

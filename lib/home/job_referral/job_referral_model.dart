@@ -7,12 +7,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import '/home/deducted_karma/deducted_karma_widget.dart';
 import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
 import 'job_referral_widget.dart' show JobReferralWidget;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -76,8 +74,12 @@ class JobReferralModel extends FlutterFlowModel<JobReferralWidget> {
     return null;
   }
 
+  // Stores action output result for [Action Block - payByKarma] action in Button widget.
+  bool? payByKarmaOutput;
+
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     pseudoDropDownModel1 = createModel(context, () => PseudoDropDownModel());
     pseudoDropDownModel2 = createModel(context, () => PseudoDropDownModel());
@@ -85,6 +87,7 @@ class JobReferralModel extends FlutterFlowModel<JobReferralWidget> {
     textController2Validator = _textController2Validator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     pseudoDropDownModel1.dispose();

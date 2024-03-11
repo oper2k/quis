@@ -1,12 +1,14 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/components/avatar_widget.dart';
 import '/components/nav_bar_widget.dart';
-import '/components/subscription_required_dialog_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
@@ -14,16 +16,14 @@ import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'home_widget.dart' show HomeWidget;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 class HomeModel extends FlutterFlowModel<HomeWidget> {
   ///  State fields for stateful widgets in this page.
@@ -31,8 +31,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in Home widget.
   List<CourseVideoRecord>? videoDayListOutput;
-  // Stores action output result for [Backend Call - API (Create a contact)] action in Home widget.
-  ApiCallResponse? apiResultsj6;
+  // Stores action output result for [Backend Call - API (Send a scheduled email)] action in Home widget.
+  ApiCallResponse? email;
   // Model for avatar component.
   late AvatarModel avatarModel;
   // State field(s) for PageView widget.
@@ -48,11 +48,13 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     avatarModel = createModel(context, () => AvatarModel());
     navBarModel = createModel(context, () => NavBarModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     avatarModel.dispose();

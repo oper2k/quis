@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'check_mark_model.dart';
@@ -9,15 +8,16 @@ export 'check_mark_model.dart';
 
 class CheckMarkWidget extends StatefulWidget {
   const CheckMarkWidget({
-    Key? key,
+    super.key,
     bool? boolean,
-  })  : this.boolean = boolean ?? false,
-        super(key: key);
+    this.backgroundColor,
+  }) : this.boolean = boolean ?? false;
 
   final bool boolean;
+  final Color? backgroundColor;
 
   @override
-  _CheckMarkWidgetState createState() => _CheckMarkWidgetState();
+  State<CheckMarkWidget> createState() => _CheckMarkWidgetState();
 }
 
 class _CheckMarkWidgetState extends State<CheckMarkWidget> {
@@ -44,23 +44,19 @@ class _CheckMarkWidgetState extends State<CheckMarkWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: 20.0,
       height: 20.0,
       decoration: BoxDecoration(
-        color: widget.boolean
-            ? FlutterFlowTheme.of(context).primaryText
-            : Colors.transparent,
+        color: widget.boolean ? widget.backgroundColor : Colors.transparent,
         shape: BoxShape.circle,
         border: Border.all(
           color: widget.boolean
-              ? Colors.transparent
+              ? FlutterFlowTheme.of(context).accent2
               : FlutterFlowTheme.of(context).accent2,
         ),
       ),
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Visibility(
         visible: widget.boolean,
         child: Icon(

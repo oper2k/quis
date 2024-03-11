@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'filter_element_model.dart';
@@ -9,19 +8,18 @@ export 'filter_element_model.dart';
 
 class FilterElementWidget extends StatefulWidget {
   const FilterElementWidget({
-    Key? key,
+    super.key,
     required this.isPicked,
     required this.text,
     bool? withBorder,
-  })  : this.withBorder = withBorder ?? true,
-        super(key: key);
+  }) : this.withBorder = withBorder ?? true;
 
   final bool? isPicked;
   final String? text;
   final bool withBorder;
 
   @override
-  _FilterElementWidgetState createState() => _FilterElementWidgetState();
+  State<FilterElementWidget> createState() => _FilterElementWidgetState();
 }
 
 class _FilterElementWidgetState extends State<FilterElementWidget> {
@@ -48,8 +46,6 @@ class _FilterElementWidgetState extends State<FilterElementWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       decoration: BoxDecoration(
         color: widget.isPicked!

@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -14,14 +13,14 @@ export 'send_feedback_bottom_sheet_model.dart';
 
 class SendFeedbackBottomSheetWidget extends StatefulWidget {
   const SendFeedbackBottomSheetWidget({
-    Key? key,
+    super.key,
     required this.videoItem,
-  }) : super(key: key);
+  });
 
   final CourseVideoRecord? videoItem;
 
   @override
-  _SendFeedbackBottomSheetWidgetState createState() =>
+  State<SendFeedbackBottomSheetWidget> createState() =>
       _SendFeedbackBottomSheetWidgetState();
 }
 
@@ -68,8 +67,6 @@ class _SendFeedbackBottomSheetWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -95,13 +92,16 @@ class _SendFeedbackBottomSheetWidgetState
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'SEND_FEEDBACK_BOTTOM_SHEET_Container_6lj');
+                          logFirebaseEvent('Container_navigate_back');
                           context.safePop();
                         },
                         child: Container(
                           width: 40.0,
                           height: 40.0,
                           decoration: BoxDecoration(),
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Icon(
                             FFIcons.karrowBack,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -121,7 +121,7 @@ class _SendFeedbackBottomSheetWidgetState
                     ],
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Lottie.asset(
                       'assets/lottie_animations/animation_lo7x2gpx.json',
                       width: 150.0,
@@ -192,7 +192,7 @@ class _SendFeedbackBottomSheetWidgetState
               ? MediaQuery.viewInsetsOf(context).bottom > 0
               : _isKeyboardVisible))
             Align(
-              alignment: AlignmentDirectional(0.00, 1.00),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: Column(
@@ -202,8 +202,8 @@ class _SendFeedbackBottomSheetWidgetState
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                       child: FFButtonWidget(
-                        onPressed: _model.textController.text == null ||
-                                _model.textController.text == ''
+                        onPressed: (_model.textController.text == null ||
+                                _model.textController.text == '')
                             ? null
                             : () {
                                 print('Button pressed ...');

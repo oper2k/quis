@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'avatar_model.dart';
@@ -9,19 +8,18 @@ export 'avatar_model.dart';
 
 class AvatarWidget extends StatefulWidget {
   const AvatarWidget({
-    Key? key,
+    super.key,
     required this.diameter,
     this.imagePath,
     bool? isPremium,
-  })  : this.isPremium = isPremium ?? false,
-        super(key: key);
+  }) : this.isPremium = isPremium ?? false;
 
   final double? diameter;
   final String? imagePath;
   final bool isPremium;
 
   @override
-  _AvatarWidgetState createState() => _AvatarWidgetState();
+  State<AvatarWidget> createState() => _AvatarWidgetState();
 }
 
 class _AvatarWidgetState extends State<AvatarWidget> {
@@ -48,16 +46,14 @@ class _AvatarWidgetState extends State<AvatarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
-      width: widget.isPremium ? widget.diameter : (widget.diameter! + 4),
-      height: widget.isPremium ? widget.diameter : (widget.diameter! + 4),
+      width: widget.isPremium ? widget.diameter : ((widget.diameter!) + 4),
+      height: widget.isPremium ? widget.diameter : ((widget.diameter!) + 4),
       child: Stack(
         children: [
           if (widget.isPremium)
             Align(
-              alignment: AlignmentDirectional(0.00, 0.00),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Container(
                 width: widget.diameter,
                 height: widget.diameter,
@@ -76,9 +72,9 @@ class _AvatarWidgetState extends State<AvatarWidget> {
               ),
             ),
           Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 2.0, 2.0),
+              padding: EdgeInsets.all(2.0),
               child: Builder(
                 builder: (context) {
                   if (widget.imagePath != null && widget.imagePath != '') {

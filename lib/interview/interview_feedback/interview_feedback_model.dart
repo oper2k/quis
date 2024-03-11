@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/feedback_pick_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,10 +9,8 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'interview_feedback_widget.dart' show InterviewFeedbackWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class InterviewFeedbackModel extends FlutterFlowModel<InterviewFeedbackWidget> {
   ///  Local state fields for this page.
@@ -45,10 +44,10 @@ class InterviewFeedbackModel extends FlutterFlowModel<InterviewFeedbackWidget> {
   late FeedbackPickElementModel feedbackPickElementModel9;
   // Model for feedbackPickElement component.
   late FeedbackPickElementModel feedbackPickElementModel10;
-  // State field(s) for improveField widget.
-  FocusNode? improveFieldFocusNode;
-  TextEditingController? improveFieldController;
-  String? Function(BuildContext, String?)? improveFieldControllerValidator;
+  // State field(s) for improveUserField widget.
+  FocusNode? improveUserFieldFocusNode;
+  TextEditingController? improveUserFieldController;
+  String? Function(BuildContext, String?)? improveUserFieldControllerValidator;
   // State field(s) for scaleField widget.
   FocusNode? scaleFieldFocusNode;
   TextEditingController? scaleFieldController;
@@ -57,15 +56,18 @@ class InterviewFeedbackModel extends FlutterFlowModel<InterviewFeedbackWidget> {
   FocusNode? improvequisFieldFocusNode;
   TextEditingController? improvequisFieldController;
   String? Function(BuildContext, String?)? improvequisFieldControllerValidator;
-  // State field(s) for feedbackField widget.
-  FocusNode? feedbackFieldFocusNode;
-  TextEditingController? feedbackFieldController;
-  String? Function(BuildContext, String?)? feedbackFieldControllerValidator;
+  // State field(s) for appFeedbackField widget.
+  FocusNode? appFeedbackFieldFocusNode;
+  TextEditingController? appFeedbackFieldController;
+  String? Function(BuildContext, String?)? appFeedbackFieldControllerValidator;
   // Stores action output result for [Backend Call - Read Document] action in Button widget.
   UsersRecord? userOutput;
+  // Stores action output result for [Backend Call - API (Send an email)] action in Button widget.
+  ApiCallResponse? apiResult3fr;
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     feedbackPickElementModel1 =
         createModel(context, () => FeedbackPickElementModel());
@@ -89,6 +91,7 @@ class InterviewFeedbackModel extends FlutterFlowModel<InterviewFeedbackWidget> {
         createModel(context, () => FeedbackPickElementModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     feedbackPickElementModel1.dispose();
@@ -101,8 +104,8 @@ class InterviewFeedbackModel extends FlutterFlowModel<InterviewFeedbackWidget> {
     feedbackPickElementModel8.dispose();
     feedbackPickElementModel9.dispose();
     feedbackPickElementModel10.dispose();
-    improveFieldFocusNode?.dispose();
-    improveFieldController?.dispose();
+    improveUserFieldFocusNode?.dispose();
+    improveUserFieldController?.dispose();
 
     scaleFieldFocusNode?.dispose();
     scaleFieldController?.dispose();
@@ -110,8 +113,8 @@ class InterviewFeedbackModel extends FlutterFlowModel<InterviewFeedbackWidget> {
     improvequisFieldFocusNode?.dispose();
     improvequisFieldController?.dispose();
 
-    feedbackFieldFocusNode?.dispose();
-    feedbackFieldController?.dispose();
+    appFeedbackFieldFocusNode?.dispose();
+    appFeedbackFieldController?.dispose();
   }
 
   /// Action blocks are added here.
