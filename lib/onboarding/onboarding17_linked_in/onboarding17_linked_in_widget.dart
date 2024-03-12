@@ -133,9 +133,9 @@ class _Onboarding17LinkedInWidgetState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (isWeb
+                if (!(isWeb
                     ? MediaQuery.viewInsetsOf(context).bottom > 0
-                    : _isKeyboardVisible)
+                    : _isKeyboardVisible))
                   ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
@@ -157,7 +157,7 @@ class _Onboarding17LinkedInWidgetState
                 ),
                 Spacer(),
                 Text(
-                  'You will be able to network with other people when using Quis app. Every time after practice Interview you willbe asked if you would like to match with your Interview Partner (Network)',
+                  'You will be able to network with other people when using Quis app. Every time after practice Interview you will be asked if you would like to match with your Interview Partner (Network)',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).titleMedium.override(
                         fontFamily: 'Sofia Pro',

@@ -139,28 +139,87 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Container(
-                          height: 52.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(10.0),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: AuthUserStreamWidget(
+                            builder: (context) => TextFormField(
+                              controller: _model.firstNameController,
+                              focusNode: _model.firstNameFocusNode,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                '_model.firstNameController',
+                                Duration(milliseconds: 300),
+                                () => setState(() {}),
+                              ),
+                              textInputAction: TextInputAction.next,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Name',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .headlineSmall
+                                    .override(
+                                      fontFamily: 'Sofia Pro',
+                                      color:
+                                          FlutterFlowTheme.of(context).accent3,
+                                      useGoogleFonts: false,
+                                    ),
+                                alignLabelWithHint: false,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context).white,
+                                contentPadding: EdgeInsets.all(10.0),
+                              ),
+                              style: FlutterFlowTheme.of(context).headlineSmall,
+                              validator: _model.firstNameControllerValidator
+                                  .asValidator(context),
+                            ),
                           ),
-                          child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 12.0, 0.0, 0.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => TextFormField(
-                                controller: _model.firstNameController,
-                                focusNode: _model.firstNameFocusNode,
+                                controller: _model.lastNameController,
+                                focusNode: _model.lastNameFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
-                                  '_model.firstNameController',
+                                  '_model.lastNameController',
                                   Duration(milliseconds: 300),
                                   () => setState(() {}),
                                 ),
-                                textInputAction: TextInputAction.next,
+                                textInputAction: TextInputAction.done,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Name',
+                                  labelText: 'Surname',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .headlineSmall
                                       .override(
@@ -170,74 +229,43 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                                         useGoogleFonts: false,
                                       ),
                                   alignLabelWithHint: false,
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  errorBorder: InputBorder.none,
-                                  focusedErrorBorder: InputBorder.none,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context).white,
                                   contentPadding: EdgeInsets.all(10.0),
                                 ),
                                 style:
                                     FlutterFlowTheme.of(context).headlineSmall,
-                                validator: _model.firstNameControllerValidator
+                                validator: _model.lastNameControllerValidator
                                     .asValidator(context),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 0.0, 0.0),
-                            child: Container(
-                              height: 52.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: AuthUserStreamWidget(
-                                  builder: (context) => TextFormField(
-                                    controller: _model.lastNameController,
-                                    focusNode: _model.lastNameFocusNode,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      '_model.lastNameController',
-                                      Duration(milliseconds: 300),
-                                      () => setState(() {}),
-                                    ),
-                                    textInputAction: TextInputAction.done,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Surname',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Sofia Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent3,
-                                            useGoogleFonts: false,
-                                          ),
-                                      alignLabelWithHint: false,
-                                      enabledBorder: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                      filled: true,
-                                      fillColor:
-                                          FlutterFlowTheme.of(context).white,
-                                      contentPadding: EdgeInsets.all(10.0),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineSmall,
-                                    validator: _model
-                                        .lastNameControllerValidator
-                                        .asValidator(context),
-                                  ),
-                                ),
                               ),
                             ),
                           ),

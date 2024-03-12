@@ -116,9 +116,7 @@ final parametersBuilderMap =
   'Login': ParameterData.none(),
   'SignupOld': ParameterData.none(),
   'Pricing': (data) async => ParameterData(
-        allParams: {
-          'isInOnboarding': getParameter<bool>(data, 'isInOnboarding'),
-        },
+        allParams: {},
       ),
   'ConfirmEmail': (data) async => ParameterData(
         allParams: {

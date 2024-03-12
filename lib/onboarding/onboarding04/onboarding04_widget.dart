@@ -106,11 +106,15 @@ class _Onboarding04WidgetState extends State<Onboarding04Widget>
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).displayLarge,
                       ),
-                      AuthUserStreamWidget(
-                        builder: (context) => Text(
-                          '${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}!',
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context).displayLarge,
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => Text(
+                            '${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}!',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context).displayLarge,
+                          ),
                         ),
                       ),
                     ],

@@ -12,6 +12,12 @@ enum PaywallPickedOption {
   week1,
 }
 
+enum PricingBackButton {
+  video,
+  onboarding1,
+  onboarding2,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -27,6 +33,8 @@ T? deserializeEnum<T>(String? value) {
       return PaywallPrice.values.deserialize(value) as T?;
     case (PaywallPickedOption):
       return PaywallPickedOption.values.deserialize(value) as T?;
+    case (PricingBackButton):
+      return PricingBackButton.values.deserialize(value) as T?;
     default:
       return null;
   }

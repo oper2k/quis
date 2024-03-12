@@ -37,6 +37,12 @@ class PricingModel extends FlutterFlowModel<PricingWidget> {
   double? ratingBarValue2;
   // State field(s) for RatingBar widget.
   double? ratingBarValue3;
+  // State field(s) for RatingBar widget.
+  double? ratingBarValue4;
+  // State field(s) for RatingBar widget.
+  double? ratingBarValue5;
+  // State field(s) for RatingBar widget.
+  double? ratingBarValue6;
   // Model for pricingOption3months25off.
   late PricingOptionModel pricingOption3months25offModel;
   // Model for pricingOption3months50off.

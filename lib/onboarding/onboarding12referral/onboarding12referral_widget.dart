@@ -217,7 +217,7 @@ class _Onboarding12referralWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: (/* NOT RECOMMENDED */ _model
                                 .refFieldController.text ==
@@ -295,25 +295,31 @@ class _Onboarding12referralWidgetState
                     ),
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      logFirebaseEvent(
-                          'ONBOARDING12REFERRAL_Text_hjjrjs1i_ON_TA');
-                      logFirebaseEvent('Text_navigate_to');
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(),
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'ONBOARDING12REFERRAL_Text_hjjrjs1i_ON_TA');
+                          logFirebaseEvent('Text_navigate_to');
 
-                      context.pushNamed('Onboarding13');
-                    },
-                    child: Text(
-                      'I don’t have',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).headlineMedium,
+                          context.pushNamed('Onboarding13');
+                        },
+                        child: Text(
+                          'I don’t have',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).headlineMedium,
+                        ),
+                      ),
                     ),
                   ),
                 ),

@@ -130,15 +130,20 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            'Explore all Quis courses tailored for specific roles, companies, and skills.',
-                            textAlign: TextAlign.start,
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Sofia Pro',
-                                      useGoogleFonts: false,
-                                      lineHeight: 1.16,
-                                    ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Text(
+                              'Explore all Quis courses tailored for specific roles, companies, and skills.',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: 'Sofia Pro',
+                                    useGoogleFonts: false,
+                                    lineHeight: 1.16,
+                                  ),
+                            ),
                           ),
                           Column(
                             mainAxisSize: MainAxisSize.max,
@@ -508,9 +513,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                             ],
                           ).animateOnPageLoad(
                               animationsMap['columnOnPageLoadAnimation']!),
-                        ]
-                            .addToStart(SizedBox(height: 30.0))
-                            .addToEnd(SizedBox(height: 100.0)),
+                        ].addToEnd(SizedBox(height: 100.0)),
                       ),
                     ),
                   ),

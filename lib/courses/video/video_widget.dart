@@ -127,7 +127,9 @@ class _VideoWidgetState extends State<VideoWidget>
         if (!revenue_cat.activeEntitlementIds
             .contains(FFAppState().entitlementID)) {
           logFirebaseEvent('Video_navigate_to');
-
+          if (Navigator.of(context).canPop()) {
+            context.pop();
+          }
           context.pushNamed(
             'Pricing',
             queryParameters: {
@@ -138,8 +140,6 @@ class _VideoWidgetState extends State<VideoWidget>
             }.withoutNulls,
           );
 
-          logFirebaseEvent('Video_navigate_back');
-          context.safePop();
           return;
         }
       }

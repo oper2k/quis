@@ -97,7 +97,7 @@ class _Onboarding06industryWidgetState
                   padding:
                       EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 0.0),
                   child: Text(
-                    'Tell us which industry you are pursuing?',
+                    'Tell us which industry are you pursuing?',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).displayMedium.override(
                           fontFamily: 'Sofia Pro',

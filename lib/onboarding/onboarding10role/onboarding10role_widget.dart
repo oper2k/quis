@@ -238,7 +238,7 @@ class _Onboarding10roleWidgetState extends State<Onboarding10roleWidget> {
                             child: Text(
                               valueOrDefault<String>(
                                 _model.pickedRole?.name,
-                                'role',
+                                'Choose your role',
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .headlineLarge

@@ -27,9 +27,15 @@ class RoleRecord extends FirestoreRecord {
   DocumentReference? get group => _group;
   bool hasGroup() => _group != null;
 
+  // "sort" field.
+  int? _sort;
+  int get sort => _sort ?? 0;
+  bool hasSort() => _sort != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _group = snapshotData['group'] as DocumentReference?;
+    _sort = castToType<int>(snapshotData['sort']);
   }
 
   static CollectionReference get collection =>
@@ -68,11 +74,13 @@ class RoleRecord extends FirestoreRecord {
 Map<String, dynamic> createRoleRecordData({
   String? name,
   DocumentReference? group,
+  int? sort,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'name': name,
       'group': group,
+      'sort': sort,
     }.withoutNulls,
   );
 
@@ -84,11 +92,14 @@ class RoleRecordDocumentEquality implements Equality<RoleRecord> {
 
   @override
   bool equals(RoleRecord? e1, RoleRecord? e2) {
-    return e1?.name == e2?.name && e1?.group == e2?.group;
+    return e1?.name == e2?.name &&
+        e1?.group == e2?.group &&
+        e1?.sort == e2?.sort;
   }
 
   @override
-  int hash(RoleRecord? e) => const ListEquality().hash([e?.name, e?.group]);
+  int hash(RoleRecord? e) =>
+      const ListEquality().hash([e?.name, e?.group, e?.sort]);
 
   @override
   bool isValidKey(Object? o) => o is RoleRecord;

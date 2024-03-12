@@ -1,11 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/avatar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -99,323 +97,152 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            AuthUserStreamWidget(
-              builder: (context) => Text(
-                (currentUserDocument?.likedUsers?.toList() ?? [])
-                    .length
-                    .toString(),
-                style: FlutterFlowTheme.of(context).bodyMedium,
-              ),
-            ),
-            AuthUserStreamWidget(
-              builder: (context) => Text(
-                (currentUserDocument?.likedBy?.toList() ?? [])
-                    .length
-                    .toString(),
-                style: FlutterFlowTheme.of(context).bodyMedium,
-              ),
-            ),
-            AuthUserStreamWidget(
-              builder: (context) => Text(
-                (currentUserDocument?.likedUsers?.toList() ?? [])
+        body: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          child: AuthUserStreamWidget(
+            builder: (context) => Builder(
+              builder: (context) {
+                final matchedUsers = widget.likedUsersList!
                     .where((e) => (currentUserDocument?.likedBy?.toList() ?? [])
-                        .contains(e.refUser))
-                    .toList()
-                    .length
-                    .toString(),
-                style: FlutterFlowTheme.of(context).bodyMedium,
-              ),
-            ),
-            AuthUserStreamWidget(
-              builder: (context) => Builder(
-                builder: (context) {
-                  final t1 = (currentUserDocument?.likedUsers?.toList() ?? [])
-                      .toList();
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: List.generate(t1.length, (t1Index) {
-                      final t1Item = t1[t1Index];
-                      return Text(
-                        valueOrDefault<String>(
-                          t1Item.refUser?.id,
-                          '-1',
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                      );
-                    }),
-                  );
-                },
-              ),
-            ),
-            AuthUserStreamWidget(
-              builder: (context) => Builder(
-                builder: (context) {
-                  final dd =
-                      (currentUserDocument?.likedBy?.toList() ?? []).toList();
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: List.generate(dd.length, (ddIndex) {
-                      final ddItem = dd[ddIndex];
-                      return Text(
-                        valueOrDefault<String>(
-                          ddItem.id,
-                          '-1',
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                      );
-                    }),
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-              child: AuthUserStreamWidget(
-                builder: (context) => Builder(
-                  builder: (context) {
-                    final matchedUsers =
-                        (currentUserDocument?.likedUsers?.toList() ?? [])
-                            .where((e) =>
-                                (currentUserDocument?.likedBy?.toList() ?? [])
-                                    .contains(e.refUser))
-                            .toList();
-                    return ListView.separated(
-                      padding: EdgeInsets.fromLTRB(
-                        0,
-                        10.0,
-                        0,
-                        50.0,
-                      ),
-                      scrollDirection: Axis.vertical,
-                      itemCount: matchedUsers.length,
-                      separatorBuilder: (_, __) => SizedBox(height: 8.0),
-                      itemBuilder: (context, matchedUsersIndex) {
-                        final matchedUsersItem =
-                            matchedUsers[matchedUsersIndex];
-                        return StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(
-                              matchedUsersItem.refUser!),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            final containerUsersRecord = snapshot.data!;
-                            return InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'MATCHED_USERS_Container_5ee9k8xu_ON_TAP');
-                                logFirebaseEvent('Container_navigate_to');
+                        .contains(e.reference))
+                    .toList();
+                return ListView.builder(
+                  padding: EdgeInsets.fromLTRB(
+                    0,
+                    10.0,
+                    0,
+                    50.0,
+                  ),
+                  scrollDirection: Axis.vertical,
+                  itemCount: matchedUsers.length,
+                  itemBuilder: (context, matchedUsersIndex) {
+                    final matchedUsersItem = matchedUsers[matchedUsersIndex];
+                    return InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        logFirebaseEvent(
+                            'MATCHED_USERS_Container_nfs3152l_ON_TAP');
+                        logFirebaseEvent('Container_navigate_to');
 
-                                context.pushNamed(
-                                  'UserProfile',
-                                  queryParameters: {
-                                    'userItem': serializeParam(
-                                      containerUsersRecord,
-                                      ParamType.Document,
-                                    ),
-                                    'isLinkedIn': serializeParam(
-                                      true,
-                                      ParamType.bool,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    'userItem': containerUsersRecord,
-                                  },
-                                );
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
+                        context.pushNamed(
+                          'UserProfile',
+                          queryParameters: {
+                            'userItem': serializeParam(
+                              matchedUsersItem,
+                              ParamType.Document,
+                            ),
+                            'isLinkedIn': serializeParam(
+                              true,
+                              ParamType.bool,
+                            ),
+                          }.withoutNulls,
+                          extra: <String, dynamic>{
+                            'userItem': matchedUsersItem,
+                          },
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              7.0, 5.0, 7.0, 5.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              AvatarWidget(
+                                key: Key(
+                                    'Key484_${matchedUsersIndex}_of_${matchedUsers.length}'),
+                                diameter: 50.0,
+                                imagePath: matchedUsersItem.photoUrl,
+                                isPremium: false,
+                              ),
+                              Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      7.0, 5.0, 7.0, 5.0),
-                                  child: Row(
+                                      10.0, 0.0, 0.0, 0.0),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      AvatarWidget(
-                                        key: Key(
-                                            'Key513_${matchedUsersIndex}_of_${matchedUsers.length}'),
-                                        diameter: 50.0,
-                                        imagePath:
-                                            containerUsersRecord.photoUrl,
-                                        isPremium: false,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 6.0, 10.0, 6.0),
+                                        child: Text(
+                                          '${matchedUsersItem.firstName} ${matchedUsersItem.lastName}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium,
+                                        ),
                                       ),
-                                      Expanded(
-                                        child: Padding(
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                        tablet: false,
+                                        tabletLandscape: false,
+                                        desktop: false,
+                                      ))
+                                        Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 0.0, 0.0, 0.0),
-                                          child: Column(
+                                                  0.0, 8.0, 0.0, 0.0),
+                                          child: Row(
                                             mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 6.0,
-                                                                15.0, 6.0),
-                                                    child: Text(
-                                                      '${containerUsersRecord.firstName} ${containerUsersRecord.lastName}',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .headlineMedium,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 6.0,
-                                                                10.0, 6.0),
-                                                    child: Text(
-                                                      matchedUsersItem.top,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
-                                                    ),
-                                                  ),
-                                                ],
+                                              Icon(
+                                                FFIcons.kclarityCalendarLine,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                size: 18.0,
                                               ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                5.0, 0.0),
-                                                    child: Icon(
-                                                      FFIcons
-                                                          .kclarityCalendarLine,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      size: 18.0,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 6.0,
-                                                                10.0, 6.0),
-                                                    child: Text(
-                                                      dateTimeFormat(
-                                                          'd/M/y',
-                                                          matchedUsersItem
-                                                              .date!),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelSmall,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              if (responsiveVisibility(
-                                                context: context,
-                                                phone: false,
-                                                tablet: false,
-                                                tabletLandscape: false,
-                                                desktop: false,
-                                              ))
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 8.0, 0.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        FFIcons
-                                                            .kclarityCalendarLine,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        size: 18.0,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    5.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          '04/10/23',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  '04/10/23',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
                                                 ),
+                                              ),
                                             ],
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondary,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        child: Icon(
-                                          FFIcons.kchevronDownS,
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          size: 24.0,
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                        );
-                      },
+                              Container(
+                                width: 30.0,
+                                height: 30.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Icon(
+                                  FFIcons.kchevronDownS,
+                                  color: FlutterFlowTheme.of(context).white,
+                                  size: 24.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
                   },
-                ),
-              ),
+                );
+              },
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -115,8 +115,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Pricing',
           path: '/pricing',
           builder: (context, params) => PricingWidget(
-            isInOnboarding: params.getParam('isInOnboarding', ParamType.bool),
             offers: params.getParam<PaywallPrice>('offers', ParamType.Enum),
+            backButton: params.getParam<PricingBackButton>(
+                'backButton', ParamType.Enum),
           ),
         ),
         FFRoute(

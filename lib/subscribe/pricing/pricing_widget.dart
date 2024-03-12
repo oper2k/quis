@@ -20,12 +20,12 @@ export 'pricing_model.dart';
 class PricingWidget extends StatefulWidget {
   const PricingWidget({
     super.key,
-    bool? isInOnboarding,
     required this.offers,
-  }) : this.isInOnboarding = isInOnboarding ?? false;
+    this.backButton,
+  });
 
-  final bool isInOnboarding;
   final PaywallPrice? offers;
+  final PricingBackButton? backButton;
 
   @override
   State<PricingWidget> createState() => _PricingWidgetState();
@@ -181,10 +181,21 @@ class _PricingWidgetState extends State<PricingWidget>
                       onTap: () async {
                         logFirebaseEvent(
                             'PRICING_PAGE_Container_baw62k28_ON_TAP');
-                        if (widget.isInOnboarding) {
-                          logFirebaseEvent('Container_navigate_to');
+                        if (widget.backButton != null) {
+                          if (widget.backButton ==
+                              PricingBackButton.onboarding1) {
+                            logFirebaseEvent('Container_navigate_to');
 
-                          context.pushNamed('Onboarding20afterPricing');
+                            context.goNamed('Onboarding20afterPricing');
+                          } else if (widget.backButton ==
+                              PricingBackButton.onboarding2) {
+                            logFirebaseEvent('Container_navigate_to');
+
+                            context.goNamed('Home');
+                          } else {
+                            logFirebaseEvent('Container_navigate_back');
+                            context.safePop();
+                          }
                         } else {
                           logFirebaseEvent('Container_navigate_back');
                           context.safePop();
@@ -288,91 +299,99 @@ class _PricingWidgetState extends State<PricingWidget>
                             ),
                           ].divide(SizedBox(width: 14.0)),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              FFIcons.kocticonBook24,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 20.0,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Unlimited Access',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily: 'Sofia Pro',
-                                          useGoogleFonts: false,
-                                          lineHeight: 1.2,
-                                        ),
-                                  ),
-                                  Text(
-                                    'Company Profiles, Expert Video Answers and the Latest Interview Questions',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Sofia Pro',
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          fontWeight: FontWeight.w300,
-                                          fontStyle: FontStyle.italic,
-                                          useGoogleFonts: false,
-                                          lineHeight: 1.42,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 8.0)),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 30.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                FFIcons.kocticonBook24,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 20.0,
                               ),
-                            ),
-                          ].divide(SizedBox(width: 14.0)),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Unlimited Access',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Sofia Pro',
+                                            useGoogleFonts: false,
+                                            lineHeight: 1.2,
+                                          ),
+                                    ),
+                                    Text(
+                                      'Company Profiles, Expert Video Answers and the Latest Interview Questions',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Sofia Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            fontWeight: FontWeight.w300,
+                                            fontStyle: FontStyle.italic,
+                                            useGoogleFonts: false,
+                                            lineHeight: 1.42,
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(height: 8.0)),
+                                ),
+                              ),
+                            ].divide(SizedBox(width: 14.0)),
+                          ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              FFIcons.ksolarUserOutline,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 20.0,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Job Referral and CV Feedback',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily: 'Sofia Pro',
-                                          useGoogleFonts: false,
-                                          lineHeight: 1.2,
-                                        ),
-                                  ),
-                                  Text(
-                                    'Your CV will be reviewed by us and seen by 300+ Referral Network who work in Aviation and F&B',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Sofia Pro',
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          fontWeight: FontWeight.w300,
-                                          fontStyle: FontStyle.italic,
-                                          useGoogleFonts: false,
-                                          lineHeight: 1.42,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 8.0)),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 30.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                FFIcons.ksolarUserOutline,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 20.0,
                               ),
-                            ),
-                          ].divide(SizedBox(width: 14.0)),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Job Referral and CV Feedback',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Sofia Pro',
+                                            useGoogleFonts: false,
+                                            lineHeight: 1.2,
+                                          ),
+                                    ),
+                                    Text(
+                                      'Your CV will be reviewed by us and seen by 300+ Referral Network who work in Aviation and F&B',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Sofia Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            fontWeight: FontWeight.w300,
+                                            fontStyle: FontStyle.italic,
+                                            useGoogleFonts: false,
+                                            lineHeight: 1.42,
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(height: 8.0)),
+                                ),
+                              ),
+                            ].divide(SizedBox(width: 14.0)),
+                          ),
                         ),
                       ].divide(SizedBox(height: 10.0)),
                     ),
@@ -380,7 +399,7 @@ class _PricingWidgetState extends State<PricingWidget>
                   Spacer(),
                   Container(
                     width: double.infinity,
-                    height: 100.0,
+                    height: 135.0,
                     child: CarouselSlider(
                       items: [
                         Column(
@@ -405,9 +424,15 @@ class _PricingWidgetState extends State<PricingWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
-                                '“Lorem ipsum dolor sit amet consectetur. Ullamcorper aliquet eu viverra massa commodo cum ullamcorper.”',
+                                '“What I liked about using this tool is that it gives you so many different interview questions. After taking 3-4 practice interviews, I felt so much better!” \n(Uros, Waiter at LETO)',
                                 textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context).titleSmall,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Sofia Pro',
+                                      useGoogleFonts: false,
+                                      lineHeight: 1.25,
+                                    ),
                               ),
                             ),
                           ],
@@ -434,9 +459,15 @@ class _PricingWidgetState extends State<PricingWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
-                                '“Lorem ipsum dolor sit amet consectetur. Ullamcorper aliquet eu viverra massa commodo cum ullamcorper.”',
+                                '“I had been with my previous company for 3+ years and just forgot how to interview. Quis has helped me become comfortable talking about myself and my skills.” \n(Emmerson, Bartender at KETCH UP)',
                                 textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context).titleSmall,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Sofia Pro',
+                                      useGoogleFonts: false,
+                                      lineHeight: 1.25,
+                                    ),
                               ),
                             ),
                           ],
@@ -452,7 +483,7 @@ class _PricingWidgetState extends State<PricingWidget>
                                 color: FlutterFlowTheme.of(context).orange,
                               ),
                               direction: Axis.horizontal,
-                              initialRating: _model.ratingBarValue3 ??= 3.0,
+                              initialRating: _model.ratingBarValue3 ??= 5.0,
                               unratedColor:
                                   FlutterFlowTheme.of(context).accent3,
                               itemCount: 5,
@@ -463,9 +494,120 @@ class _PricingWidgetState extends State<PricingWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
-                                '“Lorem ipsum dolor sit amet consectetur. Ullamcorper aliquet eu viverra massa commodo cum ullamcorper.”',
+                                'I was able to gain confidence by polishing my answers, being aware of timing, and paying attention to my non-verbal language - things I wouldn’t have paid attention to otherwise.” \n(Grace, Cabin Crew at Etihad)',
                                 textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context).titleSmall,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Sofia Pro',
+                                      useGoogleFonts: false,
+                                      lineHeight: 1.25,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            RatingBar.builder(
+                              onRatingUpdate: (newValue) => setState(
+                                  () => _model.ratingBarValue4 = newValue),
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star_rounded,
+                                color: FlutterFlowTheme.of(context).orange,
+                              ),
+                              direction: Axis.horizontal,
+                              initialRating: _model.ratingBarValue4 ??= 5.0,
+                              unratedColor:
+                                  FlutterFlowTheme.of(context).accent3,
+                              itemCount: 5,
+                              itemSize: 20.0,
+                              glowColor: FlutterFlowTheme.of(context).orange,
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: Text(
+                                '\"Quis videos and interactive mock interviews were invaluable to my preparation.\" \n(Jo Jo, Waiter)',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Sofia Pro',
+                                      useGoogleFonts: false,
+                                      lineHeight: 1.25,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            RatingBar.builder(
+                              onRatingUpdate: (newValue) => setState(
+                                  () => _model.ratingBarValue5 = newValue),
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star_rounded,
+                                color: FlutterFlowTheme.of(context).orange,
+                              ),
+                              direction: Axis.horizontal,
+                              initialRating: _model.ratingBarValue5 ??= 5.0,
+                              unratedColor:
+                                  FlutterFlowTheme.of(context).accent3,
+                              itemCount: 5,
+                              itemSize: 20.0,
+                              glowColor: FlutterFlowTheme.of(context).orange,
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: Text(
+                                '\"I reached out to Quis for help with my interviews at Emirates and Etihad. I got offers from both!\" \n(Sophia, Cabin Crew)',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Sofia Pro',
+                                      useGoogleFonts: false,
+                                      lineHeight: 1.25,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            RatingBar.builder(
+                              onRatingUpdate: (newValue) => setState(
+                                  () => _model.ratingBarValue6 = newValue),
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star_rounded,
+                                color: FlutterFlowTheme.of(context).orange,
+                              ),
+                              direction: Axis.horizontal,
+                              initialRating: _model.ratingBarValue6 ??= 4.0,
+                              unratedColor:
+                                  FlutterFlowTheme.of(context).accent3,
+                              itemCount: 5,
+                              itemSize: 20.0,
+                              glowColor: FlutterFlowTheme.of(context).orange,
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: Text(
+                                '\"The courses were extremely helpful in not only providing the information, but real examples of questions and answers.\" \n(Mahmoud, Restaurant Manager)',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Sofia Pro',
+                                      useGoogleFonts: false,
+                                      lineHeight: 1.25,
+                                    ),
                               ),
                             ),
                           ],
@@ -540,10 +682,10 @@ class _PricingWidgetState extends State<PricingWidget>
                                 model: _model.pricingOption3months25offModel,
                                 updateCallback: () => setState(() {}),
                                 child: PricingOptionWidget(
-                                  title: '3 Month - SAVE 25%',
+                                  title: '3 Month ',
                                   text: '18 USD/3 months (6 USD/mo)',
                                   isTrial: true,
-                                  trialText: '7-DAY FREE TRIAL',
+                                  trialText: 'SAVE 25%',
                                   isPicked: _model.pickedOption ==
                                       PaywallPickedOption.month3,
                                 ),
@@ -569,10 +711,10 @@ class _PricingWidgetState extends State<PricingWidget>
                                 model: _model.pricingOption3months50offModel,
                                 updateCallback: () => setState(() {}),
                                 child: PricingOptionWidget(
-                                  title: '3 Month SAVE 50%',
+                                  title: '3 Month ',
                                   text: '12.5 USD/3 months (4.2 USD/mo)',
                                   isTrial: true,
-                                  trialText: '7-DAY FREE TRIAL',
+                                  trialText: 'SAVE 50%',
                                   isPicked: _model.pickedOption ==
                                       PaywallPickedOption.month3,
                                 ),
@@ -788,7 +930,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               logFirebaseEvent('Button_revenue_cat');
                               _model.months3Subscription50OffOutput =
                                   await revenue_cat.purchasePackage(
-                                      '3MonthsSubscription50Off');
+                                      '3MonthsSubscription50off');
                               _shouldSetState = true;
                               if (!_model.months3Subscription50OffOutput!) {
                                 logFirebaseEvent('Button_alert_dialog');

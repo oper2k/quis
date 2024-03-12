@@ -165,7 +165,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                   ].divide(SizedBox(height: 12.0)),
                                 ),
                               ),
-                              if (MediaQuery.sizeOf(context).height > 700.0)
+                              if (MediaQuery.sizeOf(context).height > 815.0)
                                 Align(
                                   alignment: AlignmentDirectional(1.0, 1.0),
                                   child: Padding(
@@ -352,9 +352,9 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                               PaywallPrice.off25,
                               ParamType.Enum,
                             ),
-                            'isInOnboarding': serializeParam(
-                              true,
-                              ParamType.bool,
+                            'backButton': serializeParam(
+                              PricingBackButton.onboarding1,
+                              ParamType.Enum,
                             ),
                           }.withoutNulls,
                         );
@@ -368,9 +368,9 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                               PaywallPrice.standard,
                               ParamType.Enum,
                             ),
-                            'isInOnboarding': serializeParam(
-                              true,
-                              ParamType.bool,
+                            'backButton': serializeParam(
+                              PricingBackButton.onboarding1,
+                              ParamType.Enum,
                             ),
                           }.withoutNulls,
                         );

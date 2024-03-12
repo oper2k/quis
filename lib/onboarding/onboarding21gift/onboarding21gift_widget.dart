@@ -125,11 +125,15 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                       logFirebaseEvent('ONBOARDING21GIFT_CONTINUE_BTN_ON_TAP');
                       logFirebaseEvent('Button_navigate_to');
 
-                      context.pushNamed(
+                      context.goNamed(
                         'Pricing',
                         queryParameters: {
                           'offers': serializeParam(
                             PaywallPrice.off25,
+                            ParamType.Enum,
+                          ),
+                          'backButton': serializeParam(
+                            PricingBackButton.onboarding2,
                             ParamType.Enum,
                           ),
                         }.withoutNulls,

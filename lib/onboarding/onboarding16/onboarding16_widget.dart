@@ -108,7 +108,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                 ),
                 Spacer(),
                 Text(
-                  'Mission, Vision,Core Values, concept overview and even a link to apply has been collected for you to simplify and accelerate your hiring process.',
+                  'Mission, Vision, Core Values, concept overview and even a link to apply has been collected for you to simplify and accelerate your hiring process.',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyLarge.override(
                         fontFamily: 'Sofia Pro',

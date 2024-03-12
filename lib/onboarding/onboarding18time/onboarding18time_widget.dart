@@ -41,7 +41,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
         ),
       ],
     ),
-    'textOnActionTriggerAnimation': AnimationInfo(
+    'textOnActionTriggerAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
       applyInitialState: true,
       effects: [
@@ -58,6 +58,27 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
           duration: 100.ms,
           begin: 1.0,
           end: 0.0,
+        ),
+      ],
+    ),
+    'textOnActionTriggerAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        VisibilityEffect(duration: 300.ms),
+        MoveEffect(
+          curve: Curves.easeOut,
+          delay: 300.ms,
+          duration: 500.ms,
+          begin: Offset(0.0, 100.0),
+          end: Offset(0.0, -40.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 350.ms,
+          duration: 400.ms,
+          begin: 0.0,
+          end: 1.0,
         ),
       ],
     ),
@@ -80,16 +101,24 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
         duration: Duration(milliseconds: 4000),
         callback: (timer) async {
           if (_model.progress >= 1.0) {
+            logFirebaseEvent('Onboarding18time_widget_animation');
+            if (animationsMap['textOnActionTriggerAnimation1'] != null) {
+              await animationsMap['textOnActionTriggerAnimation1']!
+                  .controller
+                  .forward(from: 0.0);
+            }
+            logFirebaseEvent('Onboarding18time_widget_animation');
+            if (animationsMap['textOnActionTriggerAnimation2'] != null) {
+              await animationsMap['textOnActionTriggerAnimation2']!
+                  .controller
+                  .forward(from: 0.0);
+            }
+            logFirebaseEvent('Onboarding18time_wait__delay');
+            await Future.delayed(const Duration(milliseconds: 1000));
             logFirebaseEvent('Onboarding18time_update_page_state');
             setState(() {
               _model.isButtonVisible = true;
             });
-            logFirebaseEvent('Onboarding18time_widget_animation');
-            if (animationsMap['textOnActionTriggerAnimation'] != null) {
-              await animationsMap['textOnActionTriggerAnimation']!
-                  .controller
-                  .forward(from: 0.0);
-            }
             logFirebaseEvent('Onboarding18time_stop_periodic_action');
             _model.instantTimer?.cancel();
           } else {
@@ -334,8 +363,19 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                         .animateOnPageLoad(
                             animationsMap['textOnPageLoadAnimation']!)
                         .animateOnActionTrigger(
-                          animationsMap['textOnActionTriggerAnimation']!,
+                          animationsMap['textOnActionTriggerAnimation1']!,
                         ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                    child: Text(
+                      'Yeees! It’s done!',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).headlineMedium,
+                    ).animateOnActionTrigger(
+                      animationsMap['textOnActionTriggerAnimation2']!,
+                    ),
                   ),
                   Spacer(),
                   Opacity(

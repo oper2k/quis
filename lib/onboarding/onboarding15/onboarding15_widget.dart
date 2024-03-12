@@ -98,7 +98,7 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                 ),
                 Spacer(),
                 Text(
-                  'Advice from real experts 👨‍💻',
+                  'Advice from REAL experts 👨‍💻',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).displayMedium.override(
                         fontFamily: 'Sofia Pro',
@@ -108,14 +108,15 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                       ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(20.0, 32.0, 20.0, 0.0),
                   child: RichText(
                     textScaler: MediaQuery.of(context).textScaler,
                     text: TextSpan(
                       children: [
                         TextSpan(
                           text:
-                              'Learn about hiring procedd in detail by watching ',
+                              'Learn about hiring process in detail by watching ',
                           style: FlutterFlowTheme.of(context)
                               .headlineMedium
                               .override(
@@ -133,7 +134,7 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                         ),
                         TextSpan(
                           text:
-                              'courses and master ckasses where TOP industry people share tips on how to get hired.',
+                              'courses and master classes where TOP industry people share tips on how to get hired.',
                           style: TextStyle(),
                         )
                       ],

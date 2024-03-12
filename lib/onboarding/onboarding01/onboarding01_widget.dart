@@ -67,9 +67,11 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                 Spacer(),
                 Text(
                   'We are glad you’re here!',
+                  textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).displayMedium.override(
                         fontFamily: 'Sofia Pro',
                         color: FlutterFlowTheme.of(context).info,
+                        fontWeight: FontWeight.w600,
                         useGoogleFonts: false,
                       ),
                 ),
@@ -78,7 +80,11 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                   child: Text(
                     'Let’s start with a couple of questions to help us personalize your experience',
                     textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).titleMedium,
+                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                          fontFamily: 'Sofia Pro',
+                          fontWeight: FontWeight.w500,
+                          useGoogleFonts: false,
+                        ),
                   ),
                 ),
                 Padding(
@@ -138,6 +144,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                                       color: _model.isPolicyRed
                                           ? FlutterFlowTheme.of(context).error
                                           : FlutterFlowTheme.of(context).info,
+                                      fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
                                     ),
                               ),
@@ -147,6 +154,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                                   color: _model.isPolicyRed
                                       ? FlutterFlowTheme.of(context).error
                                       : FlutterFlowTheme.of(context).info,
+                                  fontWeight: FontWeight.w500,
                                   decoration: TextDecoration.underline,
                                 ),
                                 mouseCursor: SystemMouseCursors.click,
@@ -166,6 +174,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                                 .override(
                                   fontFamily: 'Sofia Pro',
                                   color: FlutterFlowTheme.of(context).info,
+                                  fontWeight: FontWeight.w500,
                                   useGoogleFonts: false,
                                   lineHeight: 1.16,
                                 ),
@@ -230,6 +239,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                                     color: _model.isTermsRed
                                         ? FlutterFlowTheme.of(context).error
                                         : FlutterFlowTheme.of(context).info,
+                                    fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
                                   ),
                             ),
@@ -242,6 +252,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                                     color: _model.isTermsRed
                                         ? FlutterFlowTheme.of(context).error
                                         : FlutterFlowTheme.of(context).info,
+                                    fontWeight: FontWeight.w500,
                                     decoration: TextDecoration.underline,
                                     useGoogleFonts: false,
                                   ),
@@ -261,6 +272,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                               .override(
                                 fontFamily: 'Sofia Pro',
                                 color: FlutterFlowTheme.of(context).info,
+                                fontWeight: FontWeight.w500,
                                 useGoogleFonts: false,
                                 lineHeight: 1.16,
                               ),

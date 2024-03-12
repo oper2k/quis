@@ -15,6 +15,7 @@ import '/flutter_flow/random_data_util.dart' as random_data;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -846,14 +847,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           FFIcons.kclarityTalkBubblesLine,
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
-                                          size: 20.0,
+                                          size: 30.0,
                                         ),
                                       ),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),
-                                      child: Text(
+                                      child: AutoSizeText(
                                         'Register For Practice Interview Now',
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
@@ -865,6 +866,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                       .primary,
                                               useGoogleFonts: false,
                                             ),
+                                        minFontSize: 14.0,
                                       ),
                                     ),
                                   ],
