@@ -327,14 +327,13 @@ class _PricingWidgetState extends State<PricingWidget>
                                           ),
                                     ),
                                     Text(
-                                      'Company Profiles, Expert Video Answers and the Latest Interview Questions',
+                                      'Unlimited Access to Practice Interviews, Company Profiles, Expert Video Answers and the Latest Interview Questions',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .bodyLarge
                                           .override(
                                             fontFamily: 'Sofia Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .info,
-                                            fontWeight: FontWeight.w300,
                                             fontStyle: FontStyle.italic,
                                             useGoogleFonts: false,
                                             lineHeight: 1.42,
@@ -376,12 +375,11 @@ class _PricingWidgetState extends State<PricingWidget>
                                     Text(
                                       'Your CV will be reviewed by us and seen by 300+ Referral Network who work in Aviation and F&B',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .bodyLarge
                                           .override(
                                             fontFamily: 'Sofia Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .info,
-                                            fontWeight: FontWeight.w300,
                                             fontStyle: FontStyle.italic,
                                             useGoogleFonts: false,
                                             lineHeight: 1.42,
@@ -998,7 +996,11 @@ class _PricingWidgetState extends State<PricingWidget>
 
                           if (_shouldSetState) setState(() {});
                         },
-                        text: 'Try Free & Subscribe',
+                        text: (_model.pickedOption ==
+                                    PaywallPickedOption.month3) &&
+                                (widget.offers == PaywallPrice.standard)
+                            ? 'Try Free & Subscribe'
+                            : 'Continue',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 52.0,

@@ -91,7 +91,7 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
-                    'assets/images/Onb5.webp',
+                    'assets/images/NEWOnb08.webp',
                     width: 200.0,
                     fit: BoxFit.contain,
                   ),

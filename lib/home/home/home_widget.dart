@@ -125,17 +125,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           userEmail: currentUserEmail,
           templateId: 2,
         );
-        logFirebaseEvent('Home_navigate_to');
-
-        context.pushNamed(
-          'Pricing',
-          queryParameters: {
-            'offers': serializeParam(
-              PaywallPrice.standard,
-              ParamType.Enum,
-            ),
-          }.withoutNulls,
-        );
       }
 
       if ((valueOrDefault<bool>(currentUserDocument?.is3dayOfferShown, false) !=
@@ -150,17 +139,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             ));
           }(),
         );
-        logFirebaseEvent('Home_navigate_to');
+        if (!revenue_cat.activeEntitlementIds
+            .contains(FFAppState().entitlementID)) {
+          logFirebaseEvent('Home_navigate_to');
 
-        context.pushNamed(
-          'Pricing',
-          queryParameters: {
-            'offers': serializeParam(
-              PaywallPrice.off25,
-              ParamType.Enum,
-            ),
-          }.withoutNulls,
-        );
+          context.pushNamed(
+            'Pricing',
+            queryParameters: {
+              'offers': serializeParam(
+                PaywallPrice.off25,
+                ParamType.Enum,
+              ),
+            }.withoutNulls,
+          );
+        }
       }
       if ((valueOrDefault<bool>(currentUserDocument?.is7dayOfferShown, false) !=
               true) &&
@@ -174,17 +166,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             ));
           }(),
         );
-        logFirebaseEvent('Home_navigate_to');
+        if (!revenue_cat.activeEntitlementIds
+            .contains(FFAppState().entitlementID)) {
+          logFirebaseEvent('Home_navigate_to');
 
-        context.pushNamed(
-          'Pricing',
-          queryParameters: {
-            'offers': serializeParam(
-              PaywallPrice.off50,
-              ParamType.Enum,
-            ),
-          }.withoutNulls,
-        );
+          context.pushNamed(
+            'Pricing',
+            queryParameters: {
+              'offers': serializeParam(
+                PaywallPrice.off50,
+                ParamType.Enum,
+              ),
+            }.withoutNulls,
+          );
+        }
       }
       logFirebaseEvent('Home_custom_action');
       await actions.awesomeNotificationScheduleLocal(
@@ -534,46 +529,30 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 builder: (context) {
                                   if (revenue_cat.activeEntitlementIds
                                       .contains(FFAppState().entitlementID)) {
-                                    return InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        logFirebaseEvent(
-                                            'HOME_PAGE_Container_ua126iqq_ON_TAP');
-                                        logFirebaseEvent(
-                                            'Container_navigate_to');
-
-                                        context.pushNamed('Onboarding01');
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .champagnePink,
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8.0, 2.0, 8.0, 2.0),
-                                          child: Text(
-                                            'Premium',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  useGoogleFonts: false,
-                                                  lineHeight: 1.16,
-                                                ),
-                                          ),
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .champagnePink,
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 2.0, 8.0, 2.0),
+                                        child: Text(
+                                          'Premium',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Sofia Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                useGoogleFonts: false,
+                                                lineHeight: 1.16,
+                                              ),
                                         ),
                                       ),
                                     );
@@ -946,30 +925,34 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Expanded(
-                                                        flex: 2,
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Align(
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Icon(
-                                                              FFIcons
-                                                                  .kcupConverted,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .white,
-                                                              size: 24.0,
-                                                            ),
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(),
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Icon(
+                                                            FFIcons
+                                                                .kcupConverted,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .white,
+                                                            size: 24.0,
                                                           ),
                                                         ),
                                                       ),
-                                                      Expanded(
-                                                        flex: 5,
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    10.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
                                                         child: Text(
                                                           ' Leadership Board',
                                                           textAlign:

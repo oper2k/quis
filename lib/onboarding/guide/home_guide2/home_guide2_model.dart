@@ -27,8 +27,8 @@ import 'package:provider/provider.dart';
 class HomeGuide2Model extends FlutterFlowModel<HomeGuide2Widget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   TutorialCoachMark? guideHome4Controller;
+  final unfocusNode = FocusNode();
   // Model for avatar component.
   late AvatarModel avatarModel;
   // State field(s) for PageView widget.
@@ -49,49 +49,12 @@ class HomeGuide2Model extends FlutterFlowModel<HomeGuide2Widget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     guideHome4Controller?.finish();
+    unfocusNode.dispose();
     avatarModel.dispose();
   }
 
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () async {
-          logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_CO');
-          logFirebaseEvent('HomeGuide2_navigate_to');
-
-          context.goNamed(
-            'PracticeInterviewGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-        },
-        onSkip: () {
-          logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_SK');
-          logFirebaseEvent('HomeGuide2_navigate_to');
-
-          context.goNamed(
-            'PracticeInterviewGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
-          return true;
-        },
-      );
 }

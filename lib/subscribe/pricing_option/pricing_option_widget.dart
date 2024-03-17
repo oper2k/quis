@@ -90,7 +90,8 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                     style: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Sofia Pro',
                           color: FlutterFlowTheme.of(context).secondary,
-                          fontSize: 12.0,
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w600,
                           useGoogleFonts: false,
                           lineHeight: 0.92,
                         ),
@@ -144,6 +145,7 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                               FlutterFlowTheme.of(context).bodyLarge.override(
                                     fontFamily: 'Sofia Pro',
                                     color: FlutterFlowTheme.of(context).info,
+                                    fontWeight: FontWeight.w600,
                                     useGoogleFonts: false,
                                   ),
                         ),
@@ -155,6 +157,7 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Sofia Pro',
                           color: FlutterFlowTheme.of(context).info,
+                          fontWeight: FontWeight.w600,
                           useGoogleFonts: false,
                         ),
                   ),

@@ -99,7 +99,7 @@ class _AvatarWidgetState extends State<AvatarWidget> {
                         shape: BoxShape.circle,
                       ),
                       child: Image.asset(
-                        'assets/images/4.webp',
+                        'assets/images/av1.webp',
                         fit: BoxFit.contain,
                       ),
                     );

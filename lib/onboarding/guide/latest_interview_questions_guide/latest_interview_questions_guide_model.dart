@@ -46,8 +46,8 @@ class LatestInterviewQuestionsGuideModel
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   TutorialCoachMark? guideQuestions3Controller;
+  final unfocusNode = FocusNode();
   // State field(s) for SearchField widget.
   FocusNode? searchFieldFocusNode;
   TextEditingController? searchFieldController;
@@ -69,8 +69,8 @@ class LatestInterviewQuestionsGuideModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     guideQuestions3Controller?.finish();
+    unfocusNode.dispose();
     searchFieldFocusNode?.dispose();
     searchFieldController?.dispose();
 
@@ -81,23 +81,4 @@ class LatestInterviewQuestionsGuideModel
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () async {
-          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
-          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
-
-          context.goNamed('HomeGuide2');
-        },
-        onSkip: () {
-          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
-          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
-
-          context.goNamed('HomeGuide2');
-
-          return true;
-        },
-      );
 }

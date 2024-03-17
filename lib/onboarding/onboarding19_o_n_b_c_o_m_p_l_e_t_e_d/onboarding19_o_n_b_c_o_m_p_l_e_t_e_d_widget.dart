@@ -57,6 +57,42 @@ class _Onboarding19ONBCOMPLETEDWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  logFirebaseEvent('ONBOARDING19_O_N_B_C_O_M_P_L_E_T_E_D_Con');
+                  logFirebaseEvent('Container_navigate_back');
+                  context.safePop();
+                },
+                child: Container(
+                  width: 40.0,
+                  height: 40.0,
+                  decoration: BoxDecoration(),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  child: Icon(
+                    FFIcons.karrowBack,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 30.0,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [],
+          centerTitle: false,
+          toolbarHeight: 40.0,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Padding(
@@ -64,37 +100,9 @@ class _Onboarding19ONBCOMPLETEDWidgetState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Spacer(),
                 Stack(
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            logFirebaseEvent(
-                                'ONBOARDING19_O_N_B_C_O_M_P_L_E_T_E_D_Con');
-                            logFirebaseEvent('Container_navigate_back');
-                            context.safePop();
-                          },
-                          child: Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(),
-                            alignment: AlignmentDirectional(-1.0, 0.0),
-                            child: Icon(
-                              FFIcons.karrowBack,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 30.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
@@ -281,7 +289,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                     ),
                   ],
                 ),
-                Spacer(),
+                Spacer(flex: 2),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(

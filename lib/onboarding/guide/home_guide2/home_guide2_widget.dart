@@ -72,7 +72,8 @@ class _HomeGuide2WidgetState extends State<HomeGuide2Widget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_INIT_STATE');
       logFirebaseEvent('HomeGuide2_start_walkthrough');
-      _model.guideHome4Controller = _model.createPageWalkthrough(context);
+      safeSetState(
+          () => _model.guideHome4Controller = createPageWalkthrough(context));
       _model.guideHome4Controller?.show(context: context);
     });
 
@@ -2622,4 +2623,42 @@ class _HomeGuide2WidgetState extends State<HomeGuide2Widget>
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () {
+          safeSetState(() => _model.guideHome4Controller = null);
+          logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_CO');
+          logFirebaseEvent('HomeGuide2_navigate_to');
+
+          context.goNamed(
+            'PracticeInterviewGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        },
+        onSkip: () {
+          logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_SK');
+          logFirebaseEvent('HomeGuide2_navigate_to');
+
+          context.goNamed(
+            'PracticeInterviewGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
+          return true;
+        },
+      );
 }

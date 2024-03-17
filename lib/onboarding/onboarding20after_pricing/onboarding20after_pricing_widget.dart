@@ -63,25 +63,19 @@ class _Onboarding20afterPricingWidgetState
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
                       'assets/images/Onb17.webp',
-                      width: 300.0,
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
-                Text(
-                  'You are all set!',
-                  style: FlutterFlowTheme.of(context).displayMedium.override(
-                        fontFamily: 'Sofia Pro',
-                        color: FlutterFlowTheme.of(context).info,
-                        useGoogleFonts: false,
-                      ),
-                ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
-                    'Let’s start with a couple of questions to help us personalize your experience',
-                    textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).titleMedium,
+                    'You are all set!',
+                    style: FlutterFlowTheme.of(context).displayLarge.override(
+                          fontFamily: 'Sofia Pro',
+                          fontWeight: FontWeight.w600,
+                          useGoogleFonts: false,
+                        ),
                   ),
                 ),
                 Spacer(flex: 2),

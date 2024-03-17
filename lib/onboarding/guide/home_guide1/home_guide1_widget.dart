@@ -72,7 +72,8 @@ class _HomeGuide1WidgetState extends State<HomeGuide1Widget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_GUIDE1_HomeGuide1_ON_INIT_STATE');
       logFirebaseEvent('HomeGuide1_start_walkthrough');
-      _model.guideHome1Controller = _model.createPageWalkthrough(context);
+      safeSetState(
+          () => _model.guideHome1Controller = createPageWalkthrough(context));
       _model.guideHome1Controller?.show(context: context);
     });
 
@@ -2644,4 +2645,42 @@ class _HomeGuide1WidgetState extends State<HomeGuide1Widget>
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () {
+          safeSetState(() => _model.guideHome1Controller = null);
+          logFirebaseEvent('HOME_GUIDE1_HomeGuide1_ON_WALKTHROUGH_CO');
+          logFirebaseEvent('HomeGuide1_navigate_to');
+
+          context.goNamed(
+            'AllCoursesGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        },
+        onSkip: () {
+          logFirebaseEvent('HOME_GUIDE1_HomeGuide1_ON_WALKTHROUGH_SK');
+          logFirebaseEvent('HomeGuide1_navigate_to');
+
+          context.goNamed(
+            'AllCoursesGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
+          return true;
+        },
+      );
 }

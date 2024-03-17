@@ -1,27 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/custom_cloud_functions/custom_cloud_function_response_manager.dart';
-import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/pick_bottom_sheet_widget.dart';
-import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/interview/no_user_found_dialog/no_user_found_dialog_widget.dart';
-import '/interview/sorry_dialog/sorry_dialog_widget.dart';
 import '/walkthroughs/guide_interveiw4.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/random_data_util.dart' as random_data;
-import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
-import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'practice_interview_guide_widget.dart' show PracticeInterviewGuideWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:collection/collection.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +18,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 class PracticeInterviewGuideModel
     extends FlutterFlowModel<PracticeInterviewGuideWidget> {
@@ -47,26 +35,8 @@ class PracticeInterviewGuideModel
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   TutorialCoachMark? guideInterveiw4Controller;
-  // Stores action output result for [Bottom Sheet - pickBottomSheet] action in Container widget.
-  String? roleOutput;
-  // Model for pseudoDropDown component.
-  late PseudoDropDownModel pseudoDropDownModel;
-  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
-  ConferenceRoomRecord? secondAttemptRoomQueryOutput;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  ConferenceRoomRecord? createdRoomOutput;
-  // State field(s) for Timer widget.
-  int timerMilliseconds = 0;
-  String timerValue = StopWatchTimer.getDisplayTime(
-    0,
-    hours: false,
-    milliSecond: false,
-  );
-  FlutterFlowTimerController timerController =
-      FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
-
+  final unfocusNode = FocusNode();
   // State field(s) for Expandable widget.
   late ExpandableController expandableController1;
 
@@ -85,16 +55,12 @@ class PracticeInterviewGuideModel
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {
-    pseudoDropDownModel = createModel(context, () => PseudoDropDownModel());
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     guideInterveiw4Controller?.finish();
-    pseudoDropDownModel.dispose();
-    timerController.dispose();
+    unfocusNode.dispose();
     expandableController1.dispose();
     expandableController2.dispose();
     expandableController3.dispose();
@@ -192,41 +158,4 @@ class PracticeInterviewGuideModel
   }
 
   /// Additional helper methods are added here.
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () async {
-          logFirebaseEvent('PRACTICE_INTERVIEW_GUIDE_PracticeIntervi');
-          logFirebaseEvent('PracticeInterviewGuide_navigate_to');
-
-          context.goNamed(
-            'Home',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-        },
-        onSkip: () {
-          logFirebaseEvent('PRACTICE_INTERVIEW_GUIDE_PracticeIntervi');
-          logFirebaseEvent('PracticeInterviewGuide_navigate_to');
-
-          context.goNamed(
-            'Home',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
-          return true;
-        },
-      );
 }

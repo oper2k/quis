@@ -116,14 +116,13 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                         lineHeight: 1.25,
                       ),
                 ),
-                Spacer(),
                 Divider(
+                  height: 24.0,
                   thickness: 1.0,
                   indent: 30.0,
                   endIndent: 30.0,
                   color: FlutterFlowTheme.of(context).accent2,
                 ),
-                Spacer(),
                 Text(
                   'Company Profiles include:',
                   textAlign: TextAlign.center,
