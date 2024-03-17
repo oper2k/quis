@@ -1,20 +1,8 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
-import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/profile/support_letter_dialog/support_letter_dialog_widget.dart';
-import 'dart:async';
 import 'support_widget.dart' show SupportWidget;
 import 'package:expandable/expandable.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 class SupportModel extends FlutterFlowModel<SupportWidget> {
   ///  Local state fields for this page.

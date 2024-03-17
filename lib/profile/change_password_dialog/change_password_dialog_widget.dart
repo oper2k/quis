@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'change_password_dialog_model.dart';
 export 'change_password_dialog_model.dart';
 
@@ -41,20 +39,20 @@ class _ChangePasswordDialogWidgetState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.0, 0.0),
+                alignment: const AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -69,9 +67,9 @@ class _ChangePasswordDialogWidgetState
                   child: Container(
                     width: 40.0,
                     height: 40.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Align(
-                      alignment: AlignmentDirectional(1.0, 0.0),
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Icon(
                         FFIcons.kcross,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -82,7 +80,7 @@ class _ChangePasswordDialogWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Text(
                   'Are you sure you want to change your password?',
                   textAlign: TextAlign.center,
@@ -95,7 +93,7 @@ class _ChangePasswordDialogWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(13.0, 50.0, 13.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(13.0, 50.0, 13.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -110,11 +108,11 @@ class _ChangePasswordDialogWidgetState
                         text: 'No',
                         options: FFButtonOptions(
                           height: 52.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: Color(0x00073763),
+                          color: const Color(0x00073763),
                           textStyle: FlutterFlowTheme.of(context).headlineSmall,
                           elevation: 0.0,
                           borderSide: BorderSide(
@@ -136,9 +134,9 @@ class _ChangePasswordDialogWidgetState
                         text: 'Yes',
                         options: FFButtonOptions(
                           height: 52.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
@@ -149,7 +147,7 @@ class _ChangePasswordDialogWidgetState
                                 useGoogleFonts: false,
                               ),
                           elevation: 0.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 0.0,
                           ),
@@ -157,7 +155,7 @@ class _ChangePasswordDialogWidgetState
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(width: 16.0)),
+                  ].divide(const SizedBox(width: 16.0)),
                 ),
               ),
             ],

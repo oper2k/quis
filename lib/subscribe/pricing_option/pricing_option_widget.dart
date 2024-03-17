@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'pricing_option_model.dart';
 export 'pricing_option_model.dart';
 
@@ -14,9 +12,9 @@ class PricingOptionWidget extends StatefulWidget {
     bool? isTrial,
     this.trialText,
     required this.isPicked,
-  })  : this.title = title ?? 'title',
-        this.text = text ?? 'text',
-        this.isTrial = isTrial ?? false;
+  })  : title = title ?? 'title',
+        text = text ?? 'text',
+        isTrial = isTrial ?? false;
 
   final String title;
   final String text;
@@ -60,7 +58,7 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
         decoration: BoxDecoration(
           color: widget.isPicked!
               ? FlutterFlowTheme.of(context).blueOcean
-              : Color(0x00000000),
+              : const Color(0x00000000),
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
             color: widget.isTrial
@@ -81,7 +79,7 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                   color: FlutterFlowTheme.of(context).tertiary,
                 ),
                 child: Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
                       widget.trialText,
@@ -90,7 +88,8 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                     style: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Sofia Pro',
                           color: FlutterFlowTheme.of(context).secondary,
-                          fontSize: 12.0,
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w600,
                           useGoogleFonts: false,
                           lineHeight: 0.92,
                         ),
@@ -125,7 +124,7 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                               : FlutterFlowTheme.of(context).secondary,
                           shape: BoxShape.circle,
                         ),
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Visibility(
                           visible: widget.isPicked ?? true,
                           child: Icon(
@@ -137,13 +136,14 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           widget.title,
                           style:
                               FlutterFlowTheme.of(context).bodyLarge.override(
                                     fontFamily: 'Sofia Pro',
                                     color: FlutterFlowTheme.of(context).info,
+                                    fontWeight: FontWeight.w600,
                                     useGoogleFonts: false,
                                   ),
                         ),
@@ -155,10 +155,11 @@ class _PricingOptionWidgetState extends State<PricingOptionWidget> {
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Sofia Pro',
                           color: FlutterFlowTheme.of(context).info,
+                          fontWeight: FontWeight.w600,
                           useGoogleFonts: false,
                         ),
                   ),
-                ].divide(SizedBox(height: 8.0)),
+                ].divide(const SizedBox(height: 8.0)),
               ),
             ),
           ],

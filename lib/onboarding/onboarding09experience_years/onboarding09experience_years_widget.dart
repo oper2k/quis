@@ -5,11 +5,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'onboarding09experience_years_model.dart';
 export 'onboarding09experience_years_model.dart';
@@ -112,8 +109,8 @@ class _Onboarding09experienceYearsWidgetState
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -123,7 +120,7 @@ class _Onboarding09experienceYearsWidgetState
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -131,13 +128,13 @@ class _Onboarding09experienceYearsWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 0.0),
                   child: Text(
                     'How many years of experience do you have?',
                     textAlign: TextAlign.center,
@@ -150,7 +147,7 @@ class _Onboarding09experienceYearsWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -204,7 +201,7 @@ class _Onboarding09experienceYearsWidgetState
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Text(
                           _model.pickedYear.toString(),
                           style: FlutterFlowTheme.of(context)
@@ -219,9 +216,9 @@ class _Onboarding09experienceYearsWidgetState
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: (_model.pickedYear == null)
                         ? null
@@ -246,9 +243,9 @@ class _Onboarding09experienceYearsWidgetState
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -257,7 +254,7 @@ class _Onboarding09experienceYearsWidgetState
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

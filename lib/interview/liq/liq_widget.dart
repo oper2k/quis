@@ -4,14 +4,10 @@ import '/components/like_profile_avatar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/interview/match_dialog/match_dialog_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'liq_model.dart';
 export 'liq_model.dart';
@@ -50,8 +46,8 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 500.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -62,7 +58,7 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 700.ms,
           duration: 800.ms,
-          color: Color(0x80FFFFFF),
+          color: const Color(0x80FFFFFF),
           angle: 0.524,
         ),
       ],
@@ -87,11 +83,11 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
           },
         ),
       });
-      if (((currentUserDocument?.likedUsers?.toList() ?? [])
+      if (((currentUserDocument?.likedUsers.toList() ?? [])
               .where((e) => e.refUser == widget.userItem)
               .toList()
               .isNotEmpty) ||
-          (currentUserDocument?.dislikedUsers?.toList() ?? [])
+          (currentUserDocument?.dislikedUsers.toList() ?? [])
               .contains(widget.userItem)) {
         logFirebaseEvent('LIQ_navigate_to');
 
@@ -136,7 +132,7 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
             stream: UsersRecord.getDocument(widget.userItem!)
               ..listen((userRefItemUsersRecord) async {
                 if (_model.userRefItemPreviousSnapshot != null &&
-                    !UsersRecordDocumentEquality().equals(
+                    !const UsersRecordDocumentEquality().equals(
                         userRefItemUsersRecord,
                         _model.userRefItemPreviousSnapshot)) {
                   logFirebaseEvent('LIQ_PAGE_userRefItem_ON_DATA_CHANGE');
@@ -153,7 +149,7 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                             elevation: 0,
                             insetPadding: EdgeInsets.zero,
                             backgroundColor: Colors.transparent,
-                            alignment: AlignmentDirectional(0.0, 0.0)
+                            alignment: const AlignmentDirectional(0.0, 0.0)
                                 .resolve(Directionality.of(context)),
                             child: WebViewAware(
                               child: GestureDetector(
@@ -198,14 +194,14 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
               }
               final userRefItemUsersRecord = snapshot.data!;
               return Container(
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(1.0, -1.0),
+                        alignment: const AlignmentDirectional(1.0, -1.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -234,9 +230,9 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                             );
                           },
                           child: Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 10.0, 0.0, 10.0),
                               child: Icon(
                                 FFIcons.kxmark,
@@ -249,7 +245,7 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             30.0, 0.0, 30.0, 0.0),
                         child: Text(
                           'Great job! We know how hard you are trying! Keep it up, you will get there soon 👋',
@@ -263,8 +259,8 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                               ),
                         ),
                       ),
-                      Spacer(),
-                      Container(
+                      const Spacer(),
+                      SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.5,
                         child: Stack(
                           children: [
@@ -277,9 +273,9 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                             ).animateOnPageLoad(animationsMap[
                                 'likeProfileAvatarOnPageLoadAnimation']!),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 1.0),
+                              alignment: const AlignmentDirectional(-1.0, 1.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     13.0, 0.0, 0.0, 30.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -300,10 +296,10 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                                             .careerProfile.role !=
                                         null)
                                       Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 6.0, 0.0, 0.0),
                                           child: StreamBuilder<RoleRecord>(
                                             stream: RoleRecord.getDocument(
@@ -356,7 +352,7 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -509,12 +505,12 @@ class _LiqWidgetState extends State<LiqWidget> with TickerProviderStateMixin {
                               ),
                             ),
                           ),
-                        ].divide(SizedBox(width: 26.0)),
+                        ].divide(const SizedBox(width: 26.0)),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ]
-                        .addToStart(SizedBox(height: 50.0))
-                        .addToEnd(SizedBox(height: 40.0)),
+                        .addToStart(const SizedBox(height: 50.0))
+                        .addToEnd(const SizedBox(height: 40.0)),
                   ),
                 ),
               ).animateOnPageLoad(

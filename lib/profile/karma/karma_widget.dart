@@ -2,10 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/components/menu_item_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'karma_model.dart';
 export 'karma_model.dart';
 
@@ -65,8 +62,8 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -81,17 +78,17 @@ class _KarmaWidgetState extends State<KarmaWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -107,7 +104,7 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                   child: AuthUserStreamWidget(
                     builder: (context) => Text(
                       'You\'ve earned ${(double? karma) {
@@ -123,7 +120,7 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Karma embodies your ultimate reputation, a currency beyond monetary value; it can only be earned. You are receiving Karma points when complete specific tasks. In essence, Karma serves as a gauge of your engagement and contributions within the Quis community. The greater your involvement in Practice Interviews, votes or comments, the more Karma you receive. Karma reflects your commitment to collaboration, knowledge-sharing, and providing guidance. It\'s presented in a clear and concise manner, embracing transparency and simplicity.\n',
                     textAlign: TextAlign.center,
@@ -148,13 +145,13 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                   child: wrapWithModel(
                     model: _model.menuItemModel1,
                     updateCallback: () => setState(() {}),
-                    child: MenuItemWidget(
+                    child: const MenuItemWidget(
                       text: 'How to earn Karma',
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -169,13 +166,13 @@ class _KarmaWidgetState extends State<KarmaWidget> {
                     child: wrapWithModel(
                       model: _model.menuItemModel2,
                       updateCallback: () => setState(() {}),
-                      child: MenuItemWidget(
+                      child: const MenuItemWidget(
                         text: 'Learn more about Karma',
                       ),
                     ),
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 50.0)),
+              ].addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

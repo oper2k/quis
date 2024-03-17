@@ -2,9 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'karma_shortage_dialog_model.dart';
 export 'karma_shortage_dialog_model.dart';
 
@@ -41,20 +39,20 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.0, 0.0),
+                alignment: const AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -69,9 +67,9 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
                   child: Container(
                     width: 40.0,
                     height: 40.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Align(
-                      alignment: AlignmentDirectional(1.0, 0.0),
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Icon(
                         FFIcons.kcross,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -89,7 +87,7 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
                 animate: true,
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                 child: Text(
                   'Unfortunately you dont have enough Karma at this moment, you can earn more Karma by participating more at Practice Interview or Invite a friend',
                   textAlign: TextAlign.center,
@@ -102,7 +100,7 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 25.0, 20.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 25.0, 20.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent(
@@ -118,9 +116,9 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -129,7 +127,7 @@ class _KarmaShortageDialogWidgetState extends State<KarmaShortageDialogWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),

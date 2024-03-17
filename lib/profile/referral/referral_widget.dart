@@ -2,13 +2,10 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'referral_model.dart';
 export 'referral_model.dart';
@@ -69,8 +66,8 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -85,24 +82,24 @@ class _ReferralWidgetState extends State<ReferralWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lnvylqq4.json',
                     width: 220.0,
@@ -112,10 +109,10 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: Text(
                       'Spread the Word, Earn Rewards!',
                       textAlign: TextAlign.center,
@@ -124,7 +121,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                   child: Text(
                     'Get additional Karma bonus!',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -136,16 +133,16 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Stack(
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: Container(
                                 width: 1.0,
@@ -169,7 +166,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                             .secondaryBackground,
                                         shape: BoxShape.circle,
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         '1',
                                         style: FlutterFlowTheme.of(context)
@@ -185,7 +182,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             20.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           'Share your referral code with friends',
@@ -213,7 +210,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                             .secondaryBackground,
                                         shape: BoxShape.circle,
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         '2',
                                         style: FlutterFlowTheme.of(context)
@@ -229,7 +226,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             20.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           'Invite friends to download app and  purchase Premium plan',
@@ -257,7 +254,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                             .secondaryBackground,
                                         shape: BoxShape.circle,
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         '3',
                                         style: FlutterFlowTheme.of(context)
@@ -279,7 +276,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Ensure your friend use referral code, so you can get bonuses!',
@@ -297,7 +294,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 3.0, 0.0, 0.0),
                                             child: Text(
                                               '(Get an additional +5 Karma bonus)',
@@ -320,7 +317,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                     ),
                                   ],
                                 ),
-                              ].divide(SizedBox(height: 15.0)),
+                              ].divide(const SizedBox(height: 15.0)),
                             ),
                           ],
                         ),
@@ -329,14 +326,14 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
                           12.0, 15.0, 12.0, 15.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -379,16 +376,16 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
+                                  duration: const Duration(milliseconds: 4000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).accent2,
                                 ),
                               );
                             },
                             child: Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(4.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Icon(
                                   FFIcons.kocticonCopy24,
                                   color: FlutterFlowTheme.of(context)
@@ -406,7 +403,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                 Builder(
                   builder: (context) => Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -427,7 +424,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               12.0, 15.0, 12.0, 15.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -435,7 +432,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                               Container(
                                 width: 32.0,
                                 height: 32.0,
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                               ),
                               Expanded(
                                 child: Text(
@@ -466,9 +463,9 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                           currentUserDocument?.refCode, '')));
                                 },
                                 child: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                   child: Padding(
-                                    padding: EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(4.0),
                                     child: Icon(
                                       FFIcons.kocticonShare24,
                                       color: FlutterFlowTheme.of(context).white,
@@ -485,7 +482,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: StreamBuilder<List<UsersRecord>>(
                     stream: queryUsersRecord(
                       queryBuilder: (usersRecord) => usersRecord.where(
@@ -511,9 +508,9 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                       List<UsersRecord> containerUsersRecordList =
                           snapshot.data!;
                       return Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Visibility(
-                          visible: containerUsersRecordList.length > 0,
+                          visible: containerUsersRecordList.isNotEmpty,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -529,7 +526,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                     ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 18.0, 0.0, 0.0),
                                 child: Builder(
                                   builder: (context) {
@@ -549,7 +546,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(6.0),
+                                            padding: const EdgeInsets.all(6.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -565,7 +562,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                             10.0),
                                                   ),
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: Text(
                                                     functions
@@ -583,7 +580,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(12.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Column(
@@ -609,7 +606,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       4.0,
@@ -635,7 +632,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           10.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -652,7 +649,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                                             ),
                                           ),
                                         );
-                                      }).divide(SizedBox(height: 8.0)),
+                                      }).divide(const SizedBox(height: 8.0)),
                                     );
                                   },
                                 ),
@@ -664,7 +661,7 @@ class _ReferralWidgetState extends State<ReferralWidget> {
                     },
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 50.0)),
+              ].addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

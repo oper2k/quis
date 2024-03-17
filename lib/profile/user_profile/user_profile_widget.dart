@@ -2,11 +2,8 @@ import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'user_profile_model.dart';
 export 'user_profile_model.dart';
 
@@ -15,7 +12,7 @@ class UserProfileWidget extends StatefulWidget {
     super.key,
     required this.userItem,
     bool? isLinkedIn,
-  }) : this.isLinkedIn = isLinkedIn ?? false;
+  }) : isLinkedIn = isLinkedIn ?? false;
 
   final UsersRecord? userItem;
   final bool isLinkedIn;
@@ -73,8 +70,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -89,23 +86,23 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.avatarModel,
                     updateCallback: () => setState(() {}),
@@ -117,7 +114,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
                       '${widget.userItem?.firstName} ${widget.userItem?.lastName}',
@@ -129,7 +126,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                 if (widget.userItem?.hasGroup() ?? true)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: StreamBuilder<GroupRecord>(
                       stream: GroupRecord.getDocument(widget.userItem!.group!),
                       builder: (context, snapshot) {
@@ -158,7 +155,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                 if (widget.isLinkedIn)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -177,7 +174,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               11.0, 12.0, 11.0, 12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -189,7 +186,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'View Profile',
@@ -215,14 +212,14 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                     widget.userItem!.careerProfile.hasExpYears())
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             9.0, 17.0, 9.0, 12.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -245,7 +242,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 9.0, 0.0, 0.0),
                                     child: FutureBuilder<RoleRecord>(
                                       future: RoleRecord.getDocumentOnce(
@@ -289,10 +286,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                             ),
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 11.0, 12.0, 11.0),
                                             child: Text(
                                               roleRefItemRoleRecord.name,
@@ -334,7 +331,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 9.0, 0.0, 0.0),
                                     child: FutureBuilder<GoalRoleRecord>(
                                       future: GoalRoleRecord.getDocumentOnce(
@@ -379,10 +376,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                             ),
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 11.0, 12.0, 11.0),
                                             child: Text(
                                               goalRoleRefItemGoalRoleRecord
@@ -425,7 +422,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 9.0, 0.0, 0.0),
                                     child: Container(
                                       constraints: BoxConstraints(
@@ -444,15 +441,15 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                               .primary,
                                         ),
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             12.0, 11.0, 12.0, 11.0),
                                         child: Text(
                                           valueOrDefault<String>(
                                             widget.userItem?.careerProfile
-                                                ?.expYears
-                                                ?.toString(),
+                                                .expYears
+                                                .toString(),
                                             'Years',
                                           ),
                                           textAlign: TextAlign.center,
@@ -472,13 +469,13 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                 ],
                               ),
                             ),
-                          ].divide(SizedBox(width: 6.0)),
+                          ].divide(const SizedBox(width: 6.0)),
                         ),
                       ),
                     ),
                   ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -487,7 +484,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -502,7 +499,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 13.0, 0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -520,7 +517,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       4.0, 0.0, 0.0, 0.0),
                                   child: Icon(
                                     FFIcons.kgameIconsYinYang,
@@ -537,10 +534,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
                   child: Container(
                     height: 96.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -561,7 +558,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                       .headlineSmall,
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 14.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -573,7 +570,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         size: 24.0,
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 0.0, 0.0),
                                         child: StreamBuilder<List<UsersRecord>>(
                                           stream: queryUsersRecord(
@@ -611,9 +608,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                                               e.reference ==
                                                               widget.userItem
                                                                   ?.reference)
-                                                          .toList()
-                                                          .length >
-                                                      0
+                                                          .toList().isNotEmpty
                                                   ? (functions.findUserIndexFromList(
                                                               textUsersRecordList
                                                                   .toList(),
@@ -659,7 +654,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                               children: [
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.userItem?.endorsement?.toString(),
+                                    widget.userItem?.endorsement.toString(),
                                     '0',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -672,7 +667,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                       ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 14.0, 0.0, 0.0),
                                   child: Icon(
                                     FFIcons.kthumbsUp,
@@ -684,11 +679,11 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                             ),
                           ),
                         ),
-                      ].divide(SizedBox(width: 7.0)),
+                      ].divide(const SizedBox(width: 7.0)),
                     ),
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 50.0)),
+              ].addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

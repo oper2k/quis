@@ -6,10 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'interview_feedback_model.dart';
 export 'interview_feedback_model.dart';
 
@@ -19,7 +16,7 @@ class InterviewFeedbackWidget extends StatefulWidget {
     required this.userRef,
     required this.roomDoc,
     bool? isLike,
-  }) : this.isLike = isLike ?? false;
+  }) : isLike = isLike ?? false;
 
   final DocumentReference? userRef;
   final ConferenceRoomRecord? roomDoc;
@@ -92,8 +89,8 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -108,38 +105,38 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'How was your interview?',
                     style: FlutterFlowTheme.of(context).headlineMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: MediaQuery.sizeOf(context).height * 0.05,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: GridView(
                       padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 4.0,
@@ -198,21 +195,21 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'How was your interview Partner?',
                     style: FlutterFlowTheme.of(context).headlineMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: MediaQuery.sizeOf(context).height * 0.1,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: GridView(
                       padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 4.0,
@@ -363,21 +360,21 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Did your Partner followed the structure?',
                     style: FlutterFlowTheme.of(context).headlineMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: MediaQuery.sizeOf(context).height * 0.05,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: GridView(
                       padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 4.0,
@@ -437,14 +434,14 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Please share where you partner can improve? (Your answer will be share directly with user)',
                     style: FlutterFlowTheme.of(context).headlineMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Container(
                     height: 82.0,
                     decoration: BoxDecoration(
@@ -453,7 +450,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
                       child: TextFormField(
                         controller: _model.improveUserFieldController,
                         focusNode: _model.improveUserFieldFocusNode,
@@ -481,14 +478,14 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
                   child: Text(
                     'On a scale of 1 to 10, how likely are you to recommend our product or service to others?',
                     style: FlutterFlowTheme.of(context).headlineMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Container(
                     height: 82.0,
                     decoration: BoxDecoration(
@@ -497,7 +494,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
                       child: TextFormField(
                         controller: _model.scaleFieldController,
                         focusNode: _model.scaleFieldFocusNode,
@@ -525,14 +522,14 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
                   child: Text(
                     'Is there anything we could have done differently to improve Quis?',
                     style: FlutterFlowTheme.of(context).headlineMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Container(
                     height: 82.0,
                     decoration: BoxDecoration(
@@ -541,7 +538,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
                       child: TextFormField(
                         controller: _model.improvequisFieldController,
                         focusNode: _model.improvequisFieldFocusNode,
@@ -569,14 +566,14 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
                   child: Text(
                     'Any feedback you want to share with us?',
                     style: FlutterFlowTheme.of(context).headlineMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Container(
                     height: 82.0,
                     decoration: BoxDecoration(
@@ -585,7 +582,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
                       child: TextFormField(
                         controller: _model.appFeedbackFieldController,
                         focusNode: _model.appFeedbackFieldFocusNode,
@@ -613,19 +610,15 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: !((_model.satisfactionInterview != null) ||
                             (_model.partner != null && _model.partner != '') ||
                             (_model.structure != null) ||
-                            (_model.improveUserFieldController.text != null &&
-                                _model.improveUserFieldController.text != '') ||
-                            (_model.scaleFieldController.text != null &&
-                                _model.scaleFieldController.text != '') ||
-                            (_model.improvequisFieldController.text != null &&
-                                _model.improvequisFieldController.text != '') ||
-                            (_model.appFeedbackFieldController.text != null &&
-                                _model.appFeedbackFieldController.text != ''))
+                            (_model.improveUserFieldController.text != '') ||
+                            (_model.scaleFieldController.text != '') ||
+                            (_model.improvequisFieldController.text != '') ||
+                            (_model.appFeedbackFieldController.text != ''))
                         ? null
                         : () async {
                             logFirebaseEvent(
@@ -671,7 +664,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                               });
                             }
 
-                            if (((currentUserDocument?.likedUsers?.toList() ??
+                            if (((currentUserDocument?.likedUsers.toList() ??
                                         [])
                                     .where((e) => e.refUser == widget.userRef)
                                     .toList()
@@ -686,7 +679,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                                       getLikedUserItemFirestoreData(
                                         updateLikedUserItemStruct(
                                           (currentUserDocument?.likedUsers
-                                                      ?.toList() ??
+                                                      .toList() ??
                                                   [])
                                               .where((e) =>
                                                   e.refUser == widget.userRef)
@@ -720,9 +713,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                                 ),
                               });
                             }
-                            if (_model.improveUserFieldController.text !=
-                                    null &&
-                                _model.improveUserFieldController.text != '') {
+                            if (_model.improveUserFieldController.text != '') {
                               logFirebaseEvent('Button_backend_call');
                               _model.apiResult3fr =
                                   await BrevoGroup.sendAnEmailCall.call(
@@ -762,9 +753,9 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -773,7 +764,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),
@@ -783,7 +774,7 @@ class _InterviewFeedbackWidgetState extends State<InterviewFeedbackWidget> {
                     ),
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 50.0)),
+              ].addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'feedback_pick_element_model.dart';
 export 'feedback_pick_element_model.dart';
 
@@ -48,9 +46,9 @@ class _FeedbackPickElementWidgetState extends State<FeedbackPickElementWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(5.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -63,7 +61,7 @@ class _FeedbackPickElementWidgetState extends State<FeedbackPickElementWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
               child: AutoSizeText(
                 widget.text!.maybeHandleOverflow(maxChars: 18),
                 style: FlutterFlowTheme.of(context).headlineMedium,

@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'filter_element_model.dart';
 export 'filter_element_model.dart';
 
@@ -12,7 +10,7 @@ class FilterElementWidget extends StatefulWidget {
     required this.isPicked,
     required this.text,
     bool? withBorder,
-  }) : this.withBorder = withBorder ?? true;
+  }) : withBorder = withBorder ?? true;
 
   final bool? isPicked;
   final String? text;
@@ -57,11 +55,11 @@ class _FilterElementWidgetState extends State<FilterElementWidget> {
               ? (widget.isPicked!
                   ? FlutterFlowTheme.of(context).powderBlue
                   : FlutterFlowTheme.of(context).accent2)
-              : Color(0x00000000),
+              : const Color(0x00000000),
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(27.0, 12.0, 27.0, 12.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(27.0, 12.0, 27.0, 12.0),
         child: Text(
           widget.text!,
           textAlign: TextAlign.center,

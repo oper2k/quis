@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'auth_email_page_model.dart';
 export 'auth_email_page_model.dart';
 
@@ -83,8 +81,8 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -99,11 +97,11 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -111,11 +109,11 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
             child: Column(
               children: [
                 Align(
-                  alignment: Alignment(0.0, 0),
+                  alignment: const Alignment(0.0, 0),
                   child: TabBar(
                     labelColor: FlutterFlowTheme.of(context).blueLink,
                     unselectedLabelColor: FlutterFlowTheme.of(context).accent3,
@@ -126,11 +124,11 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                               useGoogleFonts: false,
                               lineHeight: 1.5,
                             ),
-                    unselectedLabelStyle: TextStyle(),
+                    unselectedLabelStyle: const TextStyle(),
                     indicatorColor: FlutterFlowTheme.of(context).blueLink,
                     indicatorWeight: 2.0,
-                    padding: EdgeInsets.all(4.0),
-                    tabs: [
+                    padding: const EdgeInsets.all(4.0),
+                    tabs: const [
                       Tab(
                         text: 'Sign up',
                       ),
@@ -150,7 +148,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                     children: [
                       KeepAliveWidgetWrapper(
                         builder: (context) => Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 30.0, 16.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -160,10 +158,10 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                 focusNode: _model.suEmailFieldFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.suEmailFieldController',
-                                  Duration(milliseconds: 300),
+                                  const Duration(milliseconds: 300),
                                   () => setState(() {}),
                                 ),
-                                autofillHints: [AutofillHints.email],
+                                autofillHints: const [AutofillHints.email],
                                 textCapitalization: TextCapitalization.none,
                                 textInputAction: TextInputAction.next,
                                 obscureText: false,
@@ -208,7 +206,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                     borderRadius: BorderRadius.circular(0.0),
                                   ),
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
+                                      const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 15.0, 0.0, 0.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -226,14 +224,14 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                     .asValidator(context),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 30.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.suPasswordFieldController,
                                   focusNode: _model.suPasswordFieldFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.suPasswordFieldController',
-                                    Duration(milliseconds: 300),
+                                    const Duration(milliseconds: 300),
                                     () async {
                                       logFirebaseEvent(
                                           'AUTH_EMAIL_suPasswordField_ON_TEXTFIELD_');
@@ -291,7 +289,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                       borderRadius: BorderRadius.circular(0.0),
                                     ),
                                     contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
+                                        const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 15.0, 0.0, 1.0),
                                     suffixIcon: InkWell(
                                       onTap: () => setState(
@@ -324,19 +322,13 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: ((_model.suEmailFieldController
                                                       .text ==
-                                                  null ||
-                                              _model.suEmailFieldController
-                                                      .text ==
                                                   '') &&
                                           (_model.suPasswordFieldController
-                                                      .text ==
-                                                  null ||
-                                              _model.suPasswordFieldController
                                                       .text ==
                                                   ''))
                                       ? null
@@ -351,7 +343,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                               _model.signUpPassword!) {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
-                                              SnackBar(
+                                              const SnackBar(
                                                 content: Text(
                                                   'Passwords don\'t match!',
                                                 ),
@@ -378,9 +370,9 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 52.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -392,7 +384,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                           useGoogleFonts: false,
                                         ),
                                     elevation: 0.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 0.0,
                                     ),
@@ -410,7 +402,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                       ),
                       KeepAliveWidgetWrapper(
                         builder: (context) => Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 30.0, 16.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -420,10 +412,10 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                 focusNode: _model.liEmailFieldFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.liEmailFieldController',
-                                  Duration(milliseconds: 300),
+                                  const Duration(milliseconds: 300),
                                   () => setState(() {}),
                                 ),
-                                autofillHints: [AutofillHints.email],
+                                autofillHints: const [AutofillHints.email],
                                 textCapitalization: TextCapitalization.none,
                                 textInputAction: TextInputAction.next,
                                 obscureText: false,
@@ -468,7 +460,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                     borderRadius: BorderRadius.circular(0.0),
                                   ),
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
+                                      const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 15.0, 0.0, 0.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -486,14 +478,14 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                     .asValidator(context),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 30.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.liPasswordFieldController,
                                   focusNode: _model.liPasswordFieldFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.liPasswordFieldController',
-                                    Duration(milliseconds: 300),
+                                    const Duration(milliseconds: 300),
                                     () => setState(() {}),
                                   ),
                                   obscureText:
@@ -542,7 +534,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                       borderRadius: BorderRadius.circular(0.0),
                                     ),
                                     contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
+                                        const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 15.0, 0.0, 1.0),
                                     suffixIcon: InkWell(
                                       onTap: () => setState(
@@ -575,7 +567,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -590,9 +582,9 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                     context.pushNamed('ResetPassword');
                                   },
                                   child: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Text(
                                         'Forgot password?',
                                         style: FlutterFlowTheme.of(context)
@@ -603,19 +595,13 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: ((_model.liEmailFieldController
                                                       .text ==
-                                                  null ||
-                                              _model.liEmailFieldController
-                                                      .text ==
                                                   '') &&
                                           (_model.liPasswordFieldController
-                                                      .text ==
-                                                  null ||
-                                              _model.liPasswordFieldController
                                                       .text ==
                                                   ''))
                                       ? null
@@ -644,9 +630,9 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 52.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -658,7 +644,7 @@ class _AuthEmailPageWidgetState extends State<AuthEmailPageWidget>
                                           useGoogleFonts: false,
                                         ),
                                     elevation: 0.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 0.0,
                                     ),

@@ -9,9 +9,7 @@ import '/onboarding/minus_element/minus_element_widget.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'onboarding19_o_n_b_c_o_m_p_l_e_t_e_d_model.dart';
 export 'onboarding19_o_n_b_c_o_m_p_l_e_t_e_d_model.dart';
@@ -57,47 +55,55 @@ class _Onboarding19ONBCOMPLETEDWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  logFirebaseEvent('ONBOARDING19_O_N_B_C_O_M_P_L_E_T_E_D_Con');
+                  logFirebaseEvent('Container_navigate_back');
+                  context.safePop();
+                },
+                child: Container(
+                  width: 40.0,
+                  height: 40.0,
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  child: Icon(
+                    FFIcons.karrowBack,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 30.0,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: const [],
+          centerTitle: false,
+          toolbarHeight: 40.0,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                const Spacer(),
                 Stack(
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            logFirebaseEvent(
-                                'ONBOARDING19_O_N_B_C_O_M_P_L_E_T_E_D_Con');
-                            logFirebaseEvent('Container_navigate_back');
-                            context.safePop();
-                          },
-                          child: Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(),
-                            alignment: AlignmentDirectional(-1.0, 0.0),
-                            child: Icon(
-                              FFIcons.karrowBack,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 30.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 0.45,
                         decoration: BoxDecoration(
@@ -106,7 +112,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               14.0, 14.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -123,7 +129,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                     ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 16.0, 14.0, 14.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -131,7 +137,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                     wrapWithModel(
                                       model: _model.minusElementModel1,
                                       updateCallback: () => setState(() {}),
-                                      child: MinusElementWidget(
+                                      child: const MinusElementWidget(
                                         text:
                                             'Wondering what to do before/after interview',
                                       ),
@@ -139,7 +145,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                     wrapWithModel(
                                       model: _model.minusElementModel2,
                                       updateCallback: () => setState(() {}),
-                                      child: MinusElementWidget(
+                                      child: const MinusElementWidget(
                                         text:
                                             'Getting nervous every time & not sure if you are not ready for an interview',
                                       ),
@@ -147,7 +153,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                     wrapWithModel(
                                       model: _model.minusElementModel3,
                                       updateCallback: () => setState(() {}),
-                                      child: MinusElementWidget(
+                                      child: const MinusElementWidget(
                                         text:
                                             'Worried about what you will be asked',
                                         isPlus: false,
@@ -156,20 +162,20 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                     wrapWithModel(
                                       model: _model.minusElementModel4,
                                       updateCallback: () => setState(() {}),
-                                      child: MinusElementWidget(
+                                      child: const MinusElementWidget(
                                         text:
                                             'Unsure what the interview process will be like',
                                         isPlus: false,
                                       ),
                                     ),
-                                  ].divide(SizedBox(height: 12.0)),
+                                  ].divide(const SizedBox(height: 12.0)),
                                 ),
                               ),
                               if (MediaQuery.sizeOf(context).height > 815.0)
                                 Align(
-                                  alignment: AlignmentDirectional(1.0, 1.0),
+                                  alignment: const AlignmentDirectional(1.0, 1.0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         20.0, 0.0, 0.0, 0.0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
@@ -187,7 +193,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(1.0, 0.0),
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 0.5,
                         height: 440.0,
@@ -198,9 +204,9 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                         child: Stack(
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, 1.0),
+                              alignment: const AlignmentDirectional(0.0, 1.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     14.0, 0.0, 14.0, 14.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -212,7 +218,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   14.0, 14.0, 14.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -229,7 +235,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                         ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 50.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -237,7 +243,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                         wrapWithModel(
                                           model: _model.minusElementModel5,
                                           updateCallback: () => setState(() {}),
-                                          child: MinusElementWidget(
+                                          child: const MinusElementWidget(
                                             text: 'Know exactly what to do',
                                             isPlus: true,
                                           ),
@@ -245,7 +251,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                         wrapWithModel(
                                           model: _model.minusElementModel6,
                                           updateCallback: () => setState(() {}),
-                                          child: MinusElementWidget(
+                                          child: const MinusElementWidget(
                                             text:
                                                 'Feel positive and ready for interview',
                                             isPlus: true,
@@ -254,7 +260,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                         wrapWithModel(
                                           model: _model.minusElementModel7,
                                           updateCallback: () => setState(() {}),
-                                          child: MinusElementWidget(
+                                          child: const MinusElementWidget(
                                             text:
                                                 'Mindful and aware about interview questions',
                                             isPlus: true,
@@ -263,13 +269,13 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                         wrapWithModel(
                                           model: _model.minusElementModel8,
                                           updateCallback: () => setState(() {}),
-                                          child: MinusElementWidget(
+                                          child: const MinusElementWidget(
                                             text:
                                                 'Having clear structure about the hiring\nprocess',
                                             isPlus: true,
                                           ),
                                         ),
-                                      ].divide(SizedBox(height: 12.0)),
+                                      ].divide(const SizedBox(height: 12.0)),
                                     ),
                                   ),
                                 ],
@@ -281,9 +287,9 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
@@ -383,9 +389,9 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -394,7 +400,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

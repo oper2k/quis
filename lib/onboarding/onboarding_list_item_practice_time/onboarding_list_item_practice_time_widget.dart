@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding_list_item_practice_time_model.dart';
 export 'onboarding_list_item_practice_time_model.dart';
 
@@ -12,7 +10,7 @@ class OnboardingListItemPracticeTimeWidget extends StatefulWidget {
     required this.textLeft,
     required this.textRight,
     bool? isPicked,
-  }) : this.isPicked = isPicked ?? false;
+  }) : isPicked = isPicked ?? false;
 
   final String? textLeft;
   final String? textRight;
@@ -57,7 +55,7 @@ class _OnboardingListItemPracticeTimeWidgetState
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(12.0, 14.0, 12.0, 14.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(12.0, 14.0, 12.0, 14.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

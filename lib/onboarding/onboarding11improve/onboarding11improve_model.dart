@@ -1,12 +1,7 @@
-import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/onboarding/onboarding_list_item_description/onboarding_list_item_description_widget.dart';
 import 'onboarding11improve_widget.dart' show Onboarding11improveWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class Onboarding11improveModel
     extends FlutterFlowModel<Onboarding11improveWidget> {

@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/onboarding/onboarding_list_item_practice_time/onboarding_list_item_practice_time_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding14practice_goal_model.dart';
 export 'onboarding14practice_goal_model.dart';
 
@@ -67,8 +65,8 @@ class _Onboarding14practiceGoalWidgetState
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -78,7 +76,7 @@ class _Onboarding14practiceGoalWidgetState
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -86,13 +84,13 @@ class _Onboarding14practiceGoalWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 0.0),
                   child: Text(
                     'What\'s your weekly interview practice goal?',
                     textAlign: TextAlign.center,
@@ -105,7 +103,7 @@ class _Onboarding14practiceGoalWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -205,12 +203,12 @@ class _Onboarding14practiceGoalWidgetState
                           ),
                         ),
                       ),
-                    ].divide(SizedBox(height: 9.0)),
+                    ].divide(const SizedBox(height: 9.0)),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed:
                         (_model.pickedTime == null || _model.pickedTime == '')
@@ -227,9 +225,9 @@ class _Onboarding14practiceGoalWidgetState
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -238,7 +236,7 @@ class _Onboarding14practiceGoalWidgetState
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

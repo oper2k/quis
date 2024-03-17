@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import '../cloud_functions/cloud_functions.dart';
-import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -25,8 +23,6 @@ class CreateAContactCall {
     String? firstname = '',
     String? lastname = '',
     String? email = '',
-    String? apiKey =
-        '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',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -36,7 +32,6 @@ class CreateAContactCall {
           'firstname': firstname,
           'lastname': lastname,
           'email': email,
-          'apiKey': apiKey,
         },
       },
     );
@@ -54,8 +49,6 @@ class UpdateAContactCall {
     String? firstname = '',
     String? lastname = '',
     String? identifier = '',
-    String? apiKey =
-        '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',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -65,7 +58,6 @@ class UpdateAContactCall {
           'firstname': firstname,
           'lastname': lastname,
           'identifier': identifier,
-          'apiKey': apiKey,
         },
       },
     );
@@ -100,8 +92,6 @@ class SendAnEmailCall {
     String? paramAttachLink = '',
     String? paramUserIndustry = '',
     String? paramQuantity = '',
-    String? apiKey =
-        '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',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -133,7 +123,6 @@ class SendAnEmailCall {
           'paramAttachLink': paramAttachLink,
           'paramUserIndustry': paramUserIndustry,
           'paramQuantity': paramQuantity,
-          'apiKey': apiKey,
         },
       },
     );
@@ -147,8 +136,6 @@ class SendAScheduledEmailCall {
     String? userEmail = '',
     int? templateId,
     String? paramFeedback = '',
-    String? apiKey =
-        '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',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -159,7 +146,6 @@ class SendAScheduledEmailCall {
           'userEmail': userEmail,
           'templateId': templateId,
           'paramFeedback': paramFeedback,
-          'apiKey': apiKey,
         },
       },
     );

@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/nav_bar_widget.dart';
 import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
@@ -15,13 +14,11 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -84,24 +81,24 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 0.0,
           elevation: 0.0,
         ),
         body: Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Lottie.asset(
                           'assets/lottie_animations/animation_lodp1m2k.json',
                           width: 200.0,
@@ -112,14 +109,14 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 5.0, 0.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -132,7 +129,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 2.0, 0.0, 0.0),
                               child: Text(
                                 'Practice Interviews',
@@ -145,7 +142,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Text(
                           'Practice makes perfect! Prepare for your interviews with thousands of Quis members.',
                           textAlign: TextAlign.center,
@@ -161,14 +158,14 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                         child: Container(
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).primary,
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 40.0, 10.0, 40.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -197,7 +194,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 4.0),
                                           child: Container(
                                             width: 2.0,
@@ -215,7 +212,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -223,7 +220,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 2.0, 0.0, 0.0),
                                               child: Text(
                                                 'Register for a Practice Interview by selecting your Interview type and tap “Get Reminder”. You will receive a notification prior to Interview start, registration is open everyday until 6:50 PM +4 GST.',
@@ -271,7 +268,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 4.0),
                                           child: Container(
                                             width: 2.0,
@@ -289,7 +286,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -297,7 +294,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 2.0, 0.0, 0.0),
                                               child: Text(
                                                 'Come back 5 minutes before the interview starts and tap \'Join Now.\' Join your Interview over live video and take turns interviewing each other.',
@@ -345,7 +342,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 4.0),
                                           child: Container(
                                             width: 2.0,
@@ -363,7 +360,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -371,7 +368,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 2.0, 0.0, 0.0),
                                               child: Text(
                                                 'Match with an interview partner by swiping the screen at the end of the practice interview. Once matched, you will be provided with a LinkedIn link for networking.',
@@ -421,7 +418,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -429,7 +426,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 2.0, 0.0, 0.0),
                                               child: Text(
                                                 'Fill out the feedback form after your interview. Be as specific as possible to help each other improve!',
@@ -460,7 +457,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                         child: Text(
                           'Please choose your role to practice:',
                           style: FlutterFlowTheme.of(context).headlineMedium,
@@ -502,7 +499,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                       .first
                                   : null;
                           return Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: StreamBuilder<List<ConferenceRoomRecord>>(
                               stream: queryConferenceRoomRecord(
                                 queryBuilder: (conferenceRoomRecord) =>
@@ -546,7 +543,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                             .first
                                         : null;
                                 return Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -554,16 +551,14 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                         builder: (context) {
                                           if ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
                                                   null) &&
-                                              (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                              (interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                       .participants
                                                       .where((e) =>
                                                           e.user ==
                                                           currentUserReference)
-                                                      .toList()
-                                                      .length >
-                                                  0)) {
+                                                      .toList().isNotEmpty)) {
                                             return Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Container(
@@ -576,7 +571,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                           10.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(18.0, 11.0,
                                                           18.0, 11.0),
                                                   child: Row(
@@ -585,7 +580,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     5.0,
@@ -595,13 +590,13 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                           valueOrDefault<
                                                               String>(
                                                             interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                ?.participants
-                                                                ?.where((e) =>
+                                                                .participants
+                                                                .where((e) =>
                                                                     e.user ==
                                                                     currentUserReference)
                                                                 .toList()
-                                                                ?.first
-                                                                ?.role,
+                                                                .first
+                                                                .role,
                                                             'role',
                                                           ),
                                                           style: FlutterFlowTheme
@@ -624,7 +619,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                             );
                                           } else {
                                             return Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 6.0, 0.0, 0.0),
                                               child: InkWell(
                                                 splashColor: Colors.transparent,
@@ -703,7 +698,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                             10.0),
                                                     border: Border.all(
                                                       color: _model.isRoleValid
-                                                          ? Color(0x00000000)
+                                                          ? const Color(0x00000000)
                                                           : FlutterFlowTheme.of(
                                                                   context)
                                                               .error,
@@ -726,7 +721,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                         },
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 19.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -751,7 +746,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                   onPressed: () async {
                                                     logFirebaseEvent(
                                                         'PRACTICE_INTERVIEW_JOIN_NOW_BTN_ON_TAP');
-                                                    var _shouldSetState = false;
+                                                    var shouldSetState = false;
                                                     logFirebaseEvent(
                                                         'Button_backend_call');
 
@@ -770,14 +765,12 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                     });
                                                     if ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
                                                             null) &&
-                                                        (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                        (interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                 .participants
                                                                 .where((e) =>
                                                                     e.user ==
                                                                     currentUserReference)
-                                                                .toList()
-                                                                .length >
-                                                            0)) {
+                                                                .toList().isNotEmpty)) {
                                                       if (confirenceRoomItemConferenceRoomRecord !=
                                                           null) {
                                                         logFirebaseEvent(
@@ -787,22 +780,22 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                           context,
                                                           roomID:
                                                               confirenceRoomItemConferenceRoomRecord
-                                                                  ?.reference
+                                                                  .reference
                                                                   .id,
                                                           uid: random_data
                                                               .randomInteger(
                                                                   10, 1000),
                                                           userRef:
                                                               confirenceRoomItemConferenceRoomRecord
-                                                                  ?.users
-                                                                  ?.where((e) =>
+                                                                  .users
+                                                                  .where((e) =>
                                                                       e !=
                                                                       currentUserReference)
                                                                   .toList()
-                                                                  ?.first,
+                                                                  .first,
                                                           role:
                                                               confirenceRoomItemConferenceRoomRecord
-                                                                  ?.role,
+                                                                  .role,
                                                           roomDoc:
                                                               confirenceRoomItemConferenceRoomRecord,
                                                         );
@@ -828,7 +821,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                           singleRecord: true,
                                                         ).then((s) =>
                                                                 s.firstOrNull);
-                                                        _shouldSetState = true;
+                                                        shouldSetState = true;
                                                         if (_model
                                                                 .secondAttemptRoomQueryOutput
                                                                 ?.reference !=
@@ -848,11 +841,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                             userRef: _model
                                                                 .secondAttemptRoomQueryOutput
                                                                 ?.users
-                                                                ?.where((e) =>
+                                                                .where((e) =>
                                                                     e !=
                                                                     currentUserReference)
                                                                 .toList()
-                                                                ?.first,
+                                                                .first,
                                                             role: _model
                                                                 .secondAttemptRoomQueryOutput
                                                                 ?.role,
@@ -860,29 +853,27 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                 .secondAttemptRoomQueryOutput,
                                                           );
                                                         } else {
-                                                          if ((interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                          if ((interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                       .participants
                                                                       .where((e) =>
                                                                           e.user !=
                                                                           currentUserReference)
                                                                       .toList()
                                                                       .length >
-                                                                  interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                                  interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                       .takenUsers
                                                                       .length) &&
-                                                              (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                              (interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                       .participants
                                                                       .where((e) =>
-                                                                          !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e
+                                                                          !interviewParticipantsItemInterviewParticipantsOfDayRecord.takenUsers.contains(e
                                                                               .user) &&
                                                                           functions.checkUserKarmaMatch(
                                                                               valueOrDefault(currentUserDocument?.karma, 0.0),
                                                                               e.karma) &&
                                                                           (e.user != currentUserReference) &&
-                                                                          (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord?.participants?.where((e) => e.user == currentUserReference).toList()?.first?.role))
-                                                                      .toList()
-                                                                      .length >
-                                                                  0)) {
+                                                                          (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord.participants.where((e) => e.user == currentUserReference).toList().first.role))
+                                                                      .toList().isNotEmpty)) {
                                                             logFirebaseEvent(
                                                                 'Button_backend_call');
 
@@ -898,28 +889,28 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                         'unixTimeSecForInterview'),
                                                                     getCurrentTimestamp),
                                                                 role: interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                    ?.participants
-                                                                    ?.where((e) =>
+                                                                    .participants
+                                                                    .where((e) =>
                                                                         e.user ==
                                                                         currentUserReference)
                                                                     .toList()
-                                                                    ?.first
-                                                                    ?.role,
+                                                                    .first
+                                                                    .role,
                                                               ),
                                                               ...mapToFirestore(
                                                                 {
                                                                   'users': [
                                                                     interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                        ?.participants
-                                                                        ?.where((e) =>
-                                                                            !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
+                                                                        .participants
+                                                                        .where((e) =>
+                                                                            !interviewParticipantsItemInterviewParticipantsOfDayRecord.takenUsers.contains(e.user) &&
                                                                             functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0),
                                                                                 e.karma) &&
                                                                             (e.user != currentUserReference) &&
-                                                                            (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord?.participants?.where((e) => e.user == currentUserReference).toList()?.first?.role))
+                                                                            (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord.participants.where((e) => e.user == currentUserReference).toList().first.role))
                                                                         .toList()
-                                                                        ?.first
-                                                                        ?.user
+                                                                        .first
+                                                                        .user
                                                                   ],
                                                                 },
                                                               ),
@@ -933,38 +924,38 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                         'unixTimeSecForInterview'),
                                                                     getCurrentTimestamp),
                                                                 role: interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                    ?.participants
-                                                                    ?.where((e) =>
+                                                                    .participants
+                                                                    .where((e) =>
                                                                         e.user ==
                                                                         currentUserReference)
                                                                     .toList()
-                                                                    ?.first
-                                                                    ?.role,
+                                                                    .first
+                                                                    .role,
                                                               ),
                                                               ...mapToFirestore(
                                                                 {
                                                                   'users': [
                                                                     interviewParticipantsItemInterviewParticipantsOfDayRecord
-                                                                        ?.participants
-                                                                        ?.where((e) =>
-                                                                            !interviewParticipantsItemInterviewParticipantsOfDayRecord!.takenUsers.contains(e.user) &&
+                                                                        .participants
+                                                                        .where((e) =>
+                                                                            !interviewParticipantsItemInterviewParticipantsOfDayRecord.takenUsers.contains(e.user) &&
                                                                             functions.checkUserKarmaMatch(valueOrDefault(currentUserDocument?.karma, 0.0),
                                                                                 e.karma) &&
                                                                             (e.user != currentUserReference) &&
-                                                                            (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord?.participants?.where((e) => e.user == currentUserReference).toList()?.first?.role))
+                                                                            (e.role == interviewParticipantsItemInterviewParticipantsOfDayRecord.participants.where((e) => e.user == currentUserReference).toList().first.role))
                                                                         .toList()
-                                                                        ?.first
-                                                                        ?.user
+                                                                        .first
+                                                                        .user
                                                                   ],
                                                                 },
                                                               ),
                                                             }, conferenceRoomRecordReference);
-                                                            _shouldSetState =
+                                                            shouldSetState =
                                                                 true;
                                                             logFirebaseEvent(
                                                                 'Button_backend_call');
 
-                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                 .reference
                                                                 .update({
                                                               ...mapToFirestore(
@@ -975,7 +966,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                     _model
                                                                         .createdRoomOutput
                                                                         ?.users
-                                                                        ?.first
+                                                                        .first
                                                                   ]),
                                                                 },
                                                               ),
@@ -1000,7 +991,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                             logFirebaseEvent(
                                                                 'Button_backend_call');
 
-                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                            await interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                 .reference
                                                                 .update({
                                                               ...mapToFirestore(
@@ -1028,11 +1019,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                               userRef: _model
                                                                   .createdRoomOutput
                                                                   ?.users
-                                                                  ?.where((e) =>
+                                                                  .where((e) =>
                                                                       e !=
                                                                       currentUserReference)
                                                                   .toList()
-                                                                  ?.first,
+                                                                  .first,
                                                               role: _model
                                                                   .createdRoomOutput
                                                                   ?.role,
@@ -1054,7 +1045,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                   backgroundColor:
                                                                       Colors
                                                                           .transparent,
-                                                                  alignment: AlignmentDirectional(
+                                                                  alignment: const AlignmentDirectional(
                                                                           0.0,
                                                                           0.0)
                                                                       .resolve(
@@ -1072,7 +1063,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                           : FocusScope.of(context)
                                                                               .unfocus(),
                                                                       child:
-                                                                          NoUserFoundDialogWidget(),
+                                                                          const NoUserFoundDialogWidget(),
                                                                     ),
                                                                   ),
                                                                 );
@@ -1081,8 +1072,9 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                 setState(
                                                                     () {}));
 
-                                                            if (_shouldSetState)
+                                                            if (shouldSetState) {
                                                               setState(() {});
+                                                            }
                                                             return;
                                                           }
                                                         }
@@ -1101,7 +1093,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                             backgroundColor:
                                                                 Colors
                                                                     .transparent,
-                                                            alignment: AlignmentDirectional(
+                                                            alignment: const AlignmentDirectional(
                                                                     0.0, 0.0)
                                                                 .resolve(
                                                                     Directionality.of(
@@ -1120,7 +1112,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                             context)
                                                                         .unfocus(),
                                                                 child:
-                                                                    SorryDialogWidget(),
+                                                                    const SorryDialogWidget(),
                                                               ),
                                                             ),
                                                           );
@@ -1128,24 +1120,26 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                       ).then((value) =>
                                                           setState(() {}));
 
-                                                      if (_shouldSetState)
+                                                      if (shouldSetState) {
                                                         setState(() {});
+                                                      }
                                                       return;
                                                     }
 
-                                                    if (_shouldSetState)
+                                                    if (shouldSetState) {
                                                       setState(() {});
+                                                    }
                                                   },
                                                   text: 'Join now',
                                                   options: FFButtonOptions(
                                                     width: double.infinity,
                                                     height: 52.0,
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(24.0, 0.0,
                                                                 24.0, 0.0),
                                                     iconPadding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
@@ -1163,7 +1157,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                           useGoogleFonts: false,
                                                         ),
                                                     elevation: 0.0,
-                                                    borderSide: BorderSide(
+                                                    borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0.0,
                                                     ),
@@ -1197,14 +1191,12 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               FFButtonWidget(
                                                 onPressed: ((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
                                                             null) &&
-                                                        (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                        (interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                                 .participants
                                                                 .where((e) =>
                                                                     e.user ==
                                                                     currentUserReference)
-                                                                .toList()
-                                                                .length >
-                                                            0))
+                                                                .toList().isNotEmpty))
                                                     ? null
                                                     : () async {
                                                         logFirebaseEvent(
@@ -1345,11 +1337,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                 options: FFButtonOptions(
                                                   width: double.infinity,
                                                   height: 52.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -1367,7 +1359,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                         useGoogleFonts: false,
                                                       ),
                                                   elevation: 0.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 0.0,
                                                   ),
@@ -1402,14 +1394,12 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                 builder: (context) {
                                                   if (!((interviewParticipantsItemInterviewParticipantsOfDayRecord !=
                                                           null) &&
-                                                      (interviewParticipantsItemInterviewParticipantsOfDayRecord!
+                                                      (interviewParticipantsItemInterviewParticipantsOfDayRecord
                                                               .participants
                                                               .where((e) =>
                                                                   e.user ==
                                                                   currentUserReference)
-                                                              .toList()
-                                                              .length >
-                                                          0))) {
+                                                              .toList().isNotEmpty))) {
                                                     return InkWell(
                                                       splashColor:
                                                           Colors.transparent,
@@ -1597,12 +1587,12 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                       context)
                                                                   .aquaBreeze
                                                             ],
-                                                            stops: [0.0, 1.0],
+                                                            stops: const [0.0, 1.0],
                                                             begin:
-                                                                AlignmentDirectional(
+                                                                const AlignmentDirectional(
                                                                     0.0, 1.0),
                                                             end:
-                                                                AlignmentDirectional(
+                                                                const AlignmentDirectional(
                                                                     0, -1.0),
                                                           ),
                                                           borderRadius:
@@ -1611,7 +1601,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                       10.0),
                                                         ),
                                                         alignment:
-                                                            AlignmentDirectional(
+                                                            const AlignmentDirectional(
                                                                 0.0, 0.0),
                                                         child: Text(
                                                           'Get Reminder',
@@ -1644,7 +1634,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                                                 .circular(10.0),
                                                       ),
                                                       alignment:
-                                                          AlignmentDirectional(
+                                                          const AlignmentDirectional(
                                                               0.0, 0.0),
                                                       child: Text(
                                                         'Get Reminder',
@@ -1679,7 +1669,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                         child: Builder(
                           builder: (context) {
                             if (getCurrentTimestamp <
@@ -1700,10 +1690,10 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     size: 24.0,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      '7:00 PM +04 GST every day',
+                                      '7:00 PM GMT +4 every day',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall,
                                     ),
@@ -1722,7 +1712,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     size: 24.0,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Interview starts in',
@@ -1731,7 +1721,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 0.0, 0.0),
                                     child: FlutterFlowTimer(
                                       initialTime: functions.subtractTime(
@@ -1748,7 +1738,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                       ),
                                       controller: _model.timerController,
                                       updateStateInterval:
-                                          Duration(milliseconds: 1000),
+                                          const Duration(milliseconds: 1000),
                                       onChanged:
                                           (value, displayTime, shouldUpdate) {
                                         _model.timerMilliseconds = value;
@@ -1776,9 +1766,9 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 42.0, 0.0, 0.0),
                           child: Text(
                             'Want to practice mock interviews with an expert coach?',
@@ -1788,9 +1778,9 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1821,9 +1811,9 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        alignment: const AlignmentDirectional(-1.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 37.0, 0.0, 0.0),
                           child: Text(
                             'FAQ',
@@ -1832,24 +1822,24 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Divider(
+                              const Divider(
                                 thickness: 3.0,
                                 color: Color(0x4DD8DADC),
                               ),
                               Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
-                                    color: Color(0x00000000),
+                                    color: const Color(0x00000000),
                                     child: ExpandableNotifier(
                                       controller: _model.expandableController1,
                                       child: ExpandablePanel(
@@ -1859,11 +1849,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               .headlineMedium,
                                         ),
                                         collapsed: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                         ),
                                         expanded: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Text(
                                             'Ooh that\'s sad to hear! We understand that plans can change, however we want you to know that your no show up will leave potential Practice Partner without opportunity to improve and practice. That’s why we do not recommend missing a Practice Interview that you registered for. To encourage practice more Quis giving a reward of +0.5 Karma and penalty for no show -0.5 Karma.',
@@ -1896,17 +1886,17 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                   ),
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 3.0,
                                 color: Color(0x4DD8DADC),
                               ),
                               Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
-                                    color: Color(0x00000000),
+                                    color: const Color(0x00000000),
                                     child: ExpandableNotifier(
                                       controller: _model.expandableController2,
                                       child: ExpandablePanel(
@@ -1916,11 +1906,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               .headlineMedium,
                                         ),
                                         collapsed: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                         ),
                                         expanded: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: RichText(
                                             textScaler: MediaQuery.of(context)
@@ -1998,17 +1988,17 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                   ),
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 3.0,
                                 color: Color(0x4DD8DADC),
                               ),
                               Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
-                                    color: Color(0x00000000),
+                                    color: const Color(0x00000000),
                                     child: ExpandableNotifier(
                                       controller: _model.expandableController3,
                                       child: ExpandablePanel(
@@ -2018,11 +2008,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               .headlineMedium,
                                         ),
                                         collapsed: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                         ),
                                         expanded: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Text(
                                             'After every Practice Interview everyone is prompted to share their feedback, we will do our best not to match you with the same person again.',
@@ -2055,17 +2045,17 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                   ),
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 3.0,
                                 color: Color(0x4DD8DADC),
                               ),
                               Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
-                                    color: Color(0x00000000),
+                                    color: const Color(0x00000000),
                                     child: ExpandableNotifier(
                                       controller: _model.expandableController4,
                                       child: ExpandablePanel(
@@ -2075,11 +2065,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               .headlineMedium,
                                         ),
                                         collapsed: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                         ),
                                         expanded: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Text(
                                             'Yes! You will be directed to a swipe stage where both Practice Partners to match, if both Partners choose to network, you will be revealed with a LinkedIn profile link where you continue to network. You may find “People I matched with” in your User Profile.',
@@ -2112,17 +2102,17 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                   ),
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 3.0,
                                 color: Color(0x4DD8DADC),
                               ),
                               Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Container(
                                     width: double.infinity,
-                                    color: Color(0x00000000),
+                                    color: const Color(0x00000000),
                                     child: ExpandableNotifier(
                                       controller: _model.expandableController5,
                                       child: ExpandablePanel(
@@ -2132,11 +2122,11 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               .headlineMedium,
                                         ),
                                         collapsed: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                         ),
                                         expanded: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Text(
                                             'Here at Quis we call it “Endorsement”. They are the indication of a great Practice Interview experience partner. You can view all stats by navigating to the Leadership Board.',
@@ -2173,14 +2163,14 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                           ),
                         ),
                       ),
-                    ].addToEnd(SizedBox(height: 150.0)),
+                    ].addToEnd(const SizedBox(height: 150.0)),
                   ),
                 ),
               ),
               wrapWithModel(
                 model: _model.navBarModel,
                 updateCallback: () => setState(() {}),
-                child: NavBarWidget(
+                child: const NavBarWidget(
                   index: 2,
                 ),
               ),

@@ -5,11 +5,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'reset_password_old_model.dart';
 export 'reset_password_old_model.dart';
 
@@ -86,8 +83,8 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -102,23 +99,23 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
                 child: Text(
                   'Forgot password?',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -130,7 +127,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
                 child: Text(
                   'Don’t worry! It happens. Please enter the email associated with your account. ',
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -142,7 +139,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 6.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 6.0),
                 child: Text(
                   'Email address',
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -152,14 +149,14 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                       ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: TextFormField(
                   controller: _model.emailFieldController,
                   focusNode: _model.emailFieldFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.emailFieldController',
-                    Duration(milliseconds: 100),
+                    const Duration(milliseconds: 100),
                     () async {
                       logFirebaseEvent(
                           'RESET_PASSWORD_OLD_EmailField_ON_TEXTFIE');
@@ -182,7 +179,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                               lineHeight: 2.0,
                             ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
@@ -211,7 +208,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                     ),
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).white,
-                    contentPadding: EdgeInsets.all(16.0),
+                    contentPadding: const EdgeInsets.all(16.0),
                   ),
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Sofia Pro',
@@ -224,7 +221,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: !_model.isEmailValid
                       ? null
@@ -234,7 +231,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                           logFirebaseEvent('Button_auth');
                           if (_model.emailFieldController.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text(
                                   'Email required!',
                                 ),
@@ -255,9 +252,9 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -266,7 +263,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),
@@ -276,12 +273,12 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               if (!(isWeb
                   ? MediaQuery.viewInsetsOf(context).bottom > 0
                   : _isKeyboardVisible))
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -295,9 +292,9 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                       context.goNamed('Login');
                     },
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
@@ -325,7 +322,7 @@ class _ResetPasswordOldWidgetState extends State<ResetPasswordOldWidget> {
                     ),
                   ),
                 ),
-            ].addToEnd(SizedBox(height: 50.0)),
+            ].addToEnd(const SizedBox(height: 50.0)),
           ),
         ),
       ),

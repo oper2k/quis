@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'nav_bar_model.dart';
 export 'nav_bar_model.dart';
 
@@ -66,13 +64,13 @@ class _NavBarWidgetState extends State<NavBarWidget> {
       child: Stack(
         children: [
           Align(
-            alignment: AlignmentDirectional(0.0, 1.0),
+            alignment: const AlignmentDirectional(0.0, 1.0),
             child: Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).white,
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 32.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 32.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -90,7 +88,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           context.goNamed(
                             'Home',
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -99,7 +97,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -113,7 +111,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 6.0, 0.0, 0.0),
                                 child: Text(
                                   'Home',
@@ -148,7 +146,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           context.goNamed(
                             'AllCourses',
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -157,7 +155,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -171,10 +169,10 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 6.0, 0.0, 0.0),
                                 child: Text(
-                                  'Course',
+                                  'Learning',
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -207,7 +205,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           context.goNamed(
                             'PracticeInterview',
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -216,7 +214,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -227,11 +225,11 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 color: widget.index == 2
                                     ? FlutterFlowTheme.of(context).primary
                                     : FlutterFlowTheme.of(context).accent3,
-                                size: 24.0,
+                                size: 26.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 6.0, 0.0, 0.0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 0.0, 0.0),
                                 child: Text(
                                   'Practice',
                                   style: FlutterFlowTheme.of(context)
@@ -266,7 +264,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           context.goNamed(
                             'LatestInterviewQuestions',
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -275,7 +273,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -289,7 +287,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 6.0, 0.0, 0.0),
                                 child: Text(
                                   'Questions',
@@ -324,7 +322,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           context.goNamed(
                             'MyProfile',
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -333,7 +331,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -347,7 +345,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 6.0, 0.0, 0.0),
                                 child: Text(
                                   'Profile',

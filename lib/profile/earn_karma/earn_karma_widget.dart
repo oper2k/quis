@@ -1,10 +1,7 @@
 import '/components/karma_list_item_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'earn_karma_model.dart';
 export 'earn_karma_model.dart';
 
@@ -64,8 +61,8 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -80,17 +77,17 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -98,14 +95,14 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       wrapWithModel(
                         model: _model.karmaListItemModel1,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'You fill out profile (photo, user info etc.) ',
                           points: '0,5',
                         ),
@@ -113,7 +110,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel2,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'You complete a lesson (Full Video Watch) ',
                           points: '0,1',
                         ),
@@ -121,7 +118,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel3,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'Daily sign-in to the App',
                           points: '0,1',
                         ),
@@ -129,7 +126,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel4,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'You join Practice Interview',
                           points: '0,5',
                         ),
@@ -137,7 +134,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel5,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'You have great feedback',
                           points: '0,5',
                         ),
@@ -145,7 +142,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel6,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'Your interview questions is published',
                           points: '1,5',
                         ),
@@ -153,7 +150,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel7,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'Your interview question is upvoted',
                           points: '0,5',
                         ),
@@ -161,7 +158,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel8,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'Your interview answer is published',
                           points: '0,5',
                         ),
@@ -169,7 +166,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel9,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'Your interview answer is upvoted',
                           points: '0,5',
                         ),
@@ -177,7 +174,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel10,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'Your comment is upvoted ',
                           points: '0,3',
                         ),
@@ -185,7 +182,7 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel11,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text:
                               'You referred us to a friend (Friend signed to Premium) ',
                           points: '5',
@@ -194,15 +191,15 @@ class _EarnKarmaWidgetState extends State<EarnKarmaWidget> {
                       wrapWithModel(
                         model: _model.karmaListItemModel12,
                         updateCallback: () => setState(() {}),
-                        child: KarmaListItemWidget(
+                        child: const KarmaListItemWidget(
                           text: 'You purchased any of Add-ons ',
                           points: '2',
                         ),
                       ),
-                    ].divide(SizedBox(height: 8.0)),
+                    ].divide(const SizedBox(height: 8.0)),
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 50.0)),
+              ].addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

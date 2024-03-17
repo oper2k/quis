@@ -2,9 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'exchange_karma_model.dart';
 export 'exchange_karma_model.dart';
 
@@ -65,8 +63,8 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -81,11 +79,11 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -94,7 +92,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Lottie.asset(
                 'assets/lottie_animations/animation_lnz09grs.json',
                 width: 220.0,
@@ -104,7 +102,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Text(
                 'Get expert coaching, mock interviews',
                 textAlign: TextAlign.center,
@@ -112,7 +110,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
               child: Text(
                 'Connect with an expert in your field to practice mock interviews, review your resume in-person, or create a study plan.',
                 textAlign: TextAlign.center,
@@ -125,7 +123,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -153,11 +151,11 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                           border: Border.all(
                             color: _model.pickedService == 'Job Referral'
                                 ? FlutterFlowTheme.of(context).customColor1
-                                : Color(0x00000000),
+                                : const Color(0x00000000),
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(9.0),
+                          padding: const EdgeInsets.all(9.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -225,11 +223,11 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                           border: Border.all(
                             color: _model.pickedService == 'CV Feedback Review'
                                 ? FlutterFlowTheme.of(context).customColor2
-                                : Color(0x00000000),
+                                : const Color(0x00000000),
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(9.0),
+                          padding: const EdgeInsets.all(9.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -275,7 +273,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                         ),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: 113.0,
                       height: 113.0,
                       child: Stack(
@@ -306,11 +304,11 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                                           'Mock Interview with Recruiter'
                                       ? FlutterFlowTheme.of(context)
                                           .customColor3
-                                      : Color(0x00000000),
+                                      : const Color(0x00000000),
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(9.0),
+                                padding: const EdgeInsets.all(9.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -358,9 +356,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(1.0, -1.0),
+                            alignment: const AlignmentDirectional(1.0, -1.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 7.0, 4.0, 0.0),
                               child: Text(
                                 '45 min',
@@ -376,7 +374,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: 113.0,
                       height: 113.0,
                       child: Stack(
@@ -405,11 +403,11 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                                           '1х1 Coaching Session'
                                       ? FlutterFlowTheme.of(context)
                                           .customColor4
-                                      : Color(0x00000000),
+                                      : const Color(0x00000000),
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(9.0),
+                                padding: const EdgeInsets.all(9.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -457,9 +455,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(1.0, -1.0),
+                            alignment: const AlignmentDirectional(1.0, -1.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 7.0, 4.0, 0.0),
                               child: Text(
                                 '45 min',
@@ -476,17 +474,17 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                       ),
                     ),
                   ]
-                      .divide(SizedBox(width: 7.6))
-                      .addToStart(SizedBox(width: 16.0))
-                      .addToEnd(SizedBox(width: 16.0)),
+                      .divide(const SizedBox(width: 7.6))
+                      .addToStart(const SizedBox(width: 16.0))
+                      .addToEnd(const SizedBox(width: 16.0)),
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 50.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 50.0),
                 child: FFButtonWidget(
                   onPressed: (_model.pickedService != null &&
                           _model.pickedService != '')
@@ -499,9 +497,9 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -510,7 +508,7 @@ class _ExchangeKarmaWidgetState extends State<ExchangeKarmaWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),

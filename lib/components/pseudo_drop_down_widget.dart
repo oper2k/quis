@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'pseudo_drop_down_model.dart';
 export 'pseudo_drop_down_model.dart';
 
@@ -51,7 +49,7 @@ class _PseudoDropDownWidgetState extends State<PseudoDropDownWidget> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(18.0, 11.0, 18.0, 11.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(18.0, 11.0, 18.0, 11.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,

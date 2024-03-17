@@ -3,11 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding03name_model.dart';
 export 'onboarding03name_model.dart';
 
@@ -75,8 +72,8 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -86,7 +83,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -94,20 +91,20 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
-                    'assets/images/Onb3.webp',
+                    'assets/images/NEWOnb01.webp',
                     width: 160.0,
                     fit: BoxFit.contain,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                   child: Text(
                     'Let us know each other',
                     textAlign: TextAlign.center,
@@ -120,7 +117,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 36.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 36.0, 0.0, 0.0),
                   child: Text(
                     'What would you like Quis to call you?',
                     textAlign: TextAlign.center,
@@ -132,7 +129,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                   child: Form(
                     key: _model.formKey,
                     autovalidateMode: AutovalidateMode.disabled,
@@ -140,14 +137,14 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: AuthUserStreamWidget(
                             builder: (context) => TextFormField(
                               controller: _model.firstNameController,
                               focusNode: _model.firstNameFocusNode,
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.firstNameController',
-                                Duration(milliseconds: 300),
+                                const Duration(milliseconds: 300),
                                 () => setState(() {}),
                               ),
                               textInputAction: TextInputAction.next,
@@ -164,7 +161,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                                     ),
                                 alignLabelWithHint: false,
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
@@ -194,7 +191,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context).white,
-                                contentPadding: EdgeInsets.all(10.0),
+                                contentPadding: const EdgeInsets.all(10.0),
                               ),
                               style: FlutterFlowTheme.of(context).headlineSmall,
                               validator: _model.firstNameControllerValidator
@@ -203,9 +200,9 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 12.0, 0.0, 0.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => TextFormField(
@@ -213,7 +210,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                                 focusNode: _model.lastNameFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.lastNameController',
-                                  Duration(milliseconds: 300),
+                                  const Duration(milliseconds: 300),
                                   () => setState(() {}),
                                 ),
                                 textInputAction: TextInputAction.done,
@@ -230,7 +227,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                                       ),
                                   alignLabelWithHint: false,
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -260,7 +257,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                                   ),
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context).white,
-                                  contentPadding: EdgeInsets.all(10.0),
+                                  contentPadding: const EdgeInsets.all(10.0),
                                 ),
                                 style:
                                     FlutterFlowTheme.of(context).headlineSmall,
@@ -274,14 +271,12 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                     ),
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
-                    onPressed: ((_model.firstNameController.text == null ||
-                                _model.firstNameController.text == '') &&
-                            (_model.lastNameController.text == null ||
-                                _model.lastNameController.text == ''))
+                    onPressed: ((_model.firstNameController.text == '') &&
+                            (_model.lastNameController.text == ''))
                         ? null
                         : () async {
                             logFirebaseEvent(
@@ -307,9 +302,9 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -318,7 +313,7 @@ class _Onboarding03nameWidgetState extends State<Onboarding03nameWidget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

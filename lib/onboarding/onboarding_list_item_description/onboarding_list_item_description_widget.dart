@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding_list_item_description_model.dart';
 export 'onboarding_list_item_description_model.dart';
 
@@ -13,7 +11,7 @@ class OnboardingListItemDescriptionWidget extends StatefulWidget {
     required this.description,
     this.image,
     bool? isPicked,
-  }) : this.isPicked = isPicked ?? false;
+  }) : isPicked = isPicked ?? false;
 
   final String? title;
   final String? description;
@@ -59,7 +57,7 @@ class _OnboardingListItemDescriptionWidgetState
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(12.0, 14.0, 12.0, 14.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(12.0, 14.0, 12.0, 14.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +83,7 @@ class _OnboardingListItemDescriptionWidgetState
                 if (widget.image != null && widget.image != '')
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(0.0),
                       child: Image.network(
@@ -100,7 +98,7 @@ class _OnboardingListItemDescriptionWidgetState
             ),
             if (widget.isPicked)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
                     widget.description,
@@ -110,6 +108,7 @@ class _OnboardingListItemDescriptionWidgetState
                         fontFamily: 'Sofia Pro',
                         color: FlutterFlowTheme.of(context).info,
                         useGoogleFonts: false,
+                        lineHeight: 1.25,
                       ),
                 ),
               ),

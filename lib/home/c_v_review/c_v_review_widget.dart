@@ -9,9 +9,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'c_v_review_model.dart';
 export 'c_v_review_model.dart';
 
@@ -79,8 +77,8 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -96,25 +94,25 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                decoration: const BoxDecoration(),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lo4e868o.json',
                     width: 220.0,
@@ -129,7 +127,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   style: FlutterFlowTheme.of(context).headlineLarge,
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Find out what your application is missing, stand out to recruiters, and land more interviews',
                     textAlign: TextAlign.center,
@@ -142,14 +140,14 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primary,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -175,7 +173,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 4.0),
                                     child: Container(
                                       width: 2.0,
@@ -192,7 +190,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -200,7 +198,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 2.0, 0.0, 0.0),
                                         child: Text(
                                           'Expert Recruiter reviewer',
@@ -217,7 +215,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 0.0),
                                         child: Text(
                                           'Get feedback from experienced hiring managers and recruiters who have reviewed thousands of applications at top companies. Learn what actually matters to hiring managers.',
@@ -261,7 +259,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 4.0),
                                     child: Container(
                                       width: 2.0,
@@ -278,7 +276,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -286,7 +284,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 2.0, 0.0, 0.0),
                                         child: Text(
                                           'Personalized resume feedback',
@@ -302,7 +300,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 0.0),
                                         child: Text(
                                           'Forget the generic advice. We help you craft the perfect resume with specific, actionable improvements based on your target role and experiences.',
@@ -349,7 +347,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -357,7 +355,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 2.0, 0.0, 0.0),
                                         child: Text(
                                           'Money-back guarantee',
@@ -373,7 +371,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 0.0),
                                         child: Text(
                                           'We\'re not satisfied until you are. Work with us until you get the resume you want. If you\'re not satisfied, get your money back.',
@@ -401,10 +399,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Text(
                       'Email address',
                       style:
@@ -420,14 +418,14 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                 Form(
                   key: _model.formKey,
                   autovalidateMode: AutovalidateMode.disabled,
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: TextFormField(
                       controller: _model.emailFieldController,
                       focusNode: _model.emailFieldFocusNode,
                       onChanged: (_) => EasyDebounce.debounce(
                         '_model.emailFieldController',
-                        Duration(milliseconds: 100),
+                        const Duration(milliseconds: 100),
                         () async {
                           logFirebaseEvent(
                               'C_V_REVIEW_EmailField_ON_TEXTFIELD_CHANG');
@@ -447,7 +445,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                   lineHeight: 2.0,
                                 ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
@@ -476,7 +474,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                         ),
                         filled: true,
                         fillColor: FlutterFlowTheme.of(context).white,
-                        contentPadding: EdgeInsets.all(16.0),
+                        contentPadding: const EdgeInsets.all(16.0),
                       ),
                       style:
                           FlutterFlowTheme.of(context).headlineSmall.override(
@@ -491,10 +489,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Text(
                       'Current CV',
                       style:
@@ -508,7 +506,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: 56.0,
@@ -517,28 +515,26 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
                         color: _model.isCVvalidated
-                            ? Color(0x00000000)
+                            ? const Color(0x00000000)
                             : FlutterFlowTheme.of(context).error,
                       ),
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            _model.uploadedFileUrl != null &&
-                                    _model.uploadedFileUrl != ''
+                            _model.uploadedFileUrl != ''
                                 ? 'uploaded file'
                                 : 'Please attach here your CV',
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
                                   fontFamily: 'Sofia Pro',
-                                  color: _model.uploadedFileUrl != null &&
-                                          _model.uploadedFileUrl != ''
+                                  color: _model.uploadedFileUrl != ''
                                       ? FlutterFlowTheme.of(context).primaryText
                                       : FlutterFlowTheme.of(context).accent2,
                                   useGoogleFonts: false,
@@ -608,12 +604,12 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         .titleMedium
                                         .override(
                                           fontFamily: 'Sofia Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color:
+                                              FlutterFlowTheme.of(context).info,
                                           useGoogleFonts: false,
                                         ),
                                   ),
-                                  duration: Duration(milliseconds: 3000),
+                                  duration: const Duration(milliseconds: 3000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
@@ -624,9 +620,9 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                               });
                             },
                             child: Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Icon(
                                   FFIcons.kiconamoonAttachmentLight1,
                                   color: FlutterFlowTheme.of(context)
@@ -642,10 +638,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(1.0, 0.0),
+                  alignment: const AlignmentDirectional(1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -663,7 +659,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 6.0, 0.0, 0.0),
                               child: Text(
                                 '10',
@@ -672,7 +668,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   2.0, 0.0, 0.0, 0.0),
                               child: Icon(
                                 FFIcons.kgameIconsYinYang,
@@ -687,13 +683,12 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
                           'C_V_REVIEW_PAGE_SUBMIT_MY_C_V_BTN_ON_TAP');
-                      if (_model.uploadedFileUrl != null &&
-                          _model.uploadedFileUrl != '') {
+                      if (_model.uploadedFileUrl != '') {
                         logFirebaseEvent('Button_update_page_state');
                         setState(() {
                           _model.isCVvalidated = true;
@@ -731,9 +726,9 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -742,7 +737,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),
@@ -751,10 +746,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
                     child: Text(
                       'FAQ',
                       style: FlutterFlowTheme.of(context).headlineLarge,
@@ -762,24 +757,24 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Divider(
+                        const Divider(
                           thickness: 3.0,
                           color: Color(0x4DD8DADC),
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
-                              color: Color(0x00000000),
+                              color: const Color(0x00000000),
                               child: ExpandableNotifier(
                                 controller: _model.expandableController1,
                                 child: ExpandablePanel(
@@ -789,10 +784,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         .headlineMedium,
                                   ),
                                   collapsed: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                   ),
                                   expanded: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: RichText(
                                       textScaler:
@@ -861,17 +856,17 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                             ),
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 3.0,
                           color: Color(0x4DD8DADC),
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
-                              color: Color(0x00000000),
+                              color: const Color(0x00000000),
                               child: ExpandableNotifier(
                                 controller: _model.expandableController2,
                                 child: ExpandablePanel(
@@ -881,10 +876,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         .headlineMedium,
                                   ),
                                   collapsed: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                   ),
                                   expanded: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: Text(
                                       'We will walk you through specific recommendations and suggestions to improve your resume. All feedback will be sent to you in a personalized document. Our resume experts will explain how to edit the language, format, and details of your resume to maximize the chances of your application.',
@@ -915,17 +910,17 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                             ),
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 3.0,
                           color: Color(0x4DD8DADC),
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
-                              color: Color(0x00000000),
+                              color: const Color(0x00000000),
                               child: ExpandableNotifier(
                                 controller: _model.expandableController3,
                                 child: ExpandablePanel(
@@ -935,10 +930,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         .headlineMedium,
                                   ),
                                   collapsed: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                   ),
                                   expanded: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: Text(
                                       'Our team starts reviewing your resume right away. Your review will be sent as soon as it\'s ready. We guarantee completion within 5 business days, but in most cases, you can expect to receive it within 48 hours or less.',
@@ -969,17 +964,17 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                             ),
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 3.0,
                           color: Color(0x4DD8DADC),
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
-                              color: Color(0x00000000),
+                              color: const Color(0x00000000),
                               child: ExpandableNotifier(
                                 controller: _model.expandableController4,
                                 child: ExpandablePanel(
@@ -989,10 +984,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         .headlineMedium,
                                   ),
                                   collapsed: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                   ),
                                   expanded: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: Text(
                                       'Each CV review includes reviewing one version of your resume, but you are welcome to purchase a follow-up review for feedback on your updated resume.',
@@ -1023,17 +1018,17 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                             ),
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 3.0,
                           color: Color(0x4DD8DADC),
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
-                              color: Color(0x00000000),
+                              color: const Color(0x00000000),
                               child: ExpandableNotifier(
                                 controller: _model.expandableController5,
                                 child: ExpandablePanel(
@@ -1043,10 +1038,10 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         .headlineMedium,
                                   ),
                                   collapsed: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                   ),
                                   expanded: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: RichText(
                                       textScaler:
@@ -1114,7 +1109,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                             ),
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 3.0,
                           color: Color(0x4DD8DADC),
                         ),
@@ -1122,7 +1117,7 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                     ),
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 40.0)),
+              ].addToEnd(const SizedBox(height: 40.0)),
             ),
           ),
         ),

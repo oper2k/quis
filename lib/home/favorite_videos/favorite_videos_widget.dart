@@ -2,11 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'favorite_videos_model.dart';
 export 'favorite_videos_model.dart';
 
@@ -67,8 +63,8 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -83,27 +79,27 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 34.0, 0.0, 0.0),
                 child: AuthUserStreamWidget(
                   builder: (context) => Builder(
                     builder: (context) {
                       final favoriteVideoRef =
-                          (currentUserDocument?.favoriteVideos?.toList() ?? [])
+                          (currentUserDocument?.favoriteVideos.toList() ?? [])
                               .toList();
                       return GridView.builder(
                         padding: EdgeInsets.zero,
@@ -175,9 +171,9 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                     );
                                   },
                                   child: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -196,7 +192,7 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 9.0, 0.0, 0.0),
                                               child: Text(
                                                 containerCourseVideoRecord.name,
@@ -217,7 +213,7 @@ class _FavoriteVideosWidgetState extends State<FavoriteVideosWidget> {
                                           ),
                                           Align(
                                             alignment:
-                                                AlignmentDirectional(1.0, 0.0),
+                                                const AlignmentDirectional(1.0, 0.0),
                                             child: Text(
                                               'Learn more',
                                               textAlign: TextAlign.end,

@@ -2,9 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'next_time_dialog_model.dart';
 export 'next_time_dialog_model.dart';
 
@@ -40,14 +38,14 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,16 +56,16 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.0, -1.0),
+                    alignment: const AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Lottie.asset(
                       'assets/lottie_animations/animation_loescsjx.json',
                       width: 220.0,
@@ -77,7 +75,7 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.0, -1.0),
+                    alignment: const AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -92,9 +90,9 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                       child: Container(
                         width: 40.0,
                         height: 40.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.0, 0.0),
+                          alignment: const AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -107,7 +105,7 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                 ],
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 17.0, 20.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 17.0, 20.0, 0.0),
                 child: Text(
                   'Next time it will be better!Need to practice some more!',
                   textAlign: TextAlign.center,
@@ -119,7 +117,7 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent(
@@ -132,9 +130,9 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 7.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 7.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -143,7 +141,7 @@ class _NextTimeDialogWidgetState extends State<NextTimeDialogWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),

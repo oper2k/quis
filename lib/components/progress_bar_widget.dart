@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'progress_bar_model.dart';
 export 'progress_bar_model.dart';
 
@@ -47,9 +46,9 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -60,7 +59,7 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
               children: [
                 Container(
                   width: (widget.width!) * (widget.value!) - 25,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                 ),
                 Text(
                   '${(((widget.value!) * 100).round()).toString()}%',
@@ -80,7 +79,7 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
               animateFromLastPercent: true,
               progressColor: FlutterFlowTheme.of(context).secondary,
               backgroundColor: FlutterFlowTheme.of(context).tertiary,
-              barRadius: Radius.circular(10.0),
+              barRadius: const Radius.circular(10.0),
               padding: EdgeInsets.zero,
             ),
           ],

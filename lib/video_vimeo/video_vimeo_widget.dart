@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'video_vimeo_model.dart';
 export 'video_vimeo_model.dart';
 
@@ -54,7 +51,7 @@ class _VideoVimeoWidgetState extends State<VideoVimeoWidget> {
           child: Stack(
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: FlutterFlowWebView(
                   content: widget.videoVimeoURL!,
                   bypass: false,
@@ -76,7 +73,7 @@ class _VideoVimeoWidgetState extends State<VideoVimeoWidget> {
                 child: Container(
                   width: 50.0,
                   height: 50.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Icon(
                     FFIcons.kxmark,
                     color: FlutterFlowTheme.of(context).white,

@@ -1,13 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/test.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'test_model.dart';
 export 'test_model.dart';
 
@@ -33,7 +30,8 @@ class _TestWidgetState extends State<TestWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('TEST_PAGE_test_ON_INIT_STATE');
       logFirebaseEvent('test_start_walkthrough');
-      _model.testController = _model.createPageWalkthrough(context);
+      safeSetState(
+          () => _model.testController = createPageWalkthrough(context));
       _model.testController?.show(context: context);
     });
   }
@@ -79,4 +77,15 @@ class _TestWidgetState extends State<TestWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () {
+          safeSetState(() => _model.testController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

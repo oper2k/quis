@@ -6,9 +6,7 @@ import '/flutter_flow/instant_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'onboarding18time_model.dart';
 export 'onboarding18time_model.dart';
 
@@ -49,8 +47,8 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
           curve: Curves.easeOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(0.0, 100.0),
+          begin: const Offset(0.0, 0.0),
+          end: const Offset(0.0, 100.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -70,8 +68,8 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
           curve: Curves.easeOut,
           delay: 300.ms,
           duration: 500.ms,
-          begin: Offset(0.0, 100.0),
-          end: Offset(0.0, -40.0),
+          begin: const Offset(0.0, 100.0),
+          end: const Offset(0.0, -40.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -98,7 +96,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
       await Future.delayed(const Duration(milliseconds: 4000));
       logFirebaseEvent('Onboarding18time_start_periodic_action');
       _model.instantTimer = InstantTimer.periodic(
-        duration: Duration(milliseconds: 4000),
+        duration: const Duration(milliseconds: 4000),
         callback: (timer) async {
           if (_model.progress >= 1.0) {
             logFirebaseEvent('Onboarding18time_widget_animation');
@@ -128,7 +126,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
             });
             logFirebaseEvent('Onboarding18time_page_view');
             await _model.pageViewController?.nextPage(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.ease,
             );
           }
@@ -181,8 +179,8 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -192,7 +190,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -200,18 +198,18 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: MediaQuery.sizeOf(context).height * 0.5,
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                       child: PageView(
                         physics: const NeverScrollableScrollPhysics(),
                         controller: _model.pageViewController ??=
@@ -229,7 +227,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                   fit: BoxFit.contain,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
                                 'How to tailor a successful CV?',
                                 textAlign: TextAlign.center,
@@ -242,7 +240,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                       useGoogleFonts: false,
                                     ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                             ],
                           ),
                           Column(
@@ -256,7 +254,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                   fit: BoxFit.contain,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
                                 'How to negotiate a salary?',
                                 textAlign: TextAlign.center,
@@ -269,7 +267,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                       useGoogleFonts: false,
                                     ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                             ],
                           ),
                           Column(
@@ -283,7 +281,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                   fit: BoxFit.contain,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
                                 'How to answer: Tell me about yourself?',
                                 textAlign: TextAlign.center,
@@ -296,7 +294,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                       useGoogleFonts: false,
                                     ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                             ],
                           ),
                           Column(
@@ -310,7 +308,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                   fit: BoxFit.contain,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
                                 'What qualifications I should posses?',
                                 textAlign: TextAlign.center,
@@ -323,14 +321,14 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                       useGoogleFonts: false,
                                     ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                             ],
                           ),
                         ],
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CircularPercentIndicator(
                     percent: _model.progress,
                     radius: 50.0,
@@ -338,7 +336,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                     animation: true,
                     animateFromLastPercent: true,
                     progressColor: FlutterFlowTheme.of(context).aquaBreeze,
-                    backgroundColor: Color(0xFFDDDDDD),
+                    backgroundColor: const Color(0xFFDDDDDD),
                     center: Text(
                       formatNumber(
                         _model.progress,
@@ -354,7 +352,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                     child: Text(
                       'Personalizing your experience...',
                       textAlign: TextAlign.center,
@@ -368,7 +366,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                     child: Text(
                       'Yeees! It’s done!',
                       textAlign: TextAlign.center,
@@ -377,12 +375,12 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                       animationsMap['textOnActionTriggerAnimation2']!,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Opacity(
                     opacity: _model.isButtonVisible ? 1.0 : 0.0,
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -395,9 +393,9 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 52.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
@@ -408,7 +406,7 @@ class _Onboarding18timeWidgetState extends State<Onboarding18timeWidget>
                                 useGoogleFonts: false,
                               ),
                           elevation: 0.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 0.0,
                           ),

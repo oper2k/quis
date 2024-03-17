@@ -2,12 +2,8 @@ import '/auth/email_dialog/email_dialog_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'change_password_model.dart';
 export 'change_password_model.dart';
@@ -37,7 +33,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
       logFirebaseEvent('ChangePassword_auth');
       if (currentUserEmail.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text(
               'Email required!',
             ),
@@ -88,8 +84,8 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -104,23 +100,23 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
@@ -131,9 +127,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
                     'Check your mail',
                     style: FlutterFlowTheme.of(context).headlineLarge,
@@ -141,11 +137,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
-                    'We have sent a link to change your password to your email ${currentUserEmail}\".',
+                    'We have sent a link to change your password to your email $currentUserEmail\".',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
                           fontFamily: 'Sofia Pro',
@@ -155,13 +151,13 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Builder(
                   builder: (context) => Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -173,7 +169,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         logFirebaseEvent('Container_auth');
                         if (currentUserEmail.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text(
                                 'Email required!',
                               ),
@@ -193,7 +189,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                               elevation: 0,
                               insetPadding: EdgeInsets.zero,
                               backgroundColor: Colors.transparent,
-                              alignment: AlignmentDirectional(0.0, 0.0)
+                              alignment: const AlignmentDirectional(0.0, 0.0)
                                   .resolve(Directionality.of(context)),
                               child: WebViewAware(
                                 child: GestureDetector(
@@ -202,7 +198,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                                           ? FocusScope.of(context)
                                               .requestFocus(_model.unfocusNode)
                                           : FocusScope.of(context).unfocus(),
-                                  child: EmailDialogWidget(),
+                                  child: const EmailDialogWidget(),
                                 ),
                               ),
                             );
@@ -210,9 +206,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         ).then((value) => setState(() {}));
                       },
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: RichText(
                             textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
@@ -244,7 +240,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   ),
                 ),
               ),
-            ].addToEnd(SizedBox(height: 50.0)),
+            ].addToEnd(const SizedBox(height: 50.0)),
           ),
         ),
       ),

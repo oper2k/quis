@@ -2,10 +2,8 @@ import '/backend/schema/enums/enums.dart';
 import '/components/menu_item_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'billing_managment_model.dart';
 export 'billing_managment_model.dart';
@@ -69,8 +67,8 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -85,17 +83,17 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -105,7 +103,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                       .contains(FFAppState().entitlementID)) {
                     return Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -126,7 +124,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 12.0, 0.0, 0.0),
                             child: Container(
                               width: double.infinity,
@@ -137,15 +135,15 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                                     FlutterFlowTheme.of(context).gradient2,
                                     FlutterFlowTheme.of(context).aquaBreeze
                                   ],
-                                  stops: [0.0, 1.0],
-                                  begin: AlignmentDirectional(0.0, 1.0),
-                                  end: AlignmentDirectional(0, -1.0),
+                                  stops: const [0.0, 1.0],
+                                  begin: const AlignmentDirectional(0.0, 1.0),
+                                  end: const AlignmentDirectional(0, -1.0),
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
                                 child: Text(
                                   'Premium',
@@ -162,7 +160,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                               ),
                             ),
                           ),
-                          Row(
+                          const Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [],
                           ),
@@ -172,7 +170,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                   } else {
                     return Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -193,7 +191,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 12.0, 0.0, 0.0),
                             child: Container(
                               width: double.infinity,
@@ -202,9 +200,9 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                                 color: FlutterFlowTheme.of(context).accent2,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
                                 child: Text(
                                   'Premium',
@@ -221,7 +219,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                               ),
                             ),
                           ),
-                          Row(
+                          const Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [],
                           ),
@@ -232,7 +230,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                 },
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -266,7 +264,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     12.0, 15.0, 12.0, 15.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -296,7 +294,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   12.0, 15.0, 12.0, 15.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -349,7 +347,7 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                       child: wrapWithModel(
                         model: _model.menuItemModel1,
                         updateCallback: () => setState(() {}),
-                        child: MenuItemWidget(
+                        child: const MenuItemWidget(
                           text: 'Change subscription',
                         ),
                       ),
@@ -370,12 +368,12 @@ class _BillingManagmentWidgetState extends State<BillingManagmentWidget> {
                         child: wrapWithModel(
                           model: _model.menuItemModel2,
                           updateCallback: () => setState(() {}),
-                          child: MenuItemWidget(
+                          child: const MenuItemWidget(
                             text: 'Cancel Subscription',
                           ),
                         ),
                       ),
-                  ].divide(SizedBox(height: 8.0)),
+                  ].divide(const SizedBox(height: 8.0)),
                 ),
               ),
             ],

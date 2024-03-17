@@ -16,12 +16,9 @@ import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
@@ -54,8 +51,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 100.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 100.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 100.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -79,13 +76,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             isEqualTo: true,
           ),
         );
-        if (_model.videoDayListOutput!.length > 0) {
+        if (_model.videoDayListOutput!.isNotEmpty) {
           logFirebaseEvent('Home_update_app_state');
           setState(() {
             FFAppState().VideoOfTheDay = _model
                 .videoDayListOutput?[random_data.randomInteger(
                     0, _model.videoDayListOutput!.length - 1)]
-                ?.reference;
+                .reference;
           });
         } else {
           logFirebaseEvent('Home_update_app_state');
@@ -125,17 +122,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           userEmail: currentUserEmail,
           templateId: 2,
         );
-        logFirebaseEvent('Home_navigate_to');
-
-        context.pushNamed(
-          'Pricing',
-          queryParameters: {
-            'offers': serializeParam(
-              PaywallPrice.standard,
-              ParamType.Enum,
-            ),
-          }.withoutNulls,
-        );
       }
 
       if ((valueOrDefault<bool>(currentUserDocument?.is3dayOfferShown, false) !=
@@ -150,17 +136,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             ));
           }(),
         );
-        logFirebaseEvent('Home_navigate_to');
+        if (!revenue_cat.activeEntitlementIds
+            .contains(FFAppState().entitlementID)) {
+          logFirebaseEvent('Home_navigate_to');
 
-        context.pushNamed(
-          'Pricing',
-          queryParameters: {
-            'offers': serializeParam(
-              PaywallPrice.off25,
-              ParamType.Enum,
-            ),
-          }.withoutNulls,
-        );
+          context.pushNamed(
+            'Pricing',
+            queryParameters: {
+              'offers': serializeParam(
+                PaywallPrice.off25,
+                ParamType.Enum,
+              ),
+            }.withoutNulls,
+          );
+        }
       }
       if ((valueOrDefault<bool>(currentUserDocument?.is7dayOfferShown, false) !=
               true) &&
@@ -174,17 +163,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             ));
           }(),
         );
-        logFirebaseEvent('Home_navigate_to');
+        if (!revenue_cat.activeEntitlementIds
+            .contains(FFAppState().entitlementID)) {
+          logFirebaseEvent('Home_navigate_to');
 
-        context.pushNamed(
-          'Pricing',
-          queryParameters: {
-            'offers': serializeParam(
-              PaywallPrice.off50,
-              ParamType.Enum,
-            ),
-          }.withoutNulls,
-        );
+          context.pushNamed(
+            'Pricing',
+            queryParameters: {
+              'offers': serializeParam(
+                PaywallPrice.off50,
+                ParamType.Enum,
+              ),
+            }.withoutNulls,
+          );
+        }
       }
       logFirebaseEvent('Home_custom_action');
       await actions.awesomeNotificationScheduleLocal(
@@ -247,7 +239,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
               children: [
                 Container(
                   width: double.infinity,
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minHeight: 150.0,
                   ),
                   decoration: BoxDecoration(
@@ -256,11 +248,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                         FlutterFlowTheme.of(context).gradient1,
                         FlutterFlowTheme.of(context).primary
                       ],
-                      stops: [0.0, 1.0],
-                      begin: AlignmentDirectional(0.0, -1.0),
-                      end: AlignmentDirectional(0, 1.0),
+                      stops: const [0.0, 1.0],
+                      begin: const AlignmentDirectional(0.0, -1.0),
+                      end: const AlignmentDirectional(0, 1.0),
                     ),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(10.0),
                       bottomRight: Radius.circular(10.0),
                       topLeft: Radius.circular(0.0),
@@ -269,7 +261,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                   ),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 50.0, 16.0, 20.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 50.0, 16.0, 20.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -303,7 +295,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -312,7 +304,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 5.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -334,7 +326,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         3.0, 0.0, 0.0, 0.0),
                                                 child: ClipRRect(
@@ -354,7 +346,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 13.0, 0.0, 0.0),
                                           child: AuthUserStreamWidget(
                                             builder: (context) => Text(
@@ -363,18 +355,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                     currentUserDocument
                                                                         ?.firstName,
                                                                     '') !=
-                                                                null &&
-                                                            valueOrDefault(
-                                                                    currentUserDocument
-                                                                        ?.firstName,
-                                                                    '') !=
                                                                 '') &&
                                                         (valueOrDefault(
-                                                                    currentUserDocument
-                                                                        ?.lastName,
-                                                                    '') !=
-                                                                null &&
-                                                            valueOrDefault(
                                                                     currentUserDocument
                                                                         ?.lastName,
                                                                     '') !=
@@ -401,13 +383,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                         if (currentUserDocument
-                                                ?.careerProfile?.role !=
+                                                ?.careerProfile.role !=
                                             null)
                                           AuthUserStreamWidget(
                                             builder: (context) => Container(
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 5.0, 0.0, 0.0),
                                                 child:
@@ -511,7 +493,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   color: FlutterFlowTheme.of(context).primary,
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   'Add-ons',
                                   textAlign: TextAlign.center,
@@ -528,52 +510,36 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Builder(
                                 builder: (context) {
                                   if (revenue_cat.activeEntitlementIds
                                       .contains(FFAppState().entitlementID)) {
-                                    return InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        logFirebaseEvent(
-                                            'HOME_PAGE_Container_ua126iqq_ON_TAP');
-                                        logFirebaseEvent(
-                                            'Container_navigate_to');
-
-                                        context.pushNamed('Onboarding01');
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .champagnePink,
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8.0, 2.0, 8.0, 2.0),
-                                          child: Text(
-                                            'Premium',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  useGoogleFonts: false,
-                                                  lineHeight: 1.16,
-                                                ),
-                                          ),
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .champagnePink,
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 2.0, 8.0, 2.0),
+                                        child: Text(
+                                          'Premium',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Sofia Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                useGoogleFonts: false,
+                                                lineHeight: 1.16,
+                                              ),
                                         ),
                                       ),
                                     );
@@ -607,10 +573,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               BorderRadius.circular(5.0),
                                         ),
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 2.0, 8.0, 2.0),
                                           child: Text(
                                             'Free',
@@ -676,14 +642,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     ? containerWelcomeVideoRecordList.first
                                     : null;
                             return Container(
-                              decoration: BoxDecoration(),
-                              child: Container(
+                              decoration: const BoxDecoration(),
+                              child: SizedBox(
                                 width: double.infinity,
                                 height: 180.0,
                                 child: Stack(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 30.0),
                                       child: PageView(
                                         controller:
@@ -693,7 +659,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 18.0, 16.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
@@ -735,7 +701,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 18.0, 16.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
@@ -766,9 +732,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       ),
                                     ),
                                     Align(
-                                      alignment: AlignmentDirectional(0.0, 1.0),
+                                      alignment: const AlignmentDirectional(0.0, 1.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 12.0),
                                         child: smooth_page_indicator
                                             .SmoothPageIndicator(
@@ -782,7 +748,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 .animateToPage(
                                               i,
                                               duration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               curve: Curves.ease,
                                             );
                                           },
@@ -810,7 +776,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           },
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 18.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -832,17 +798,17 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     22.0, 0.0, 22.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Icon(
                                           FFIcons.kclarityTalkBubblesLine,
                                           color: FlutterFlowTheme.of(context)
@@ -852,7 +818,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),
                                       child: AutoSizeText(
                                         'Register For Practice Interview Now',
@@ -876,7 +842,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'My progress',
@@ -890,7 +856,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 15.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -899,7 +865,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 flex: 3,
                                 child: Container(
                                   height: 170.0,
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
@@ -914,7 +880,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 BorderRadius.circular(19.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(9.0),
+                                            padding: const EdgeInsets.all(9.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
@@ -939,37 +905,41 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                           10.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           10.0, 0.0, 10.0, 0.0),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Expanded(
-                                                        flex: 2,
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Align(
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Icon(
-                                                              FFIcons
-                                                                  .kcupConverted,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .white,
-                                                              size: 24.0,
-                                                            ),
+                                                      Container(
+                                                        decoration:
+                                                            const BoxDecoration(),
+                                                        child: Align(
+                                                          alignment:
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Icon(
+                                                            FFIcons
+                                                                .kcupConverted,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .white,
+                                                            size: 24.0,
                                                           ),
                                                         ),
                                                       ),
-                                                      Expanded(
-                                                        flex: 5,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    10.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
                                                         child: Text(
                                                           ' Leadership Board',
                                                           textAlign:
@@ -1029,7 +999,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 15.0,
                                                                 0.0, 15.0),
                                                     child: Column(
@@ -1078,7 +1048,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                     0.0))
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -1141,7 +1111,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                           10.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 15.0, 0.0, 15.0),
                                                   child: Column(
@@ -1248,7 +1218,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     15.0,
@@ -1290,7 +1260,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   size: 24.0,
                                                                 ),
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           5.0,
                                                                           0.0,
@@ -1299,8 +1269,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   child: Text(
                                                                     valueOrDefault<
                                                                         String>(
-                                                                      containerUsersRecordList.where((e) => e.reference == currentUserReference).toList().length >
-                                                                              0
+                                                                      containerUsersRecordList.where((e) => e.reference == currentUserReference).toList().isNotEmpty
                                                                           ? (functions.findUserIndexFromList(containerUsersRecordList.toList(), currentUserReference!.id) + 1)
                                                                               .toString()
                                                                           : '-',
@@ -1329,23 +1298,23 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 },
                                               ),
                                             ),
-                                          ].divide(SizedBox(width: 4.0)),
+                                          ].divide(const SizedBox(width: 4.0)),
                                         ),
                                       ),
-                                    ].divide(SizedBox(height: 5.0)),
+                                    ].divide(const SizedBox(height: 5.0)),
                                   ),
                                 ),
                               ),
                               if (currentUserDocument?.courseProgress
-                                      ?.hasRefCourse() ??
+                                      .hasRefCourse() ??
                                   true)
                                 Expanded(
                                   flex: 2,
                                   child: AuthUserStreamWidget(
                                     builder: (context) => Container(
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 0.0, 0.0),
                                         child: StreamBuilder<CourseRecord>(
                                           stream: CourseRecord.getDocument(
@@ -1423,7 +1392,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                     'course',
                                                                     isEqualTo: currentUserDocument
                                                                         ?.courseProgress
-                                                                        ?.refCourse,
+                                                                        .refCourse,
                                                                   )
                                                                   .where(
                                                                     'type',
@@ -1456,12 +1425,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                           snapshot.data!;
                                                       return Container(
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            const BoxDecoration(),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Container(
+                                                            SizedBox(
                                                               width: double
                                                                   .infinity,
                                                               height: 80.0,
@@ -1489,14 +1458,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                     height: double
                                                                         .infinity,
                                                                     decoration:
-                                                                        BoxDecoration(
+                                                                        const BoxDecoration(
                                                                       color: Color(
                                                                           0x4C000000),
                                                                     ),
                                                                   ),
                                                                   Align(
                                                                     alignment:
-                                                                        AlignmentDirectional(
+                                                                        const AlignmentDirectional(
                                                                             0.0,
                                                                             0.0),
                                                                     child:
@@ -1528,14 +1497,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                               ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               5.0,
                                                                               0.0,
                                                                               0.0),
                                                                           child:
                                                                               Text(
-                                                                            '${currentUserDocument?.courseProgress?.refVideos?.length?.toString()}/${videoCountCount.toString()} lessons',
+                                                                            '${currentUserDocument?.courseProgress.refVideos.length.toString()}/${videoCountCount.toString()} lessons',
                                                                             textAlign:
                                                                                 TextAlign.center,
                                                                             style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -1569,7 +1538,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                             context)
                                                                         .aquaBreeze,
                                                                 backgroundColor:
-                                                                    Color(
+                                                                    const Color(
                                                                         0xFFDDDDDD),
                                                                 center: Text(
                                                                   '${(((currentUserDocument!.courseProgress.refVideos.length / videoCountCount) * 100).round()).toString()}%',
@@ -1604,12 +1573,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             ],
                           ),
                         ),
-                        if ((currentUserDocument?.favoriteVideos?.toList() ??
-                                    [])
-                                .length >
-                            0)
+                        if ((currentUserDocument?.favoriteVideos.toList() ??
+                                    []).isNotEmpty)
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 18.0, 0.0, 0.0),
                             child: AuthUserStreamWidget(
                               builder: (context) => Column(
@@ -1617,7 +1584,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 9.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1643,9 +1610,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             context.pushNamed('FavoriteVideos');
                                           },
                                           child: Container(
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(7.0, 5.0, 7.0, 5.0),
                                               child: Text(
                                                 'See all',
@@ -1666,13 +1633,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 9.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
                                         final favoriteVideoRef =
                                             (currentUserDocument?.favoriteVideos
-                                                        ?.toList() ??
+                                                        .toList() ??
                                                     [])
                                                 .toList();
                                         return SingleChildScrollView(
@@ -1764,10 +1731,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                       },
                                                       child: Container(
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            const BoxDecoration(),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   9.0),
                                                           child: Column(
                                                             mainAxisSize:
@@ -1777,7 +1744,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Container(
+                                                              SizedBox(
                                                                 width: 142.0,
                                                                 height: 99.0,
                                                                 child: Stack(
@@ -1800,7 +1767,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                     ),
                                                                     Align(
                                                                       alignment:
-                                                                          AlignmentDirectional(
+                                                                          const AlignmentDirectional(
                                                                               0.0,
                                                                               0.0),
                                                                       child:
@@ -1818,7 +1785,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             6.0,
@@ -1850,11 +1817,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 },
                                               );
                                             })
-                                                .divide(SizedBox(width: 12.0))
+                                                .divide(const SizedBox(width: 12.0))
                                                 .addToStart(
-                                                    SizedBox(width: 16.0))
+                                                    const SizedBox(width: 16.0))
                                                 .addToEnd(
-                                                    SizedBox(width: 16.0)),
+                                                    const SizedBox(width: 16.0)),
                                           ),
                                         );
                                       },
@@ -1886,13 +1853,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               final videoOfDayCourseVideoRecord =
                                   snapshot.data!;
                               return Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           16.0, 20.0, 16.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -1906,9 +1873,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 14.0, 0.0, 0.0),
-                                            child: Container(
+                                            child: SizedBox(
                                               width: double.infinity,
                                               height: 150.0,
                                               child: Stack(
@@ -1999,14 +1966,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                         decoration:
                                                             BoxDecoration(
                                                           color:
-                                                              Color(0xB81A1919),
+                                                              const Color(0xB81A1919),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
                                                                       10.0),
                                                         ),
                                                         alignment:
-                                                            AlignmentDirectional(
+                                                            const AlignmentDirectional(
                                                                 0.0, 0.0),
                                                         child: Icon(
                                                           FFIcons
@@ -2030,7 +1997,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             desktop: false,
                                           ))
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Text(
@@ -2050,13 +2017,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             },
                           ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 18.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 9.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -2072,7 +2039,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 9.0, 0.0, 0.0),
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -2102,7 +2069,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(9.0),
+                                            padding: const EdgeInsets.all(9.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -2180,7 +2147,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(9.0),
+                                            padding: const EdgeInsets.all(9.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -2234,7 +2201,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 113.0,
                                         height: 113.0,
                                         child: Stack(
@@ -2266,7 +2233,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                           10.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsets.all(9.0),
+                                                  padding: const EdgeInsets.all(9.0),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -2328,10 +2295,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   1.0, -1.0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 7.0, 4.0, 0.0),
                                                 child: Text(
@@ -2349,7 +2316,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           ],
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 113.0,
                                         height: 113.0,
                                         child: Stack(
@@ -2381,7 +2348,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                           10.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsets.all(9.0),
+                                                  padding: const EdgeInsets.all(9.0),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -2443,10 +2410,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   1.0, -1.0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 7.0, 4.0, 0.0),
                                                 child: Text(
@@ -2465,9 +2432,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         ),
                                       ),
                                     ]
-                                        .divide(SizedBox(width: 7.6))
-                                        .addToStart(SizedBox(width: 16.0))
-                                        .addToEnd(SizedBox(width: 16.0)),
+                                        .divide(const SizedBox(width: 7.6))
+                                        .addToStart(const SizedBox(width: 16.0))
+                                        .addToEnd(const SizedBox(width: 16.0)),
                                   ),
                                 ),
                               ),
@@ -2475,7 +2442,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 20.0, 16.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
@@ -2484,7 +2451,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   12.0, 15.0, 12.0, 15.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -2500,7 +2467,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         size: 20.0,
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             6.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           'Company profiles',
@@ -2511,7 +2478,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     ],
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 11.0, 0.0, 0.0),
                                     child: Text(
                                       'Access the most recent information about the TOP companies in the Aviation and Food & Beverage industries.',
@@ -2525,7 +2492,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 14.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
@@ -2557,12 +2524,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       options: FFButtonOptions(
                                         width: double.infinity,
                                         height: 52.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
+                                            const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
-                                        color: Color(0x00073763),
+                                        color: const Color(0x00073763),
                                         textStyle: FlutterFlowTheme.of(context)
                                             .headlineLarge
                                             .override(
@@ -2599,7 +2566,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                      ].addToEnd(SizedBox(height: 100.0)),
+                      ].addToEnd(const SizedBox(height: 100.0)),
                     ),
                   ).animateOnPageLoad(
                       animationsMap['columnOnPageLoadAnimation']!),
@@ -2607,11 +2574,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
               ],
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.navBarModel,
                 updateCallback: () => setState(() {}),
-                child: NavBarWidget(
+                child: const NavBarWidget(
                   index: 0,
                 ),
               ),

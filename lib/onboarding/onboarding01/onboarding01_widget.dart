@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding01_model.dart';
 export 'onboarding01_model.dart';
 
@@ -49,22 +47,22 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
-                      'assets/images/Onb1.webp',
+                      'assets/images/NEWOnb05.webp',
                       width: 300.0,
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'We are glad you’re here!',
                   textAlign: TextAlign.center,
@@ -76,7 +74,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                       ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                   child: Text(
                     'Let’s start with a couple of questions to help us personalize your experience',
                     textAlign: TextAlign.center,
@@ -88,7 +86,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -114,9 +112,9 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                           }
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 13.0, 10.0),
                             child: wrapWithModel(
                               model: _model.checkMarkModel1,
@@ -209,9 +207,9 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                         }
                       },
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 13.0, 10.0),
                           child: wrapWithModel(
                             model: _model.checkMarkModel2,
@@ -281,9 +279,9 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                     ),
                   ],
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('ONBOARDING01_PAGE_CONTINUE_BTN_ON_TAP');
@@ -317,9 +315,9 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).white,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -328,7 +326,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

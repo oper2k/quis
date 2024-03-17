@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding02_model.dart';
 export 'onboarding02_model.dart';
 
@@ -64,8 +62,8 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -75,7 +73,7 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -83,18 +81,18 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
-                    'assets/images/Onb2.webp',
+                    'assets/images/NEWOnb04.webp',
                     fit: BoxFit.contain,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'You are in the right place!',
                   textAlign: TextAlign.center,
@@ -106,7 +104,7 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget> {
                       ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
                   child: Text(
                     'Quis helped thousands of people to pass interview and get hired!',
                     textAlign: TextAlign.center,
@@ -117,9 +115,9 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget> {
                         ),
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('ONBOARDING02_PAGE_CONTINUE_BTN_ON_TAP');
@@ -132,9 +130,9 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -143,7 +141,7 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

@@ -1,12 +1,8 @@
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/onboarding/onboarding_list_item_practice_time/onboarding_list_item_practice_time_widget.dart';
 import 'onboarding14practice_goal_widget.dart'
     show Onboarding14practiceGoalWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class Onboarding14practiceGoalModel
     extends FlutterFlowModel<Onboarding14practiceGoalWidget> {

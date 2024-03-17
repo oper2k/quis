@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding08_model.dart';
 export 'onboarding08_model.dart';
 
@@ -65,8 +63,8 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -76,7 +74,7 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -84,19 +82,19 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
-                    'assets/images/Onb7.webp',
+                    'assets/images/NEWOnb06.webp',
                     width: 200.0,
                     fit: BoxFit.contain,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'Got it!',
                   style: FlutterFlowTheme.of(context).displayMedium.override(
@@ -106,7 +104,7 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
                         useGoogleFonts: false,
                       ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +112,7 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel1,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text:
                             'Learn everything about signals HR use to evaluate job candidates',
                       ),
@@ -122,43 +120,43 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel2,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text: 'Get to know what Recruters will ask you',
                       ),
                     ),
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel3,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text: 'Practice and polish yours answers',
                       ),
                     ),
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel4,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text: 'Boost confidence and negotiating skills',
                       ),
                     ),
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel5,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text: 'Get CV feedback from team of Experts',
                       ),
                     ),
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel6,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text: 'Get Recommended by a large referral network',
                       ),
                     ),
-                  ].divide(SizedBox(height: 20.0)),
+                  ].divide(const SizedBox(height: 20.0)),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('ONBOARDING08_PAGE_CONTINUE_BTN_ON_TAP');
@@ -171,9 +169,9 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -182,7 +180,7 @@ class _Onboarding08WidgetState extends State<Onboarding08Widget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

@@ -1,13 +1,6 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/components/avatar_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'matched_users_widget.dart' show MatchedUsersWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class MatchedUsersModel extends FlutterFlowModel<MatchedUsersWidget> {
   ///  State fields for stateful widgets in this page.

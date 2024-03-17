@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'menu_item_model.dart';
 export 'menu_item_model.dart';
 
@@ -48,7 +46,7 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '/components/test_w_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 
 // Focus widget keys for this walkthrough
 final textZ0sp5rt3 = GlobalKey();
@@ -21,7 +20,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.right,
-            builder: (context, __) => TestWWidget(),
+            builder: (context, __) => const TestWWidget(),
           ),
         ],
       ),

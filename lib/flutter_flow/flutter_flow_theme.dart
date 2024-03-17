@@ -137,22 +137,22 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color error = const Color(0xFFEB4335);
   late Color info = const Color(0xFFFFFFFF);
 
-  late Color white = Color(0xFFFFFFFF);
-  late Color orange = Color(0xFFFF8718);
-  late Color black = Color(0xFF000000);
-  late Color aquaBreeze = Color(0xFF00D3AE);
-  late Color gradient2 = Color(0xFF326A9F);
-  late Color powderBlue = Color(0xFFAEC5EB);
-  late Color melon = Color(0xFFE9AFA3);
-  late Color champagnePink = Color(0xFFF9DEC9);
-  late Color blueOcean = Color(0xFF18C3D9);
-  late Color customColor1 = Color(0xFF753123);
-  late Color customColor2 = Color(0xFF3A5481);
-  late Color customColor3 = Color(0xFFB06327);
-  late Color customColor4 = Color(0xFF295B61);
-  late Color gradient1 = Color(0xFF7FFBE5);
-  late Color profileBgr = Color(0xFF323232);
-  late Color blueLink = Color(0xFF0A66C2);
+  late Color white = const Color(0xFFFFFFFF);
+  late Color orange = const Color(0xFFFF8718);
+  late Color black = const Color(0xFF000000);
+  late Color aquaBreeze = const Color(0xFF00D3AE);
+  late Color gradient2 = const Color(0xFF326A9F);
+  late Color powderBlue = const Color(0xFFAEC5EB);
+  late Color melon = const Color(0xFFE9AFA3);
+  late Color champagnePink = const Color(0xFFF9DEC9);
+  late Color blueOcean = const Color(0xFF18C3D9);
+  late Color customColor1 = const Color(0xFF753123);
+  late Color customColor2 = const Color(0xFF3A5481);
+  late Color customColor3 = const Color(0xFFB06327);
+  late Color customColor4 = const Color(0xFF295B61);
+  late Color gradient1 = const Color(0xFF7FFBE5);
+  late Color profileBgr = const Color(0xFF323232);
+  late Color blueLink = const Color(0xFF0A66C2);
 }
 
 abstract class Typography {

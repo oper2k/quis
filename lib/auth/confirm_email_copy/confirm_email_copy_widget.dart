@@ -5,17 +5,13 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'confirm_email_copy_model.dart';
@@ -25,7 +21,7 @@ class ConfirmEmailCopyWidget extends StatefulWidget {
   const ConfirmEmailCopyWidget({
     super.key,
     bool? isAfterReg,
-  }) : this.isAfterReg = isAfterReg ?? false;
+  }) : isAfterReg = isAfterReg ?? false;
 
   final bool isAfterReg;
 
@@ -75,8 +71,7 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
         logFirebaseEvent('ConfirmEmailCopy_timer');
         _model.timerController.onStartTimer();
       }
-      if (!(valueOrDefault(currentUserDocument?.refCode, '') != null &&
-          valueOrDefault(currentUserDocument?.refCode, '') != '')) {
+      if (!(valueOrDefault(currentUserDocument?.refCode, '') != '')) {
         logFirebaseEvent('ConfirmEmailCopy_backend_call');
         unawaited(
           () async {
@@ -111,7 +106,7 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
       }
       logFirebaseEvent('ConfirmEmailCopy_start_periodic_action');
       _model.instantTimer = InstantTimer.periodic(
-        duration: Duration(milliseconds: 3000),
+        duration: const Duration(milliseconds: 3000),
         callback: (timer) async {
           if (currentUserEmailVerified) {
             logFirebaseEvent('ConfirmEmailCopy_stop_periodic_action');
@@ -163,8 +158,8 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -179,23 +174,23 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
@@ -206,9 +201,9 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
                     'Check your mail',
                     style: FlutterFlowTheme.of(context).headlineLarge,
@@ -216,17 +211,17 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
-                    'We have send an account activation link to your email ”${currentUserEmail}\".',
+                    'We have send an account activation link to your email ”$currentUserEmail\".',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).headlineSmall,
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               if (!_model.isSendEmailVisible)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -240,7 +235,7 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                         milliSecond: false,
                       ),
                       controller: _model.timerController,
-                      updateStateInterval: Duration(milliseconds: 1000),
+                      updateStateInterval: const Duration(milliseconds: 1000),
                       onChanged: (value, displayTime, shouldUpdate) {
                         _model.timerMilliseconds = value;
                         _model.timerValue = displayTime;
@@ -259,7 +254,7 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                       child: Text(
                         'minutes to \'Resend\' availability.',
                         style: FlutterFlowTheme.of(context).headlineSmall,
@@ -271,7 +266,7 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                 Builder(
                   builder: (context) => Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -288,7 +283,7 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                               elevation: 0,
                               insetPadding: EdgeInsets.zero,
                               backgroundColor: Colors.transparent,
-                              alignment: AlignmentDirectional(0.0, 0.0)
+                              alignment: const AlignmentDirectional(0.0, 0.0)
                                   .resolve(Directionality.of(context)),
                               child: WebViewAware(
                                 child: GestureDetector(
@@ -297,7 +292,7 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                                           ? FocusScope.of(context)
                                               .requestFocus(_model.unfocusNode)
                                           : FocusScope.of(context).unfocus(),
-                                  child: EmailDialogWidget(),
+                                  child: const EmailDialogWidget(),
                                 ),
                               ),
                             );
@@ -315,9 +310,9 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                         _model.timerController.onStartTimer();
                       },
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: RichText(
                             textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
@@ -349,8 +344,8 @@ class _ConfirmEmailCopyWidgetState extends State<ConfirmEmailCopyWidget>
                   ),
                 ),
             ]
-                .addToStart(SizedBox(height: 50.0))
-                .addToEnd(SizedBox(height: 50.0)),
+                .addToStart(const SizedBox(height: 50.0))
+                .addToEnd(const SizedBox(height: 50.0)),
           ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation']!),
         ),
       ),

@@ -3,13 +3,9 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding17_linked_in_model.dart';
 export 'onboarding17_linked_in_model.dart';
 
@@ -88,8 +84,8 @@ class _Onboarding17LinkedInWidgetState
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -111,8 +107,8 @@ class _Onboarding17LinkedInWidgetState
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Text(
                     'Skip',
                     style: FlutterFlowTheme.of(context).headlineSmall,
@@ -121,7 +117,7 @@ class _Onboarding17LinkedInWidgetState
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -129,7 +125,7 @@ class _Onboarding17LinkedInWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -139,12 +135,12 @@ class _Onboarding17LinkedInWidgetState
                   ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
-                      'assets/images/Onb11.webp',
+                      'assets/images/NEWOnb07.webp',
                       width: 235.0,
                       fit: BoxFit.contain,
                     ),
                   ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'Quis Networking',
                   textAlign: TextAlign.center,
@@ -155,7 +151,7 @@ class _Onboarding17LinkedInWidgetState
                         useGoogleFonts: false,
                       ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'You will be able to network with other people when using Quis app. Every time after practice Interview you will be asked if you would like to match with your Interview Partner (Network)',
                   textAlign: TextAlign.center,
@@ -166,13 +162,13 @@ class _Onboarding17LinkedInWidgetState
                         lineHeight: 1.25,
                       ),
                 ),
-                Spacer(),
+                const Spacer(),
                 TextFormField(
                   controller: _model.textController,
                   focusNode: _model.textFieldFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.textController',
-                    Duration(milliseconds: 300),
+                    const Duration(milliseconds: 300),
                     () => setState(() {}),
                   ),
                   obscureText: false,
@@ -185,7 +181,7 @@ class _Onboarding17LinkedInWidgetState
                           lineHeight: 1.16,
                         ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
@@ -214,7 +210,7 @@ class _Onboarding17LinkedInWidgetState
                     ),
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).white,
-                    contentPadding: EdgeInsets.all(16.0),
+                    contentPadding: const EdgeInsets.all(16.0),
                     prefixIcon: Icon(
                       FFIcons.kuitLinkedinAlt,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -226,7 +222,7 @@ class _Onboarding17LinkedInWidgetState
                       _model.textControllerValidator.asValidator(context),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Text(
                     'We do not disclose this information to anyone. Only you decide if you want other people to see your link.',
                     textAlign: TextAlign.start,
@@ -237,12 +233,11 @@ class _Onboarding17LinkedInWidgetState
                         ),
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
-                    onPressed: (_model.textController.text == null ||
-                            _model.textController.text == '')
+                    onPressed: (_model.textController.text == '')
                         ? null
                         : () async {
                             logFirebaseEvent(
@@ -262,9 +257,9 @@ class _Onboarding17LinkedInWidgetState
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -273,7 +268,7 @@ class _Onboarding17LinkedInWidgetState
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

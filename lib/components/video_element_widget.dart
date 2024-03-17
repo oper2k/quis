@@ -2,8 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'video_element_model.dart';
 export 'video_element_model.dart';
 
@@ -53,7 +51,7 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
+            SizedBox(
               width: 110.0,
               height: 91.0,
               child: Stack(
@@ -68,7 +66,7 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Icon(
                       FFIcons.kocticonPlay24,
                       color: FlutterFlowTheme.of(context).white,
@@ -80,7 +78,7 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +92,7 @@ class _VideoElementWidgetState extends State<VideoElementWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Text(
                         valueOrDefault<String>(
                           widget.videoItem?.description,

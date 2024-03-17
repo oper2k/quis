@@ -1,14 +1,9 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'onboarding12referral_model.dart';
 export 'onboarding12referral_model.dart';
@@ -74,8 +69,8 @@ class _Onboarding12referralWidgetState
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -85,7 +80,7 @@ class _Onboarding12referralWidgetState
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -93,18 +88,18 @@ class _Onboarding12referralWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 27.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 27.0, 0.0, 0.0),
                   child: GradientText(
                     'Quis for Friends',
                     style: FlutterFlowTheme.of(context).displayLarge,
                     colors: [
                       FlutterFlowTheme.of(context).aquaBreeze,
-                      Color(0xFF326A9F)
+                      const Color(0xFF326A9F)
                     ],
                     gradientDirection: GradientDirection.ttb,
                     gradientType: GradientType.linear,
@@ -112,7 +107,7 @@ class _Onboarding12referralWidgetState
                 ),
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(10.0, 30.0, 10.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(10.0, 30.0, 10.0, 0.0),
                   child: Text(
                     'Do you have Referral code?',
                     textAlign: TextAlign.center,
@@ -124,7 +119,7 @@ class _Onboarding12referralWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
                     'Enter your referral code for exclusive benefits!',
                     textAlign: TextAlign.center,
@@ -132,7 +127,7 @@ class _Onboarding12referralWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                   child: Form(
                     key: _model.formKey,
                     autovalidateMode: AutovalidateMode.disabled,
@@ -146,7 +141,7 @@ class _Onboarding12referralWidgetState
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(1.0),
+                        padding: const EdgeInsets.all(1.0),
                         child: TextFormField(
                           controller: _model.refFieldController,
                           focusNode: _model.refFieldFocusNode,
@@ -163,14 +158,14 @@ class _Onboarding12referralWidgetState
                                   useGoogleFonts: false,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 0.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 0.0,
                               ),
@@ -217,7 +212,7 @@ class _Onboarding12referralWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: (/* NOT RECOMMENDED */ _model
                                 .refFieldController.text ==
@@ -226,7 +221,7 @@ class _Onboarding12referralWidgetState
                         : () async {
                             logFirebaseEvent(
                                 'ONBOARDING12REFERRAL_CONTINUE_BTN_ON_TAP');
-                            var _shouldSetState = false;
+                            var shouldSetState = false;
                             logFirebaseEvent('Button_update_page_state');
                             setState(() {
                               _model.isRefValid = true;
@@ -243,12 +238,12 @@ class _Onboarding12referralWidgetState
                                 isEqualTo: _model.refFieldController.text,
                               ),
                             );
-                            _shouldSetState = true;
-                            if (_model.refUserOutput!.length > 0) {
+                            shouldSetState = true;
+                            if (_model.refUserOutput!.isNotEmpty) {
                               logFirebaseEvent('Button_update_app_state');
                               setState(() {
                                 FFAppState().refUser =
-                                    _model.refUserOutput?.first?.reference;
+                                    _model.refUserOutput?.first.reference;
                               });
                               logFirebaseEvent('Button_update_page_state');
                               setState(() {
@@ -259,7 +254,7 @@ class _Onboarding12referralWidgetState
                               setState(() {
                                 _model.isFieldRed = true;
                               });
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
 
@@ -267,16 +262,16 @@ class _Onboarding12referralWidgetState
 
                             context.pushNamed('Onboarding13');
 
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                           },
                     text: 'Continue',
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -285,7 +280,7 @@ class _Onboarding12referralWidgetState
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),
@@ -296,12 +291,12 @@ class _Onboarding12referralWidgetState
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,

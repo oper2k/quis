@@ -1,11 +1,7 @@
 import '/components/karma_list_item_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'earn_karma_widget.dart' show EarnKarmaWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class EarnKarmaModel extends FlutterFlowModel<EarnKarmaWidget> {
   ///  State fields for stateful widgets in this page.

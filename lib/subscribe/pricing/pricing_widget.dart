@@ -1,4 +1,3 @@
-import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,11 +7,8 @@ import '/subscribe/pricing_option/pricing_option_widget.dart';
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'pricing_model.dart';
 export 'pricing_model.dart';
@@ -46,8 +42,8 @@ class _PricingWidgetState extends State<PricingWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 0.0),
+          end: const Offset(0.0, -200.0),
         ),
       ],
     ),
@@ -60,15 +56,15 @@ class _PricingWidgetState extends State<PricingWidget>
           curve: Curves.easeOut,
           delay: 50.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(1.0, 1.0),
+          begin: const Offset(0.0, 0.0),
+          end: const Offset(1.0, 1.0),
         ),
         MoveEffect(
           curve: Curves.easeOut,
           delay: 50.ms,
           duration: 300.ms,
-          begin: Offset(300.0, 0.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(300.0, 0.0),
+          end: const Offset(0.0, 0.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -88,15 +84,15 @@ class _PricingWidgetState extends State<PricingWidget>
           curve: Curves.easeOut,
           delay: 100.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(1.0, 1.0),
+          begin: const Offset(0.0, 0.0),
+          end: const Offset(1.0, 1.0),
         ),
         MoveEffect(
           curve: Curves.easeInOut,
           delay: 100.ms,
           duration: 300.ms,
-          begin: Offset(-300.0, 0.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(-300.0, 0.0),
+          end: const Offset(0.0, 0.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -143,7 +139,7 @@ class _PricingWidgetState extends State<PricingWidget>
           children: [
             if (widget.offers == PaywallPrice.standard)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
@@ -156,7 +152,7 @@ class _PricingWidgetState extends State<PricingWidget>
               ),
             if (widget.offers != PaywallPrice.standard)
               Align(
-                alignment: AlignmentDirectional(0.0, -1.02),
+                alignment: const AlignmentDirectional(0.0, -1.02),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
@@ -167,12 +163,12 @@ class _PricingWidgetState extends State<PricingWidget>
                 ),
               ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(-1.0, -1.0),
+                    alignment: const AlignmentDirectional(-1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -202,9 +198,9 @@ class _PricingWidgetState extends State<PricingWidget>
                         }
                       },
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).info,
@@ -218,7 +214,7 @@ class _PricingWidgetState extends State<PricingWidget>
                     builder: (context) {
                       if (widget.offers == PaywallPrice.off25) {
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Text(
                             'You\'ve got an offer! \nSave 25% off, don\'t miss out!',
@@ -236,7 +232,7 @@ class _PricingWidgetState extends State<PricingWidget>
                         );
                       } else if (widget.offers == PaywallPrice.off50) {
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Text(
                             'Your one-time offer!\n Save 50%!',
@@ -254,7 +250,7 @@ class _PricingWidgetState extends State<PricingWidget>
                         );
                       } else {
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Text(
                             'Choose your plan',
@@ -273,7 +269,7 @@ class _PricingWidgetState extends State<PricingWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -297,10 +293,10 @@ class _PricingWidgetState extends State<PricingWidget>
                                     ),
                               ),
                             ),
-                          ].divide(SizedBox(width: 14.0)),
+                          ].divide(const SizedBox(width: 14.0)),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 30.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -327,27 +323,26 @@ class _PricingWidgetState extends State<PricingWidget>
                                           ),
                                     ),
                                     Text(
-                                      'Company Profiles, Expert Video Answers and the Latest Interview Questions',
+                                      'Unlimited Access to Practice Interviews, Company Profiles, Expert Video Answers and the Latest Interview Questions',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .bodyLarge
                                           .override(
                                             fontFamily: 'Sofia Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .info,
-                                            fontWeight: FontWeight.w300,
                                             fontStyle: FontStyle.italic,
                                             useGoogleFonts: false,
                                             lineHeight: 1.42,
                                           ),
                                     ),
-                                  ].divide(SizedBox(height: 8.0)),
+                                  ].divide(const SizedBox(height: 8.0)),
                                 ),
                               ),
-                            ].divide(SizedBox(width: 14.0)),
+                            ].divide(const SizedBox(width: 14.0)),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 30.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -376,28 +371,27 @@ class _PricingWidgetState extends State<PricingWidget>
                                     Text(
                                       'Your CV will be reviewed by us and seen by 300+ Referral Network who work in Aviation and F&B',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .bodyLarge
                                           .override(
                                             fontFamily: 'Sofia Pro',
                                             color: FlutterFlowTheme.of(context)
                                                 .info,
-                                            fontWeight: FontWeight.w300,
                                             fontStyle: FontStyle.italic,
                                             useGoogleFonts: false,
                                             lineHeight: 1.42,
                                           ),
                                     ),
-                                  ].divide(SizedBox(height: 8.0)),
+                                  ].divide(const SizedBox(height: 8.0)),
                                 ),
                               ),
-                            ].divide(SizedBox(width: 14.0)),
+                            ].divide(const SizedBox(width: 14.0)),
                           ),
                         ),
-                      ].divide(SizedBox(height: 10.0)),
+                      ].divide(const SizedBox(height: 10.0)),
                     ),
                   ),
-                  Spacer(),
-                  Container(
+                  const Spacer(),
+                  SizedBox(
                     width: double.infinity,
                     height: 135.0,
                     child: CarouselSlider(
@@ -421,7 +415,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               glowColor: FlutterFlowTheme.of(context).orange,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 '“What I liked about using this tool is that it gives you so many different interview questions. After taking 3-4 practice interviews, I felt so much better!” \n(Uros, Waiter at LETO)',
@@ -456,7 +450,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               glowColor: FlutterFlowTheme.of(context).orange,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 '“I had been with my previous company for 3+ years and just forgot how to interview. Quis has helped me become comfortable talking about myself and my skills.” \n(Emmerson, Bartender at KETCH UP)',
@@ -491,7 +485,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               glowColor: FlutterFlowTheme.of(context).orange,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 'I was able to gain confidence by polishing my answers, being aware of timing, and paying attention to my non-verbal language - things I wouldn’t have paid attention to otherwise.” \n(Grace, Cabin Crew at Etihad)',
@@ -526,7 +520,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               glowColor: FlutterFlowTheme.of(context).orange,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 '\"Quis videos and interactive mock interviews were invaluable to my preparation.\" \n(Jo Jo, Waiter)',
@@ -561,7 +555,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               glowColor: FlutterFlowTheme.of(context).orange,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 '\"I reached out to Quis for help with my interviews at Emirates and Etihad. I got offers from both!\" \n(Sophia, Cabin Crew)',
@@ -596,7 +590,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               glowColor: FlutterFlowTheme.of(context).orange,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 '\"The courses were extremely helpful in not only providing the information, but real examples of questions and answers.\" \n(Mahmoud, Restaurant Manager)',
@@ -624,8 +618,8 @@ class _PricingWidgetState extends State<PricingWidget>
                         enableInfiniteScroll: true,
                         scrollDirection: Axis.horizontal,
                         autoPlay: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        autoPlayInterval: Duration(milliseconds: (800 + 4000)),
+                        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                        autoPlayInterval: const Duration(milliseconds: (800 + 4000)),
                         autoPlayCurve: Curves.linear,
                         pauseAutoPlayInFiniteScroll: true,
                         onPageChanged: (index, _) =>
@@ -633,8 +627,8 @@ class _PricingWidgetState extends State<PricingWidget>
                       ),
                     ),
                   ),
-                  Spacer(flex: 3),
-                ].addToStart(SizedBox(height: 40.0)),
+                  const Spacer(flex: 3),
+                ].addToStart(const SizedBox(height: 40.0)),
               ),
             ),
             Align(
@@ -648,7 +642,7 @@ class _PricingWidgetState extends State<PricingWidget>
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).primary,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(0.0),
                     bottomRight: Radius.circular(0.0),
                     topLeft: Radius.circular(10.0),
@@ -656,7 +650,7 @@ class _PricingWidgetState extends State<PricingWidget>
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -811,9 +805,9 @@ class _PricingWidgetState extends State<PricingWidget>
                             'pricingOptionOnActionTriggerAnimation2']!,
                       ),
                     ]
-                        .divide(SizedBox(height: 10.0))
-                        .addToStart(SizedBox(height: 16.0))
-                        .addToEnd(SizedBox(height: 40.0)),
+                        .divide(const SizedBox(height: 10.0))
+                        .addToStart(const SizedBox(height: 16.0))
+                        .addToEnd(const SizedBox(height: 40.0)),
                   ),
                 ),
               ).animateOnActionTrigger(
@@ -821,14 +815,14 @@ class _PricingWidgetState extends State<PricingWidget>
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: Container(
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).primary,
                 ),
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 40.0),
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 40.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -836,13 +830,13 @@ class _PricingWidgetState extends State<PricingWidget>
                         onPressed: () async {
                           logFirebaseEvent(
                               'PRICING_TRY_FREE_&_SUBSCRIBE_BTN_ON_TAP');
-                          var _shouldSetState = false;
+                          var shouldSetState = false;
                           if (_model.pickedOption ==
                               PaywallPickedOption.month1) {
                             logFirebaseEvent('Button_revenue_cat');
                             _model.monthlysubscriptionOutput = await revenue_cat
                                 .purchasePackage('monthlysubscription');
-                            _shouldSetState = true;
+                            shouldSetState = true;
                             if (!_model.monthlysubscriptionOutput!) {
                               logFirebaseEvent('Button_alert_dialog');
                               await showDialog(
@@ -850,20 +844,20 @@ class _PricingWidgetState extends State<PricingWidget>
                                 builder: (alertDialogContext) {
                                   return WebViewAware(
                                     child: AlertDialog(
-                                      title: Text('Error'),
-                                      content: Text('Payment failed'),
+                                      title: const Text('Error'),
+                                      content: const Text('Payment failed'),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
+                                          child: const Text('Ok'),
                                         ),
                                       ],
                                     ),
                                   );
                                 },
                               );
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
                           } else if (_model.pickedOption ==
@@ -871,7 +865,7 @@ class _PricingWidgetState extends State<PricingWidget>
                             logFirebaseEvent('Button_revenue_cat');
                             _model.weeklysubscriptionOutput = await revenue_cat
                                 .purchasePackage('yearlysubscription');
-                            _shouldSetState = true;
+                            shouldSetState = true;
                             if (!_model.weeklysubscriptionOutput!) {
                               logFirebaseEvent('Button_alert_dialog');
                               await showDialog(
@@ -879,20 +873,20 @@ class _PricingWidgetState extends State<PricingWidget>
                                 builder: (alertDialogContext) {
                                   return WebViewAware(
                                     child: AlertDialog(
-                                      title: Text('Error'),
-                                      content: Text('Payment failed'),
+                                      title: const Text('Error'),
+                                      content: const Text('Payment failed'),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
+                                          child: const Text('Ok'),
                                         ),
                                       ],
                                     ),
                                   );
                                 },
                               );
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
                           } else if (_model.pickedOption ==
@@ -902,7 +896,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               _model.months3Subscription25OffOutput =
                                   await revenue_cat.purchasePackage(
                                       '3MonthsSubscription25Off');
-                              _shouldSetState = true;
+                              shouldSetState = true;
                               if (!_model.months3Subscription25OffOutput!) {
                                 logFirebaseEvent('Button_alert_dialog');
                                 await showDialog(
@@ -910,20 +904,20 @@ class _PricingWidgetState extends State<PricingWidget>
                                   builder: (alertDialogContext) {
                                     return WebViewAware(
                                       child: AlertDialog(
-                                        title: Text('Error'),
-                                        content: Text('Payment failed'),
+                                        title: const Text('Error'),
+                                        content: const Text('Payment failed'),
                                         actions: [
                                           TextButton(
                                             onPressed: () => Navigator.pop(
                                                 alertDialogContext),
-                                            child: Text('Ok'),
+                                            child: const Text('Ok'),
                                           ),
                                         ],
                                       ),
                                     );
                                   },
                                 );
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
                             } else if (widget.offers == PaywallPrice.off50) {
@@ -931,7 +925,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               _model.months3Subscription50OffOutput =
                                   await revenue_cat.purchasePackage(
                                       '3MonthsSubscription50off');
-                              _shouldSetState = true;
+                              shouldSetState = true;
                               if (!_model.months3Subscription50OffOutput!) {
                                 logFirebaseEvent('Button_alert_dialog');
                                 await showDialog(
@@ -939,20 +933,20 @@ class _PricingWidgetState extends State<PricingWidget>
                                   builder: (alertDialogContext) {
                                     return WebViewAware(
                                       child: AlertDialog(
-                                        title: Text('Error'),
-                                        content: Text('Payment failed'),
+                                        title: const Text('Error'),
+                                        content: const Text('Payment failed'),
                                         actions: [
                                           TextButton(
                                             onPressed: () => Navigator.pop(
                                                 alertDialogContext),
-                                            child: Text('Ok'),
+                                            child: const Text('Ok'),
                                           ),
                                         ],
                                       ),
                                     );
                                   },
                                 );
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
                             } else {
@@ -960,7 +954,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               _model.months3SubscriptionOutput =
                                   await revenue_cat.purchasePackage(
                                       '3MonthsSubscriptionStandard');
-                              _shouldSetState = true;
+                              shouldSetState = true;
                               if (!_model.months3SubscriptionOutput!) {
                                 logFirebaseEvent('Button_alert_dialog');
                                 await showDialog(
@@ -968,25 +962,25 @@ class _PricingWidgetState extends State<PricingWidget>
                                   builder: (alertDialogContext) {
                                     return WebViewAware(
                                       child: AlertDialog(
-                                        title: Text('Error'),
-                                        content: Text('Payment failed'),
+                                        title: const Text('Error'),
+                                        content: const Text('Payment failed'),
                                         actions: [
                                           TextButton(
                                             onPressed: () => Navigator.pop(
                                                 alertDialogContext),
-                                            child: Text('Ok'),
+                                            child: const Text('Ok'),
                                           ),
                                         ],
                                       ),
                                     );
                                   },
                                 );
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
                             }
                           } else {
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                             return;
                           }
 
@@ -996,15 +990,19 @@ class _PricingWidgetState extends State<PricingWidget>
                           }
                           context.pushNamed('ThankYouForSubscription');
 
-                          if (_shouldSetState) setState(() {});
+                          if (shouldSetState) setState(() {});
                         },
-                        text: 'Try Free & Subscribe',
+                        text: (_model.pickedOption ==
+                                    PaywallPickedOption.month3) &&
+                                (widget.offers == PaywallPrice.standard)
+                            ? 'Try Free & Subscribe'
+                            : 'Continue',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 52.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).white,
                           textStyle: FlutterFlowTheme.of(context)
@@ -1015,7 +1013,7 @@ class _PricingWidgetState extends State<PricingWidget>
                                 useGoogleFonts: false,
                               ),
                           elevation: 0.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 0.0,
                           ),
@@ -1101,9 +1099,9 @@ class _PricingWidgetState extends State<PricingWidget>
                               }
                             },
                             child: Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Text(
                                   'All plans',
                                   style: FlutterFlowTheme.of(context)
@@ -1119,9 +1117,9 @@ class _PricingWidgetState extends State<PricingWidget>
                             ),
                           ),
                           Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Padding(
-                              padding: EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Terms of Use ',
                                 style: FlutterFlowTheme.of(context)

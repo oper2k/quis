@@ -3,12 +3,9 @@ import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'leadership_model.dart';
 export 'leadership_model.dart';
 
@@ -93,8 +90,8 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                     child: Container(
                       width: 40.0,
                       height: 40.0,
-                      decoration: BoxDecoration(),
-                      alignment: AlignmentDirectional(-1.0, 0.0),
+                      decoration: const BoxDecoration(),
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
                       child: Icon(
                         FFIcons.karrowBack,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -109,24 +106,24 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                   Container(
                     width: 40.0,
                     height: 40.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                   ),
                 ],
               ),
-              actions: [],
+              actions: const [],
               centerTitle: false,
               toolbarHeight: 40.0,
               elevation: 0.0,
             ),
             body: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 13.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 13.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -135,19 +132,19 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                           Expanded(
                             child: Container(
                               width: 100.0,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Visibility(
                                 visible: (leadershipUsersRecordList[0] !=
                                         null) &&
                                     (leadershipUsersRecordList[0].reference !=
                                         currentUserReference),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 47.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 60.0,
                                         height: 60.0,
                                         child: Stack(
@@ -195,7 +192,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   1.0, 1.0),
                                               child: Container(
                                                 width: 18.0,
@@ -206,7 +203,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                       .primary,
                                                   shape: BoxShape.circle,
                                                 ),
-                                                alignment: AlignmentDirectional(
+                                                alignment: const AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Text(
                                                   '1',
@@ -229,7 +226,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 6.0, 0.0, 0.0),
                                         child: Text(
                                           leadershipUsersRecordList[0]
@@ -244,7 +241,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 4.0, 0.0, 0.0),
                                         child: Text(
                                           (double? karma) {
@@ -270,163 +267,162 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                           Expanded(
                             child: Container(
                               width: 100.0,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  if (leadershipUsersRecordList[0] != null)
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          width: 93.0,
-                                          height: 93.0,
-                                          child: Stack(
-                                            children: [
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Container(
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      SizedBox(
+                                        width: 93.0,
+                                        height: 93.0,
+                                        child: Stack(
+                                          children: [
+                                            Align(
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: SizedBox(
+                                                width: 93.0,
+                                                height: 93.0,
+                                                child: custom_widgets
+                                                    .DottedContainer(
                                                   width: 93.0,
                                                   height: 93.0,
-                                                  child: custom_widgets
-                                                      .DottedContainer(
-                                                    width: 93.0,
-                                                    height: 93.0,
-                                                    colorDecoration:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                    intDash: 2,
-                                                    intSpase: 2,
-                                                    doubleStrokeWidth: 1.0,
-                                                    doubleRadius: 100.0,
-                                                  ),
+                                                  colorDecoration:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                  intDash: 2,
+                                                  intSpase: 2,
+                                                  doubleStrokeWidth: 1.0,
+                                                  doubleRadius: 100.0,
                                                 ),
                                               ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: AuthUserStreamWidget(
-                                                  builder: (context) =>
-                                                      wrapWithModel(
-                                                    model: _model.avatarModel2,
-                                                    updateCallback: () =>
-                                                        setState(() {}),
-                                                    child: AvatarWidget(
-                                                      diameter: 79.0,
-                                                      imagePath:
-                                                          currentUserPhoto,
-                                                      isPremium: false,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.8, 0.8),
-                                                child: Builder(
-                                                  builder: (context) {
-                                                    final userIndex =
-                                                        leadershipUsersRecordList
-                                                            .toList();
-                                                    return Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: List.generate(
-                                                          userIndex.length,
-                                                          (userIndexIndex) {
-                                                        final userIndexItem =
-                                                            userIndex[
-                                                                userIndexIndex];
-                                                        return Visibility(
-                                                          visible: userIndexItem
-                                                                  .uid ==
-                                                              currentUserUid,
-                                                          child: Container(
-                                                            width: 18.0,
-                                                            height: 18.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Text(
-                                                              (userIndexIndex +
-                                                                      1)
-                                                                  .toString(),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .white,
-                                                                    fontSize:
-                                                                        13.0,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }),
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 6.0, 0.0, 0.0),
-                                          child: Text(
-                                            'You',
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  useGoogleFonts: false,
-                                                  lineHeight: 1.16,
-                                                ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
-                                          child: AuthUserStreamWidget(
-                                            builder: (context) => Text(
-                                              (double? karma) {
-                                                return karma != null
-                                                    ? karma.toStringAsFixed(1)
-                                                    : '0';
-                                              }(valueOrDefault(
-                                                  currentUserDocument?.karma,
-                                                  0.0)),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Sofia Pro',
-                                                        useGoogleFonts: false,
-                                                        lineHeight: 1.16,
-                                                      ),
                                             ),
+                                            Align(
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: AuthUserStreamWidget(
+                                                builder: (context) =>
+                                                    wrapWithModel(
+                                                  model: _model.avatarModel2,
+                                                  updateCallback: () =>
+                                                      setState(() {}),
+                                                  child: AvatarWidget(
+                                                    diameter: 79.0,
+                                                    imagePath:
+                                                        currentUserPhoto,
+                                                    isPremium: false,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: const AlignmentDirectional(
+                                                  0.8, 0.8),
+                                              child: Builder(
+                                                builder: (context) {
+                                                  final userIndex =
+                                                      leadershipUsersRecordList
+                                                          .toList();
+                                                  return Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: List.generate(
+                                                        userIndex.length,
+                                                        (userIndexIndex) {
+                                                      final userIndexItem =
+                                                          userIndex[
+                                                              userIndexIndex];
+                                                      return Visibility(
+                                                        visible: userIndexItem
+                                                                .uid ==
+                                                            currentUserUid,
+                                                        child: Container(
+                                                          width: 18.0,
+                                                          height: 18.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            shape: BoxShape
+                                                                .circle,
+                                                          ),
+                                                          alignment:
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Text(
+                                                            (userIndexIndex +
+                                                                    1)
+                                                                .toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .white,
+                                                                  fontSize:
+                                                                      13.0,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 6.0, 0.0, 0.0),
+                                        child: Text(
+                                          'You',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Sofia Pro',
+                                                useGoogleFonts: false,
+                                                lineHeight: 1.16,
+                                              ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 4.0, 0.0, 0.0),
+                                        child: AuthUserStreamWidget(
+                                          builder: (context) => Text(
+                                            (double? karma) {
+                                              return karma != null
+                                                  ? karma.toStringAsFixed(1)
+                                                  : '0';
+                                            }(valueOrDefault(
+                                                currentUserDocument?.karma,
+                                                0.0)),
+                                            style:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Sofia Pro',
+                                                      useGoogleFonts: false,
+                                                      lineHeight: 1.16,
+                                                    ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -434,7 +430,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                           Expanded(
                             child: Container(
                               width: 100.0,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Builder(
                                 builder: (context) {
                                   if (functions
@@ -451,12 +447,12 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                   .reference !=
                                               currentUserReference),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 47.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: 60.0,
                                               height: 60.0,
                                               child: Stack(
@@ -511,7 +507,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
+                                                        const AlignmentDirectional(
                                                             1.0, 1.0),
                                                     child: Container(
                                                       width: 18.0,
@@ -524,7 +520,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
-                                                          AlignmentDirectional(
+                                                          const AlignmentDirectional(
                                                               0.0, 0.0),
                                                       child: Text(
                                                         '3',
@@ -550,7 +546,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 6.0, 0.0, 0.0),
                                               child: Text(
                                                 leadershipUsersRecordList[2]
@@ -567,7 +563,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 4.0, 0.0, 0.0),
                                               child: Text(
                                                 (double? karma) {
@@ -599,12 +595,12 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                   .reference !=
                                               currentUserReference),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 47.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: 60.0,
                                               height: 60.0,
                                               child: Stack(
@@ -659,7 +655,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
+                                                        const AlignmentDirectional(
                                                             1.0, 1.0),
                                                     child: Container(
                                                       width: 18.0,
@@ -672,7 +668,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                         shape: BoxShape.circle,
                                                       ),
                                                       alignment:
-                                                          AlignmentDirectional(
+                                                          const AlignmentDirectional(
                                                               0.0, 0.0),
                                                       child: Text(
                                                         '2',
@@ -698,7 +694,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 6.0, 0.0, 0.0),
                                               child: Text(
                                                 leadershipUsersRecordList[1]
@@ -715,7 +711,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 4.0, 0.0, 0.0),
                                               child: Text(
                                                 (double? karma) {
@@ -749,7 +745,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: Builder(
                         builder: (context) {
                           final user = leadershipUsersRecordList.toList();
@@ -775,7 +771,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                         (userItem.uid !=
                                             currentUserReference?.id)),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 5.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -808,7 +804,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                             BorderRadius.circular(10.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             15.0, 15.0, 35.0, 15.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -820,7 +816,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                                       .bodyLarge,
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       25.0, 0.0, 0.0, 0.0),
                                               child: AvatarWidget(
@@ -833,7 +829,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                                             ),
                                             Expanded(
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
@@ -863,7 +859,7 @@ class _LeadershipWidgetState extends State<LeadershipWidget> {
                         },
                       ),
                     ),
-                  ].addToEnd(SizedBox(height: 50.0)),
+                  ].addToEnd(const SizedBox(height: 50.0)),
                 ),
               ),
             ),

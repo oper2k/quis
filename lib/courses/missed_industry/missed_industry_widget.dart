@@ -5,8 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'missed_industry_model.dart';
 export 'missed_industry_model.dart';
 
@@ -45,14 +43,14 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +61,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.0, -1.0),
+                    alignment: const AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -78,7 +76,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                       child: Container(
                         width: 40.0,
                         height: 40.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                       ),
                     ),
                   ),
@@ -91,7 +89,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.0, -1.0),
+                    alignment: const AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -106,9 +104,9 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                       child: Container(
                         width: 40.0,
                         height: 40.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.0, 0.0),
+                          alignment: const AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -121,7 +119,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                 ],
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
                 child: Text(
                   'Which online course we could add?',
                   textAlign: TextAlign.center,
@@ -136,7 +134,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                 key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: TextFormField(
                     controller: _model.textController,
                     focusNode: _model.textFieldFocusNode,
@@ -181,7 +179,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('MISSED_INDUSTRY_COMP_SEND_BTN_ON_TAP');
@@ -209,9 +207,9 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -220,7 +218,7 @@ class _MissedIndustryWidgetState extends State<MissedIndustryWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),

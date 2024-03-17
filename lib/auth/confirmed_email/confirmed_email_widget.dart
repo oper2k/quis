@@ -3,11 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'confirmed_email_model.dart';
 export 'confirmed_email_model.dart';
 
@@ -67,8 +64,8 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                decoration: const BoxDecoration(),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
               ),
               Text(
                 'Sign up',
@@ -77,23 +74,23 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
@@ -104,9 +101,9 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
                     'Email address confirmed!',
                     style: FlutterFlowTheme.of(context).headlineLarge,
@@ -114,9 +111,9 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
                     'Next you can select a plan, create your profile\nand enjoy using this App.',
                     textAlign: TextAlign.center,
@@ -124,9 +121,9 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('CONFIRMED_EMAIL_GET_STARTED_BTN_ON_TAP');
@@ -144,9 +141,9 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -155,7 +152,7 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),
@@ -163,7 +160,7 @@ class _ConfirmedEmailWidgetState extends State<ConfirmedEmailWidget> {
                   ),
                 ),
               ),
-            ].addToEnd(SizedBox(height: 50.0)),
+            ].addToEnd(const SizedBox(height: 50.0)),
           ),
         ),
       ),

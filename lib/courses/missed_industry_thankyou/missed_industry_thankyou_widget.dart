@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'missed_industry_thankyou_model.dart';
 export 'missed_industry_thankyou_model.dart';
 
@@ -40,14 +38,14 @@ class _MissedIndustryThankyouWidgetState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 42.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,15 +56,15 @@ class _MissedIndustryThankyouWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(1.0, -1.0),
+                    alignment: const AlignmentDirectional(1.0, -1.0),
                     child: Container(
                       width: 40.0,
                       height: 40.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(0.0),
                       child: Image.asset(
@@ -77,7 +75,7 @@ class _MissedIndustryThankyouWidgetState
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(1.0, -1.0),
+                    alignment: const AlignmentDirectional(1.0, -1.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -92,9 +90,9 @@ class _MissedIndustryThankyouWidgetState
                       child: Container(
                         width: 40.0,
                         height: 40.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(1.0, 0.0),
+                          alignment: const AlignmentDirectional(1.0, 0.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -107,7 +105,7 @@ class _MissedIndustryThankyouWidgetState
                 ],
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
                 child: Text(
                   'Thank you!',
                   textAlign: TextAlign.center,
@@ -119,7 +117,7 @@ class _MissedIndustryThankyouWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
                 child: Text(
                   'We will consider your request',
                   textAlign: TextAlign.center,

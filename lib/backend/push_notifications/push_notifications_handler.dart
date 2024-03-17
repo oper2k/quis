@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'serialization_util.dart';
 import '../backend.dart';
@@ -8,14 +7,11 @@ import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-import '../../index.dart';
-import '../../main.dart';
 
 final _handledMessageIds = <String?>{};
 
 class PushNotificationsHandler extends StatefulWidget {
-  const PushNotificationsHandler({Key? key, required this.child})
-      : super(key: key);
+  const PushNotificationsHandler({super.key, required this.child});
 
   final Widget child;
 
@@ -106,7 +102,7 @@ class ParameterData {
       );
 
   static Future<ParameterData> Function(Map<String, dynamic>) none() =>
-      (data) async => ParameterData();
+      (data) async => const ParameterData();
 }
 
 final parametersBuilderMap =
@@ -115,7 +111,7 @@ final parametersBuilderMap =
   'OnboardingOld': ParameterData.none(),
   'Login': ParameterData.none(),
   'SignupOld': ParameterData.none(),
-  'Pricing': (data) async => ParameterData(
+  'Pricing': (data) async => const ParameterData(
         allParams: {},
       ),
   'ConfirmEmail': (data) async => ParameterData(
@@ -135,7 +131,7 @@ final parametersBuilderMap =
   'Support': ParameterData.none(),
   'Karma': ParameterData.none(),
   'EarnKarma': ParameterData.none(),
-  'MatchedUsers': (data) async => ParameterData(
+  'MatchedUsers': (data) async => const ParameterData(
         allParams: {},
       ),
   'UserProfile': (data) async => ParameterData(

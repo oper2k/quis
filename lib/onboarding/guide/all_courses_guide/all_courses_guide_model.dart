@@ -1,25 +1,9 @@
-import '/backend/backend.dart';
 import '/components/courses_list_component_widget.dart';
-import '/courses/missed_industry/missed_industry_widget.dart';
-import '/courses/missed_industry_thankyou/missed_industry_thankyou_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/walkthroughs/quide_courses2.dart';
-import 'dart:async';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'all_courses_guide_widget.dart' show AllCoursesGuideWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
   ///  Local state fields for this page.
@@ -28,8 +12,8 @@ class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   TutorialCoachMark? quideCourses2Controller;
+  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -55,8 +39,8 @@ class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     quideCourses2Controller?.finish();
+    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
 
@@ -67,41 +51,4 @@ class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () async {
-          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
-          logFirebaseEvent('AllCoursesGuide_navigate_to');
-
-          context.goNamed(
-            'LatestInterviewQuestionsGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-        },
-        onSkip: () {
-          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
-          logFirebaseEvent('AllCoursesGuide_navigate_to');
-
-          context.goNamed(
-            'LatestInterviewQuestionsGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
-          return true;
-        },
-      );
 }

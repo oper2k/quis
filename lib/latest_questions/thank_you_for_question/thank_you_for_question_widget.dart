@@ -3,12 +3,8 @@ import '/backend/backend.dart';
 import '/components/karma_plus_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'thank_you_for_question_model.dart';
 export 'thank_you_for_question_model.dart';
@@ -53,14 +49,14 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
             elevation: 0,
             insetPadding: EdgeInsets.zero,
             backgroundColor: Colors.transparent,
-            alignment: AlignmentDirectional(0.0, 0.0)
+            alignment: const AlignmentDirectional(0.0, 0.0)
                 .resolve(Directionality.of(context)),
             child: WebViewAware(
               child: GestureDetector(
                 onTap: () => _model.unfocusNode.canRequestFocus
                     ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                     : FocusScope.of(context).unfocus(),
-                child: KarmaPlusDialogWidget(
+                child: const KarmaPlusDialogWidget(
                   karmaPoints: 0.5,
                 ),
               ),
@@ -89,12 +85,12 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(1.0, -1.0),
+                  alignment: const AlignmentDirectional(1.0, -1.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -108,9 +104,9 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
                       context.pushNamed('LatestInterviewQuestions');
                     },
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             10.0, 10.0, 0.0, 10.0),
                         child: Icon(
                           FFIcons.kxmark,
@@ -122,7 +118,7 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
@@ -133,7 +129,7 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 33.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 33.0, 0.0, 0.0),
                   child: Text(
                     'Thank you!!!',
                     textAlign: TextAlign.center,
@@ -141,7 +137,7 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 33.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 33.0, 0.0, 0.0),
                   child: Text(
                     ' We appreciate your contribution to our community! ',
                     textAlign: TextAlign.center,
@@ -154,8 +150,8 @@ class _ThankYouForQuestionWidgetState extends State<ThankYouForQuestionWidget> {
                   ),
                 ),
               ]
-                  .addToStart(SizedBox(height: 50.0))
-                  .addToEnd(SizedBox(height: 50.0)),
+                  .addToStart(const SizedBox(height: 50.0))
+                  .addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

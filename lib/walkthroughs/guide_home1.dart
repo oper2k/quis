@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '/onboarding/guide/walk_element/walk_element_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 
 // Focus widget keys for this walkthrough
 final columnWr0te2mf = GlobalKey();
@@ -22,7 +21,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => WalkElementWidget(
+            builder: (context, __) => const WalkElementWidget(
               text:
                   'You can find everything for your sucess here: Job Referrals, Company Profiles, CV Review, and more',
               index: '1/6',
@@ -41,7 +40,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => WalkElementWidget(
+            builder: (context, __) => const WalkElementWidget(
               text:
                   'Karma are points that you get when you complete certain tasks. You can exchange Karma for CV reviews, job referrals, and more. Tap to see the full list when you earn Karma.',
               index: '2/6',

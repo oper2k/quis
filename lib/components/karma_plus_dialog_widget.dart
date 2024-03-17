@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'karma_plus_dialog_model.dart';
 export 'karma_plus_dialog_model.dart';
 
@@ -44,14 +42,14 @@ class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).white,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(18.0, 8.0, 18.0, 22.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(18.0, 8.0, 18.0, 22.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -65,7 +63,7 @@ class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: Text(
                   'Hooray! You\'ve just earned ${widget.karmaPoints?.toString()} Karma, and you\'re getting closer to achieving your dream job. Keep up the great work!',
                   textAlign: TextAlign.center,
@@ -78,7 +76,7 @@ class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('KARMA_PLUS_DIALOG_HOORAY!_BTN_ON_TAP');
@@ -90,9 +88,9 @@ class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -101,7 +99,7 @@ class _KarmaPlusDialogWidgetState extends State<KarmaPlusDialogWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),

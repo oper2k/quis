@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -10,9 +9,7 @@ import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'job_referral_model.dart';
 export 'job_referral_model.dart';
@@ -78,8 +75,8 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -95,12 +92,12 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                decoration: const BoxDecoration(),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -124,7 +121,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
             }
             List<GroupRecord> groupListGroupRecordList = snapshot.data!;
             return Container(
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: StreamBuilder<List<RoleRecord>>(
                 stream: queryRoleRecord(),
                 builder: (context, snapshot) {
@@ -144,17 +141,17 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                   }
                   List<RoleRecord> roleListRoleRecordList = snapshot.data!;
                   return Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Lottie.asset(
                                 'assets/lottie_animations/animation_lo30k8t3.json',
                                 width: 220.0,
@@ -169,7 +166,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               style: FlutterFlowTheme.of(context).headlineLarge,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Text(
                                 'Land more interviews with job referrals from employees at Emirates, Coya and more.',
@@ -185,7 +182,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -193,7 +190,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -223,7 +220,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 4.0, 0.0, 4.0),
                                                 child: Container(
@@ -243,7 +240,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       12.0, 0.0, 0.0, 0.0),
                                               child: Column(
@@ -253,7 +250,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 2.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -275,7 +272,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 5.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -329,7 +326,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 4.0, 0.0, 4.0),
                                                 child: Container(
@@ -349,7 +346,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       12.0, 0.0, 0.0, 0.0),
                                               child: Column(
@@ -359,7 +356,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 2.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -381,7 +378,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 5.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -438,7 +435,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       12.0, 0.0, 0.0, 0.0),
                                               child: Column(
@@ -448,7 +445,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 2.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -470,7 +467,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 5.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -507,7 +504,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               key: _model.formKey,
                               autovalidateMode: AutovalidateMode.disabled,
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 33.0, 0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -525,7 +522,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -619,7 +616,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 11.0, 0.0, 0.0),
                                       child: Text(
                                         'Role',
@@ -634,7 +631,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -736,7 +733,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 11.0, 0.0, 0.0),
                                       child: Text(
                                         'Email address',
@@ -751,7 +748,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: TextFormField(
                                         controller: _model.textController1,
@@ -772,7 +769,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 lineHeight: 1.16,
                                               ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -814,7 +811,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .white,
-                                          contentPadding: EdgeInsets.all(16.0),
+                                          contentPadding: const EdgeInsets.all(16.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall,
@@ -824,7 +821,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 11.0, 0.0, 0.0),
                                       child: Text(
                                         'Current CV',
@@ -839,7 +836,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
@@ -860,7 +857,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -869,8 +866,6 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                             children: [
                                               Text(
                                                 _model.uploadedFileUrl !=
-                                                            null &&
-                                                        _model.uploadedFileUrl !=
                                                             ''
                                                     ? 'uploaded file'
                                                     : 'Please attach here your CV',
@@ -880,8 +875,6 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                     .override(
                                                       fontFamily: 'Sofia Pro',
                                                       color: _model.uploadedFileUrl !=
-                                                                  null &&
-                                                              _model.uploadedFileUrl !=
                                                                   ''
                                                           ? FlutterFlowTheme.of(
                                                                   context)
@@ -973,13 +966,42 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                   }
 
                                                   logFirebaseEvent(
+                                                      'Container_show_snack_bar');
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Uploading document....',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .info,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
+                                                      duration: const Duration(
+                                                          milliseconds: 3000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary,
+                                                    ),
+                                                  );
+                                                  logFirebaseEvent(
                                                       'Container_update_page_state');
                                                   setState(() {
                                                     _model.isCVvalidated = true;
                                                   });
                                                 },
                                                 child: Container(
-                                                  decoration: BoxDecoration(),
+                                                  decoration: const BoxDecoration(),
                                                   child: Icon(
                                                     FFIcons
                                                         .kiconamoonAttachmentLight1,
@@ -996,7 +1018,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 11.0, 0.0, 0.0),
                                       child: Text(
                                         'Inspiring message',
@@ -1011,7 +1033,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: TextFormField(
                                         controller: _model.textController2,
@@ -1032,7 +1054,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                 lineHeight: 1.16,
                                               ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -1074,7 +1096,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .white,
-                                          contentPadding: EdgeInsets.all(16.0),
+                                          contentPadding: const EdgeInsets.all(16.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall,
@@ -1090,9 +1112,9 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Text(
                                   'This feature does not guarantee a Job Offer. Upon receiving your submission, we will actively promote CV within internal network of Recruiters. IF your CV is succesfull you will receive a response from the Recruiter informing further steps. \n\nNOTE: You can apply for a Job Referral only ONCE a month!',
@@ -1110,9 +1132,9 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
+                              alignment: const AlignmentDirectional(1.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 23.0, 0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -1134,7 +1156,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 6.0, 0.0, 0.0),
                                           child: Text(
                                             '15',
@@ -1144,7 +1166,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   2.0, 0.0, 0.0, 0.0),
                                           child: Icon(
                                             FFIcons.kgameIconsYinYang,
@@ -1160,13 +1182,13 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 30.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
                                       'JOB_REFERRAL_GET_A_REFERRAL_BTN_ON_TAP');
-                                  var _shouldSetState = false;
+                                  var shouldSetState = false;
                                   if ((_model.pickedRole != null) &&
                                       (_model.pickedIndustry != null)) {
                                     logFirebaseEvent(
@@ -1180,8 +1202,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                     setState(() {
                                       _model.isRoleGroupValidated = false;
                                     });
-                                    if (_model.uploadedFileUrl != null &&
-                                        _model.uploadedFileUrl != '') {
+                                    if (_model.uploadedFileUrl != '') {
                                       logFirebaseEvent(
                                           'Button_update_page_state');
                                       setState(() {
@@ -1201,16 +1222,14 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                             .validate()) {
                                       return;
                                     }
-                                    if (_model.uploadedFileUrl == null ||
-                                        _model.uploadedFileUrl.isEmpty) {
+                                    if (_model.uploadedFileUrl.isEmpty) {
                                       return;
                                     }
-                                    if (_shouldSetState) setState(() {});
+                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
 
-                                  if (_model.uploadedFileUrl != null &&
-                                      _model.uploadedFileUrl != '') {
+                                  if (_model.uploadedFileUrl != '') {
                                     logFirebaseEvent(
                                         'Button_update_page_state');
                                     setState(() {
@@ -1222,7 +1241,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                     setState(() {
                                       _model.isCVvalidated = false;
                                     });
-                                    if (_shouldSetState) setState(() {});
+                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
 
@@ -1232,8 +1251,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                           .validate()) {
                                     return;
                                   }
-                                  if (_model.uploadedFileUrl == null ||
-                                      _model.uploadedFileUrl.isEmpty) {
+                                  if (_model.uploadedFileUrl.isEmpty) {
                                     return;
                                   }
                                   logFirebaseEvent('Button_action_block');
@@ -1248,16 +1266,16 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                     userIndustry: _model.pickedIndustry?.name,
                                     userEmail: _model.textController1.text,
                                   );
-                                  _shouldSetState = true;
-                                  if (_shouldSetState) setState(() {});
+                                  shouldSetState = true;
+                                  if (shouldSetState) setState(() {});
                                 },
                                 text: 'Get a Referral',
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: 52.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -1269,7 +1287,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                         useGoogleFonts: false,
                                       ),
                                   elevation: 0.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 0.0,
                                   ),
@@ -1277,7 +1295,7 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                 ),
                               ),
                             ),
-                          ].addToEnd(SizedBox(height: 40.0)),
+                          ].addToEnd(const SizedBox(height: 40.0)),
                         ),
                       ),
                     ),

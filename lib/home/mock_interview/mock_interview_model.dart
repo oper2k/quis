@@ -1,21 +1,10 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/actions/actions.dart' as action_blocks;
 import 'mock_interview_widget.dart' show MockInterviewWidget;
 import 'package:expandable/expandable.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 class MockInterviewModel extends FlutterFlowModel<MockInterviewWidget> {
   ///  Local state fields for this page.

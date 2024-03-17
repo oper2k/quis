@@ -10,11 +10,8 @@ import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'video_conf_page_model.dart';
 export 'video_conf_page_model.dart';
@@ -88,10 +85,10 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Stack(
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: double.infinity,
                 child: custom_widgets.VideoConfWidget(
@@ -151,7 +148,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                     milliSecond: false,
                   ),
                   controller: _model.initialTimerController,
-                  updateStateInterval: Duration(milliseconds: 1000),
+                  updateStateInterval: const Duration(milliseconds: 1000),
                   onChanged: (value, displayTime, shouldUpdate) {
                     _model.initialTimerMilliseconds = value;
                     _model.initialTimerValue = displayTime;
@@ -199,7 +196,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.5),
+                alignment: const AlignmentDirectional(0.0, 0.5),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('VIDEO_CONF_SELECT_A_QUESTION_BTN_ON_TAP');
@@ -231,13 +228,13 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                   options: FFButtonOptions(
                     height: 44.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).white,
                     textStyle: FlutterFlowTheme.of(context).headlineMedium,
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),
@@ -246,16 +243,16 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.0, -1.0),
+                alignment: const AlignmentDirectional(-1.0, -1.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 9.0),
                         child: StreamBuilder<UsersRecord>(
                           stream: UsersRecord.getDocument(widget.userRef!),
                           builder: (context, snapshot) {
@@ -300,11 +297,11 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                 child: Container(
                                   width: MediaQuery.sizeOf(context).width * 0.4,
                                   decoration: BoxDecoration(
-                                    color: Color(0x70FFFFFF),
+                                    color: const Color(0x70FFFFFF),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(12.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
@@ -335,7 +332,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                           controller:
                                               _model.introTimerController,
                                           updateStateInterval:
-                                              Duration(milliseconds: 1000),
+                                              const Duration(milliseconds: 1000),
                                           onChanged: (value, displayTime,
                                               shouldUpdate) {
                                             _model.introTimerMilliseconds =
@@ -383,11 +380,11 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                 child: Container(
                                   width: MediaQuery.sizeOf(context).width * 0.5,
                                   decoration: BoxDecoration(
-                                    color: Color(0x70FFFFFF),
+                                    color: const Color(0x70FFFFFF),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(12.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -418,7 +415,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                               final containerUsersRecord =
                                                   snapshot.data!;
                                               return Container(
-                                                decoration: BoxDecoration(),
+                                                decoration: const BoxDecoration(),
                                                 child: Text(
                                                   '${containerUsersRecord.firstName} ${containerUsersRecord.lastName} answers ',
                                                   style: FlutterFlowTheme.of(
@@ -439,7 +436,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 0.0, 0.0),
                                           child: FlutterFlowTimer(
                                             initialTime: functions.subtractTime(
@@ -456,7 +453,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                             controller:
                                                 _model.user1TimerController,
                                             updateStateInterval:
-                                                Duration(milliseconds: 1000),
+                                                const Duration(milliseconds: 1000),
                                             onChanged: (value, displayTime,
                                                 shouldUpdate) {
                                               _model.user1TimerMilliseconds =
@@ -506,11 +503,11 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                 child: Container(
                                   width: MediaQuery.sizeOf(context).width * 0.5,
                                   decoration: BoxDecoration(
-                                    color: Color(0x70FFFFFF),
+                                    color: const Color(0x70FFFFFF),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(12.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -541,7 +538,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                               final containerUsersRecord =
                                                   snapshot.data!;
                                               return Container(
-                                                decoration: BoxDecoration(),
+                                                decoration: const BoxDecoration(),
                                                 child: Text(
                                                   '${containerUsersRecord.firstName} ${containerUsersRecord.lastName} answers ',
                                                   style: FlutterFlowTheme.of(
@@ -562,7 +559,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 0.0, 0.0),
                                           child: FlutterFlowTimer(
                                             initialTime: functions.subtractTime(
@@ -579,7 +576,7 @@ class _VideoConfPageWidgetState extends State<VideoConfPageWidget> {
                                             controller:
                                                 _model.user2TimerController,
                                             updateStateInterval:
-                                                Duration(milliseconds: 1000),
+                                                const Duration(milliseconds: 1000),
                                             onChanged: (value, displayTime,
                                                 shouldUpdate) {
                                               _model.user2TimerMilliseconds =

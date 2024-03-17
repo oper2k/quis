@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'check_mark_blue_model.dart';
 export 'check_mark_blue_model.dart';
 
@@ -10,7 +8,7 @@ class CheckMarkBlueWidget extends StatefulWidget {
   const CheckMarkBlueWidget({
     super.key,
     bool? boolean,
-  }) : this.boolean = boolean ?? false;
+  }) : boolean = boolean ?? false;
 
   final bool boolean;
 
@@ -56,7 +54,7 @@ class _CheckMarkBlueWidgetState extends State<CheckMarkBlueWidget> {
               : FlutterFlowTheme.of(context).accent2,
         ),
       ),
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Visibility(
         visible: widget.boolean,
         child: Icon(

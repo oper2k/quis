@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/avatar_widget.dart';
 import '/components/back_button_widget.dart';
 import '/courses/video_comments_bottom_sheet/video_comments_bottom_sheet_widget.dart';
@@ -13,15 +12,12 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'video_model.dart';
@@ -32,7 +28,7 @@ class VideoWidget extends StatefulWidget {
     super.key,
     required this.videoItem,
     bool? showBottomButtons,
-  }) : this.showBottomButtons = showBottomButtons ?? true;
+  }) : showBottomButtons = showBottomButtons ?? true;
 
   final CourseVideoRecord? videoItem;
   final bool showBottomButtons;
@@ -83,23 +79,19 @@ class _VideoWidgetState extends State<VideoWidget>
       logFirebaseEvent('Video_update_page_state');
       setState(() {
         _model.isFavorite =
-            (currentUserDocument?.favoriteVideos?.toList() ?? [])
+            (currentUserDocument?.favoriteVideos.toList() ?? [])
                 .contains(widget.videoItem?.reference);
       });
       if (widget.videoItem!.likeDislike
               .where((e) => e.user == currentUserReference)
-              .toList()
-              .length >
-          0) {
+              .toList().isNotEmpty) {
         logFirebaseEvent('Video_update_page_state');
         setState(() {
           _model.isLiked = widget.videoItem!.likeDislike
                       .where((e) =>
                           (e.user == currentUserReference) &&
                           (e.isLike == true))
-                      .toList()
-                      .length >
-                  0
+                      .toList().isNotEmpty
               ? true
               : false;
         });
@@ -121,9 +113,7 @@ class _VideoWidgetState extends State<VideoWidget>
               .take(FFAppConstants.freeVideosNumber)
               .toList()
               .where((e) => e.reference == widget.videoItem?.reference)
-              .toList()
-              .length <=
-          0) {
+              .toList().isEmpty) {
         if (!revenue_cat.activeEntitlementIds
             .contains(FFAppState().entitlementID)) {
           logFirebaseEvent('Video_navigate_to');
@@ -190,8 +180,8 @@ class _VideoWidgetState extends State<VideoWidget>
             }
             final courseRefItemCourseRecord = snapshot.data!;
             return Container(
-              decoration: BoxDecoration(),
-              child: Container(
+              decoration: const BoxDecoration(),
+              child: SizedBox(
                 width: double.infinity,
                 height: double.infinity,
                 child: Stack(
@@ -201,14 +191,14 @@ class _VideoWidgetState extends State<VideoWidget>
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             height: MediaQuery.sizeOf(context).width / 1.72,
                             child: Stack(
                               children: [
                                 Container(
                                   width: double.infinity,
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                   child: FlutterFlowWebView(
                                     content: widget.videoItem!.vimeoVideoUrl,
                                     bypass: false,
@@ -248,7 +238,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                   desktop: false,
                                 ))
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.2),
+                                    alignment: const AlignmentDirectional(0.0, 0.2),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
                                       focusColor: Colors.transparent,
@@ -289,7 +279,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     50.0, 13.0, 50.0, 13.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.min,
@@ -306,7 +296,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                   size: 30.0,
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           14.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -332,7 +322,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                     ),
                                   ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 50.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -349,15 +339,15 @@ class _VideoWidgetState extends State<VideoWidget>
                                     child: wrapWithModel(
                                       model: _model.backButtonModel,
                                       updateCallback: () => setState(() {}),
-                                      child: BackButtonWidget(),
+                                      child: const BackButtonWidget(),
                                     ),
                                   ),
                                 ),
                                 if (isAndroid)
                                   Align(
-                                    alignment: AlignmentDirectional(1.0, 1.0),
+                                    alignment: const AlignmentDirectional(1.0, 1.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 6.0, 6.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -373,9 +363,9 @@ class _VideoWidgetState extends State<VideoWidget>
                                               widget.videoItem!.vimeoVideoUrl);
                                         },
                                         child: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                           child: Padding(
-                                            padding: EdgeInsets.all(10.0),
+                                            padding: const EdgeInsets.all(10.0),
                                             child: Icon(
                                               FFIcons
                                                   .kmaterialSymbolsLightFullscreen,
@@ -393,7 +383,7 @@ class _VideoWidgetState extends State<VideoWidget>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 22.0, 16.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -449,9 +439,9 @@ class _VideoWidgetState extends State<VideoWidget>
                                               });
                                             },
                                             child: Container(
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Padding(
-                                                padding: EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 child: Icon(
                                                   FFIcons.ksubwayHurt,
                                                   color: FlutterFlowTheme.of(
@@ -503,9 +493,9 @@ class _VideoWidgetState extends State<VideoWidget>
                                               }
                                             },
                                             child: Container(
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Padding(
-                                                padding: EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 child: Icon(
                                                   FFIcons.ksubwayHurt1,
                                                   color: FlutterFlowTheme.of(
@@ -522,7 +512,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                   ],
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 7.0, 0.0, 0.0),
                                   child: Text(
                                     valueOrDefault<String>(
@@ -534,7 +524,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 14.0, 0.0, 0.0),
                                   child: Text(
                                     valueOrDefault<String>(
@@ -547,13 +537,13 @@ class _VideoWidgetState extends State<VideoWidget>
                                 ),
                                 if (widget.videoItem?.hasTextGuides() ?? true)
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 18.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
                                         final textGuide = widget
                                                 .videoItem?.textGuides
-                                                ?.toList() ??
+                                                .toList() ??
                                             [];
                                         return Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -571,10 +561,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                                     BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsets.all(11.0),
+                                                padding: const EdgeInsets.all(11.0),
                                                 child: Container(
                                                   width: double.infinity,
-                                                  color: Color(0x00000000),
+                                                  color: const Color(0x00000000),
                                                   child: ExpandableNotifier(
                                                     initialExpanded: false,
                                                     child: ExpandablePanel(
@@ -587,14 +577,14 @@ class _VideoWidgetState extends State<VideoWidget>
                                                       ),
                                                       collapsed: Container(
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            const BoxDecoration(),
                                                       ),
                                                       expanded: Container(
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            const BoxDecoration(),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       10.0,
@@ -631,13 +621,13 @@ class _VideoWidgetState extends State<VideoWidget>
                                                 ),
                                               ),
                                             );
-                                          }).divide(SizedBox(height: 6.0)),
+                                          }).divide(const SizedBox(height: 6.0)),
                                         );
                                       },
                                     ),
                                   ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -656,7 +646,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     9.0, 0.0, 5.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.min,
@@ -679,7 +669,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -687,10 +677,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                                                         0.0),
                                                             child: Container(
                                                               decoration:
-                                                                  BoxDecoration(),
+                                                                  const BoxDecoration(),
                                                               child: Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             2.0,
                                                                             0.0,
@@ -727,10 +717,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                                           ),
                                                           Container(
                                                             decoration:
-                                                                BoxDecoration(),
+                                                                const BoxDecoration(),
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .all(2.0),
                                                               child: Icon(
                                                                 FFIcons
@@ -755,7 +745,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -833,9 +823,9 @@ class _VideoWidgetState extends State<VideoWidget>
                                                               },
                                                               child: Container(
                                                                 decoration:
-                                                                    BoxDecoration(),
+                                                                    const BoxDecoration(),
                                                                 child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           2.0,
                                                                           0.0,
@@ -937,10 +927,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                                             },
                                                             child: Container(
                                                               decoration:
-                                                                  BoxDecoration(),
+                                                                  const BoxDecoration(),
                                                               child: Padding(
                                                                 padding:
-                                                                    EdgeInsets
+                                                                    const EdgeInsets
                                                                         .all(
                                                                             2.0),
                                                                 child: Icon(
@@ -989,10 +979,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                           );
                                         },
                                         child: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 5.0, 0.0, 5.0),
                                             child: Text(
                                               'Share feedback',
@@ -1016,7 +1006,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: FutureBuilder<int>(
                                     future: queryCommentRecordCount(
@@ -1074,7 +1064,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                     padding:
                                                         MediaQuery.viewInsetsOf(
                                                             context),
-                                                    child: Container(
+                                                    child: SizedBox(
                                                       height: MediaQuery.sizeOf(
                                                                   context)
                                                               .height *
@@ -1101,7 +1091,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                 BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.all(8.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -1118,7 +1108,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   12.0,
                                                                   0.0,
@@ -1189,7 +1179,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                               : null;
                                                       return Container(
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            const BoxDecoration(),
                                                         child: StreamBuilder<
                                                             UsersRecord>(
                                                           stream: UsersRecord
@@ -1222,10 +1212,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                                                 snapshot.data!;
                                                             return Container(
                                                               decoration:
-                                                                  BoxDecoration(),
+                                                                  const BoxDecoration(),
                                                               child: Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             8.0,
                                                                             6.0,
@@ -1255,14 +1245,14 @@ class _VideoWidgetState extends State<VideoWidget>
                                                                     Expanded(
                                                                       child:
                                                                           Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             8.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
                                                                         child:
                                                                             Text(
-                                                                          commentItemCommentRecord!
+                                                                          commentItemCommentRecord
                                                                               .text,
                                                                           maxLines:
                                                                               2,
@@ -1277,7 +1267,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                                       ),
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           10.0,
                                                                           0.0,
                                                                           0.0,
@@ -1312,11 +1302,11 @@ class _VideoWidgetState extends State<VideoWidget>
                               ],
                             ),
                           ),
-                        ].addToEnd(SizedBox(height: 100.0)),
+                        ].addToEnd(const SizedBox(height: 100.0)),
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.7),
+                      alignment: const AlignmentDirectional(0.0, 0.7),
                       child: Container(
                         decoration: BoxDecoration(
                           color:
@@ -1324,7 +1314,7 @@ class _VideoWidgetState extends State<VideoWidget>
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 15.0, 10.0, 15.0),
                           child: Text(
                             'This video has been added to your favorites',
@@ -1343,13 +1333,13 @@ class _VideoWidgetState extends State<VideoWidget>
                     ),
                     if (widget.showBottomButtons)
                       Align(
-                        alignment: AlignmentDirectional(0.0, 1.0),
+                        alignment: const AlignmentDirectional(0.0, 1.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 40.0),
                           child: Builder(
                             builder: (context) {
-                              if (_model.courseVideosQuery?.last?.reference ==
+                              if (_model.courseVideosQuery?.last.reference ==
                                   widget.videoItem?.reference) {
                                 return Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -1395,7 +1385,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                             'LatestInterviewQuestions',
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
-                                                  TransitionInfo(
+                                                  const TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
                                                     PageTransitionType
@@ -1408,10 +1398,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                         options: FFButtonOptions(
                                           height: 52.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -1426,7 +1416,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                 useGoogleFonts: false,
                                               ),
                                           elevation: 0.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 0.0,
                                           ),
@@ -1483,7 +1473,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                                 .toList())!) -
                                                         1],
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType
@@ -1502,7 +1492,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                   BorderRadius.circular(10.0),
                                             ),
                                             alignment:
-                                                AlignmentDirectional(0.0, 0.0),
+                                                const AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               'Previous Video',
                                               textAlign: TextAlign.center,
@@ -1586,7 +1576,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                               .toList())!) +
                                                       1],
                                               kTransitionInfoKey:
-                                                  TransitionInfo(
+                                                  const TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
                                                     PageTransitionType
@@ -1599,10 +1589,10 @@ class _VideoWidgetState extends State<VideoWidget>
                                         options: FFButtonOptions(
                                           height: 52.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -1617,7 +1607,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                                 useGoogleFonts: false,
                                               ),
                                           elevation: 0.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 0.0,
                                           ),
@@ -1626,7 +1616,7 @@ class _VideoWidgetState extends State<VideoWidget>
                                         ),
                                       ),
                                     ),
-                                  ].divide(SizedBox(width: 7.0)),
+                                  ].divide(const SizedBox(width: 7.0)),
                                 );
                               }
                             },

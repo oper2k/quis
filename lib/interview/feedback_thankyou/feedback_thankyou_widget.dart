@@ -4,9 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'feedback_thankyou_model.dart';
 export 'feedback_thankyou_model.dart';
@@ -49,12 +47,12 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: AlignmentDirectional(1.0, -1.0),
+                alignment: const AlignmentDirectional(1.0, -1.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -84,10 +82,10 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                     }
                   },
                   child: Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
                       child: Icon(
                         FFIcons.kxmark,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -104,14 +102,14 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                 fit: BoxFit.contain,
                 animate: true,
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 'Thank you for your feedback!',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).headlineLarge,
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Text(
                   'We glad seeing your improvement and your help to improve Quis at the same time!',
                   textAlign: TextAlign.center,
@@ -122,7 +120,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                       ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('FEEDBACK_THANKYOU_BACK_HOME_BTN_ON_TAP');
@@ -150,9 +148,9 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 52.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle:
                       FlutterFlowTheme.of(context).headlineLarge.override(
@@ -161,7 +159,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                             useGoogleFonts: false,
                           ),
                   elevation: 0.0,
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 0.0,
                   ),
@@ -170,7 +168,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
               ),
               Builder(
                 builder: (context) => Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
@@ -182,7 +180,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                       );
                     },
                     text: 'Share with friends',
-                    icon: Icon(
+                    icon: const Icon(
                       FFIcons.ksystemUiconsShare2,
                       size: 24.0,
                     ),
@@ -190,9 +188,9 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 3.0, 5.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 3.0, 5.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -201,7 +199,7 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),
@@ -211,8 +209,8 @@ class _FeedbackThankyouWidgetState extends State<FeedbackThankyouWidget> {
                 ),
               ),
             ]
-                .addToStart(SizedBox(height: 40.0))
-                .addToEnd(SizedBox(height: 50.0)),
+                .addToStart(const SizedBox(height: 40.0))
+                .addToEnd(const SizedBox(height: 50.0)),
           ),
         ),
       ),

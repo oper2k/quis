@@ -7,8 +7,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'pricing_old_model.dart';
 export 'pricing_old_model.dart';
@@ -17,7 +15,7 @@ class PricingOldWidget extends StatefulWidget {
   const PricingOldWidget({
     super.key,
     bool? isFirst,
-  }) : this.isFirst = isFirst ?? false;
+  }) : isFirst = isFirst ?? false;
 
   final bool isFirst;
 
@@ -69,7 +67,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +76,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                       Container(
                         width: 40.0,
                         height: 40.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                       ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(0.0),
@@ -108,8 +106,8 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                         child: Container(
                           width: 40.0,
                           height: 40.0,
-                          decoration: BoxDecoration(),
-                          alignment: AlignmentDirectional(1.0, 1.0),
+                          decoration: const BoxDecoration(),
+                          alignment: const AlignmentDirectional(1.0, 1.0),
                           child: Icon(
                             FFIcons.kcross,
                             color: FlutterFlowTheme.of(context).white,
@@ -120,9 +118,9 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                   child: Text(
                     'Please select your pricing plan',
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
@@ -132,16 +130,16 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                         ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                  child: Container(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                  child: SizedBox(
                     width: double.infinity,
                     height: MediaQuery.sizeOf(context).height * 0.65,
                     child: Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 15.0),
                           child: PageView(
                             controller: _model.pageViewController ??=
@@ -150,7 +148,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                             scrollDirection: Axis.horizontal,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     38.0, 0.0, 38.0, 5.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -163,17 +161,17 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                           FlutterFlowTheme.of(context)
                                               .aquaBreeze
                                         ],
-                                        stops: [0.0, 1.0],
-                                        begin: AlignmentDirectional(0.0, 1.0),
-                                        end: AlignmentDirectional(0, -1.0),
+                                        stops: const [0.0, 1.0],
+                                        begin: const AlignmentDirectional(0.0, 1.0),
+                                        end: const AlignmentDirectional(0, -1.0),
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.all(1.5),
+                                      padding: const EdgeInsets.all(1.5),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF62D7CA),
                                               Color(0xFF3C8BAB)
@@ -189,13 +187,13 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   17.0, 10.0, 17.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 13.0, 0.0, 0.0),
                                                 child: Text(
@@ -217,7 +215,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 16.0, 0.0, 30.0),
                                                 child: Container(
@@ -233,7 +231,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                   ),
                                                   child: Align(
                                                     alignment:
-                                                        AlignmentDirectional(
+                                                        const AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Text(
                                                       '0 AED/Month',
@@ -249,12 +247,12 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 5.0, 0.0, 0.0),
                                                   child: ListView(
                                                     padding:
-                                                        EdgeInsets.fromLTRB(
+                                                        const EdgeInsets.fromLTRB(
                                                       0,
                                                       0,
                                                       0,
@@ -369,7 +367,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     38.0, 0.0, 38.0, 5.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -382,17 +380,17 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                           FlutterFlowTheme.of(context)
                                               .aquaBreeze
                                         ],
-                                        stops: [0.0, 1.0],
-                                        begin: AlignmentDirectional(0.0, 1.0),
-                                        end: AlignmentDirectional(0, -1.0),
+                                        stops: const [0.0, 1.0],
+                                        begin: const AlignmentDirectional(0.0, 1.0),
+                                        end: const AlignmentDirectional(0, -1.0),
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.all(1.5),
+                                      padding: const EdgeInsets.all(1.5),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFFA4E8E0),
                                               Color(0xFF8FBECF)
@@ -408,13 +406,13 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   17.0, 10.0, 17.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 13.0, 0.0, 0.0),
                                                 child: Text(
@@ -436,10 +434,10 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 10.0, 0.0, 0.0),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height: 90.0,
                                                   child: Stack(
                                                     children: [
@@ -458,7 +456,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   11.0),
                                                           child: Column(
                                                             mainAxisSize:
@@ -476,7 +474,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             4.0,
@@ -508,7 +506,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                       ),
                                                       Align(
                                                         alignment:
-                                                            AlignmentDirectional(
+                                                            const AlignmentDirectional(
                                                                 0.0, 1.0),
                                                         child: ClipRRect(
                                                           borderRadius:
@@ -528,16 +526,16 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                                           context)
                                                                       .aquaBreeze
                                                                 ],
-                                                                stops: [
+                                                                stops: const [
                                                                   0.0,
                                                                   1.0
                                                                 ],
                                                                 begin:
-                                                                    AlignmentDirectional(
+                                                                    const AlignmentDirectional(
                                                                         0.0,
                                                                         1.0),
                                                                 end:
-                                                                    AlignmentDirectional(
+                                                                    const AlignmentDirectional(
                                                                         0,
                                                                         -1.0),
                                                               ),
@@ -548,7 +546,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                             ),
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .all(1.5),
                                                               child: Container(
                                                                 decoration:
@@ -562,7 +560,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                                               8.5),
                                                                 ),
                                                                 child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           13.0,
                                                                           3.0,
@@ -597,12 +595,12 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 5.0, 0.0, 0.0),
                                                   child: ListView(
                                                     padding:
-                                                        EdgeInsets.fromLTRB(
+                                                        const EdgeInsets.fromLTRB(
                                                       0,
                                                       0,
                                                       0,
@@ -812,7 +810,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     38.0, 0.0, 38.0, 5.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -825,17 +823,17 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                           FlutterFlowTheme.of(context)
                                               .aquaBreeze
                                         ],
-                                        stops: [0.0, 1.0],
-                                        begin: AlignmentDirectional(0.0, 1.0),
-                                        end: AlignmentDirectional(0, -1.0),
+                                        stops: const [0.0, 1.0],
+                                        begin: const AlignmentDirectional(0.0, 1.0),
+                                        end: const AlignmentDirectional(0, -1.0),
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.all(1.5),
+                                      padding: const EdgeInsets.all(1.5),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF62D7CA),
                                               Color(0xFF3C8BAB)
@@ -851,13 +849,13 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   17.0, 10.0, 17.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 13.0, 0.0, 0.0),
                                                 child: Text(
@@ -878,10 +876,10 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 10.0, 0.0, 0.0),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height: 90.0,
                                                   child: Stack(
                                                     children: [
@@ -900,7 +898,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   11.0),
                                                           child: Column(
                                                             mainAxisSize:
@@ -918,7 +916,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             4.0,
@@ -950,7 +948,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                       ),
                                                       Align(
                                                         alignment:
-                                                            AlignmentDirectional(
+                                                            const AlignmentDirectional(
                                                                 0.0, 1.0),
                                                         child: ClipRRect(
                                                           borderRadius:
@@ -970,16 +968,16 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                                           context)
                                                                       .aquaBreeze
                                                                 ],
-                                                                stops: [
+                                                                stops: const [
                                                                   0.0,
                                                                   1.0
                                                                 ],
                                                                 begin:
-                                                                    AlignmentDirectional(
+                                                                    const AlignmentDirectional(
                                                                         0.0,
                                                                         1.0),
                                                                 end:
-                                                                    AlignmentDirectional(
+                                                                    const AlignmentDirectional(
                                                                         0,
                                                                         -1.0),
                                                               ),
@@ -990,7 +988,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                             ),
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .all(1.5),
                                                               child: Container(
                                                                 decoration:
@@ -1004,7 +1002,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                                               8.5),
                                                                 ),
                                                                 child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           13.0,
                                                                           3.0,
@@ -1039,12 +1037,12 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 5.0, 0.0, 0.0),
                                                   child: ListView(
                                                     padding:
-                                                        EdgeInsets.fromLTRB(
+                                                        const EdgeInsets.fromLTRB(
                                                       0,
                                                       0,
                                                       0,
@@ -1254,7 +1252,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     38.0, 0.0, 38.0, 5.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -1267,17 +1265,17 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                           FlutterFlowTheme.of(context)
                                               .aquaBreeze
                                         ],
-                                        stops: [0.0, 1.0],
-                                        begin: AlignmentDirectional(0.0, 1.0),
-                                        end: AlignmentDirectional(0, -1.0),
+                                        stops: const [0.0, 1.0],
+                                        begin: const AlignmentDirectional(0.0, 1.0),
+                                        end: const AlignmentDirectional(0, -1.0),
                                       ),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.all(1.5),
+                                      padding: const EdgeInsets.all(1.5),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF62D7CA),
                                               Color(0xFF3C8BAB)
@@ -1293,13 +1291,13 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   17.0, 10.0, 17.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 13.0, 0.0, 0.0),
                                                 child: Text(
@@ -1321,7 +1319,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 20.0, 0.0, 0.0),
                                                 child: Container(
@@ -1336,7 +1334,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsets.all(11.0),
+                                                        const EdgeInsets.all(11.0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -1359,12 +1357,12 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 20.0, 0.0, 0.0),
                                                   child: ListView(
                                                     padding:
-                                                        EdgeInsets.fromLTRB(
+                                                        const EdgeInsets.fromLTRB(
                                                       0,
                                                       0,
                                                       0,
@@ -1539,9 +1537,9 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 1.0),
+                          alignment: const AlignmentDirectional(0.0, 1.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 25.0, 0.0, 0.0),
                             child: smooth_page_indicator.SmoothPageIndicator(
                               controller: _model.pageViewController ??=
@@ -1551,7 +1549,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                               onDotClicked: (i) async {
                                 await _model.pageViewController!.animateToPage(
                                   i,
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   curve: Curves.ease,
                                 );
                               },
@@ -1572,15 +1570,15 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 if (_model.pageViewCurrentIndex > 0 ? true : false)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: AutoSizeText(
                           'You will not be charged unless you select and subscribe to a plan that automatically renews based on the subscription type you select.',
                           textAlign: TextAlign.center,
@@ -1609,9 +1607,9 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                         'https://quisapp.notion.site/Terms-of-Use-6e0163631b634a80ae3b5265054de6d3');
                   },
                   child: Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Text(
                         'Terms of Use (EULA)',
                         textAlign: TextAlign.center,
@@ -1627,21 +1625,21 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 if (_model.pageViewCurrentIndex > 0)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent(
                             'PRICING_OLD_PAGE_SELECT_PLAN_BTN_ON_TAP');
-                        var _shouldSetState = false;
+                        var shouldSetState = false;
                         if (_model.pageViewCurrentIndex == 1) {
                           logFirebaseEvent('Button_revenue_cat');
                           _model.monthlysubscriptionOutput = await revenue_cat
                               .purchasePackage('monthlysubscription');
-                          _shouldSetState = true;
+                          shouldSetState = true;
                           if (!_model.monthlysubscriptionOutput!) {
                             logFirebaseEvent('Button_alert_dialog');
                             await showDialog(
@@ -1649,27 +1647,27 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                               builder: (alertDialogContext) {
                                 return WebViewAware(
                                   child: AlertDialog(
-                                    title: Text('Error'),
-                                    content: Text('Payment failed'),
+                                    title: const Text('Error'),
+                                    content: const Text('Payment failed'),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
+                                        child: const Text('Ok'),
                                       ),
                                     ],
                                   ),
                                 );
                               },
                             );
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                             return;
                           }
                         } else if (_model.pageViewCurrentIndex == 2) {
                           logFirebaseEvent('Button_revenue_cat');
                           _model.yearlysubscriptionOutput = await revenue_cat
                               .purchasePackage('yearlysubscription');
-                          _shouldSetState = true;
+                          shouldSetState = true;
                           if (!_model.yearlysubscriptionOutput!) {
                             logFirebaseEvent('Button_alert_dialog');
                             await showDialog(
@@ -1677,27 +1675,27 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                               builder: (alertDialogContext) {
                                 return WebViewAware(
                                   child: AlertDialog(
-                                    title: Text('Error'),
-                                    content: Text('Payment failed'),
+                                    title: const Text('Error'),
+                                    content: const Text('Payment failed'),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
+                                        child: const Text('Ok'),
                                       ),
                                     ],
                                   ),
                                 );
                               },
                             );
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                             return;
                           }
                         } else if (_model.pageViewCurrentIndex == 3) {
                           logFirebaseEvent('Button_revenue_cat');
                           _model.onetimeOutput =
                               await revenue_cat.purchasePackage('onetime');
-                          _shouldSetState = true;
+                          shouldSetState = true;
                           if (!_model.onetimeOutput!) {
                             logFirebaseEvent('Button_alert_dialog');
                             await showDialog(
@@ -1705,24 +1703,24 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                               builder: (alertDialogContext) {
                                 return WebViewAware(
                                   child: AlertDialog(
-                                    title: Text('Error'),
-                                    content: Text('Payment failed'),
+                                    title: const Text('Error'),
+                                    content: const Text('Payment failed'),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
+                                        child: const Text('Ok'),
                                       ),
                                     ],
                                   ),
                                 );
                               },
                             );
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                             return;
                           }
                         } else {
-                          if (_shouldSetState) setState(() {});
+                          if (shouldSetState) setState(() {});
                           return;
                         }
 
@@ -1732,16 +1730,16 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                         }
                         context.pushNamed('ThankYouForSubscription');
 
-                        if (_shouldSetState) setState(() {});
+                        if (shouldSetState) setState(() {});
                       },
                       text: 'Select Plan',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 52.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).headlineLarge.override(
@@ -1750,7 +1748,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                   useGoogleFonts: false,
                                 ),
                         elevation: 0.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 0.0,
                         ),
@@ -1761,7 +1759,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                 if (_model.pageViewCurrentIndex <= 0)
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent(
@@ -1779,10 +1777,10 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 52.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).aquaBreeze,
                         textStyle:
                             FlutterFlowTheme.of(context).headlineLarge.override(
@@ -1791,7 +1789,7 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                                   useGoogleFonts: false,
                                 ),
                         elevation: 0.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 0.0,
                         ),
@@ -1800,8 +1798,8 @@ class _PricingOldWidgetState extends State<PricingOldWidget> {
                     ),
                   ),
               ]
-                  .addToStart(SizedBox(height: 50.0))
-                  .addToEnd(SizedBox(height: 36.0)),
+                  .addToStart(const SizedBox(height: 50.0))
+                  .addToEnd(const SizedBox(height: 36.0)),
             ),
           ],
         ),

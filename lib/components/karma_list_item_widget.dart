@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'karma_list_item_model.dart';
 export 'karma_list_item_model.dart';
 
@@ -50,13 +48,13 @@ class _KarmaListItemWidgetState extends State<KarmaListItemWidget> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(15.0, 11.0, 15.0, 11.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(15.0, 11.0, 15.0, 11.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                 child: Text(
                   widget.text!,
                   style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -71,7 +69,7 @@ class _KarmaListItemWidgetState extends State<KarmaListItemWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 2.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 2.0, 0.0),
                   child: Text(
                     widget.points!,
                     style: TextStyle(

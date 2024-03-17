@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/course_button_widget.dart';
 import '/components/video_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -11,7 +10,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -83,8 +81,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -99,11 +97,11 @@ class _CourseWidgetState extends State<CourseWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -139,7 +137,7 @@ class _CourseWidgetState extends State<CourseWidget> {
             List<CourseVideoRecord> lessonListCourseVideoRecordList =
                 snapshot.data!;
             return Container(
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: StreamBuilder<List<CourseVideoRecord>>(
                 stream: queryCourseVideoRecord(
                   queryBuilder: (courseVideoRecord) => courseVideoRecord
@@ -171,14 +169,14 @@ class _CourseWidgetState extends State<CourseWidget> {
                   List<CourseVideoRecord> masterclassListCourseVideoRecordList =
                       snapshot.data!;
                   return Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Stack(
                       children: [
                         SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 height: MediaQuery.sizeOf(context).width / 1.72,
                                 child: Stack(
@@ -236,7 +234,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                     ))
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.2),
+                                            const AlignmentDirectional(0.0, 0.2),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -246,7 +244,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               sigmaY: 50.0,
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       15.0, 13.0, 15.0, 13.0),
                                               child: Row(
@@ -265,7 +263,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(14.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -294,10 +292,10 @@ class _CourseWidgetState extends State<CourseWidget> {
                                     if (isAndroid)
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.0, 1.0),
+                                            const AlignmentDirectional(1.0, 1.0),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 6.0, 6.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -313,9 +311,9 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                   .previewVimeoVideoUrl);
                                             },
                                             child: Container(
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Padding(
-                                                padding: EdgeInsets.all(10.0),
+                                                padding: const EdgeInsets.all(10.0),
                                                 child: Icon(
                                                   FFIcons
                                                       .kmaterialSymbolsLightFullscreen,
@@ -333,7 +331,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 22.0, 16.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -364,7 +362,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                         ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 2.0, 0.0, 0.0),
                                                 child: Row(
@@ -374,8 +372,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                     Text(
                                                       valueOrDefault<String>(
                                                         widget.courseItem
-                                                            ?.rating?.rating
-                                                            ?.toString(),
+                                                            ?.rating.rating
+                                                            .toString(),
                                                         '0',
                                                       ),
                                                       style:
@@ -386,11 +384,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                     ),
                                                     if (widget
                                                             .courseItem?.rating
-                                                            ?.hasRating() ??
+                                                            .hasRating() ??
                                                         true)
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     2.0,
                                                                     0.0,
@@ -423,11 +421,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                       ),
                                                     if (widget
                                                             .courseItem?.rating
-                                                            ?.hasNumber() ??
+                                                            .hasNumber() ??
                                                         true)
                                                       Expanded(
                                                         child: Text(
-                                                          '(${widget.courseItem?.rating?.number?.toString()})',
+                                                          '(${widget.courseItem?.rating.number.toString()})',
                                                           style: GoogleFonts
                                                               .getFont(
                                                             'Roboto',
@@ -446,7 +444,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                             if (widget.courseItem?.reference ==
                                                 currentUserDocument
                                                     ?.courseProgress
-                                                    ?.refCourse) {
+                                                    .refCourse) {
                                               return InkWell(
                                                 splashColor: Colors.transparent,
                                                 focusColor: Colors.transparent,
@@ -466,9 +464,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                           serializeParam(
                                                         lessonListCourseVideoRecordList[currentUserDocument!
                                                                     .courseProgress
-                                                                    .refVideos
-                                                                    .length >
-                                                                0
+                                                                    .refVideos.isNotEmpty
                                                             ? ((int?
                                                                 lastCompletedLessonIndex) {
                                                                 return lastCompletedLessonIndex !=
@@ -479,8 +475,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                               }(functions.videoIndexInList(
                                                                 currentUserDocument
                                                                     ?.courseProgress
-                                                                    ?.refVideos
-                                                                    ?.last,
+                                                                    .refVideos
+                                                                    .last,
                                                                 lessonListCourseVideoRecordList
                                                                     .toList())))
                                                             : 0],
@@ -490,9 +486,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                     extra: <String, dynamic>{
                                                       'videoItem': lessonListCourseVideoRecordList[currentUserDocument!
                                                                   .courseProgress
-                                                                  .refVideos
-                                                                  .length >
-                                                              0
+                                                                  .refVideos.isNotEmpty
                                                           ? ((int?
                                                               lastCompletedLessonIndex) {
                                                               return lastCompletedLessonIndex !=
@@ -503,8 +497,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                             }(functions.videoIndexInList(
                                                               currentUserDocument
                                                                   ?.courseProgress
-                                                                  ?.refVideos
-                                                                  ?.last,
+                                                                  .refVideos
+                                                                  .last,
                                                               lessonListCourseVideoRecordList
                                                                   .toList())))
                                                           : 0],
@@ -524,11 +518,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                 context)
                                                             .aquaBreeze
                                                       ],
-                                                      stops: [0.0, 1.0],
+                                                      stops: const [0.0, 1.0],
                                                       begin:
-                                                          AlignmentDirectional(
+                                                          const AlignmentDirectional(
                                                               0.0, 1.0),
-                                                      end: AlignmentDirectional(
+                                                      end: const AlignmentDirectional(
                                                           0, -1.0),
                                                     ),
                                                     borderRadius:
@@ -536,11 +530,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                             10.0),
                                                   ),
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 7.0,
                                                                 0.0, 7.0),
                                                     child: Text(
@@ -622,11 +616,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                 context)
                                                             .aquaBreeze
                                                       ],
-                                                      stops: [0.0, 1.0],
+                                                      stops: const [0.0, 1.0],
                                                       begin:
-                                                          AlignmentDirectional(
+                                                          const AlignmentDirectional(
                                                               0.0, 1.0),
-                                                      end: AlignmentDirectional(
+                                                      end: const AlignmentDirectional(
                                                           0, -1.0),
                                                     ),
                                                     borderRadius:
@@ -634,11 +628,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                             10.0),
                                                   ),
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 7.0,
                                                                 0.0, 7.0),
                                                     child: Text(
@@ -665,11 +659,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                       ],
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 14.0, 0.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
-                                          widget.courseItem?.description?.text,
+                                          widget.courseItem?.description.text,
                                           'description',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -682,7 +676,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 15.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -698,7 +692,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     3.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'This course include',
@@ -711,13 +705,13 @@ class _CourseWidgetState extends State<CourseWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 10.0, 0.0, 0.0),
                                       child: Builder(
                                         builder: (context) {
                                           final included = widget.courseItem
-                                                  ?.description?.included
-                                                  ?.toList() ??
+                                                  ?.description.included
+                                                  .toList() ??
                                               [];
                                           return Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -729,18 +723,18 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               final includedItem =
                                                   included[includedIndex];
                                               return Text(
-                                                '   •   ${includedItem}',
+                                                '   •   $includedItem',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,
                                               );
-                                            }).divide(SizedBox(height: 1.16)),
+                                            }).divide(const SizedBox(height: 1.16)),
                                           );
                                         },
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 18.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -837,15 +831,15 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               ),
                                             ),
                                           ),
-                                        ].divide(SizedBox(width: 10.0)),
+                                        ].divide(const SizedBox(width: 10.0)),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 18.0, 0.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: Builder(
                                           builder: (context) {
                                             if (_model.activeButton ==
@@ -916,7 +910,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                         ),
                                                       );
                                                     }).divide(
-                                                        SizedBox(height: 10.0)),
+                                                        const SizedBox(height: 10.0)),
                                                   );
                                                 },
                                               );
@@ -1006,7 +1000,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                         ),
                                                       );
                                                     }).divide(
-                                                        SizedBox(height: 10.0)),
+                                                        const SizedBox(height: 10.0)),
                                                   );
                                                 },
                                               );
@@ -1015,7 +1009,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                 builder: (context) {
                                                   final faq = widget
                                                           .courseItem?.faq
-                                                          ?.toList() ??
+                                                          .toList() ??
                                                       [];
                                                   return Column(
                                                     mainAxisSize:
@@ -1028,23 +1022,23 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         children: [
-                                                          Divider(
+                                                          const Divider(
                                                             thickness: 3.0,
                                                             color: Color(
                                                                 0x4DD8DADC),
                                                           ),
                                                           Container(
                                                             decoration:
-                                                                BoxDecoration(),
+                                                                const BoxDecoration(),
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .all(
                                                                           16.0),
                                                               child: Container(
                                                                 width: double
                                                                     .infinity,
-                                                                color: Color(
+                                                                color: const Color(
                                                                     0x00000000),
                                                                 child:
                                                                     ExpandableNotifier(
@@ -1063,11 +1057,11 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                                     collapsed:
                                                                         Container(
                                                                       decoration:
-                                                                          BoxDecoration(),
+                                                                          const BoxDecoration(),
                                                                     ),
                                                                     expanded:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           16.0,
                                                                           0.0,
@@ -1124,7 +1118,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                   ],
                                 ),
                               ),
-                            ].addToEnd(SizedBox(height: 110.0)),
+                            ].addToEnd(const SizedBox(height: 110.0)),
                           ),
                         ),
                         if (responsiveVisibility(
@@ -1135,15 +1129,15 @@ class _CourseWidgetState extends State<CourseWidget> {
                           desktop: false,
                         ))
                           Align(
-                            alignment: AlignmentDirectional(0.0, 1.0),
+                            alignment: const AlignmentDirectional(0.0, 1.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 40.0),
                               child: Builder(
                                 builder: (context) {
                                   if (widget.courseItem?.reference ==
                                       currentUserDocument
-                                          ?.courseProgress?.refCourse) {
+                                          ?.courseProgress.refCourse) {
                                     return FFButtonWidget(
                                       onPressed: () async {
                                         logFirebaseEvent(
@@ -1157,9 +1151,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               lessonListCourseVideoRecordList[
                                                   currentUserDocument!
                                                               .courseProgress
-                                                              .refVideos
-                                                              .length >
-                                                          0
+                                                              .refVideos.isNotEmpty
                                                       ? ((int?
                                                           lastCompletedLessonIndex) {
                                                           return lastCompletedLessonIndex !=
@@ -1170,8 +1162,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                         }(functions.videoIndexInList(
                                                           currentUserDocument
                                                               ?.courseProgress
-                                                              ?.refVideos
-                                                              ?.last,
+                                                              .refVideos
+                                                              .last,
                                                           lessonListCourseVideoRecordList
                                                               .toList())))
                                                       : 0],
@@ -1182,9 +1174,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                             'videoItem': lessonListCourseVideoRecordList[
                                                 currentUserDocument!
                                                             .courseProgress
-                                                            .refVideos
-                                                            .length >
-                                                        0
+                                                            .refVideos.isNotEmpty
                                                     ? ((int?
                                                         lastCompletedLessonIndex) {
                                                         return lastCompletedLessonIndex !=
@@ -1195,8 +1185,8 @@ class _CourseWidgetState extends State<CourseWidget> {
                                                       }(functions.videoIndexInList(
                                                         currentUserDocument
                                                             ?.courseProgress
-                                                            ?.refVideos
-                                                            ?.last,
+                                                            .refVideos
+                                                            .last,
                                                         lessonListCourseVideoRecordList
                                                             .toList())))
                                                     : 0],
@@ -1207,10 +1197,10 @@ class _CourseWidgetState extends State<CourseWidget> {
                                       options: FFButtonOptions(
                                         width: double.infinity,
                                         height: 52.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
+                                            const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
@@ -1224,7 +1214,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               useGoogleFonts: false,
                                             ),
                                         elevation: 0.0,
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.transparent,
                                           width: 0.0,
                                         ),
@@ -1273,10 +1263,10 @@ class _CourseWidgetState extends State<CourseWidget> {
                                       options: FFButtonOptions(
                                         width: double.infinity,
                                         height: 52.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
+                                            const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
@@ -1290,7 +1280,7 @@ class _CourseWidgetState extends State<CourseWidget> {
                                               useGoogleFonts: false,
                                             ),
                                         elevation: 0.0,
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.transparent,
                                           width: 0.0,
                                         ),

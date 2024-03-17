@@ -1,16 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/backend/api_requests/api_manager.dart';
 import '/backend/backend.dart';
-import '/backend/schema/enums/enums.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/karma_shortage_dialog_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/home/deducted_karma/deducted_karma_widget.dart';
 import '/home/succesful_purchase_dialog/succesful_purchase_dialog_widget.dart';
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
@@ -38,7 +33,7 @@ Future<bool?> payByKarma(
         insetPadding: EdgeInsets.zero,
         backgroundColor: Colors.transparent,
         alignment:
-            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+            const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
         child: WebViewAware(
           child: DeductedKarmaWidget(
             deductedKarma: karmaAmount!,
@@ -57,7 +52,7 @@ Future<bool?> payByKarma(
     await currentUserReference!.update({
       ...mapToFirestore(
         {
-          'karma': FieldValue.increment(-(karmaAmount!)),
+          'karma': FieldValue.increment(-(karmaAmount)),
         },
       ),
     });
@@ -101,9 +96,9 @@ Future<bool?> payByKarma(
           elevation: 0,
           insetPadding: EdgeInsets.zero,
           backgroundColor: Colors.transparent,
-          alignment: AlignmentDirectional(0.0, 0.0)
+          alignment: const AlignmentDirectional(0.0, 0.0)
               .resolve(Directionality.of(context)),
-          child: WebViewAware(
+          child: const WebViewAware(
             child: SuccesfulPurchaseDialogWidget(),
           ),
         );
@@ -122,9 +117,9 @@ Future<bool?> payByKarma(
           elevation: 0,
           insetPadding: EdgeInsets.zero,
           backgroundColor: Colors.transparent,
-          alignment: AlignmentDirectional(0.0, 0.0)
+          alignment: const AlignmentDirectional(0.0, 0.0)
               .resolve(Directionality.of(context)),
-          child: WebViewAware(
+          child: const WebViewAware(
             child: KarmaShortageDialogWidget(),
           ),
         );

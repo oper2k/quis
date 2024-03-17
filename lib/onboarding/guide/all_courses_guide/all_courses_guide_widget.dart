@@ -5,9 +5,7 @@ import '/courses/missed_industry_thankyou/missed_industry_thankyou_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/quide_courses2.dart';
-import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
@@ -16,8 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'all_courses_guide_model.dart';
 export 'all_courses_guide_model.dart';
@@ -52,8 +48,8 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
           curve: Curves.easeInOut,
           delay: 100.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 100.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 100.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -70,7 +66,8 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_INI');
       logFirebaseEvent('AllCoursesGuide_start_walkthrough');
-      _model.quideCourses2Controller = _model.createPageWalkthrough(context);
+      safeSetState(() =>
+          _model.quideCourses2Controller = createPageWalkthrough(context));
       _model.quideCourses2Controller?.show(context: context);
     });
 
@@ -114,7 +111,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Text(
                   '📖 Course Library',
                   style: FlutterFlowTheme.of(context).headlineLarge,
@@ -122,7 +119,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -148,10 +145,10 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                 }
                 List<CourseRecord> couseListCourseRecordList = snapshot.data!;
                 return Container(
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -171,19 +168,18 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.textController,
                                   focusNode: _model.textFieldFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.textController',
-                                    Duration(milliseconds: 100),
+                                    const Duration(milliseconds: 100),
                                     () async {
                                       logFirebaseEvent(
                                           'ALL_COURSES_GUIDE_TextField_degc8osl_ON_');
-                                      if (_model.textController.text != null &&
-                                          _model.textController.text != '') {
+                                      if (_model.textController.text != '') {
                                         logFirebaseEvent(
                                             'TextField_update_page_state');
                                         setState(() {
@@ -211,7 +207,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                           lineHeight: 1.16,
                                         ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0x00000000),
                                         width: 1.0,
                                       ),
@@ -244,7 +240,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                     filled: true,
                                     fillColor:
                                         FlutterFlowTheme.of(context).white,
-                                    contentPadding: EdgeInsets.all(16.0),
+                                    contentPadding: const EdgeInsets.all(16.0),
                                     prefixIcon: Icon(
                                       Icons.search,
                                       color: FlutterFlowTheme.of(context)
@@ -259,7 +255,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 24.0, 0.0, 0.0),
                                 child: Builder(
                                   builder: (context) {
@@ -290,7 +286,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 18.0, 0.0, 0.0),
                                             child: Builder(
                                               builder: (context) {
@@ -364,7 +360,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 18.0, 0.0, 0.0),
                                             child: Builder(
                                               builder: (context) {
@@ -424,7 +420,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                               ),
                               Builder(
                                 builder: (context) => Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -443,7 +439,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                             elevation: 0,
                                             insetPadding: EdgeInsets.zero,
                                             backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(
+                                            alignment: const AlignmentDirectional(
                                                     0.0, -0.4)
                                                 .resolve(
                                                     Directionality.of(context)),
@@ -456,7 +452,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                                             _model.unfocusNode)
                                                     : FocusScope.of(context)
                                                         .unfocus(),
-                                                child: MissedIndustryWidget(),
+                                                child: const MissedIndustryWidget(),
                                               ),
                                             ),
                                           );
@@ -477,7 +473,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                               backgroundColor:
                                                   Colors.transparent,
                                               alignment:
-                                                  AlignmentDirectional(0.0, 0.0)
+                                                  const AlignmentDirectional(0.0, 0.0)
                                                       .resolve(
                                                           Directionality.of(
                                                               context)),
@@ -492,7 +488,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                                       : FocusScope.of(context)
                                                           .unfocus(),
                                                   child:
-                                                      MissedIndustryThankyouWidget(),
+                                                      const MissedIndustryThankyouWidget(),
                                                 ),
                                               ),
                                             );
@@ -511,7 +507,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         'Do we miss your industry?',
                                         textAlign: TextAlign.center,
@@ -536,8 +532,8 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                           ).animateOnPageLoad(
                               animationsMap['columnOnPageLoadAnimation']!),
                         ]
-                            .addToStart(SizedBox(height: 30.0))
-                            .addToEnd(SizedBox(height: 100.0)),
+                            .addToStart(const SizedBox(height: 30.0))
+                            .addToEnd(const SizedBox(height: 100.0)),
                       ),
                     ),
                   ),
@@ -550,21 +546,21 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
               Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).white,
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 32.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 32.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -577,7 +573,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Home',
@@ -591,7 +587,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -604,7 +600,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Course',
@@ -621,7 +617,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -634,7 +630,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Practice',
@@ -648,7 +644,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -661,7 +657,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Questions',
@@ -675,7 +671,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -688,7 +684,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Profile',
@@ -712,4 +708,42 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () {
+          safeSetState(() => _model.quideCourses2Controller = null);
+          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
+          logFirebaseEvent('AllCoursesGuide_navigate_to');
+
+          context.goNamed(
+            'LatestInterviewQuestionsGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        },
+        onSkip: () {
+          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
+          logFirebaseEvent('AllCoursesGuide_navigate_to');
+
+          context.goNamed(
+            'LatestInterviewQuestionsGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
+          return true;
+        },
+      );
 }

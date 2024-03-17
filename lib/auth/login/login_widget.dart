@@ -6,11 +6,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -89,8 +86,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -105,23 +102,23 @@ class _LoginWidgetState extends State<LoginWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
                 child: Text(
                   'Email address',
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -134,18 +131,18 @@ class _LoginWidgetState extends State<LoginWidget> {
               Form(
                 key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
-                child: Container(
+                child: SizedBox(
                   height: 56.0,
                   child: Stack(
                     children: [
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: TextFormField(
                           controller: _model.emailFieldController,
                           focusNode: _model.emailFieldFocusNode,
                           onChanged: (_) => EasyDebounce.debounce(
                             '_model.emailFieldController',
-                            Duration(milliseconds: 100),
+                            const Duration(milliseconds: 100),
                             () async {
                               logFirebaseEvent(
                                   'LOGIN_EmailField_ON_TEXTFIELD_CHANGE');
@@ -169,7 +166,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   lineHeight: 2.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -198,7 +195,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsets.all(16.0),
+                            contentPadding: const EdgeInsets.all(16.0),
                           ),
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
@@ -213,9 +210,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(1.0, 0.0),
+                        alignment: const AlignmentDirectional(1.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 16.0, 0.0),
                           child: wrapWithModel(
                             model: _model.checkMarkModel,
@@ -231,7 +228,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 21.0, 0.0, 6.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 21.0, 0.0, 6.0),
                 child: Text(
                   'Password',
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -241,14 +238,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                       ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: TextFormField(
                   controller: _model.passwordFieldController,
                   focusNode: _model.passwordFieldFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.passwordFieldController',
-                    Duration(milliseconds: 100),
+                    const Duration(milliseconds: 100),
                     () async {
                       logFirebaseEvent(
                           'LOGIN_PasswordField_ON_TEXTFIELD_CHANGE');
@@ -270,7 +267,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               lineHeight: 2.0,
                             ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 1.0,
                       ),
@@ -299,7 +296,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).white,
-                    contentPadding: EdgeInsets.all(16.0),
+                    contentPadding: const EdgeInsets.all(16.0),
                     suffixIcon: InkWell(
                       onTap: () => setState(
                         () => _model.passwordFieldVisibility =
@@ -325,7 +322,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(1.0, 0.0),
+                alignment: const AlignmentDirectional(1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -338,10 +335,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                     context.pushNamed('ResetPassword');
                   },
                   child: Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(14.0, 14.0, 0.0, 14.0),
+                          const EdgeInsetsDirectional.fromSTEB(14.0, 14.0, 0.0, 14.0),
                       child: Text(
                         'Forgot password?',
                         style:
@@ -356,7 +353,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: (!_model.isEmailValid || !_model.isPasswordValid)
                       ? null
@@ -391,9 +388,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                     width: double.infinity,
                     height: 52.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).headlineLarge.override(
@@ -402,7 +399,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               useGoogleFonts: false,
                             ),
                     elevation: 0.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 0.0,
                     ),
@@ -413,7 +410,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -441,11 +438,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(width: 15.0)),
+                  ].divide(const SizedBox(width: 15.0)),
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 9.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 9.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -539,15 +536,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(width: 22.0)),
+                  ].divide(const SizedBox(width: 22.0)),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               if (!(isWeb
                   ? MediaQuery.viewInsetsOf(context).bottom > 0
                   : _isKeyboardVisible))
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -562,9 +559,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                       context.pushNamed('SignupOld');
                     },
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
@@ -592,7 +589,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                   ),
                 ),
-            ].addToEnd(SizedBox(height: 50.0)),
+            ].addToEnd(const SizedBox(height: 50.0)),
           ),
         ),
       ),

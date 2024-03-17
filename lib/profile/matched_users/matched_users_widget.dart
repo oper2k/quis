@@ -3,10 +3,7 @@ import '/backend/backend.dart';
 import '/components/avatar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'matched_users_model.dart';
 export 'matched_users_model.dart';
 
@@ -72,8 +69,8 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -88,26 +85,26 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: AuthUserStreamWidget(
             builder: (context) => Builder(
               builder: (context) {
                 final matchedUsers = widget.likedUsersList!
-                    .where((e) => (currentUserDocument?.likedBy?.toList() ?? [])
+                    .where((e) => (currentUserDocument?.likedBy.toList() ?? [])
                         .contains(e.reference))
                     .toList();
                 return ListView.builder(
-                  padding: EdgeInsets.fromLTRB(
+                  padding: const EdgeInsets.fromLTRB(
                     0,
                     10.0,
                     0,
@@ -151,7 +148,7 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               7.0, 5.0, 7.0, 5.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -165,7 +162,7 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -173,7 +170,7 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 6.0, 10.0, 6.0),
                                         child: Text(
                                           '${matchedUsersItem.firstName} ${matchedUsersItem.lastName}',
@@ -190,7 +187,7 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                                       ))
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 8.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -203,7 +200,7 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                                                 size: 18.0,
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 0.0, 0.0),
                                                 child: Text(

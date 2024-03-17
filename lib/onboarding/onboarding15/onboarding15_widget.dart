@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding15_model.dart';
 export 'onboarding15_model.dart';
 
@@ -65,8 +62,8 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -76,7 +73,7 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -84,7 +81,7 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -96,7 +93,7 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                     fit: BoxFit.contain,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'Advice from REAL experts 👨‍💻',
                   textAlign: TextAlign.center,
@@ -109,7 +106,7 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                 ),
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 32.0, 20.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 32.0, 20.0, 0.0),
                   child: RichText(
                     textScaler: MediaQuery.of(context).textScaler,
                     text: TextSpan(
@@ -126,13 +123,13 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                                 lineHeight: 1.11,
                               ),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: 'Experts Video Answer ',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text:
                               'courses and master classes where TOP industry people share tips on how to get hired.',
                           style: TextStyle(),
@@ -149,9 +146,9 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('ONBOARDING15_PAGE_CONTINUE_BTN_ON_TAP');
@@ -164,9 +161,9 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -175,7 +172,7 @@ class _Onboarding15WidgetState extends State<Onboarding15Widget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

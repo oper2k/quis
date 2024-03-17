@@ -1,9 +1,6 @@
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'calendar_element_widget.dart' show CalendarElementWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class CalendarElementModel extends FlutterFlowModel<CalendarElementWidget> {
   /// Initialization and disposal methods.

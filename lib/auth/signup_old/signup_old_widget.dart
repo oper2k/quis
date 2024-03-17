@@ -5,13 +5,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'signup_old_model.dart';
 export 'signup_old_model.dart';
 
@@ -82,8 +78,8 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -98,17 +94,17 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -116,7 +112,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 6.0),
                   child: Text(
                     'Email address',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -126,18 +122,18 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 56.0,
                   child: Stack(
                     children: [
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: TextFormField(
                           controller: _model.emailFieldController,
                           focusNode: _model.emailFieldFocusNode,
                           onChanged: (_) => EasyDebounce.debounce(
                             '_model.emailFieldController',
-                            Duration(milliseconds: 100),
+                            const Duration(milliseconds: 100),
                             () async {
                               logFirebaseEvent(
                                   'SIGNUP_OLD_EmailField_ON_TEXTFIELD_CHANG');
@@ -161,7 +157,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                   lineHeight: 2.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -190,7 +186,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsets.all(16.0),
+                            contentPadding: const EdgeInsets.all(16.0),
                           ),
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
@@ -205,9 +201,9 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(1.0, 0.0),
+                        alignment: const AlignmentDirectional(1.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 16.0, 0.0),
                           child: wrapWithModel(
                             model: _model.checkMarkModel1,
@@ -230,7 +226,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 6.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 6.0),
                         child: Text(
                           'Create Password',
                           style: FlutterFlowTheme.of(context)
@@ -242,14 +238,14 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                               ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: TextFormField(
                           controller: _model.passwordField1Controller,
                           focusNode: _model.passwordField1FocusNode,
                           onChanged: (_) => EasyDebounce.debounce(
                             '_model.passwordField1Controller',
-                            Duration(milliseconds: 100),
+                            const Duration(milliseconds: 100),
                             () async {
                               logFirebaseEvent(
                                   'SIGNUP_OLD_PasswordField1_ON_TEXTFIELD_C');
@@ -274,7 +270,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                   lineHeight: 2.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -303,7 +299,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsets.all(16.0),
+                            contentPadding: const EdgeInsets.all(16.0),
                             suffixIcon: InkWell(
                               onTap: () => setState(
                                 () => _model.passwordField1Visibility =
@@ -332,7 +328,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 6.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 6.0),
                         child: Text(
                           'Confirm password',
                           style: FlutterFlowTheme.of(context)
@@ -346,15 +342,15 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
-                        child: Container(
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                        child: SizedBox(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.passwordField2Controller,
                             focusNode: _model.passwordField2FocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.passwordField2Controller',
-                              Duration(milliseconds: 100),
+                              const Duration(milliseconds: 100),
                               () async {
                                 logFirebaseEvent(
                                     'SIGNUP_OLD_PasswordField2_ON_TEXTFIELD_C');
@@ -379,7 +375,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                     lineHeight: 2.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -408,7 +404,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                               ),
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context).white,
-                              contentPadding: EdgeInsets.all(16.0),
+                              contentPadding: const EdgeInsets.all(16.0),
                               suffixIcon: InkWell(
                                 onTap: () => setState(
                                   () => _model.passwordField2Visibility =
@@ -465,9 +461,9 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         }
                       },
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 5.0, 10.0),
                           child: wrapWithModel(
                             model: _model.checkMarkModel2,
@@ -557,12 +553,12 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(width: 7.0)),
+                  ].divide(const SizedBox(width: 7.0)),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -586,7 +582,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 5.0, 10.0),
                             child: wrapWithModel(
                               model: _model.checkMarkModel3,
@@ -597,7 +593,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 14.0, 0.0, 14.0),
                             child: Text(
                               'I have a referral code',
@@ -610,7 +606,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                   ),
                             ),
                           ),
-                        ].divide(SizedBox(width: 7.0)),
+                        ].divide(const SizedBox(width: 7.0)),
                       ),
                     ),
                   ),
@@ -619,31 +615,30 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                   key: _model.formKey1,
                   autovalidateMode: AutovalidateMode.disabled,
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
                           color: _model.isRefValid
-                              ? Color(0x00000000)
+                              ? const Color(0x00000000)
                               : FlutterFlowTheme.of(context).error,
                         ),
                       ),
                       child: Visibility(
                         visible: _model.isRef,
-                        child: Container(
+                        child: SizedBox(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.refFieldController,
                             focusNode: _model.refFieldFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.refFieldController',
-                              Duration(milliseconds: 2000),
+                              const Duration(milliseconds: 2000),
                               () async {
                                 logFirebaseEvent(
                                     'SIGNUP_OLD_RefField_ON_TEXTFIELD_CHANGE');
-                                if (_model.refFieldController.text != null &&
-                                    _model.refFieldController.text != '') {
+                                if (_model.refFieldController.text != '') {
                                   logFirebaseEvent(
                                       'RefField_update_page_state');
                                   setState(() {
@@ -670,7 +665,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                     lineHeight: 2.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -699,7 +694,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                               ),
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context).white,
-                              contentPadding: EdgeInsets.all(16.0),
+                              contentPadding: const EdgeInsets.all(16.0),
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
@@ -723,17 +718,16 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: !_model.isEmailValid
                         ? null
                         : () async {
                             logFirebaseEvent(
                                 'SIGNUP_OLD_PAGE_SIGN_UP_BTN_ON_TAP');
-                            var _shouldSetState = false;
+                            var shouldSetState = false;
                             if (_model.isRef) {
-                              if (_model.refFieldController.text != null &&
-                                  _model.refFieldController.text != '') {
+                              if (_model.refFieldController.text != '') {
                                 logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isRefValid = true;
@@ -753,7 +747,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                     !_model.formKey2.currentState!.validate()) {
                                   return;
                                 }
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
 
@@ -765,19 +759,19 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                   isEqualTo: _model.refFieldController.text,
                                 ),
                               );
-                              _shouldSetState = true;
-                              if (_model.refUserOutput!.length > 0) {
+                              shouldSetState = true;
+                              if (_model.refUserOutput!.isNotEmpty) {
                                 logFirebaseEvent('Button_update_app_state');
                                 setState(() {
                                   FFAppState().refUser =
-                                      _model.refUserOutput?.first?.reference;
+                                      _model.refUserOutput?.first.reference;
                                 });
                               } else {
                                 logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isRefValid = false;
                                 });
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
                             }
@@ -791,7 +785,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                               setState(() {
                                 _model.isConsentRed = true;
                               });
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
 
@@ -800,7 +794,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                             if (_model.passwordField1Controller.text !=
                                 _model.passwordField2Controller.text) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                   content: Text(
                                     'Passwords don\'t match!',
                                   ),
@@ -834,16 +828,16 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                               }.withoutNulls,
                             );
 
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                           },
                     text: 'Sign up',
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -852,7 +846,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),
@@ -863,7 +857,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -892,11 +886,11 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                           ),
                         ),
                       ),
-                    ].divide(SizedBox(width: 15.0)),
+                    ].divide(const SizedBox(width: 15.0)),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 9.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 9.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -908,10 +902,9 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           logFirebaseEvent('SIGNUP_OLD_PAGE_Google_ON_TAP');
-                          var _shouldSetState = false;
+                          var shouldSetState = false;
                           if (_model.isRef) {
-                            if (_model.refFieldController.text != null &&
-                                _model.refFieldController.text != '') {
+                            if (_model.refFieldController.text != '') {
                               logFirebaseEvent('Google_update_page_state');
                               setState(() {
                                 _model.isRefValid = true;
@@ -921,7 +914,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                               setState(() {
                                 _model.isRefValid = false;
                               });
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
 
@@ -933,19 +926,19 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                 isEqualTo: _model.refFieldController.text,
                               ),
                             );
-                            _shouldSetState = true;
-                            if (_model.refUserOutputGoogle!.length > 0) {
+                            shouldSetState = true;
+                            if (_model.refUserOutputGoogle!.isNotEmpty) {
                               logFirebaseEvent('Google_update_app_state');
                               setState(() {
                                 FFAppState().refUser = _model
-                                    .refUserOutputGoogle?.first?.reference;
+                                    .refUserOutputGoogle?.first.reference;
                               });
                             } else {
                               logFirebaseEvent('Google_update_page_state');
                               setState(() {
                                 _model.isRefValid = false;
                               });
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
                           }
@@ -959,7 +952,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                             setState(() {
                               _model.isConsentRed = true;
                             });
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                             return;
                           }
 
@@ -974,7 +967,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
 
                           context.goNamedAuth('ConfirmEmail', context.mounted);
 
-                          if (_shouldSetState) setState(() {});
+                          if (shouldSetState) setState(() {});
                         },
                         child: Container(
                           width: 108.0,
@@ -1011,10 +1004,9 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           logFirebaseEvent('SIGNUP_OLD_PAGE_Apple_ON_TAP');
-                          var _shouldSetState = false;
+                          var shouldSetState = false;
                           if (_model.isRef) {
-                            if (_model.refFieldController.text != null &&
-                                _model.refFieldController.text != '') {
+                            if (_model.refFieldController.text != '') {
                               logFirebaseEvent('Apple_update_page_state');
                               setState(() {
                                 _model.isRefValid = true;
@@ -1024,7 +1016,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                               setState(() {
                                 _model.isRefValid = false;
                               });
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
 
@@ -1036,19 +1028,19 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                                 isEqualTo: _model.refFieldController.text,
                               ),
                             );
-                            _shouldSetState = true;
-                            if (_model.refUserOutputApple!.length > 0) {
+                            shouldSetState = true;
+                            if (_model.refUserOutputApple!.isNotEmpty) {
                               logFirebaseEvent('Apple_update_app_state');
                               setState(() {
                                 FFAppState().refUser =
-                                    _model.refUserOutputApple?.first?.reference;
+                                    _model.refUserOutputApple?.first.reference;
                               });
                             } else {
                               logFirebaseEvent('Apple_update_page_state');
                               setState(() {
                                 _model.isRefValid = false;
                               });
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
                           }
@@ -1062,7 +1054,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                             setState(() {
                               _model.isConsentRed = true;
                             });
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                             return;
                           }
 
@@ -1077,7 +1069,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
 
                           context.goNamedAuth('ConfirmEmail', context.mounted);
 
-                          if (_shouldSetState) setState(() {});
+                          if (shouldSetState) setState(() {});
                         },
                         child: Container(
                           width: 108.0,
@@ -1107,14 +1099,14 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                           ),
                         ),
                       ),
-                    ].divide(SizedBox(width: 22.0)),
+                    ].divide(const SizedBox(width: 22.0)),
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -1130,9 +1122,9 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                         context.pushNamed('Login');
                       },
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: RichText(
                             textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
@@ -1161,7 +1153,7 @@ class _SignupOldWidgetState extends State<SignupOldWidget> {
                     ),
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 50.0)),
+              ].addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

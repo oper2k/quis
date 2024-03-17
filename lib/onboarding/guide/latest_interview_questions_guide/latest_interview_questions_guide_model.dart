@@ -1,31 +1,10 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/backend/schema/enums/enums.dart';
 import '/components/filter_element_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/latest_questions/questions_filter_bottom_sheet/questions_filter_bottom_sheet_widget.dart';
-import '/walkthroughs/guide_questions3.dart';
-import 'dart:async';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'latest_interview_questions_guide_widget.dart'
     show LatestInterviewQuestionsGuideWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 class LatestInterviewQuestionsGuideModel
     extends FlutterFlowModel<LatestInterviewQuestionsGuideWidget> {
@@ -46,8 +25,8 @@ class LatestInterviewQuestionsGuideModel
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   TutorialCoachMark? guideQuestions3Controller;
+  final unfocusNode = FocusNode();
   // State field(s) for SearchField widget.
   FocusNode? searchFieldFocusNode;
   TextEditingController? searchFieldController;
@@ -69,8 +48,8 @@ class LatestInterviewQuestionsGuideModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     guideQuestions3Controller?.finish();
+    unfocusNode.dispose();
     searchFieldFocusNode?.dispose();
     searchFieldController?.dispose();
 
@@ -81,23 +60,4 @@ class LatestInterviewQuestionsGuideModel
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () async {
-          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
-          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
-
-          context.goNamed('HomeGuide2');
-        },
-        onSkip: () {
-          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
-          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
-
-          context.goNamed('HomeGuide2');
-
-          return true;
-        },
-      );
 }

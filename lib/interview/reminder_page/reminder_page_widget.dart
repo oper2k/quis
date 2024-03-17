@@ -8,9 +8,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'reminder_page_model.dart';
 export 'reminder_page_model.dart';
 
@@ -56,18 +54,18 @@ class _ReminderPageWidgetState extends State<ReminderPageWidget> {
           child: Stack(
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, -0.25),
+                alignment: const AlignmentDirectional(0.0, -0.25),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Lottie.asset(
-                          'assets/lottie_animations/animation_loesndo3.json',
+                          'assets/lottie_animations/XLjIcIgZfU.json',
                           width: 200.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -76,7 +74,7 @@ class _ReminderPageWidgetState extends State<ReminderPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 17.0, 0.0, 0.0),
                         child: Wrap(
                           spacing: 5.0,
                           runSpacing: 0.0,
@@ -99,7 +97,7 @@ class _ReminderPageWidgetState extends State<ReminderPageWidget> {
                                   ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 30.0, 0.0, 0.0),
                               child: Text(
                                 'You have successfully registered for an interview',
@@ -121,9 +119,9 @@ class _ReminderPageWidgetState extends State<ReminderPageWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
@@ -269,9 +267,9 @@ class _ReminderPageWidgetState extends State<ReminderPageWidget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 7.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 7.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -280,7 +278,7 @@ class _ReminderPageWidgetState extends State<ReminderPageWidget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

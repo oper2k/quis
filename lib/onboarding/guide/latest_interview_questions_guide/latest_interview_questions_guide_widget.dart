@@ -5,22 +5,18 @@ import '/components/filter_element_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/latest_questions/questions_filter_bottom_sheet/questions_filter_bottom_sheet_widget.dart';
 import '/walkthroughs/guide_questions3.dart';
-import 'dart:async';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -59,8 +55,8 @@ class _LatestInterviewQuestionsGuideWidgetState
           curve: Curves.easeInOut,
           delay: 100.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 100.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 100.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -77,7 +73,8 @@ class _LatestInterviewQuestionsGuideWidgetState
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
       logFirebaseEvent('LatestInterviewQuestionsGuide_start_walk');
-      _model.guideQuestions3Controller = _model.createPageWalkthrough(context);
+      safeSetState(() =>
+          _model.guideQuestions3Controller = createPageWalkthrough(context));
       _model.guideQuestions3Controller?.show(context: context);
     });
 
@@ -118,7 +115,7 @@ class _LatestInterviewQuestionsGuideWidgetState
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 0.0,
           elevation: 0.0,
@@ -126,13 +123,13 @@ class _LatestInterviewQuestionsGuideWidgetState
         body: Stack(
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: ListView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Lottie.asset(
                       'assets/lottie_animations/animation_lofuvsla.json',
                       width: 220.0,
@@ -143,7 +140,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,7 +148,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                         Container(
                           width: 30.0,
                           height: 30.0,
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                         ),
                         Text(
                           'Latest Interview Question',
@@ -176,7 +173,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                             context.pushNamed('NewQuestion');
                           },
                           child: Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Icon(
                               FFIcons.kplus,
                               color: FlutterFlowTheme.of(context).secondaryText,
@@ -189,7 +186,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                     child: RichText(
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
@@ -246,7 +243,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                           questionListInterviewQuestionRecordList =
                           snapshot.data!;
                       return Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child:
                             StreamBuilder<List<CommentInterviewQuestionRecord>>(
                           stream: queryCommentInterviewQuestionRecord(),
@@ -269,12 +266,12 @@ class _LatestInterviewQuestionsGuideWidgetState
                                 commentsListCommentInterviewQuestionRecordList =
                                 snapshot.data!;
                             return Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 14.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -288,14 +285,11 @@ class _LatestInterviewQuestionsGuideWidgetState
                                             onChanged: (_) =>
                                                 EasyDebounce.debounce(
                                               '_model.searchFieldController',
-                                              Duration(milliseconds: 100),
+                                              const Duration(milliseconds: 100),
                                               () async {
                                                 logFirebaseEvent(
                                                     'LATEST_INTERVIEW_QUESTIONS_GUIDE_SearchF');
                                                 if (_model.searchFieldController
-                                                            .text !=
-                                                        null &&
-                                                    _model.searchFieldController
                                                             .text !=
                                                         '') {
                                                   logFirebaseEvent(
@@ -328,7 +322,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                         lineHeight: 1.16,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
@@ -371,7 +365,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                   FlutterFlowTheme.of(context)
                                                       .white,
                                               contentPadding:
-                                                  EdgeInsets.all(16.0),
+                                                  const EdgeInsets.all(16.0),
                                               prefixIcon: Icon(
                                                 Icons.search,
                                                 color:
@@ -442,9 +436,9 @@ class _LatestInterviewQuestionsGuideWidgetState
                                             setState(() {});
                                           },
                                           child: Container(
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Padding(
-                                              padding: EdgeInsets.all(10.0),
+                                              padding: const EdgeInsets.all(10.0),
                                               child: Icon(
                                                 Icons.filter_alt_outlined,
                                                 color:
@@ -459,7 +453,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -469,7 +463,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                             BorderRadius.circular(10.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -531,21 +525,20 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                 ),
                                               ),
                                             ),
-                                          ].divide(SizedBox(width: 6.0)),
+                                          ].divide(const SizedBox(width: 6.0)),
                                         ),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
                                         if (_model.isAll) {
                                           return Builder(
                                             builder: (context) {
-                                              if (_model.filterList.length ==
-                                                  0) {
+                                              if (_model.filterList.isEmpty) {
                                                 return Builder(
                                                   builder: (context) {
                                                     if (_model.isSearch) {
@@ -584,7 +577,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                           .length,
                                                                   separatorBuilder: (_,
                                                                           __) =>
-                                                                      SizedBox(
+                                                                      const SizedBox(
                                                                           height:
                                                                               12.0),
                                                                   itemBuilder:
@@ -663,7 +656,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                             Builder(
                                                                               builder: (_) {
                                                                                 final child = Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
                                                                                   child: Row(
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -675,7 +668,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                       ),
                                                                                       Expanded(
                                                                                         child: Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                                                                                           child: Column(
                                                                                             mainAxisSize: MainAxisSize.max,
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -689,7 +682,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                 children: [
                                                                                                   Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
                                                                                                     child: Row(
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       children: [
@@ -705,7 +698,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                             borderRadius: BorderRadius.circular(8.0),
                                                                                                           ),
                                                                                                           child: Padding(
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
                                                                                                             child: Text(
                                                                                                               questionListViewSearchItem.role,
                                                                                                               style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -719,15 +712,15 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                       ],
                                                                                                     ),
                                                                                                   ),
-                                                                                                  if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().length > 0)
+                                                                                                  if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().isNotEmpty)
                                                                                                     Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                                                                                                       child: Container(
-                                                                                                        constraints: BoxConstraints(
+                                                                                                        constraints: const BoxConstraints(
                                                                                                           minHeight: 16.0,
                                                                                                           maxHeight: 70.0,
                                                                                                         ),
-                                                                                                        decoration: BoxDecoration(),
+                                                                                                        decoration: const BoxDecoration(),
                                                                                                         child: Stack(
                                                                                                           children: [
                                                                                                             ClipRect(
@@ -767,7 +760,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                 ],
                                                                                               ),
                                                                                               Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
                                                                                                 child: Row(
                                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                                   children: [
@@ -855,7 +848,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                           .length,
                                                                   separatorBuilder: (_,
                                                                           __) =>
-                                                                      SizedBox(
+                                                                      const SizedBox(
                                                                           height:
                                                                               12.0),
                                                                   itemBuilder:
@@ -934,7 +927,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                             Builder(
                                                                               builder: (_) {
                                                                                 final child = Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
                                                                                   child: Row(
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -946,7 +939,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                       ),
                                                                                       Expanded(
                                                                                         child: Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                                                                                           child: Column(
                                                                                             mainAxisSize: MainAxisSize.max,
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -960,7 +953,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                 children: [
                                                                                                   Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
                                                                                                     child: Row(
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       children: [
@@ -976,7 +969,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                             borderRadius: BorderRadius.circular(8.0),
                                                                                                           ),
                                                                                                           child: Padding(
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
                                                                                                             child: Text(
                                                                                                               questionListViewSearchItem.role,
                                                                                                               style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -990,15 +983,15 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                       ],
                                                                                                     ),
                                                                                                   ),
-                                                                                                  if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().length > 0)
+                                                                                                  if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewSearchItem.reference).toList().isNotEmpty)
                                                                                                     Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                                                                                                       child: Container(
-                                                                                                        constraints: BoxConstraints(
+                                                                                                        constraints: const BoxConstraints(
                                                                                                           minHeight: 16.0,
                                                                                                           maxHeight: 70.0,
                                                                                                         ),
-                                                                                                        decoration: BoxDecoration(),
+                                                                                                        decoration: const BoxDecoration(),
                                                                                                         child: Stack(
                                                                                                           children: [
                                                                                                             ClipRect(
@@ -1038,7 +1031,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                 ],
                                                                                               ),
                                                                                               Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
                                                                                                 child: Row(
                                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                                   children: [
@@ -1119,7 +1112,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                     .length,
                                                             separatorBuilder: (_,
                                                                     __) =>
-                                                                SizedBox(
+                                                                const SizedBox(
                                                                     height:
                                                                         12.0),
                                                             itemBuilder: (context,
@@ -1206,7 +1199,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                             (_) {
                                                                           final child =
                                                                               Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                                                 12.0,
                                                                                 15.0,
                                                                                 12.0,
@@ -1223,7 +1216,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                 ),
                                                                                 Expanded(
                                                                                   child: Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                                                                                     child: Column(
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1237,7 +1230,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                                                           children: [
                                                                                             Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
                                                                                               child: Row(
                                                                                                 mainAxisSize: MainAxisSize.max,
                                                                                                 children: [
@@ -1253,7 +1246,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                       borderRadius: BorderRadius.circular(8.0),
                                                                                                     ),
                                                                                                     child: Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
                                                                                                       child: Text(
                                                                                                         questionListViewItem.role,
                                                                                                         style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -1267,15 +1260,15 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                 ],
                                                                                               ),
                                                                                             ),
-                                                                                            if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewItem.reference).toList().length > 0)
+                                                                                            if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == questionListViewItem.reference).toList().isNotEmpty)
                                                                                               Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                                                                                                 child: Container(
-                                                                                                  constraints: BoxConstraints(
+                                                                                                  constraints: const BoxConstraints(
                                                                                                     minHeight: 16.0,
                                                                                                     maxHeight: 70.0,
                                                                                                   ),
-                                                                                                  decoration: BoxDecoration(),
+                                                                                                  decoration: const BoxDecoration(),
                                                                                                   child: Stack(
                                                                                                     children: [
                                                                                                       ClipRect(
@@ -1315,7 +1308,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                           ],
                                                                                         ),
                                                                                         Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
                                                                                           child: Row(
                                                                                             mainAxisSize: MainAxisSize.max,
                                                                                             children: [
@@ -1507,7 +1500,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                               (_) {
                                                                             final child =
                                                                                 Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
                                                                               child: Row(
                                                                                 mainAxisSize: MainAxisSize.max,
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1519,7 +1512,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                   ),
                                                                                   Expanded(
                                                                                     child: Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                                                                                       child: Column(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1529,13 +1522,13 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                             style: FlutterFlowTheme.of(context).headlineLarge,
                                                                                           ),
                                                                                           Container(
-                                                                                            decoration: BoxDecoration(),
+                                                                                            decoration: const BoxDecoration(),
                                                                                             child: Column(
                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                                               children: [
                                                                                                 Padding(
-                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
                                                                                                   child: Row(
                                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                                     children: [
@@ -1551,7 +1544,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                           borderRadius: BorderRadius.circular(8.0),
                                                                                                         ),
                                                                                                         child: Padding(
-                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
                                                                                                           child: Text(
                                                                                                             filteredquestionItem.role,
                                                                                                             style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -1565,15 +1558,15 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                     ],
                                                                                                   ),
                                                                                                 ),
-                                                                                                if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == filteredquestionItem.reference).toList().length > 0)
+                                                                                                if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == filteredquestionItem.reference).toList().isNotEmpty)
                                                                                                   Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                                                                                                     child: Container(
-                                                                                                      constraints: BoxConstraints(
+                                                                                                      constraints: const BoxConstraints(
                                                                                                         minHeight: 16.0,
                                                                                                         maxHeight: 70.0,
                                                                                                       ),
-                                                                                                      decoration: BoxDecoration(),
+                                                                                                      decoration: const BoxDecoration(),
                                                                                                       child: Stack(
                                                                                                         children: [
                                                                                                           ClipRect(
@@ -1614,7 +1607,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                             ),
                                                                                           ),
                                                                                           Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
                                                                                             child: Row(
                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                               children: [
@@ -1668,7 +1661,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                   ),
                                                                 ),
                                                               );
-                                                            }).divide(SizedBox(
+                                                            }).divide(const SizedBox(
                                                                 height: 12.0)),
                                                           );
                                                         },
@@ -1801,7 +1794,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                               (_) {
                                                                             final child =
                                                                                 Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 15.0, 12.0, 15.0),
                                                                               child: Row(
                                                                                 mainAxisSize: MainAxisSize.max,
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1813,7 +1806,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                   ),
                                                                                   Expanded(
                                                                                     child: Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                                                                                       child: Column(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1823,13 +1816,13 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                             style: FlutterFlowTheme.of(context).headlineLarge,
                                                                                           ),
                                                                                           Container(
-                                                                                            decoration: BoxDecoration(),
+                                                                                            decoration: const BoxDecoration(),
                                                                                             child: Column(
                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                                               children: [
                                                                                                 Padding(
-                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
                                                                                                   child: Row(
                                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                                     children: [
@@ -1845,7 +1838,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                           borderRadius: BorderRadius.circular(8.0),
                                                                                                         ),
                                                                                                         child: Padding(
-                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
                                                                                                           child: Text(
                                                                                                             filteredquestionItem.role,
                                                                                                             style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -1859,15 +1852,15 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                                     ],
                                                                                                   ),
                                                                                                 ),
-                                                                                                if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == filteredquestionItem.reference).toList().length > 0)
+                                                                                                if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == filteredquestionItem.reference).toList().isNotEmpty)
                                                                                                   Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                                                                                                     child: Container(
-                                                                                                      constraints: BoxConstraints(
+                                                                                                      constraints: const BoxConstraints(
                                                                                                         minHeight: 16.0,
                                                                                                         maxHeight: 70.0,
                                                                                                       ),
-                                                                                                      decoration: BoxDecoration(),
+                                                                                                      decoration: const BoxDecoration(),
                                                                                                       child: Stack(
                                                                                                         children: [
                                                                                                           ClipRect(
@@ -1908,7 +1901,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                             ),
                                                                                           ),
                                                                                           Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
+                                                                                            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 11.0, 0.0, 0.0),
                                                                                             child: Row(
                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                               children: [
@@ -1962,7 +1955,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                   ),
                                                                 ),
                                                               );
-                                                            }).divide(SizedBox(
+                                                            }).divide(const SizedBox(
                                                                 height: 12.0)),
                                                           );
                                                         },
@@ -1982,7 +1975,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                         .where((e) =>
                                                             (currentUserDocument
                                                                         ?.favoriteQuestions
-                                                                        ?.toList() ??
+                                                                        .toList() ??
                                                                     [])
                                                                 .contains(e
                                                                     .reference))
@@ -2043,7 +2036,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           12.0,
                                                                           15.0,
@@ -2068,7 +2061,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                   Expanded(
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           10.0,
                                                                           0.0,
                                                                           0.0,
@@ -2092,7 +2085,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
                                                                               Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
+                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 0.0),
                                                                                 child: Row(
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
@@ -2108,7 +2101,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                         borderRadius: BorderRadius.circular(8.0),
                                                                                       ),
                                                                                       child: Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
+                                                                                        padding: const EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 2.0),
                                                                                         child: Text(
                                                                                           savedquestionItem.role,
                                                                                           style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -2122,9 +2115,9 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                                   ],
                                                                                 ),
                                                                               ),
-                                                                              if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == savedquestionItem.reference).toList().length > 0)
+                                                                              if (commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == savedquestionItem.reference).toList().isNotEmpty)
                                                                                 Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                                                                                   child: Text(
                                                                                     commentsListCommentInterviewQuestionRecordList.where((e) => e.refQuestion == savedquestionItem.reference).toList().first.text,
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium,
@@ -2133,7 +2126,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                                             ],
                                                                           ),
                                                                           Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                                                 0.0,
                                                                                 11.0,
                                                                                 0.0,
@@ -2177,7 +2170,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                                       ),
                                                     );
                                                   }).divide(
-                                                      SizedBox(height: 12.0)),
+                                                      const SizedBox(height: 12.0)),
                                                 );
                                               },
                                             ),
@@ -2204,21 +2197,21 @@ class _LatestInterviewQuestionsGuideWidgetState
               Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).white,
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 32.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 32.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -2231,7 +2224,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Home',
@@ -2245,7 +2238,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -2258,7 +2251,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Course',
@@ -2272,7 +2265,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -2285,7 +2278,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Practice',
@@ -2299,7 +2292,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -2312,7 +2305,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Questions',
@@ -2329,7 +2322,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                             ),
                             Expanded(
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -2342,7 +2335,7 @@ class _LatestInterviewQuestionsGuideWidgetState
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 6.0, 0.0, 0.0),
                                       child: Text(
                                         'Profile',
@@ -2366,4 +2359,24 @@ class _LatestInterviewQuestionsGuideWidgetState
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () {
+          safeSetState(() => _model.guideQuestions3Controller = null);
+          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
+          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
+
+          context.goNamed('HomeGuide2');
+        },
+        onSkip: () {
+          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
+          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
+
+          context.goNamed('HomeGuide2');
+
+          return true;
+        },
+      );
 }

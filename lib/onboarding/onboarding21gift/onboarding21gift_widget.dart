@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding21gift_model.dart';
 export 'onboarding21gift_model.dart';
 
@@ -66,8 +64,8 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -77,7 +75,7 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -85,11 +83,11 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Spacer(),
+                const Spacer(),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
@@ -98,7 +96,7 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                     fit: BoxFit.contain,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'Just one last thing',
                   textAlign: TextAlign.center,
@@ -110,16 +108,16 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                       ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Before we show you around, we have a gift for you.',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).labelMedium,
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('ONBOARDING21GIFT_CONTINUE_BTN_ON_TAP');
@@ -144,9 +142,9 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -155,7 +153,7 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),
@@ -164,7 +162,7 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -183,9 +181,9 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                     child: Container(
                       width: double.infinity,
                       height: 52.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Text(
                           'No, Thanks',
                           style: FlutterFlowTheme.of(context)

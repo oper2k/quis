@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'init_page_old_model.dart';
 export 'init_page_old_model.dart';
 
@@ -46,13 +44,13 @@ class _InitPageOldWidgetState extends State<InitPageOldWidget> {
         body: Stack(
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(0.0),
                       child: Image.asset(
@@ -62,7 +60,7 @@ class _InitPageOldWidgetState extends State<InitPageOldWidget> {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -78,9 +76,9 @@ class _InitPageOldWidgetState extends State<InitPageOldWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 52.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).white,
                           textStyle: FlutterFlowTheme.of(context)
@@ -91,7 +89,7 @@ class _InitPageOldWidgetState extends State<InitPageOldWidget> {
                                 useGoogleFonts: false,
                               ),
                           elevation: 0.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 0.0,
                           ),
@@ -100,7 +98,7 @@ class _InitPageOldWidgetState extends State<InitPageOldWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 13.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 13.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -113,9 +111,9 @@ class _InitPageOldWidgetState extends State<InitPageOldWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 52.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -136,7 +134,7 @@ class _InitPageOldWidgetState extends State<InitPageOldWidget> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
             ),

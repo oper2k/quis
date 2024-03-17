@@ -2,8 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'interview_questions_bottom_sheet_model.dart';
 export 'interview_questions_bottom_sheet_model.dart';
 
@@ -49,7 +47,7 @@ class _InterviewQuestionsBottomSheetWidgetState
       width: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(10.0),
@@ -57,24 +55,24 @@ class _InterviewQuestionsBottomSheetWidgetState
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 40.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 40.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
               child: Text(
                 'Please select a question',
                 style: FlutterFlowTheme.of(context).headlineMedium,
               ),
             ),
             Container(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxHeight: 250.0,
               ),
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                 child: FutureBuilder<List<InterviewQuestionRecord>>(
                   future: queryInterviewQuestionRecordOnce(
                     queryBuilder: (interviewQuestionRecord) =>
@@ -104,7 +102,7 @@ class _InterviewQuestionsBottomSheetWidgetState
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
                       itemCount: listViewInterviewQuestionRecordList.length,
-                      separatorBuilder: (_, __) => SizedBox(height: 8.0),
+                      separatorBuilder: (_, __) => const SizedBox(height: 8.0),
                       itemBuilder: (context, listViewIndex) {
                         final listViewInterviewQuestionRecord =
                             listViewInterviewQuestionRecordList[listViewIndex];
@@ -131,7 +129,7 @@ class _InterviewQuestionsBottomSheetWidgetState
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   12.0, 15.0, 12.0, 15.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -144,7 +142,7 @@ class _InterviewQuestionsBottomSheetWidgetState
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 9.0, 0.0, 9.0),
                                       child: Text(
                                         listViewInterviewQuestionRecord

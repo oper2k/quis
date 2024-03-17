@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'onboarding20after_pricing_model.dart';
 export 'onboarding20after_pricing_model.dart';
@@ -52,41 +51,35 @@ class _Onboarding20afterPricingWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
                       'assets/images/Onb17.webp',
-                      width: 300.0,
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
-                Text(
-                  'You are all set!',
-                  style: FlutterFlowTheme.of(context).displayMedium.override(
-                        fontFamily: 'Sofia Pro',
-                        color: FlutterFlowTheme.of(context).info,
-                        useGoogleFonts: false,
-                      ),
-                ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Text(
-                    'Let’s start with a couple of questions to help us personalize your experience',
-                    textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).titleMedium,
+                    'You are all set!',
+                    style: FlutterFlowTheme.of(context).displayLarge.override(
+                          fontFamily: 'Sofia Pro',
+                          fontWeight: FontWeight.w600,
+                          useGoogleFonts: false,
+                        ),
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
@@ -107,9 +100,9 @@ class _Onboarding20afterPricingWidgetState
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).white,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -118,7 +111,7 @@ class _Onboarding20afterPricingWidgetState
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

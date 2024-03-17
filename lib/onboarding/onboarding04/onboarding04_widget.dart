@@ -2,12 +2,9 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding04_model.dart';
 export 'onboarding04_model.dart';
 
@@ -33,8 +30,8 @@ class _Onboarding04WidgetState extends State<Onboarding04Widget>
           curve: Curves.easeOut,
           delay: 200.ms,
           duration: 700.ms,
-          begin: Offset(0.0, 100.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 100.0),
+          end: const Offset(0.0, 0.0),
         ),
         FadeEffect(
           curve: Curves.easeIn,
@@ -84,20 +81,20 @@ class _Onboarding04WidgetState extends State<Onboarding04Widget>
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.0, -0.3),
+            alignment: const AlignmentDirectional(0.0, -0.3),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'assets/images/Onb4.webp',
+                    'assets/images/NEWOnb03.webp',
                     width: 146.0,
                     fit: BoxFit.contain,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 13.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 13.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -108,7 +105,7 @@ class _Onboarding04WidgetState extends State<Onboarding04Widget>
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: AuthUserStreamWidget(
                           builder: (context) => Text(
                             '${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}!',

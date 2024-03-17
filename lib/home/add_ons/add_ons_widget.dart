@@ -1,8 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -15,7 +13,6 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -96,8 +93,8 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -112,12 +109,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                decoration: const BoxDecoration(),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -125,14 +122,14 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
         body: Stack(
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Lottie.asset(
                         'assets/lottie_animations/animation_lnz09grs.json',
                         width: 220.0,
@@ -148,7 +145,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                       child: Text(
                         'Connect with an expert in your field to practice mock interviews, review your resume in-person, or create a study plan.',
                         textAlign: TextAlign.center,
@@ -162,10 +159,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                         child: Text(
                           'Choose service',
                           style: FlutterFlowTheme.of(context)
@@ -181,7 +178,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -241,7 +238,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             borderRadius: BorderRadius.circular(10.0),
                             border: Border.all(
                               color: _model.isServiceValidated
-                                  ? Color(0x00000000)
+                                  ? const Color(0x00000000)
                                   : FlutterFlowTheme.of(context).error,
                             ),
                           ),
@@ -257,10 +254,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Text(
                           'Your comment',
                           style: FlutterFlowTheme.of(context)
@@ -279,7 +276,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       autovalidateMode: AutovalidateMode.disabled,
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                         child: TextFormField(
                           controller: _model.textController,
                           focusNode: _model.textFieldFocusNode,
@@ -295,7 +292,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                   lineHeight: 1.16,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -324,7 +321,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             ),
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context).white,
-                            contentPadding: EdgeInsets.all(16.0),
+                            contentPadding: const EdgeInsets.all(16.0),
                           ),
                           style: FlutterFlowTheme.of(context).headlineSmall,
                           maxLines: null,
@@ -343,9 +340,9 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Text(
                                 'Current CV',
@@ -361,7 +358,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 6.0, 0.0, 0.0),
                             child: Container(
                               width: double.infinity,
@@ -372,12 +369,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 borderRadius: BorderRadius.circular(10.0),
                                 border: Border.all(
                                   color: _model.isCVValidated
-                                      ? Color(0x00000000)
+                                      ? const Color(0x00000000)
                                       : FlutterFlowTheme.of(context).error,
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -385,17 +382,14 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      _model.uploadedFileUrl != null &&
-                                              _model.uploadedFileUrl != ''
+                                      _model.uploadedFileUrl != ''
                                           ? 'uploaded file'
                                           : 'Please attach here your CV',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall
                                           .override(
                                             fontFamily: 'Sofia Pro',
-                                            color: _model.uploadedFileUrl !=
-                                                        null &&
-                                                    _model.uploadedFileUrl != ''
+                                            color: _model.uploadedFileUrl != ''
                                                 ? FlutterFlowTheme.of(context)
                                                     .primaryText
                                                 : FlutterFlowTheme.of(context)
@@ -480,12 +474,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryText,
+                                                                .info,
                                                         useGoogleFonts: false,
                                                       ),
                                             ),
                                             duration:
-                                                Duration(milliseconds: 3000),
+                                                const Duration(milliseconds: 3000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -498,9 +492,9 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                         });
                                       },
                                       child: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: Padding(
-                                          padding: EdgeInsets.all(10.0),
+                                          padding: const EdgeInsets.all(10.0),
                                           child: Icon(
                                             FFIcons.kiconamoonAttachmentLight1,
                                             color: FlutterFlowTheme.of(context)
@@ -518,10 +512,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                         ],
                       ),
                     Align(
-                      alignment: AlignmentDirectional(1.0, 0.0),
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 23.0, 0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -535,11 +529,11 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 6.0, 0.0, 0.0),
                               child: Text(
                                 '${valueOrDefault<String>(
-                                  _model.pickedAddon?.price?.toString(),
+                                  _model.pickedAddon?.price.toString(),
                                   '0',
                                 )}USD',
                                 style:
@@ -553,12 +547,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                     Builder(
                       builder: (context) => Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
                                 'ADD_ONS_PAGE_ORDER_SERVICE_BTN_ON_TAP');
-                            var _shouldSetState = false;
+                            var shouldSetState = false;
                             if (_model.pickedAddon != null) {
                               logFirebaseEvent('Button_update_page_state');
                               setState(() {
@@ -569,8 +563,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                               setState(() {
                                 _model.isServiceValidated = false;
                               });
-                              if (_model.uploadedFileUrl != null &&
-                                  _model.uploadedFileUrl != '') {
+                              if (_model.uploadedFileUrl != '') {
                                 logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isCVValidated = true;
@@ -587,13 +580,12 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                   !_model.formKey.currentState!.validate()) {
                                 return;
                               }
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
 
                             if (_model.pickedAddon!.hasAttach) {
-                              if (_model.uploadedFileUrl != null &&
-                                  _model.uploadedFileUrl != '') {
+                              if (_model.uploadedFileUrl != '') {
                                 logFirebaseEvent('Button_update_page_state');
                                 setState(() {
                                   _model.isCVValidated = true;
@@ -608,7 +600,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                     !_model.formKey.currentState!.validate()) {
                                   return;
                                 }
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
                             }
@@ -623,7 +615,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 );
                               }(),
                             );
-                            _shouldSetState = true;
+                            shouldSetState = true;
                             logFirebaseEvent('Button_backend_call');
                             unawaited(
                               () async {
@@ -638,7 +630,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 );
                               }(),
                             );
-                            _shouldSetState = true;
+                            shouldSetState = true;
                             logFirebaseEvent('Button_alert_dialog');
                             await showDialog(
                               context: context,
@@ -647,7 +639,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                   elevation: 0,
                                   insetPadding: EdgeInsets.zero,
                                   backgroundColor: Colors.transparent,
-                                  alignment: AlignmentDirectional(0.0, 0.0)
+                                  alignment: const AlignmentDirectional(0.0, 0.0)
                                       .resolve(Directionality.of(context)),
                                   child: WebViewAware(
                                     child: GestureDetector(
@@ -656,7 +648,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                           ? FocusScope.of(context)
                                               .requestFocus(_model.unfocusNode)
                                           : FocusScope.of(context).unfocus(),
-                                      child: SuccesfulPurchaseDialogWidget(),
+                                      child: const SuccesfulPurchaseDialogWidget(),
                                     ),
                                   ),
                                 );
@@ -665,15 +657,15 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
 
                             logFirebaseEvent('Button_navigate_back');
                             context.safePop();
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                           },
                           text: 'Order Service',
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 52.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -684,7 +676,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                   useGoogleFonts: false,
                                 ),
                             elevation: 0.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 0.0,
                             ),
@@ -694,10 +686,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
                         child: Text(
                           'FAQ',
                           style: FlutterFlowTheme.of(context).headlineLarge,
@@ -705,24 +697,24 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController1,
                                     child: ExpandablePanel(
@@ -732,10 +724,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'After submitting your service order, we will contact you via email to provide further instructions and request any additional information, if necessary. ',
@@ -767,17 +759,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController2,
                                     child: ExpandablePanel(
@@ -787,10 +779,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'Our interviewing coaching is a core pillar of the Quis interview preparation experience. In addition to self-studying on our platform and practicing with Practice Interviews, you can give yourself the best chance of landing your dream role by seeking feedback from our expert interview coaches who can help level-up your interview presence, refine your responses, and highlight any pitfalls. Most students book 3-5 sessions to make the most of the coaching experience.',
@@ -822,17 +814,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController3,
                                     child: ExpandablePanel(
@@ -842,10 +834,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'Before and during the 45-minute session, you\'ll discuss your goals, and your coach will customize the session to tailor to your areas of improvement. During and after the session, you\'ll receive detailed feedback and guidance on how to improve. Some examples of what we might cover in our sessions depend on the industry where you are and include Salary negotiation, job requirement conformance, research and more.',
@@ -877,17 +869,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController4,
                                     child: ExpandablePanel(
@@ -897,10 +889,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'Quis Coaches are current Recruiters, ex-Recruiters and industry experts who have been hand-picked and vetted by Quis. Coaches are rigorously selected and checked before providing any kind of services.',
@@ -932,17 +924,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController5,
                                     child: ExpandablePanel(
@@ -952,10 +944,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'Yes! We have coaches who can service any time zone you are in. You can preview the upcoming availability for each coach on their profile page.',
@@ -987,17 +979,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController6,
                                     child: ExpandablePanel(
@@ -1007,10 +999,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'Unused sessions never expire and can be redeemed for any type of 45 min coaching session',
@@ -1042,17 +1034,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController7,
                                     child: ExpandablePanel(
@@ -1062,10 +1054,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: RichText(
                                           textScaler:
@@ -1139,17 +1131,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController8,
                                     child: ExpandablePanel(
@@ -1159,10 +1151,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'Please fill up the Add-ons form and we will get in touch with you.',
@@ -1194,17 +1186,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController9,
                                     child: ExpandablePanel(
@@ -1214,10 +1206,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'The purchase of a coaching session does not include Quis membership. ',
@@ -1249,17 +1241,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController10,
                                     child: ExpandablePanel(
@@ -1269,10 +1261,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Text(
                                           'We understand that plans can change. We ask that you reschedule or cancel your session at least 24 hours ahead of time out of consideration for our coaches. Missed sessions or cancellations/reschedules within 24 hours will count as a used session.',
@@ -1304,17 +1296,17 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                 ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 3.0,
                               color: Color(0x4DD8DADC),
                             ),
                             Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  color: Color(0x00000000),
+                                  color: const Color(0x00000000),
                                   child: ExpandableNotifier(
                                     controller: _model.expandableController11,
                                     child: ExpandablePanel(
@@ -1324,10 +1316,10 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                             .headlineMedium,
                                       ),
                                       collapsed: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                       expanded: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: RichText(
                                           textScaler:
@@ -1405,7 +1397,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                         ),
                       ),
                     ),
-                  ].addToEnd(SizedBox(height: 50.0)),
+                  ].addToEnd(const SizedBox(height: 50.0)),
                 ),
               ),
             ),

@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'pick_component_model.dart';
 export 'pick_component_model.dart';
 
@@ -50,7 +48,7 @@ class _PickComponentWidgetState extends State<PickComponentWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         minHeight: 43.0,
       ),
       decoration: BoxDecoration(
@@ -59,9 +57,9 @@ class _PickComponentWidgetState extends State<PickComponentWidget> {
           color: FlutterFlowTheme.of(context).primary,
         ),
       ),
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +88,7 @@ class _PickComponentWidgetState extends State<PickComponentWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
               child: FaIcon(
                 FontAwesomeIcons.chevronDown,
                 color: FlutterFlowTheme.of(context).primaryText,

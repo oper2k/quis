@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'course_button_model.dart';
 export 'course_button_model.dart';
 
@@ -11,7 +9,7 @@ class CourseButtonWidget extends StatefulWidget {
     super.key,
     required this.text,
     bool? isActive,
-  }) : this.isActive = isActive ?? false;
+  }) : isActive = isActive ?? false;
 
   final String? text;
   final bool isActive;
@@ -53,7 +51,7 @@ class _CourseButtonWidgetState extends State<CourseButtonWidget> {
             : FlutterFlowTheme.of(context).blueOcean,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Text(
         widget.text!,
         style: FlutterFlowTheme.of(context).headlineSmall.override(

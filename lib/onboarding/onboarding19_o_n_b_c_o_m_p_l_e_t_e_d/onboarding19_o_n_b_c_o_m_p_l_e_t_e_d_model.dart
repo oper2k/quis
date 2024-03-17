@@ -1,20 +1,9 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
-import '/backend/schema/enums/enums.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/onboarding/minus_element/minus_element_widget.dart';
-import 'dart:async';
-import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'onboarding19_o_n_b_c_o_m_p_l_e_t_e_d_widget.dart'
     show Onboarding19ONBCOMPLETEDWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class Onboarding19ONBCOMPLETEDModel
     extends FlutterFlowModel<Onboarding19ONBCOMPLETEDWidget> {

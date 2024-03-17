@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'avatar_model.dart';
 export 'avatar_model.dart';
 
@@ -12,7 +10,7 @@ class AvatarWidget extends StatefulWidget {
     required this.diameter,
     this.imagePath,
     bool? isPremium,
-  }) : this.isPremium = isPremium ?? false;
+  }) : isPremium = isPremium ?? false;
 
   final double? diameter;
   final String? imagePath;
@@ -46,14 +44,14 @@ class _AvatarWidgetState extends State<AvatarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: widget.isPremium ? widget.diameter : ((widget.diameter!) + 4),
       height: widget.isPremium ? widget.diameter : ((widget.diameter!) + 4),
       child: Stack(
         children: [
           if (widget.isPremium)
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Container(
                 width: widget.diameter,
                 height: widget.diameter,
@@ -63,18 +61,18 @@ class _AvatarWidgetState extends State<AvatarWidget> {
                       FlutterFlowTheme.of(context).gradient2,
                       FlutterFlowTheme.of(context).aquaBreeze
                     ],
-                    stops: [0.0, 1.0],
-                    begin: AlignmentDirectional(0.0, 1.0),
-                    end: AlignmentDirectional(0, -1.0),
+                    stops: const [0.0, 1.0],
+                    begin: const AlignmentDirectional(0.0, 1.0),
+                    end: const AlignmentDirectional(0, -1.0),
                   ),
                   shape: BoxShape.circle,
                 ),
               ),
             ),
           Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(2.0),
               child: Builder(
                 builder: (context) {
                   if (widget.imagePath != null && widget.imagePath != '') {
@@ -82,7 +80,7 @@ class _AvatarWidgetState extends State<AvatarWidget> {
                       width: widget.diameter,
                       height: widget.diameter,
                       clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
                       child: Image.network(
@@ -95,11 +93,11 @@ class _AvatarWidgetState extends State<AvatarWidget> {
                       width: widget.diameter,
                       height: widget.diameter,
                       clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
                       child: Image.asset(
-                        'assets/images/4.webp',
+                        'assets/images/av1.webp',
                         fit: BoxFit.contain,
                       ),
                     );

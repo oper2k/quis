@@ -2,11 +2,8 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/components/menu_item_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/profile/delete_account_dialog/delete_account_dialog_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'settings_model.dart';
 export 'settings_model.dart';
@@ -67,8 +64,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -83,22 +80,22 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -117,7 +114,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       child: wrapWithModel(
                         model: _model.menuItemModel1,
                         updateCallback: () => setState(() {}),
-                        child: MenuItemWidget(
+                        child: const MenuItemWidget(
                           text: 'Billing Management',
                         ),
                       ),
@@ -137,7 +134,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       child: wrapWithModel(
                         model: _model.menuItemModel2,
                         updateCallback: () => setState(() {}),
-                        child: MenuItemWidget(
+                        child: const MenuItemWidget(
                           text: 'Change password',
                         ),
                       ),
@@ -159,7 +156,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                 elevation: 0,
                                 insetPadding: EdgeInsets.zero,
                                 backgroundColor: Colors.transparent,
-                                alignment: AlignmentDirectional(0.0, 0.0)
+                                alignment: const AlignmentDirectional(0.0, 0.0)
                                     .resolve(Directionality.of(context)),
                                 child: WebViewAware(
                                   child: GestureDetector(
@@ -168,7 +165,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                         ? FocusScope.of(context)
                                             .requestFocus(_model.unfocusNode)
                                         : FocusScope.of(context).unfocus(),
-                                    child: DeleteAccountDialogWidget(),
+                                    child: const DeleteAccountDialogWidget(),
                                   ),
                                 ),
                               );
@@ -187,7 +184,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                         .primaryText,
                                   ),
                                 ),
-                                duration: Duration(milliseconds: 3000),
+                                duration: const Duration(milliseconds: 3000),
                                 backgroundColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
@@ -199,7 +196,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         child: wrapWithModel(
                           model: _model.menuItemModel3,
                           updateCallback: () => setState(() {}),
-                          child: MenuItemWidget(
+                          child: const MenuItemWidget(
                             text: 'Delete Account',
                           ),
                         ),
@@ -226,7 +223,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               12.0, 15.0, 12.0, 15.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -255,7 +252,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(height: 10.0)),
+                  ].divide(const SizedBox(height: 10.0)),
                 ),
               ),
             ],

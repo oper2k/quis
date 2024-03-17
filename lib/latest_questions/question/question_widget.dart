@@ -2,13 +2,9 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/latest_questions/question_comments_bottom_sheet/question_comments_bottom_sheet_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'question_model.dart';
 export 'question_model.dart';
@@ -42,7 +38,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
       logFirebaseEvent('Question_update_page_state');
       setState(() {
         _model.isFavorite =
-            (currentUserDocument?.favoriteQuestions?.toList() ?? [])
+            (currentUserDocument?.favoriteQuestions.toList() ?? [])
                 .contains(widget.questionItem?.reference);
       });
     });
@@ -84,8 +80,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -113,7 +109,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
                         child: Text(
                           'Share',
                           style: FlutterFlowTheme.of(context).labelMedium,
@@ -121,7 +117,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 4.0, 4.0),
+                            const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 4.0, 4.0),
                         child: Icon(
                           FFIcons.ksystemUiconsShare2,
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -134,7 +130,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -142,7 +138,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         body: Stack(
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -150,7 +146,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -194,9 +190,9 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                     });
                                   },
                                   child: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Icon(
                                         FFIcons.ksubwayHurt,
                                         color:
@@ -234,9 +230,9 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                                     });
                                   },
                                   child: Container(
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Icon(
                                         FFIcons.ksubwayHurt1,
                                         color:
@@ -254,7 +250,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Text(
                         dateTimeFormat(
                             'd/M/y', widget.questionItem!.dateInterview!),
@@ -263,7 +259,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: Text(
                         widget.questionItem!.userAnswer,
                         style:
@@ -276,14 +272,14 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     ),
                     Container(
                       height: MediaQuery.sizeOf(context).height * 0.5,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                     ),
                   ],
                 ),
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.questionCommentsBottomSheetModel,
                 updateCallback: () => setState(() {}),

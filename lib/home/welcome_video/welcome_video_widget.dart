@@ -5,13 +5,9 @@ import '/components/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'welcome_video_model.dart';
 export 'welcome_video_model.dart';
 
@@ -82,7 +78,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: MediaQuery.sizeOf(context).width / 1.72,
                 child: Stack(
@@ -90,7 +86,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                     Container(
                       width: double.infinity,
                       height: double.infinity,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: FlutterFlowWebView(
                         content: widget.welcomeVideo!.vimeoVideo.vimeoVideoUrl,
                         bypass: false,
@@ -128,7 +124,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                       desktop: false,
                     ))
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.7),
+                        alignment: const AlignmentDirectional(0.0, 0.7),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -144,7 +140,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                               queryParameters: {
                                 'videoVimeoURL': serializeParam(
                                   widget
-                                      .welcomeVideo?.vimeoVideo?.vimeoVideoUrl,
+                                      .welcomeVideo?.vimeoVideo.vimeoVideoUrl,
                                   ParamType.String,
                                 ),
                               }.withoutNulls,
@@ -156,7 +152,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   50.0, 13.0, 50.0, 13.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -169,7 +165,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                                     size: 30.0,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         14.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Play',
@@ -191,7 +187,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                       ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 50.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 50.0, 0.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -206,7 +202,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                         child: wrapWithModel(
                           model: _model.backButtonModel,
                           updateCallback: () => setState(() {}),
-                          child: BackButtonWidget(),
+                          child: const BackButtonWidget(),
                         ),
                       ),
                     ),
@@ -214,7 +210,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 22.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 22.0, 16.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +224,7 @@ class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                       child: Text(
                         valueOrDefault<String>(
                           widget.welcomeVideo?.announcementsText,

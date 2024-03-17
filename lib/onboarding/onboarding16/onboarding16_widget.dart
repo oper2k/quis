@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding16_model.dart';
 export 'onboarding16_model.dart';
 
@@ -64,8 +62,8 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -75,7 +73,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -83,7 +81,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -95,7 +93,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                     fit: BoxFit.contain,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'Company research done just for you',
                   textAlign: TextAlign.center,
@@ -106,7 +104,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                         useGoogleFonts: false,
                       ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'Mission, Vision, Core Values, concept overview and even a link to apply has been collected for you to simplify and accelerate your hiring process.',
                   textAlign: TextAlign.center,
@@ -116,21 +114,20 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                         lineHeight: 1.25,
                       ),
                 ),
-                Spacer(),
                 Divider(
+                  height: 24.0,
                   thickness: 1.0,
                   indent: 30.0,
                   endIndent: 30.0,
                   color: FlutterFlowTheme.of(context).accent2,
                 ),
-                Spacer(),
                 Text(
                   'Company Profiles include:',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).headlineLarge,
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -145,7 +142,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Aviation - 50+ TOP Airlines Worldwide',
                           style: FlutterFlowTheme.of(context).bodyLarge,
@@ -155,7 +152,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,7 +168,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'F&B - 150+ TOP Middle East Bars, Restaurants and Hospitality Groups',
@@ -182,9 +179,9 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                     ],
                   ),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('ONBOARDING16_PAGE_CONTINUE_BTN_ON_TAP');
@@ -197,9 +194,9 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -208,7 +205,7 @@ class _Onboarding16WidgetState extends State<Onboarding16Widget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

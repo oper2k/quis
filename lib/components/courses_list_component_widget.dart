@@ -2,8 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'courses_list_component_model.dart';
 export 'courses_list_component_model.dart';
 
@@ -74,7 +72,7 @@ class _CoursesListComponentWidgetState
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +88,7 @@ class _CoursesListComponentWidgetState
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 9.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 9.0, 0.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
                       widget.courseItem?.name,
@@ -106,7 +104,7 @@ class _CoursesListComponentWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,7 +116,7 @@ class _CoursesListComponentWidgetState
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget.courseItem?.rating?.rating?.toString(),
+                            widget.courseItem?.rating.rating.toString(),
                             '0',
                           ),
                           style: FlutterFlowTheme.of(context).bodySmall,

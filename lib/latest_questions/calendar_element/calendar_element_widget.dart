@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'calendar_element_model.dart';
 export 'calendar_element_model.dart';
 
@@ -55,7 +53,7 @@ class _CalendarElementWidgetState extends State<CalendarElementWidget> {
               : FlutterFlowTheme.of(context).white,
           borderRadius: BorderRadius.circular(10.0),
         ),
-        alignment: AlignmentDirectional(0.0, 0.0),
+        alignment: const AlignmentDirectional(0.0, 0.0),
         child: Text(
           dateTimeFormat('dd', widget.date),
           style: FlutterFlowTheme.of(context).headlineMedium.override(

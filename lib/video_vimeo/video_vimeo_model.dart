@@ -1,11 +1,6 @@
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_web_view.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'video_vimeo_widget.dart' show VideoVimeoWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class VideoVimeoModel extends FlutterFlowModel<VideoVimeoWidget> {
   ///  State fields for stateful widgets in this page.

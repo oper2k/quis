@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'questions_filter_bottom_sheet_model.dart';
 export 'questions_filter_bottom_sheet_model.dart';
@@ -64,7 +63,7 @@ class _QuestionsFilterBottomSheetWidgetState
       width: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(10.0),
@@ -72,7 +71,7 @@ class _QuestionsFilterBottomSheetWidgetState
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -81,7 +80,7 @@ class _QuestionsFilterBottomSheetWidgetState
               style: FlutterFlowTheme.of(context).headlineLarge,
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
               child: Wrap(
                 spacing: 10.0,
                 runSpacing: 10.0,
@@ -113,9 +112,9 @@ class _QuestionsFilterBottomSheetWidgetState
                       }
                     },
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -128,7 +127,7 @@ class _QuestionsFilterBottomSheetWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -141,7 +140,7 @@ class _QuestionsFilterBottomSheetWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: AutoSizeText(
                                 'Hot',
@@ -176,9 +175,9 @@ class _QuestionsFilterBottomSheetWidgetState
                       }
                     },
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -191,7 +190,7 @@ class _QuestionsFilterBottomSheetWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -204,7 +203,7 @@ class _QuestionsFilterBottomSheetWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: AutoSizeText(
                                 'Popular',
@@ -239,9 +238,9 @@ class _QuestionsFilterBottomSheetWidgetState
                       }
                     },
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -254,7 +253,7 @@ class _QuestionsFilterBottomSheetWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -267,7 +266,7 @@ class _QuestionsFilterBottomSheetWidgetState
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: AutoSizeText(
                                 'Newest',
@@ -285,9 +284,9 @@ class _QuestionsFilterBottomSheetWidgetState
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(-1.0, 0.0),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 31.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 31.0, 0.0, 0.0),
                 child: Text(
                   'Role',
                   style: FlutterFlowTheme.of(context).headlineMedium,
@@ -295,7 +294,7 @@ class _QuestionsFilterBottomSheetWidgetState
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
               child: Builder(
                 builder: (context) {
                   final role = FFAppState().filterRoleList.toList();
@@ -344,7 +343,7 @@ class _QuestionsFilterBottomSheetWidgetState
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 40.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 40.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -360,10 +359,10 @@ class _QuestionsFilterBottomSheetWidgetState
                       text: 'Cancel',
                       options: FFButtonOptions(
                         height: 45.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).white,
                         textStyle:
                             FlutterFlowTheme.of(context).headlineLarge.override(
@@ -372,7 +371,7 @@ class _QuestionsFilterBottomSheetWidgetState
                                   useGoogleFonts: false,
                                 ),
                         elevation: 0.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 0.0,
                         ),
@@ -391,10 +390,10 @@ class _QuestionsFilterBottomSheetWidgetState
                       text: 'Save',
                       options: FFButtonOptions(
                         height: 45.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).headlineLarge.override(
@@ -403,7 +402,7 @@ class _QuestionsFilterBottomSheetWidgetState
                                   useGoogleFonts: false,
                                 ),
                         elevation: 0.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 0.0,
                         ),
@@ -411,7 +410,7 @@ class _QuestionsFilterBottomSheetWidgetState
                       ),
                     ),
                   ),
-                ].divide(SizedBox(width: 30.0)),
+                ].divide(const SizedBox(width: 30.0)),
               ),
             ),
           ],

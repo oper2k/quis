@@ -1,33 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/custom_cloud_functions/custom_cloud_function_response_manager.dart';
-import '/backend/schema/enums/enums.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/nav_bar_widget.dart';
-import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/interview/no_user_found_dialog/no_user_found_dialog_widget.dart';
-import '/interview/sorry_dialog/sorry_dialog_widget.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/random_data_util.dart' as random_data;
-import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'practice_interview_widget.dart' show PracticeInterviewWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:collection/collection.dart';
 import 'package:expandable/expandable.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 
 class PracticeInterviewModel extends FlutterFlowModel<PracticeInterviewWidget> {
   ///  Local state fields for this page.
@@ -135,14 +118,14 @@ class PracticeInterviewModel extends FlutterFlowModel<PracticeInterviewWidget> {
       );
     }
 
-    if (cloudFunctions90!.succeeded!) {
+    if (cloudFunctions90.succeeded!) {
       logFirebaseEvent('roomConnection_navigate_to');
 
       context.pushNamed(
         'VideoConfPage',
         queryParameters: {
           'token': serializeParam(
-            cloudFunctions90?.resultAsString,
+            cloudFunctions90.resultAsString,
             ParamType.String,
           ),
           'channelName': serializeParam(
@@ -184,7 +167,7 @@ class PracticeInterviewModel extends FlutterFlowModel<PracticeInterviewWidget> {
               color: FlutterFlowTheme.of(context).primaryText,
             ),
           ),
-          duration: Duration(milliseconds: 4000),
+          duration: const Duration(milliseconds: 4000),
           backgroundColor: FlutterFlowTheme.of(context).secondary,
         ),
       );

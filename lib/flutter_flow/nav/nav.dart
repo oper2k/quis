@@ -1,11 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
@@ -13,12 +10,8 @@ import '/auth/base_auth_user_provider.dart';
 import '/backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
 import '/index.dart';
-import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -83,33 +76,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? SplashPageWidget() : InitPageWidget(),
+          appStateNotifier.loggedIn ? const SplashPageWidget() : const InitPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? SplashPageWidget() : InitPageWidget(),
+              appStateNotifier.loggedIn ? const SplashPageWidget() : const InitPageWidget(),
         ),
         FFRoute(
           name: 'Home',
           path: '/home',
-          builder: (context, params) => HomeWidget(),
+          builder: (context, params) => const HomeWidget(),
         ),
         FFRoute(
           name: 'OnboardingOld',
           path: '/onboardingOld',
-          builder: (context, params) => OnboardingOldWidget(),
+          builder: (context, params) => const OnboardingOldWidget(),
         ),
         FFRoute(
           name: 'Login',
           path: '/login',
-          builder: (context, params) => LoginWidget(),
+          builder: (context, params) => const LoginWidget(),
         ),
         FFRoute(
           name: 'SignupOld',
           path: '/signupOld',
-          builder: (context, params) => SignupOldWidget(),
+          builder: (context, params) => const SignupOldWidget(),
         ),
         FFRoute(
           name: 'Pricing',
@@ -130,62 +123,62 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'InitPage',
           path: '/initPage',
-          builder: (context, params) => InitPageWidget(),
+          builder: (context, params) => const InitPageWidget(),
         ),
         FFRoute(
           name: 'ResetPassword',
           path: '/resetPassword',
-          builder: (context, params) => ResetPasswordWidget(),
+          builder: (context, params) => const ResetPasswordWidget(),
         ),
         FFRoute(
           name: 'ResetPasswordConfirm',
           path: '/resetPasswordConfirm',
-          builder: (context, params) => ResetPasswordConfirmWidget(),
+          builder: (context, params) => const ResetPasswordConfirmWidget(),
         ),
         FFRoute(
           name: 'ConfirmedEmail',
           path: '/confirmedEmail',
-          builder: (context, params) => ConfirmedEmailWidget(),
+          builder: (context, params) => const ConfirmedEmailWidget(),
         ),
         FFRoute(
           name: 'MyProfile',
           path: '/myProfile',
-          builder: (context, params) => MyProfileWidget(),
+          builder: (context, params) => const MyProfileWidget(),
         ),
         FFRoute(
           name: 'Settings',
           path: '/settings',
-          builder: (context, params) => SettingsWidget(),
+          builder: (context, params) => const SettingsWidget(),
         ),
         FFRoute(
           name: 'ChangePassword',
           path: '/changePassword',
-          builder: (context, params) => ChangePasswordWidget(),
+          builder: (context, params) => const ChangePasswordWidget(),
         ),
         FFRoute(
           name: 'EditProfile',
           path: '/editProfile',
-          builder: (context, params) => EditProfileWidget(),
+          builder: (context, params) => const EditProfileWidget(),
         ),
         FFRoute(
           name: 'Referral',
           path: '/referral',
-          builder: (context, params) => ReferralWidget(),
+          builder: (context, params) => const ReferralWidget(),
         ),
         FFRoute(
           name: 'Support',
           path: '/support',
-          builder: (context, params) => SupportWidget(),
+          builder: (context, params) => const SupportWidget(),
         ),
         FFRoute(
           name: 'Karma',
           path: '/karma',
-          builder: (context, params) => KarmaWidget(),
+          builder: (context, params) => const KarmaWidget(),
         ),
         FFRoute(
           name: 'EarnKarma',
           path: '/earnKarma',
-          builder: (context, params) => EarnKarmaWidget(),
+          builder: (context, params) => const EarnKarmaWidget(),
         ),
         FFRoute(
           name: 'MatchedUsers',
@@ -212,47 +205,47 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Add-ons',
           path: '/addOns',
-          builder: (context, params) => AddOnsWidget(),
+          builder: (context, params) => const AddOnsWidget(),
         ),
         FFRoute(
           name: 'CVReview',
           path: '/cVReview',
-          builder: (context, params) => CVReviewWidget(),
+          builder: (context, params) => const CVReviewWidget(),
         ),
         FFRoute(
           name: 'MockInterview',
           path: '/mockInterview',
-          builder: (context, params) => MockInterviewWidget(),
+          builder: (context, params) => const MockInterviewWidget(),
         ),
         FFRoute(
           name: 'LeadershipOrig',
           path: '/leadershipOrig',
-          builder: (context, params) => LeadershipOrigWidget(),
+          builder: (context, params) => const LeadershipOrigWidget(),
         ),
         FFRoute(
           name: 'Leadership',
           path: '/leadership',
-          builder: (context, params) => LeadershipWidget(),
+          builder: (context, params) => const LeadershipWidget(),
         ),
         FFRoute(
           name: 'JobReferral',
           path: '/jobReferral',
-          builder: (context, params) => JobReferralWidget(),
+          builder: (context, params) => const JobReferralWidget(),
         ),
         FFRoute(
           name: 'ExchangeKarma',
           path: '/exchangeKarma',
-          builder: (context, params) => ExchangeKarmaWidget(),
+          builder: (context, params) => const ExchangeKarmaWidget(),
         ),
         FFRoute(
           name: 'FavoriteVideos',
           path: '/favoriteVideos',
-          builder: (context, params) => FavoriteVideosWidget(),
+          builder: (context, params) => const FavoriteVideosWidget(),
         ),
         FFRoute(
           name: 'AllCourses',
           path: '/allCourses',
-          builder: (context, params) => AllCoursesWidget(),
+          builder: (context, params) => const AllCoursesWidget(),
         ),
         FFRoute(
           name: 'Course',
@@ -291,7 +284,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'PracticeInterview',
           path: '/practiceInterview',
-          builder: (context, params) => PracticeInterviewWidget(),
+          builder: (context, params) => const PracticeInterviewWidget(),
         ),
         FFRoute(
           name: 'InterviewFeedback',
@@ -310,7 +303,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'FeedbackThankyou',
           path: '/feedbackThankyou',
-          builder: (context, params) => FeedbackThankyouWidget(),
+          builder: (context, params) => const FeedbackThankyouWidget(),
         ),
         FFRoute(
           name: 'LIQ',
@@ -328,12 +321,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'LatestInterviewQuestions',
           path: '/latestInterviewQuestions',
-          builder: (context, params) => LatestInterviewQuestionsWidget(),
+          builder: (context, params) => const LatestInterviewQuestionsWidget(),
         ),
         FFRoute(
           name: 'NewQuestion',
           path: '/newQuestion',
-          builder: (context, params) => NewQuestionWidget(),
+          builder: (context, params) => const NewQuestionWidget(),
         ),
         FFRoute(
           name: 'WelcomeVideo',
@@ -379,12 +372,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ThankYouForQuestion',
           path: '/thankYouForQuestion',
-          builder: (context, params) => ThankYouForQuestionWidget(),
+          builder: (context, params) => const ThankYouForQuestionWidget(),
         ),
         FFRoute(
           name: 'BillingManagment',
           path: '/billingManagment',
-          builder: (context, params) => BillingManagmentWidget(),
+          builder: (context, params) => const BillingManagmentWidget(),
         ),
         FFRoute(
           name: 'ThankYouForSubscription',
@@ -410,12 +403,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ReminderPage',
           path: '/reminderPage',
-          builder: (context, params) => ReminderPageWidget(),
+          builder: (context, params) => const ReminderPageWidget(),
         ),
         FFRoute(
           name: 'InitPageOld',
           path: '/initPageOld',
-          builder: (context, params) => InitPageOldWidget(),
+          builder: (context, params) => const InitPageOldWidget(),
         ),
         FFRoute(
           name: 'PricingOld',
@@ -427,157 +420,157 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AuthEmailPage',
           path: '/authEmailPage',
-          builder: (context, params) => AuthEmailPageWidget(),
+          builder: (context, params) => const AuthEmailPageWidget(),
         ),
         FFRoute(
           name: 'Onboarding01',
           path: '/onboarding01',
-          builder: (context, params) => Onboarding01Widget(),
+          builder: (context, params) => const Onboarding01Widget(),
         ),
         FFRoute(
           name: 'Onboarding02',
           path: '/onboarding02',
-          builder: (context, params) => Onboarding02Widget(),
+          builder: (context, params) => const Onboarding02Widget(),
         ),
         FFRoute(
           name: 'Onboarding03name',
           path: '/onboarding03name',
-          builder: (context, params) => Onboarding03nameWidget(),
+          builder: (context, params) => const Onboarding03nameWidget(),
         ),
         FFRoute(
           name: 'Onboarding04',
           path: '/onboarding04',
-          builder: (context, params) => Onboarding04Widget(),
+          builder: (context, params) => const Onboarding04Widget(),
         ),
         FFRoute(
           name: 'Onboarding05',
           path: '/onboarding05',
-          builder: (context, params) => Onboarding05Widget(),
+          builder: (context, params) => const Onboarding05Widget(),
         ),
         FFRoute(
           name: 'Onboarding06industry',
           path: '/onboarding06industry',
-          builder: (context, params) => Onboarding06industryWidget(),
+          builder: (context, params) => const Onboarding06industryWidget(),
         ),
         FFRoute(
           name: 'Onboarding07',
           path: '/onboarding07',
-          builder: (context, params) => Onboarding07Widget(),
+          builder: (context, params) => const Onboarding07Widget(),
         ),
         FFRoute(
           name: 'Onboarding08',
           path: '/onboarding08',
-          builder: (context, params) => Onboarding08Widget(),
+          builder: (context, params) => const Onboarding08Widget(),
         ),
         FFRoute(
           name: 'Onboarding18time',
           path: '/onboarding18time',
-          builder: (context, params) => Onboarding18timeWidget(),
+          builder: (context, params) => const Onboarding18timeWidget(),
         ),
         FFRoute(
           name: 'Onboarding09experienceYears',
           path: '/onboarding09experienceYears',
-          builder: (context, params) => Onboarding09experienceYearsWidget(),
+          builder: (context, params) => const Onboarding09experienceYearsWidget(),
         ),
         FFRoute(
           name: 'Onboarding10role',
           path: '/onboarding10role',
-          builder: (context, params) => Onboarding10roleWidget(),
+          builder: (context, params) => const Onboarding10roleWidget(),
         ),
         FFRoute(
           name: 'Onboarding11improve',
           path: '/onboarding11improve',
-          builder: (context, params) => Onboarding11improveWidget(),
+          builder: (context, params) => const Onboarding11improveWidget(),
         ),
         FFRoute(
           name: 'Onboarding12referral',
           path: '/onboarding12referral',
-          builder: (context, params) => Onboarding12referralWidget(),
+          builder: (context, params) => const Onboarding12referralWidget(),
         ),
         FFRoute(
           name: 'Onboarding13',
           path: '/onboarding13',
-          builder: (context, params) => Onboarding13Widget(),
+          builder: (context, params) => const Onboarding13Widget(),
         ),
         FFRoute(
           name: 'Onboarding14practiceGoal',
           path: '/onboarding14practiceGoal',
-          builder: (context, params) => Onboarding14practiceGoalWidget(),
+          builder: (context, params) => const Onboarding14practiceGoalWidget(),
         ),
         FFRoute(
           name: 'Onboarding15',
           path: '/onboarding15',
-          builder: (context, params) => Onboarding15Widget(),
+          builder: (context, params) => const Onboarding15Widget(),
         ),
         FFRoute(
           name: 'Onboarding16',
           path: '/onboarding16',
-          builder: (context, params) => Onboarding16Widget(),
+          builder: (context, params) => const Onboarding16Widget(),
         ),
         FFRoute(
           name: 'SplashPage',
           path: '/splashPage',
-          builder: (context, params) => SplashPageWidget(),
+          builder: (context, params) => const SplashPageWidget(),
         ),
         FFRoute(
           name: 'ResetPasswordOld',
           path: '/resetPasswordOld',
-          builder: (context, params) => ResetPasswordOldWidget(),
+          builder: (context, params) => const ResetPasswordOldWidget(),
         ),
         FFRoute(
           name: 'Onboarding17LinkedIn',
           path: '/onboarding17LinkedIn',
-          builder: (context, params) => Onboarding17LinkedInWidget(),
+          builder: (context, params) => const Onboarding17LinkedInWidget(),
         ),
         FFRoute(
           name: 'Onboarding19ONBCOMPLETED',
           path: '/onboarding19ONBCOMPLETED',
-          builder: (context, params) => Onboarding19ONBCOMPLETEDWidget(),
+          builder: (context, params) => const Onboarding19ONBCOMPLETEDWidget(),
         ),
         FFRoute(
           name: 'Onboarding20afterPricing',
           path: '/onboarding20afterPricing',
-          builder: (context, params) => Onboarding20afterPricingWidget(),
+          builder: (context, params) => const Onboarding20afterPricingWidget(),
         ),
         FFRoute(
           name: 'Onboarding21gift',
           path: '/onboarding21gift',
-          builder: (context, params) => Onboarding21giftWidget(),
+          builder: (context, params) => const Onboarding21giftWidget(),
         ),
         FFRoute(
           name: 'Guide1',
           path: '/guide1',
-          builder: (context, params) => Guide1Widget(),
+          builder: (context, params) => const Guide1Widget(),
         ),
         FFRoute(
           name: 'HomeGuide1',
           path: '/homeGuide1',
-          builder: (context, params) => HomeGuide1Widget(),
+          builder: (context, params) => const HomeGuide1Widget(),
         ),
         FFRoute(
           name: 'AllCoursesGuide',
           path: '/allCoursesGuide',
-          builder: (context, params) => AllCoursesGuideWidget(),
+          builder: (context, params) => const AllCoursesGuideWidget(),
         ),
         FFRoute(
           name: 'LatestInterviewQuestionsGuide',
           path: '/latestInterviewQuestionsGuide',
-          builder: (context, params) => LatestInterviewQuestionsGuideWidget(),
+          builder: (context, params) => const LatestInterviewQuestionsGuideWidget(),
         ),
         FFRoute(
           name: 'HomeGuide2',
           path: '/homeGuide2',
-          builder: (context, params) => HomeGuide2Widget(),
+          builder: (context, params) => const HomeGuide2Widget(),
         ),
         FFRoute(
           name: 'test',
           path: '/test',
-          builder: (context, params) => TestWidget(),
+          builder: (context, params) => const TestWidget(),
         ),
         FFRoute(
           name: 'PracticeInterviewGuide',
           path: '/practiceInterviewGuide',
-          builder: (context, params) => PracticeInterviewGuideWidget(),
+          builder: (context, params) => const PracticeInterviewGuideWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -810,7 +803,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

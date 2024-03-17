@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '/onboarding/guide/walk_element/walk_element_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 
 // Focus widget keys for this walkthrough
 final containerKtz8r38t = GlobalKey();
@@ -21,7 +20,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         contents: [
           TargetContent(
             align: ContentAlign.top,
-            builder: (context, __) => WalkElementWidget(
+            builder: (context, __) => const WalkElementWidget(
               text:
                   'You can find all the latest questions about interviews here, share your answers in the comments, and participate in the growing Quis community.',
               index: '4/6',

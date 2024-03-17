@@ -5,8 +5,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding_old_model.dart';
 export 'onboarding_old_model.dart';
 
@@ -52,7 +50,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
-              alignment: AlignmentDirectional(1.0, 0.0),
+              alignment: const AlignmentDirectional(1.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -65,9 +63,9 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                   context.pushNamed('InitPage');
                 },
                 child: Container(
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
                       'Skip',
                       style:
@@ -81,8 +79,8 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                 ),
               ),
             ),
-            Spacer(),
-            Container(
+            const Spacer(),
+            SizedBox(
               width: double.infinity,
               height: 510.0,
               child: Stack(
@@ -94,7 +92,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -108,7 +106,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 40.0, 0.0, 0.0),
                               child: Text(
                                 'Created by Experts',
@@ -117,7 +115,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: AutoSizeText(
                                 'Learn to beat interviews directly from the TOP Companies’ employees who ask them. Built by experts for future experts. We are go-to platform with all practical tools that you need to succeed on your interview. ',
@@ -137,7 +135,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -151,7 +149,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 40.0, 0.0, 0.0),
                               child: Text(
                                 'Innovative Tools',
@@ -160,7 +158,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 'We\'ve built custom tools for acing the interview including structured lessons, masterclasses from TOP Industry people. We’ve collected TOP companies’ info and gathered them for your success! ',
@@ -179,7 +177,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -194,7 +192,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 40.0, 0.0, 0.0),
                               child: Text(
                                 'Close Community',
@@ -203,7 +201,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 'Don\'t interview alone. Practice with like-minded people to get the inside scoop on interviews and even make new friends. Boost your confidence, practice structured answers, and improve in no-time.',
@@ -222,7 +220,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -237,7 +235,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Text(
                                 'Earn Karma - Get benefits',
@@ -246,7 +244,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
                                 'Introducing Karma – points that you get when complete certain tasks. Karma serves as your ultimate reputation that can’t be bought for money. Earn Karma and find a reward that right for you, get FREE CV Feedback or a Job Referral to other recruiters on behalf of Quis.',
@@ -267,10 +265,10 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                     ],
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: smooth_page_indicator.SmoothPageIndicator(
                         controller: _model.pageViewController ??=
                             PageController(initialPage: 0),
@@ -279,7 +277,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                         onDotClicked: (i) async {
                           await _model.pageViewController!.animateToPage(
                             i,
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             curve: Curves.ease,
                           );
                         },
@@ -298,9 +296,9 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 40.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 40.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -310,7 +308,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                         logFirebaseEvent('ONBOARDING_OLD_PAGE__BTN_ON_TAP');
                         logFirebaseEvent('Button_page_view');
                         await _model.pageViewController?.previousPage(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.ease,
                         );
                       },
@@ -324,9 +322,9 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                         width: 80.0,
                         height: 52.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).tertiary,
                         textStyle:
                             FlutterFlowTheme.of(context).headlineLarge.override(
@@ -335,7 +333,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                                   useGoogleFonts: false,
                                 ),
                         elevation: 0.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 0.0,
                         ),
@@ -355,7 +353,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                         } else {
                           logFirebaseEvent('Button_page_view');
                           await _model.pageViewController?.nextPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.ease,
                           );
                         }
@@ -365,10 +363,10 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                           : 'Next',
                       options: FFButtonOptions(
                         height: 52.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).headlineLarge.override(
@@ -377,7 +375,7 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                                   useGoogleFonts: false,
                                 ),
                         elevation: 0.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 0.0,
                         ),
@@ -386,10 +384,10 @@ class _OnboardingOldWidgetState extends State<OnboardingOldWidget> {
                       showLoadingIndicator: false,
                     ),
                   ),
-                ].divide(SizedBox(width: 10.0)),
+                ].divide(const SizedBox(width: 10.0)),
               ),
             ),
-          ].addToStart(SizedBox(height: 40.0)),
+          ].addToStart(const SizedBox(height: 40.0)),
         ),
       ),
     );

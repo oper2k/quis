@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'question_answer_element_model.dart';
 export 'question_answer_element_model.dart';
 
@@ -54,7 +52,7 @@ class _QuestionAnswerElementWidgetState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 27.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 27.0, 0.0, 0.0),
             child: Text(
               'Interview question',
               style: FlutterFlowTheme.of(context).headlineSmall,
@@ -65,7 +63,7 @@ class _QuestionAnswerElementWidgetState
             focusNode: _model.questionFieldFocusNode,
             onChanged: (_) => EasyDebounce.debounce(
               '_model.questionFieldController',
-              Duration(milliseconds: 2000),
+              const Duration(milliseconds: 2000),
               () async {
                 logFirebaseEvent('QUESTION_ANSWER_ELEMENT_QuestionField_ON');
                 logFirebaseEvent('QuestionField_update_component_state');
@@ -93,7 +91,7 @@ class _QuestionAnswerElementWidgetState
                     lineHeight: 1.16,
                   ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Color(0x00000000),
                   width: 1.0,
                 ),
@@ -122,7 +120,7 @@ class _QuestionAnswerElementWidgetState
               ),
               filled: true,
               fillColor: FlutterFlowTheme.of(context).white,
-              contentPadding: EdgeInsets.all(16.0),
+              contentPadding: const EdgeInsets.all(16.0),
             ),
             style: FlutterFlowTheme.of(context).headlineSmall,
             maxLines: null,
@@ -132,20 +130,20 @@ class _QuestionAnswerElementWidgetState
                 _model.questionFieldControllerValidator.asValidator(context),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
             child: Text(
               'Your answer *',
               style: FlutterFlowTheme.of(context).headlineSmall,
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
             child: TextFormField(
               controller: _model.answerFieldController,
               focusNode: _model.answerFieldFocusNode,
               onChanged: (_) => EasyDebounce.debounce(
                 '_model.answerFieldController',
-                Duration(milliseconds: 2000),
+                const Duration(milliseconds: 2000),
                 () async {
                   logFirebaseEvent('QUESTION_ANSWER_ELEMENT_AnswerField_ON_T');
                   logFirebaseEvent('AnswerField_update_component_state');
@@ -173,7 +171,7 @@ class _QuestionAnswerElementWidgetState
                       lineHeight: 1.16,
                     ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Color(0x00000000),
                     width: 1.0,
                   ),
@@ -202,7 +200,7 @@ class _QuestionAnswerElementWidgetState
                 ),
                 filled: true,
                 fillColor: FlutterFlowTheme.of(context).white,
-                contentPadding: EdgeInsets.all(16.0),
+                contentPadding: const EdgeInsets.all(16.0),
               ),
               style: FlutterFlowTheme.of(context).headlineSmall,
               validator:

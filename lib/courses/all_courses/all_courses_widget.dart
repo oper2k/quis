@@ -6,14 +6,10 @@ import '/courses/missed_industry_thankyou/missed_industry_thankyou_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'all_courses_model.dart';
 export 'all_courses_model.dart';
@@ -46,8 +42,8 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
           curve: Curves.easeInOut,
           delay: 100.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 100.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 100.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -87,7 +83,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Text(
                   '📖 Course Library',
                   style: FlutterFlowTheme.of(context).headlineLarge,
@@ -95,7 +91,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -121,17 +117,17 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                 }
                 List<CourseRecord> couseListCourseRecordList = snapshot.data!;
                 return Container(
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Explore all Quis courses tailored for specific roles, companies, and skills.',
@@ -149,19 +145,18 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.textController,
                                   focusNode: _model.textFieldFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.textController',
-                                    Duration(milliseconds: 100),
+                                    const Duration(milliseconds: 100),
                                     () async {
                                       logFirebaseEvent(
                                           'ALL_COURSES_TextField_s5owlpw4_ON_TEXTFI');
-                                      if (_model.textController.text != null &&
-                                          _model.textController.text != '') {
+                                      if (_model.textController.text != '') {
                                         logFirebaseEvent(
                                             'TextField_update_page_state');
                                         setState(() {
@@ -189,7 +184,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                           lineHeight: 1.16,
                                         ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Color(0x00000000),
                                         width: 1.0,
                                       ),
@@ -222,7 +217,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                     filled: true,
                                     fillColor:
                                         FlutterFlowTheme.of(context).white,
-                                    contentPadding: EdgeInsets.all(16.0),
+                                    contentPadding: const EdgeInsets.all(16.0),
                                     prefixIcon: Icon(
                                       Icons.search,
                                       color: FlutterFlowTheme.of(context)
@@ -237,7 +232,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 24.0, 0.0, 0.0),
                                 child: Builder(
                                   builder: (context) {
@@ -268,7 +263,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 18.0, 0.0, 0.0),
                                             child: Builder(
                                               builder: (context) {
@@ -342,7 +337,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 18.0, 0.0, 0.0),
                                             child: Builder(
                                               builder: (context) {
@@ -402,7 +397,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                               ),
                               Builder(
                                 builder: (context) => Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -421,7 +416,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                             elevation: 0,
                                             insetPadding: EdgeInsets.zero,
                                             backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(
+                                            alignment: const AlignmentDirectional(
                                                     0.0, -0.4)
                                                 .resolve(
                                                     Directionality.of(context)),
@@ -434,7 +429,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                                             _model.unfocusNode)
                                                     : FocusScope.of(context)
                                                         .unfocus(),
-                                                child: MissedIndustryWidget(),
+                                                child: const MissedIndustryWidget(),
                                               ),
                                             ),
                                           );
@@ -455,7 +450,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                               backgroundColor:
                                                   Colors.transparent,
                                               alignment:
-                                                  AlignmentDirectional(0.0, 0.0)
+                                                  const AlignmentDirectional(0.0, 0.0)
                                                       .resolve(
                                                           Directionality.of(
                                                               context)),
@@ -470,7 +465,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                                       : FocusScope.of(context)
                                                           .unfocus(),
                                                   child:
-                                                      MissedIndustryThankyouWidget(),
+                                                      const MissedIndustryThankyouWidget(),
                                                 ),
                                               ),
                                             );
@@ -489,7 +484,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         'Do we miss your industry?',
                                         textAlign: TextAlign.center,
@@ -513,7 +508,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
                             ],
                           ).animateOnPageLoad(
                               animationsMap['columnOnPageLoadAnimation']!),
-                        ].addToEnd(SizedBox(height: 100.0)),
+                        ].addToEnd(const SizedBox(height: 100.0)),
                       ),
                     ),
                   ),
@@ -523,7 +518,7 @@ class _AllCoursesWidgetState extends State<AllCoursesWidget>
             wrapWithModel(
               model: _model.navBarModel,
               updateCallback: () => setState(() {}),
-              child: NavBarWidget(
+              child: const NavBarWidget(
                 index: 1,
               ),
             ),

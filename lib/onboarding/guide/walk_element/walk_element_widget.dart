@@ -1,8 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'walk_element_model.dart';
 export 'walk_element_model.dart';
 
@@ -51,7 +49,7 @@ class _WalkElementWidgetState extends State<WalkElementWidget> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -63,9 +61,9 @@ class _WalkElementWidgetState extends State<WalkElementWidget> {
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
                     widget.index,

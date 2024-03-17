@@ -10,7 +10,6 @@ import 'dart:async';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -95,8 +94,8 @@ class _SupportWidgetState extends State<SupportWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -111,24 +110,24 @@ class _SupportWidgetState extends State<SupportWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/animation_lnvyjnau.json',
                     width: 226.0,
@@ -138,7 +137,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Text(
                     'Assistance at Your Fingertips',
                     textAlign: TextAlign.center,
@@ -146,7 +145,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Select the topic of the appeal',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -158,7 +157,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -213,7 +212,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
                           color: _model.isTopicValidated
-                              ? Color(0x00000000)
+                              ? const Color(0x00000000)
                               : FlutterFlowTheme.of(context).error,
                         ),
                       ),
@@ -229,7 +228,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
                   child: Text(
                     'Message',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -245,7 +244,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                   autovalidateMode: AutovalidateMode.disabled,
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: TextFormField(
                       controller: _model.textController,
                       focusNode: _model.textFieldFocusNode,
@@ -261,7 +260,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                                   lineHeight: 1.16,
                                 ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
@@ -290,7 +289,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                         ),
                         filled: true,
                         fillColor: FlutterFlowTheme.of(context).white,
-                        contentPadding: EdgeInsets.all(16.0),
+                        contentPadding: const EdgeInsets.all(16.0),
                       ),
                       style: FlutterFlowTheme.of(context).headlineSmall,
                       maxLines: null,
@@ -304,7 +303,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                 Builder(
                   builder: (context) => Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent('SUPPORT_PAGE_SUBMIT_BTN_ON_TAP');
@@ -361,7 +360,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                               elevation: 0,
                               insetPadding: EdgeInsets.zero,
                               backgroundColor: Colors.transparent,
-                              alignment: AlignmentDirectional(0.0, 0.0)
+                              alignment: const AlignmentDirectional(0.0, 0.0)
                                   .resolve(Directionality.of(context)),
                               child: WebViewAware(
                                 child: GestureDetector(
@@ -370,7 +369,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                                           ? FocusScope.of(context)
                                               .requestFocus(_model.unfocusNode)
                                           : FocusScope.of(context).unfocus(),
-                                  child: SupportLetterDialogWidget(),
+                                  child: const SupportLetterDialogWidget(),
                                 ),
                               ),
                             );
@@ -384,10 +383,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 52.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).headlineLarge.override(
@@ -396,7 +395,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                                   useGoogleFonts: false,
                                 ),
                         elevation: 0.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 0.0,
                         ),
@@ -406,21 +405,21 @@ class _SupportWidgetState extends State<SupportWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
                   child: Text(
                     'FAQ',
                     style: FlutterFlowTheme.of(context).headlineLarge,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Membership',
                           style: FlutterFlowTheme.of(context)
@@ -432,17 +431,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                               ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController1,
                               child: ExpandablePanel(
@@ -452,10 +451,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'Quis membership includes exclusive access to all of the course content, unlimited practice interviews and so much more! Our courses include detailed lessons, guides, master class videos, and frameworks to help you ace your interview. All of our courses include free lessons ',
@@ -486,17 +485,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController2,
                               child: ExpandablePanel(
@@ -506,10 +505,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'At this time, Quis support offers assistance with account and service-related issues. If you would like more in-depth advice, we recommend you take a look at our coaching',
@@ -540,17 +539,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController3,
                               child: ExpandablePanel(
@@ -560,10 +559,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'Our business hours are Monday through Thursday, 8 AM - 8 PM. You can expect a response within 2 business days.',
@@ -594,17 +593,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController4,
                               child: ExpandablePanel(
@@ -614,10 +613,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     ' You can delete your account by navigating to the \"Settings\" page and choose \"Delete Account\"',
@@ -648,17 +647,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController5,
                               child: ExpandablePanel(
@@ -668,10 +667,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'Your Quis membership will renew automatically. You can cancel your plan at any time before your renewal date by visiting the \"Billing Management\" from the \"Settings\" page.',
@@ -702,17 +701,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController6,
                               child: ExpandablePanel(
@@ -722,10 +721,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: RichText(
                                     textScaler:
@@ -792,7 +791,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
@@ -800,13 +799,13 @@ class _SupportWidgetState extends State<SupportWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 19.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 10.0, 0.0, 0.0),
                         child: Text(
                           'Coaching',
@@ -819,17 +818,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                               ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController7,
                               child: ExpandablePanel(
@@ -839,10 +838,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'Our interviewing coaching is a core pillar of the Quis interview preparation experience. In addition to self-studying on our platform and practicing with Practice Interviews, you can give yourself the best chance of landing your dream role by seeking feedback from our expert interview coaches who can help level-up your interview presence, refine your responses, and highlight any pitfalls. Most students book 3-5 sessions to make the most of the coaching experience.',
@@ -873,17 +872,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController8,
                               child: ExpandablePanel(
@@ -893,10 +892,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'Before and during the 45-minute session, you\'ll discuss your goals, and your coach will customize the session to tailor to your areas of improvement. During and after the session, you\'ll receive detailed feedback and guidance on how to improve. Some examples of what we might cover in our sessions depend on the industry where you are and include Salary negotiation, job requirement conformance, research and more.',
@@ -927,17 +926,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController9,
                               child: ExpandablePanel(
@@ -947,10 +946,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'Quis Coaches are current Recruiters, ex-Recruiters and industry experts who have been hand-picked and vetted by Quis. Coaches are rigorously selected and checked before providing any kind of services',
@@ -981,17 +980,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController10,
                               child: ExpandablePanel(
@@ -1001,10 +1000,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'Please fill up the Add-ons form and we will get in touch with you.',
@@ -1035,17 +1034,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController11,
                               child: ExpandablePanel(
@@ -1055,10 +1054,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'The purchase of a coaching session does not include Quis membership.',
@@ -1089,17 +1088,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController12,
                               child: ExpandablePanel(
@@ -1109,10 +1108,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: Text(
                                     'We understand that plans can change. We ask that you reschedule or cancel your session at least 24 hours ahead of time out of consideration for our coaches. Missed sessions or cancellations/reschedules within 24 hours will count as a used session.',
@@ -1143,17 +1142,17 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
-                            color: Color(0x00000000),
+                            color: const Color(0x00000000),
                             child: ExpandableNotifier(
                               controller: _model.expandableController13,
                               child: ExpandablePanel(
@@ -1163,10 +1162,10 @@ class _SupportWidgetState extends State<SupportWidget> {
                                       .headlineMedium,
                                 ),
                                 collapsed: Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                 ),
                                 expanded: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 0.0),
                                   child: RichText(
                                     textScaler:
@@ -1233,14 +1232,14 @@ class _SupportWidgetState extends State<SupportWidget> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 3.0,
                         color: Color(0x4DD8DADC),
                       ),
                     ],
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 50.0)),
+              ].addToEnd(const SizedBox(height: 50.0)),
             ),
           ),
         ),

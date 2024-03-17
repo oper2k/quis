@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'onboarding05_model.dart';
 export 'onboarding05_model.dart';
 
@@ -65,8 +63,8 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -76,7 +74,7 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -84,19 +82,19 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(0.0),
                   child: Image.asset(
-                    'assets/images/Onb5.webp',
+                    'assets/images/NEWOnb08.webp',
                     width: 200.0,
                     fit: BoxFit.contain,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'Become an Interview Expert',
                   textAlign: TextAlign.center,
@@ -108,7 +106,7 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                       ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
                   child: Text(
                     'Shorten Time to get hired with Practice Interview',
                     textAlign: TextAlign.center,
@@ -120,7 +118,7 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                         ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +126,7 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel1,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text:
                             'Stay on track with your interview application and daily insights',
                       ),
@@ -136,22 +134,22 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel2,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text: 'Share updates about your interview Process',
                       ),
                     ),
                     wrapWithModel(
                       model: _model.onboardingListCheckItemModel3,
                       updateCallback: () => setState(() {}),
-                      child: OnboardingListCheckItemWidget(
+                      child: const OnboardingListCheckItemWidget(
                         text: 'Plan ahead with activities',
                       ),
                     ),
-                  ].divide(SizedBox(height: 20.0)),
+                  ].divide(const SizedBox(height: 20.0)),
                 ),
-                Spacer(flex: 2),
+                const Spacer(flex: 2),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('ONBOARDING05_PAGE_CONTINUE_BTN_ON_TAP');
@@ -164,9 +162,9 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                       width: double.infinity,
                       height: 52.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -175,7 +173,7 @@ class _Onboarding05WidgetState extends State<Onboarding05Widget> {
                                 useGoogleFonts: false,
                               ),
                       elevation: 0.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 0.0,
                       ),

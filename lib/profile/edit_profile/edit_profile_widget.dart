@@ -14,11 +14,9 @@ import '/flutter_flow/upload_data.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'edit_profile_model.dart';
@@ -50,9 +48,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
       logFirebaseEvent('EditProfile_update_page_state');
       setState(() {
         _model.groupRef = currentUserDocument?.group;
-        _model.roleRef = currentUserDocument?.careerProfile?.role;
-        _model.goalRoleRef = currentUserDocument?.careerProfile?.goalRole;
-        _model.expYears = currentUserDocument?.careerProfile?.expYears;
+        _model.roleRef = currentUserDocument?.careerProfile.role;
+        _model.goalRoleRef = currentUserDocument?.careerProfile.goalRole;
+        _model.expYears = currentUserDocument?.careerProfile.expYears;
       });
     });
 
@@ -123,8 +121,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -139,11 +137,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -167,7 +165,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             }
             List<GroupRecord> groupListGroupRecordList = snapshot.data!;
             return Container(
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: StreamBuilder<List<RoleRecord>>(
                 stream: queryRoleRecord(),
                 builder: (context, snapshot) {
@@ -187,7 +185,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   }
                   List<RoleRecord> roleListRoleRecordList = snapshot.data!;
                   return Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: StreamBuilder<List<GoalRoleRecord>>(
                       stream: queryGoalRoleRecord(),
                       builder: (context, snapshot) {
@@ -208,11 +206,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         List<GoalRoleRecord> containerGoalRoleRecordList =
                             snapshot.data!;
                         return Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Stack(
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
                                 child: SingleChildScrollView(
                                   child: Column(
@@ -221,15 +219,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 26.0, 0.0, 0.0),
-                                        child: Container(
+                                        child: SizedBox(
                                           width: 110.0,
                                           height: 110.0,
                                           child: Stack(
                                             children: [
                                               Align(
-                                                alignment: AlignmentDirectional(
+                                                alignment: const AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: AuthUserStreamWidget(
                                                   builder: (context) =>
@@ -239,10 +237,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                         setState(() {}),
                                                     child: AvatarWidget(
                                                       diameter: 100.0,
-                                                      imagePath: _model
-                                                                      .uploadedFileUrl !=
-                                                                  null &&
-                                                              _model.uploadedFileUrl !=
+                                                      imagePath: _model.uploadedFileUrl !=
                                                                   ''
                                                           ? _model
                                                               .uploadedFileUrl
@@ -256,7 +251,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(
+                                                alignment: const AlignmentDirectional(
                                                     1.0, 1.0),
                                                 child: InkWell(
                                                   splashColor:
@@ -396,7 +391,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 26.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -410,7 +405,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         12.0, 6.5, 12.0, 6.5),
                                                 child: Column(
@@ -482,7 +477,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         12.0, 6.5, 12.0, 6.5),
                                                 child: Column(
@@ -642,9 +637,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                     e.reference ==
                                                                     _model
                                                                         .groupRef)
-                                                                .toList()
-                                                                .length >
-                                                            0
+                                                                .toList().isNotEmpty
                                                         ? groupListGroupRecordList
                                                             .where((e) =>
                                                                 e.reference ==
@@ -666,7 +659,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         9.0, 17.0, 9.0, 12.0),
                                                 child: Row(
@@ -700,7 +693,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         10.0,
@@ -834,7 +827,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         10.0,
@@ -969,7 +962,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         10.0,
@@ -1071,7 +1064,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      SizedBox(width: 6.0)),
+                                                      const SizedBox(width: 6.0)),
                                                 ),
                                               ),
                                             ),
@@ -1084,7 +1077,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         12.0, 6.5, 12.0, 6.5),
                                                 child: Column(
@@ -1155,7 +1148,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         12.0, 6.5, 12.0, 6.5),
                                                 child: Column(
@@ -1226,21 +1219,21 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 ),
                                               ),
                                             ),
-                                          ].divide(SizedBox(height: 12.0)),
+                                          ].divide(const SizedBox(height: 12.0)),
                                         ),
                                       ),
-                                    ].addToEnd(SizedBox(height: 120.0)),
+                                    ].addToEnd(const SizedBox(height: 120.0)),
                                   ),
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0.0, 1.0),
+                                alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Builder(
                                       builder: (context) => Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 10.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
@@ -1285,9 +1278,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 ),
                                               ));
                                             }
-                                            if (_model.uploadedFileUrl !=
-                                                    null &&
-                                                _model.uploadedFileUrl != '') {
+                                            if (_model.uploadedFileUrl != '') {
                                               logFirebaseEvent(
                                                   'Button_backend_call');
 
@@ -1301,22 +1292,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     currentUserDocument
                                                         ?.isProfileCompleted,
                                                     false) &&
-                                                ((_model
-                                                                .firstNameFieldController
-                                                                .text !=
-                                                            null &&
-                                                        _model.firstNameFieldController.text !=
+                                                ((_model.firstNameFieldController.text !=
                                                             '') &&
-                                                    (_model.lastNameFieldController.text != null &&
-                                                        _model.lastNameFieldController.text !=
+                                                    (_model.lastNameFieldController.text !=
                                                             '') &&
-                                                    (_model.phoneFieldController.text != null &&
-                                                        _model
+                                                    (_model
                                                                 .phoneFieldController
                                                                 .text !=
                                                             '') &&
-                                                    (_model.linkedinFieldController.text != null &&
-                                                        _model
+                                                    (_model
                                                                 .linkedinFieldController
                                                                 .text !=
                                                             '')) &&
@@ -1356,7 +1340,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     backgroundColor:
                                                         Colors.transparent,
                                                     alignment:
-                                                        AlignmentDirectional(
+                                                        const AlignmentDirectional(
                                                                 0.0, 0.0)
                                                             .resolve(
                                                                 Directionality.of(
@@ -1374,7 +1358,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                                     context)
                                                                 .unfocus(),
                                                         child:
-                                                            KarmaPlusDialogWidget(
+                                                            const KarmaPlusDialogWidget(
                                                           karmaPoints: 0.5,
                                                         ),
                                                       ),
@@ -1384,59 +1368,20 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                               ).then(
                                                   (value) => setState(() {}));
                                             }
-                                            if (valueOrDefault(
-                                                    currentUserDocument
-                                                        ?.brevoId,
-                                                    0) !=
-                                                null) {
-                                              logFirebaseEvent(
-                                                  'Button_backend_call');
-                                              await BrevoGroup
-                                                  .updateAContactCall
-                                                  .call(
-                                                firstname: _model
-                                                    .firstNameFieldController
-                                                    .text,
-                                                lastname: _model
-                                                    .lastNameFieldController
-                                                    .text,
-                                                identifier: currentUserEmail,
-                                              );
-                                            } else {
-                                              logFirebaseEvent(
-                                                  'Button_backend_call');
-                                              _model.apiResultsj66 =
-                                                  await BrevoGroup
-                                                      .createAContactCall
-                                                      .call(
-                                                firstname: _model
-                                                    .firstNameFieldController
-                                                    .text,
-                                                lastname: _model
-                                                    .lastNameFieldController
-                                                    .text,
-                                                email: currentUserEmail,
-                                              );
-                                              if ((_model.apiResultsj66
-                                                      ?.succeeded ??
-                                                  true)) {
-                                                logFirebaseEvent(
-                                                    'Button_backend_call');
-
-                                                await currentUserReference!
-                                                    .update(
-                                                        createUsersRecordData(
-                                                  brevoId: BrevoGroup
-                                                      .createAContactCall
-                                                      .brevoID(
-                                                    (_model.apiResultsj66
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                ));
-                                              }
-                                            }
-
+                                            logFirebaseEvent(
+                                                'Button_backend_call');
+                                            await BrevoGroup
+                                                .updateAContactCall
+                                                .call(
+                                              firstname: _model
+                                                  .firstNameFieldController
+                                                  .text,
+                                              lastname: _model
+                                                  .lastNameFieldController
+                                                  .text,
+                                              identifier: currentUserEmail,
+                                            );
+                                          
                                             logFirebaseEvent(
                                                 'Button_navigate_to');
 
@@ -1449,10 +1394,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             width: double.infinity,
                                             height: 52.0,
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -1468,7 +1413,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                       useGoogleFonts: false,
                                                     ),
                                             elevation: 0.0,
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Colors.transparent,
                                               width: 0.0,
                                             ),
@@ -1485,7 +1430,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         : _isKeyboardVisible))
                                       Container(
                                         height: 40.0,
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                       ),
                                   ],
                                 ),

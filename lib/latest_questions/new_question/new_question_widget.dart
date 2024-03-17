@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/pick_bottom_sheet_widget.dart';
 import '/components/pseudo_drop_down_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -10,10 +9,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/latest_questions/calendar_element/calendar_element_widget.dart';
 import '/latest_questions/question_answer_element/question_answer_element_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -93,8 +90,8 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                 child: Container(
                   width: 40.0,
                   height: 40.0,
-                  decoration: BoxDecoration(),
-                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  decoration: const BoxDecoration(),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Icon(
                     FFIcons.karrowBack,
                     color: FlutterFlowTheme.of(context).secondaryText,
@@ -109,11 +106,11 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
               Container(
                 width: 40.0,
                 height: 40.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           toolbarHeight: 40.0,
           elevation: 0.0,
@@ -137,21 +134,21 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
             }
             List<RoleRecord> roleListRoleRecordList = snapshot.data!;
             return Container(
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: Form(
                 key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 23.0, 0.0, 0.0),
                             child: Lottie.asset(
                               'assets/lottie_animations/animation_lofuvsla.json',
@@ -163,7 +160,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 23.0, 0.0, 0.0),
                           child: Text(
                             'Help the Quis community by telling us about your recent interview experience! Interview questions that are detailed and clearly written will be added to the question database and you will receive Karma bonus!',
@@ -172,7 +169,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 27.0, 0.0, 0.0),
                           child: Text(
                             'Company',
@@ -180,7 +177,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 6.0, 0.0, 0.0),
                           child: TextFormField(
                             controller: _model.companyFieldController,
@@ -197,7 +194,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                     lineHeight: 1.16,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -226,7 +223,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               ),
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context).white,
-                              contentPadding: EdgeInsets.all(16.0),
+                              contentPadding: const EdgeInsets.all(16.0),
                             ),
                             style: FlutterFlowTheme.of(context).headlineSmall,
                             validator: _model.companyFieldControllerValidator
@@ -234,7 +231,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 27.0, 0.0, 0.0),
                           child: Text(
                             'Role',
@@ -242,7 +239,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 6.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -306,7 +303,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 borderRadius: BorderRadius.circular(10.0),
                                 border: Border.all(
                                   color: _model.isRoleValidated
-                                      ? Color(0x00EB4335)
+                                      ? const Color(0x00EB4335)
                                       : FlutterFlowTheme.of(context).error,
                                 ),
                               ),
@@ -329,7 +326,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 27.0, 0.0, 0.0),
                           child: Text(
                             'Stage',
@@ -337,7 +334,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 6.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -393,7 +390,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 borderRadius: BorderRadius.circular(10.0),
                                 border: Border.all(
                                   color: _model.isStageValid
-                                      ? Color(0x00EB4335)
+                                      ? const Color(0x00EB4335)
                                       : FlutterFlowTheme.of(context).error,
                                 ),
                               ),
@@ -409,7 +406,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 27.0, 0.0, 0.0),
                           child: Text(
                             'Did you pass interview round?',
@@ -417,7 +414,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 6.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -473,7 +470,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                 borderRadius: BorderRadius.circular(10.0),
                                 border: Border.all(
                                   color: _model.isRoundValid
-                                      ? Color(0x00EB4335)
+                                      ? const Color(0x00EB4335)
                                       : FlutterFlowTheme.of(context).error,
                                 ),
                               ),
@@ -522,7 +519,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 27.0, 0.0, 0.0),
                               child: Text(
                                 'Date of interview',
@@ -531,7 +528,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -563,9 +560,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                           });
                                         },
                                         child: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                           child: Padding(
-                                            padding: EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(3.0),
                                             child: Icon(
                                               Icons.chevron_left_rounded,
                                               color:
@@ -592,9 +589,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                           });
                                         },
                                         child: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                           child: Padding(
-                                            padding: EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(3.0),
                                             child: Icon(
                                               Icons.chevron_right_rounded,
                                               color:
@@ -611,7 +608,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 18.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -657,7 +654,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 16.0, 0.0, 0.0),
                               child: Container(
                                 width: double.infinity,
@@ -666,7 +663,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(
                                     color: _model.isDateValid
-                                        ? Color(0x00000000)
+                                        ? const Color(0x00000000)
                                         : FlutterFlowTheme.of(context).error,
                                   ),
                                 ),
@@ -680,7 +677,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                     return GridView.builder(
                                       padding: EdgeInsets.zero,
                                       gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 7,
                                         crossAxisSpacing: 18.0,
                                         mainAxisSpacing: 13.0,
@@ -749,9 +746,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                             });
                           },
                           child: Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Padding(
-                              padding: EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Add more question',
                                 style: FlutterFlowTheme.of(context)
@@ -767,7 +764,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
@@ -927,7 +924,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                   !_model.formKey.currentState!.validate()) {
                                 return;
                               }
-                              while (_model.questionAnswerList.length > 0) {
+                              while (_model.questionAnswerList.isNotEmpty) {
                                 logFirebaseEvent('Button_backend_call');
 
                                 await InterviewQuestionRecord.collection
@@ -1026,9 +1023,9 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                             options: FFButtonOptions(
                               width: double.infinity,
                               height: 52.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
@@ -1039,7 +1036,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                                     useGoogleFonts: false,
                                   ),
                               elevation: 0.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 0.0,
                               ),
@@ -1047,7 +1044,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                             ),
                           ),
                         ),
-                      ].addToEnd(SizedBox(height: 50.0)),
+                      ].addToEnd(const SizedBox(height: 50.0)),
                     ),
                   ),
                 ),

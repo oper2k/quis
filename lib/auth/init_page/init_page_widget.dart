@@ -1,10 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'init_page_model.dart';
 export 'init_page_model.dart';
 
@@ -46,16 +43,16 @@ class _InitPageWidgetState extends State<InitPageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: SafeArea(
           top: true,
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             height: double.infinity,
             child: Stack(
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.0, -0.8),
+                  alignment: const AlignmentDirectional(0.0, -0.8),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -67,7 +64,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 30.0, 0.0, 0.0),
                           child: Text(
                             'Take control of your career',
@@ -83,7 +80,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Text(
                             '85% of users say Quis helped them boost their confidence',
@@ -102,10 +99,10 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
+                  alignment: const AlignmentDirectional(0.0, 1.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 10.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -128,7 +125,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 10.0, 16.0, 10.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -141,7 +138,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                                     size: 24.0,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Continue with email',
@@ -179,7 +176,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 10.0, 16.0, 10.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -195,7 +192,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Continue with Apple',
@@ -239,7 +236,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 10.0, 16.0, 10.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -255,7 +252,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Continue with Google',
@@ -274,7 +271,7 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                             ),
                           ),
                         ),
-                      ].divide(SizedBox(height: 8.0)),
+                      ].divide(const SizedBox(height: 8.0)),
                     ),
                   ),
                 ),

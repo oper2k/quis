@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'minus_element_model.dart';
 export 'minus_element_model.dart';
 
@@ -12,7 +10,7 @@ class MinusElementWidget extends StatefulWidget {
     super.key,
     required this.text,
     bool? isPlus,
-  }) : this.isPlus = isPlus ?? false;
+  }) : isPlus = isPlus ?? false;
 
   final String? text;
   final bool isPlus;
@@ -85,7 +83,7 @@ class _MinusElementWidgetState extends State<MinusElementWidget> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
             child: Text(
               valueOrDefault<String>(
                 widget.text,

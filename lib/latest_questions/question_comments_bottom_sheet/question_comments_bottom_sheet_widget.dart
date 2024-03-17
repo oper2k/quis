@@ -6,12 +6,8 @@ import '/components/karma_plus_dialog_widget.dart';
 import '/components/message_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'question_comments_bottom_sheet_model.dart';
 export 'question_comments_bottom_sheet_model.dart';
@@ -77,7 +73,7 @@ class _QuestionCommentsBottomSheetWidgetState
       height: MediaQuery.sizeOf(context).height * 0.5,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(10.0),
@@ -112,16 +108,16 @@ class _QuestionCommentsBottomSheetWidgetState
           List<CommentInterviewQuestionRecord>
               commentListCommentInterviewQuestionRecordList = snapshot.data!;
           return Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Padding(
-              padding: EdgeInsets.all(1.0),
+              padding: const EdgeInsets.all(1.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 5.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 5.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,9 +135,9 @@ class _QuestionCommentsBottomSheetWidgetState
                         minHeight: 50.0,
                         maxHeight: MediaQuery.sizeOf(context).height * 0.5,
                       ),
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Builder(
                           builder: (context) {
@@ -149,7 +145,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                 commentListCommentInterviewQuestionRecordList
                                     .toList();
                             return ListView.separated(
-                              padding: EdgeInsets.fromLTRB(
+                              padding: const EdgeInsets.fromLTRB(
                                 0,
                                 20.0,
                                 0,
@@ -159,7 +155,7 @@ class _QuestionCommentsBottomSheetWidgetState
                               scrollDirection: Axis.vertical,
                               itemCount: comment.length,
                               separatorBuilder: (_, __) =>
-                                  SizedBox(height: 24.0),
+                                  const SizedBox(height: 24.0),
                               itemBuilder: (context, commentIndex) {
                                 final commentItem = comment[commentIndex];
                                 return StreamBuilder<UsersRecord>(
@@ -185,7 +181,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                     final userRefItemUsersRecord =
                                         snapshot.data!;
                                     return Container(
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -227,7 +223,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(8.0, 0.0, 0.0, 0.0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
@@ -249,7 +245,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 5.0,
                                                                 0.0, 0.0),
                                                     child: wrapWithModel(
@@ -272,7 +268,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 14.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -286,9 +282,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                     .where((e) =>
                                                                         e.user ==
                                                                         currentUserReference)
-                                                                    .toList()
-                                                                    .length >
-                                                                0) {
+                                                                    .toList().isNotEmpty) {
                                                               return Row(
                                                                 mainAxisSize:
                                                                     MainAxisSize
@@ -296,7 +290,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                 children: [
                                                                   Container(
                                                                     decoration:
-                                                                        BoxDecoration(),
+                                                                        const BoxDecoration(),
                                                                     child: Row(
                                                                       mainAxisSize:
                                                                           MainAxisSize
@@ -305,14 +299,14 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                         Icon(
                                                                           FFIcons
                                                                               .kthumbsUp,
-                                                                          color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == true)).toList().length > 0
+                                                                          color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == true)).toList().isNotEmpty
                                                                               ? FlutterFlowTheme.of(context).success
                                                                               : FlutterFlowTheme.of(context).primaryText,
                                                                           size:
                                                                               15.0,
                                                                         ),
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               6.0,
                                                                               0.0,
                                                                               0.0,
@@ -322,7 +316,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                             '${((commentItem.likeDislike.where((e) => e.isLike == true).toList().length / commentItem.likeDislike.length) * 100).toString()} %',
                                                                             style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                                                   fontFamily: 'Sofia Pro',
-                                                                                  color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == true)).toList().length > 0 ? FlutterFlowTheme.of(context).success : FlutterFlowTheme.of(context).primaryText,
+                                                                                  color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == true)).toList().isNotEmpty ? FlutterFlowTheme.of(context).success : FlutterFlowTheme.of(context).primaryText,
                                                                                   useGoogleFonts: false,
                                                                                 ),
                                                                           ),
@@ -331,7 +325,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                     ),
                                                                   ),
                                                                   Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -340,7 +334,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                     child:
                                                                         Container(
                                                                       decoration:
-                                                                          BoxDecoration(),
+                                                                          const BoxDecoration(),
                                                                       child:
                                                                           Row(
                                                                         mainAxisSize:
@@ -348,14 +342,14 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                         children: [
                                                                           Icon(
                                                                             FFIcons.kthumbsDown,
-                                                                            color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == false)).toList().length > 0
+                                                                            color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == false)).toList().isNotEmpty
                                                                                 ? FlutterFlowTheme.of(context).error
                                                                                 : FlutterFlowTheme.of(context).primaryText,
                                                                             size:
                                                                                 15.0,
                                                                           ),
                                                                           Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                                                 6.0,
                                                                                 0.0,
                                                                                 0.0,
@@ -365,7 +359,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                               '${((commentItem.likeDislike.where((e) => e.isLike == false).toList().length / commentItem.likeDislike.length) * 100).toString()} %',
                                                                               style: FlutterFlowTheme.of(context).headlineSmall.override(
                                                                                     fontFamily: 'Sofia Pro',
-                                                                                    color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == false)).toList().length > 0 ? FlutterFlowTheme.of(context).error : FlutterFlowTheme.of(context).primaryText,
+                                                                                    color: commentItem.likeDislike.where((e) => (e.user == currentUserReference) && (e.isLike == false)).toList().isNotEmpty ? FlutterFlowTheme.of(context).error : FlutterFlowTheme.of(context).primaryText,
                                                                                     useGoogleFonts: false,
                                                                                   ),
                                                                             ),
@@ -458,11 +452,11 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                     child:
                                                                         Container(
                                                                       decoration:
-                                                                          BoxDecoration(),
+                                                                          const BoxDecoration(),
                                                                       child:
                                                                           Padding(
                                                                         padding:
-                                                                            EdgeInsets.all(2.0),
+                                                                            const EdgeInsets.all(2.0),
                                                                         child:
                                                                             Icon(
                                                                           FFIcons
@@ -476,7 +470,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                     ),
                                                                   ),
                                                                   Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -525,11 +519,11 @@ class _QuestionCommentsBottomSheetWidgetState
                                                                       child:
                                                                           Container(
                                                                         decoration:
-                                                                            BoxDecoration(),
+                                                                            const BoxDecoration(),
                                                                         child:
                                                                             Padding(
                                                                           padding:
-                                                                              EdgeInsets.all(2.0),
+                                                                              const EdgeInsets.all(2.0),
                                                                           child:
                                                                               Icon(
                                                                             FFIcons.kthumbsDown,
@@ -572,7 +566,7 @@ class _QuestionCommentsBottomSheetWidgetState
                     color: FlutterFlowTheme.of(context).accent2,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -589,7 +583,7 @@ class _QuestionCommentsBottomSheetWidgetState
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 11.0, 0.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.textController,
@@ -608,7 +602,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                       lineHeight: 1.16,
                                     ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
@@ -639,7 +633,7 @@ class _QuestionCommentsBottomSheetWidgetState
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                contentPadding: EdgeInsets.all(16.0),
+                                contentPadding: const EdgeInsets.all(16.0),
                               ),
                               style: FlutterFlowTheme.of(context).headlineSmall,
                               validator: _model.textControllerValidator
@@ -656,8 +650,7 @@ class _QuestionCommentsBottomSheetWidgetState
                             onTap: () async {
                               logFirebaseEvent(
                                   'QUESTION_COMMENTS_BOTTOM_SHEET_Container');
-                              if (_model.textController.text != null &&
-                                  _model.textController.text != '') {
+                              if (_model.textController.text != '') {
                                 logFirebaseEvent('Container_backend_call');
 
                                 await CommentInterviewQuestionRecord.collection
@@ -686,9 +679,9 @@ class _QuestionCommentsBottomSheetWidgetState
                                       elevation: 0,
                                       insetPadding: EdgeInsets.zero,
                                       backgroundColor: Colors.transparent,
-                                      alignment: AlignmentDirectional(0.0, 0.0)
+                                      alignment: const AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
-                                      child: WebViewAware(
+                                      child: const WebViewAware(
                                         child: KarmaPlusDialogWidget(
                                           karmaPoints: 0.5,
                                         ),
@@ -704,9 +697,9 @@ class _QuestionCommentsBottomSheetWidgetState
                               }
                             },
                             child: Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     4.0, 0.0, 0.0, 0.0),
                                 child: Icon(
                                   FFIcons.kfluentSend48Regular,
@@ -726,7 +719,7 @@ class _QuestionCommentsBottomSheetWidgetState
                       : _isKeyboardVisible))
                     Container(
                       height: 40.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                     ),
                 ],
               ),
