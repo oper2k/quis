@@ -70,8 +70,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_INI');
       logFirebaseEvent('AllCoursesGuide_start_walkthrough');
-      safeSetState(() =>
-          _model.quideCourses2Controller = createPageWalkthrough(context));
+      _model.quideCourses2Controller = _model.createPageWalkthrough(context);
       _model.quideCourses2Controller?.show(context: context);
     });
 
@@ -713,42 +712,4 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
       ),
     );
   }
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () {
-          safeSetState(() => _model.quideCourses2Controller = null);
-          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
-          logFirebaseEvent('AllCoursesGuide_navigate_to');
-
-          context.goNamed(
-            'LatestInterviewQuestionsGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-        },
-        onSkip: () {
-          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
-          logFirebaseEvent('AllCoursesGuide_navigate_to');
-
-          context.goNamed(
-            'LatestInterviewQuestionsGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
-          return true;
-        },
-      );
 }

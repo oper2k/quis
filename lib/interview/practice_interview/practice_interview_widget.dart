@@ -1703,7 +1703,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      '7:00 PM GMT +4 every day',
+                                      '7:00 PM +04 GST every day',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall,
                                     ),

@@ -26,10 +26,6 @@ class FFAppState extends ChangeNotifier {
           prefs.getString('ff_VideoOfTheDay')?.ref ?? _VideoOfTheDay;
     });
     _safeInit(() {
-      _filterRoleList =
-          prefs.getStringList('ff_filterRoleList') ?? _filterRoleList;
-    });
-    _safeInit(() {
       _refUser = prefs.getString('ff_refUser')?.ref ?? _refUser;
     });
     _safeInit(() {
@@ -80,11 +76,11 @@ class FFAppState extends ChangeNotifier {
 
   List<ServiceStruct> _addOns = [
     ServiceStruct.fromSerializableMap(jsonDecode(
-        '{\"name\":\"CV Writing Service\",\"priceKarma\":\"0.0\",\"price\":\"80.0\",\"has_attach\":\"true\"}')),
+        '{\"name\":\"CV Writing Service\",\"priceKarma\":\"0\",\"price\":\"300\",\"has_attach\":\"true\"}')),
     ServiceStruct.fromSerializableMap(jsonDecode(
-        '{\"name\":\"1x1 Coaching \",\"priceKarma\":\"0.0\",\"price\":\"150.0\"}')),
+        '{\"name\":\"1x1 Coaching \",\"priceKarma\":\"0\",\"price\":\"500\"}')),
     ServiceStruct.fromSerializableMap(jsonDecode(
-        '{\"name\":\"Mock up Recruiter Interview\",\"priceKarma\":\"0.0\",\"price\":\"150.0\"}'))
+        '{\"name\":\"Mock up Recruiter Interview\",\"priceKarma\":\"0\",\"price\":\"500\"}'))
   ];
   List<ServiceStruct> get addOns => _addOns;
   set addOns(List<ServiceStruct> _value) {
@@ -187,32 +183,28 @@ class FFAppState extends ChangeNotifier {
   }
 
   List<String> _filterRoleList = [
-    'Cabin Crew',
+    'Waiter',
     'Manager',
     'Hostess/ Host',
     'Bartender',
     'Supervisor',
-    'Waiter'
+    'Cabin Crew'
   ];
   List<String> get filterRoleList => _filterRoleList;
   set filterRoleList(List<String> _value) {
     _filterRoleList = _value;
-    prefs.setStringList('ff_filterRoleList', _value);
   }
 
   void addToFilterRoleList(String _value) {
     _filterRoleList.add(_value);
-    prefs.setStringList('ff_filterRoleList', _filterRoleList);
   }
 
   void removeFromFilterRoleList(String _value) {
     _filterRoleList.remove(_value);
-    prefs.setStringList('ff_filterRoleList', _filterRoleList);
   }
 
   void removeAtIndexFromFilterRoleList(int _index) {
     _filterRoleList.removeAt(_index);
-    prefs.setStringList('ff_filterRoleList', _filterRoleList);
   }
 
   void updateFilterRoleListAtIndex(
@@ -220,12 +212,10 @@ class FFAppState extends ChangeNotifier {
     String Function(String) updateFn,
   ) {
     _filterRoleList[_index] = updateFn(_filterRoleList[_index]);
-    prefs.setStringList('ff_filterRoleList', _filterRoleList);
   }
 
   void insertAtIndexInFilterRoleList(int _index, String _value) {
     _filterRoleList.insert(_index, _value);
-    prefs.setStringList('ff_filterRoleList', _filterRoleList);
   }
 
   List<String> _supportTopicList = [
@@ -375,11 +365,11 @@ class FFAppState extends ChangeNotifier {
 
   List<ImprovementItemStruct> _improvementList = [
     ImprovementItemStruct.fromSerializableMap(jsonDecode(
-        '{\"title\":\"Interview Process Awareness 💡\",\"description\":\" Knowing Interview structure help you see the final goal.\",\"sort\":\"1\"}')),
+        '{\"title\":\"Interview Process Awareness 💡\",\"description\":\" \",\"sort\":\"1\"}')),
     ImprovementItemStruct.fromSerializableMap(jsonDecode(
-        '{\"title\":\"Get out from feeling of stuck 🤝 \",\"description\":\" This might be overwhelming, we know; we\'ve been in your shoes. Start slowly, and you will see progress with Quis.\",\"sort\":\"2\"}')),
+        '{\"title\":\"Get out from feeling of stuck 🤝 \",\"description\":\" \",\"sort\":\"3\"}')),
     ImprovementItemStruct.fromSerializableMap(jsonDecode(
-        '{\"title\":\"Get more Confidence 🍀\",\"description\":\" You are not alone. As you start, you will see progress quickly.\",\"sort\":\"3\"}')),
+        '{\"title\":\"Get more Confidence 🍀\",\"description\":\" \",\"sort\":\"3\"}')),
     ImprovementItemStruct.fromSerializableMap(jsonDecode(
         '{\"title\":\"Interview Questions 💬\",\"description\":\"Many failed because they did not know what to expect. We aim to change that!\",\"sort\":\"4\"}'))
   ];

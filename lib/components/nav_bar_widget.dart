@@ -174,7 +174,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 6.0, 0.0, 0.0),
                                 child: Text(
-                                  'Learning',
+                                  'Course',
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -227,11 +227,11 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 color: widget.index == 2
                                     ? FlutterFlowTheme.of(context).primary
                                     : FlutterFlowTheme.of(context).accent3,
-                                size: 26.0,
+                                size: 24.0,
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 4.0, 0.0, 0.0),
+                                    0.0, 6.0, 0.0, 0.0),
                                 child: Text(
                                   'Practice',
                                   style: FlutterFlowTheme.of(context)

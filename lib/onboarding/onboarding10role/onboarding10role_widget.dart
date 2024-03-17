@@ -37,10 +37,7 @@ class _Onboarding10roleWidgetState extends State<Onboarding10roleWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('ONBOARDING10ROLE_Onboarding10role_ON_INI');
       logFirebaseEvent('Onboarding10role_firestore_query');
-      _model.roleQueryOutput = await queryRoleRecordOnce(
-        queryBuilder: (roleRecord) =>
-            roleRecord.orderBy('sort', descending: true),
-      );
+      _model.roleQueryOutput = await queryRoleRecordOnce();
       logFirebaseEvent('Onboarding10role_bottom_sheet');
       await showModalBottomSheet(
         isScrollControlled: true,

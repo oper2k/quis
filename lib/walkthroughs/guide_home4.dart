@@ -3,7 +3,6 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '/onboarding/guide/walk_element/walk_element_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 // Focus widget keys for this walkthrough
 final containerAa69miij = GlobalKey();

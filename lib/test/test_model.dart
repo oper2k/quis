@@ -13,8 +13,8 @@ import 'package:provider/provider.dart';
 class TestModel extends FlutterFlowModel<TestWidget> {
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? testController;
   final unfocusNode = FocusNode();
+  TutorialCoachMark? testController;
 
   /// Initialization and disposal methods.
 
@@ -23,11 +23,19 @@ class TestModel extends FlutterFlowModel<TestWidget> {
 
   @override
   void dispose() {
-    testController?.finish();
     unfocusNode.dispose();
+    testController?.finish();
   }
 
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onSkip: () {
+          return true;
+        },
+      );
 }

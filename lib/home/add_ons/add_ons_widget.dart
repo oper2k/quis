@@ -480,7 +480,7 @@ class _AddOnsWidgetState extends State<AddOnsWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .info,
+                                                                .primaryText,
                                                         useGoogleFonts: false,
                                                       ),
                                             ),

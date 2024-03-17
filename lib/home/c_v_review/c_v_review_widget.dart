@@ -608,8 +608,8 @@ class _CVReviewWidgetState extends State<CVReviewWidget> {
                                         .titleMedium
                                         .override(
                                           fontFamily: 'Sofia Pro',
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           useGoogleFonts: false,
                                         ),
                                   ),

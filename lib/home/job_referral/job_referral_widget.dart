@@ -973,35 +973,6 @@ class _JobReferralWidgetState extends State<JobReferralWidget> {
                                                   }
 
                                                   logFirebaseEvent(
-                                                      'Container_show_snack_bar');
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'Uploading document....',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                      ),
-                                                      duration: Duration(
-                                                          milliseconds: 3000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                    ),
-                                                  );
-                                                  logFirebaseEvent(
                                                       'Container_update_page_state');
                                                   setState(() {
                                                     _model.isCVvalidated = true;

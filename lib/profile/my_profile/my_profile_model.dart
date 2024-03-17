@@ -17,7 +17,6 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
   ///  Local state fields for this page.

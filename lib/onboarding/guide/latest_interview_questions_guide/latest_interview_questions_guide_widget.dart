@@ -77,8 +77,7 @@ class _LatestInterviewQuestionsGuideWidgetState
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
       logFirebaseEvent('LatestInterviewQuestionsGuide_start_walk');
-      safeSetState(() =>
-          _model.guideQuestions3Controller = createPageWalkthrough(context));
+      _model.guideQuestions3Controller = _model.createPageWalkthrough(context);
       _model.guideQuestions3Controller?.show(context: context);
     });
 
@@ -2367,24 +2366,4 @@ class _LatestInterviewQuestionsGuideWidgetState
       ),
     );
   }
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () {
-          safeSetState(() => _model.guideQuestions3Controller = null);
-          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
-          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
-
-          context.goNamed('HomeGuide2');
-        },
-        onSkip: () {
-          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
-          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
-
-          context.goNamed('HomeGuide2');
-
-          return true;
-        },
-      );
 }

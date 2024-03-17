@@ -110,7 +110,6 @@ class _OnboardingListItemDescriptionWidgetState
                         fontFamily: 'Sofia Pro',
                         color: FlutterFlowTheme.of(context).info,
                         useGoogleFonts: false,
-                        lineHeight: 1.25,
                       ),
                 ),
               ),

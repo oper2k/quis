@@ -67,7 +67,7 @@ class _ReminderPageWidgetState extends State<ReminderPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Lottie.asset(
-                          'assets/lottie_animations/XLjIcIgZfU.json',
+                          'assets/lottie_animations/animation_loesndo3.json',
                           width: 200.0,
                           height: 200.0,
                           fit: BoxFit.cover,

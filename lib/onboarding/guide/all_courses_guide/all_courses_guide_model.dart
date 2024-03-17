@@ -28,8 +28,8 @@ class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? quideCourses2Controller;
   final unfocusNode = FocusNode();
+  TutorialCoachMark? quideCourses2Controller;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -55,8 +55,8 @@ class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
 
   @override
   void dispose() {
-    quideCourses2Controller?.finish();
     unfocusNode.dispose();
+    quideCourses2Controller?.finish();
     textFieldFocusNode?.dispose();
     textController?.dispose();
 
@@ -67,4 +67,41 @@ class AllCoursesGuideModel extends FlutterFlowModel<AllCoursesGuideWidget> {
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
+          logFirebaseEvent('AllCoursesGuide_navigate_to');
+
+          context.goNamed(
+            'LatestInterviewQuestionsGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        },
+        onSkip: () {
+          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
+          logFirebaseEvent('AllCoursesGuide_navigate_to');
+
+          context.goNamed(
+            'LatestInterviewQuestionsGuide',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
+          return true;
+        },
+      );
 }

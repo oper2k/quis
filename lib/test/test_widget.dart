@@ -33,8 +33,7 @@ class _TestWidgetState extends State<TestWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('TEST_PAGE_test_ON_INIT_STATE');
       logFirebaseEvent('test_start_walkthrough');
-      safeSetState(
-          () => _model.testController = createPageWalkthrough(context));
+      _model.testController = _model.createPageWalkthrough(context);
       _model.testController?.show(context: context);
     });
   }
@@ -80,15 +79,4 @@ class _TestWidgetState extends State<TestWidget> {
       ),
     );
   }
-
-  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
-      TutorialCoachMark(
-        targets: createWalkthroughTargets(context),
-        onFinish: () {
-          safeSetState(() => _model.testController = null);
-        },
-        onSkip: () {
-          return true;
-        },
-      );
 }

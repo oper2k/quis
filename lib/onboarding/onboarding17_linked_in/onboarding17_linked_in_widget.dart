@@ -139,7 +139,7 @@ class _Onboarding17LinkedInWidgetState
                   ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
-                      'assets/images/NEWOnb07.webp',
+                      'assets/images/Onb11.webp',
                       width: 235.0,
                       fit: BoxFit.contain,
                     ),

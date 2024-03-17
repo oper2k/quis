@@ -349,7 +349,7 @@ extension WalkthroughWrapperExtension on Widget {
     GlobalKey walkthroughKey,
     TutorialCoachMark? controller,
   ) =>
-      controller != null
+      controller?.isShowing ?? false
           ? KeyedSubtree(
               key: walkthroughKey,
               child: this,
