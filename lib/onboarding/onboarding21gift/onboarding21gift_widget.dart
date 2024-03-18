@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -171,12 +170,9 @@ class _Onboarding21giftWidgetState extends State<Onboarding21giftWidget> {
                     onTap: () async {
                       logFirebaseEvent(
                           'ONBOARDING21GIFT_Container_gtm8dy73_ON_T');
-                      logFirebaseEvent('Container_auth');
-                      GoRouter.of(context).prepareAuthEvent();
-                      await authManager.signOut();
-                      GoRouter.of(context).clearRedirectLocation();
+                      logFirebaseEvent('Container_navigate_to');
 
-                      context.goNamedAuth('InitPage', context.mounted);
+                      context.goNamed('InitPage');
                     },
                     child: Container(
                       width: double.infinity,

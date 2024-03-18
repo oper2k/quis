@@ -1,8 +1,7 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -242,12 +241,11 @@ class _Onboarding17LinkedInWidgetState
                         : () async {
                             logFirebaseEvent(
                                 'ONBOARDING17_LINKED_IN_CONTINUE_BTN_ON_T');
-                            logFirebaseEvent('Button_backend_call');
-
-                            await currentUserReference!
-                                .update(createUsersRecordData(
-                              linkedinLink: _model.textController.text,
-                            ));
+                            logFirebaseEvent('Button_update_app_state');
+                            setState(() {
+                              FFAppState().onbLinkedIn =
+                                  _model.textController.text;
+                            });
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('Onboarding18time');

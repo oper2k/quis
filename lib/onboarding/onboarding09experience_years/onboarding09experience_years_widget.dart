@@ -1,5 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/components/pick_bottom_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,6 +5,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'onboarding09experience_years_model.dart';
 export 'onboarding09experience_years_model.dart';
@@ -37,7 +36,7 @@ class _Onboarding09experienceYearsWidgetState
       logFirebaseEvent('ONBOARDING09EXPERIENCE_YEARS_Onboarding0');
       logFirebaseEvent('Onboarding09experienceYears_update_page_');
       setState(() {
-        _model.pickedYear = currentUserDocument!.careerProfile.expYears;
+        _model.pickedYear = FFAppState().onbExperienceYears;
       });
       logFirebaseEvent('Onboarding09experienceYears_bottom_sheet');
       await showModalBottomSheet(
@@ -82,6 +81,8 @@ class _Onboarding09experienceYearsWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -225,15 +226,11 @@ class _Onboarding09experienceYearsWidgetState
                         : () async {
                             logFirebaseEvent(
                                 'ONBOARDING09EXPERIENCE_YEARS_CONTINUE_BT');
-                            logFirebaseEvent('Button_backend_call');
-
-                            await currentUserReference!
-                                .update(createUsersRecordData(
-                              careerProfile: createCareerProfileStruct(
-                                expYears: _model.pickedYear,
-                                clearUnsetFields: false,
-                              ),
-                            ));
+                            logFirebaseEvent('Button_update_app_state');
+                            setState(() {
+                              FFAppState().onbExperienceYears =
+                                  _model.pickedYear;
+                            });
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('Onboarding10role');

@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -182,12 +181,10 @@ class _Onboarding06industryWidgetState
                         : () async {
                             logFirebaseEvent(
                                 'ONBOARDING06INDUSTRY_CONTINUE_BTN_ON_TAP');
-                            logFirebaseEvent('Button_backend_call');
-
-                            await currentUserReference!
-                                .update(createUsersRecordData(
-                              group: _model.pickedGroup,
-                            ));
+                            logFirebaseEvent('Button_update_app_state');
+                            setState(() {
+                              FFAppState().onbGroup = _model.pickedGroup;
+                            });
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('Onboarding07');

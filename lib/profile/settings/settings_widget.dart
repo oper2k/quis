@@ -215,7 +215,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();
 
-                        context.goNamedAuth('InitPage', context.mounted);
+                        context.goNamedAuth('Onboarding01', context.mounted);
                       },
                       child: Container(
                         decoration: BoxDecoration(

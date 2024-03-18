@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/home/deducted_karma/deducted_karma_widget.dart';
 import '/home/succesful_purchase_dialog/succesful_purchase_dialog_widget.dart';
 import 'dart:async';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
@@ -128,4 +129,25 @@ Future<bool?> payByKarma(
 
     return false;
   }
+}
+
+Future signupUserData(BuildContext context) async {
+  logFirebaseEvent('signupUserData_backend_call');
+  unawaited(
+    () async {
+      await currentUserReference!.update(createUsersRecordData(
+        refUser: FFAppState().refUser,
+        group: FFAppState().onbGroup,
+        careerProfile: createCareerProfileStruct(
+          role: FFAppState().onbRole,
+          expYears: FFAppState().onbExperienceYears,
+          clearUnsetFields: false,
+        ),
+        firstName: FFAppState().onbFirstName,
+        lastName: FFAppState().onbLastName,
+        linkedinLink: FFAppState().onbLinkedIn,
+        refCode: functions.generateRefCode(),
+      ));
+    }(),
+  );
 }

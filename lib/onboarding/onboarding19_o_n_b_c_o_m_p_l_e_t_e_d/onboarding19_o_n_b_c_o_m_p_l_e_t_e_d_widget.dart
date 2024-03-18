@@ -1,12 +1,8 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/onboarding/minus_element/minus_element_widget.dart';
-import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
@@ -294,28 +290,6 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                     onPressed: () async {
                       logFirebaseEvent(
                           'ONBOARDING19_O_N_B_C_O_M_P_L_E_T_E_D_CON');
-                      if (valueOrDefault(currentUserDocument?.brevoId, 0) <=
-                          0) {
-                        logFirebaseEvent('Button_backend_call');
-                        _model.apiResultsj6 =
-                            await BrevoGroup.createAContactCall.call(
-                          firstname: valueOrDefault(
-                              currentUserDocument?.firstName, ''),
-                          lastname:
-                              valueOrDefault(currentUserDocument?.lastName, ''),
-                          email: currentUserEmail,
-                        );
-                        if ((_model.apiResultsj6?.succeeded ?? true)) {
-                          logFirebaseEvent('Button_backend_call');
-
-                          await currentUserReference!
-                              .update(createUsersRecordData(
-                            brevoId: BrevoGroup.createAContactCall.brevoID(
-                              (_model.apiResultsj6?.jsonBody ?? ''),
-                            ),
-                          ));
-                        }
-                      }
                       if (FFAppState().dailyNotificationID <= 0) {
                         logFirebaseEvent('Button_update_app_state');
                         setState(() {
@@ -339,16 +313,7 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                           true,
                         );
                       }
-                      logFirebaseEvent('Button_backend_call');
-                      unawaited(
-                        () async {
-                          await currentUserReference!
-                              .update(createUsersRecordData(
-                            isOnboardingCompleted: true,
-                          ));
-                        }(),
-                      );
-                      if (currentUserDocument?.refUser != null) {
+                      if (FFAppState().refUser != null) {
                         logFirebaseEvent('Button_navigate_to');
 
                         context.pushNamed(
@@ -381,8 +346,6 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                           }.withoutNulls,
                         );
                       }
-
-                      setState(() {});
                     },
                     text: 'Continue',
                     options: FFButtonOptions(

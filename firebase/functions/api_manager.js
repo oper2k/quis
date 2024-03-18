@@ -6,7 +6,7 @@ const qs = require("qs");
 const brevoGroup = {
   baseUrl: "https://api.brevo.com/v3",
   headers: {
-    "api-key": `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`,
+    "api-key": `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`,
   },
 };
 
@@ -17,7 +17,7 @@ async function _createAContactCall(context, ffVariables) {
 
   var url = `${brevoGroup.baseUrl}/contacts`;
   var headers = {
-    "api-key": `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`,
+    "api-key": `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`,
   };
   var params = {};
   var ffApiRequestBody = `
@@ -49,7 +49,7 @@ async function _updateAContactCall(context, ffVariables) {
 
   var url = `${brevoGroup.baseUrl}/contacts/${identifier}`;
   var headers = {
-    "api-key": `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`,
+    "api-key": `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`,
   };
   var params = {};
   var ffApiRequestBody = `
@@ -104,7 +104,7 @@ async function _sendAnEmailCall(context, ffVariables) {
 
   var url = `${brevoGroup.baseUrl}/smtp/email`;
   var headers = {
-    "api-key": `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`,
+    "api-key": `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`,
   };
   var params = {};
   var ffApiRequestBody = `
@@ -165,7 +165,7 @@ async function _sendAScheduledEmailCall(context, ffVariables) {
 
   var url = `${brevoGroup.baseUrl}/smtp/email`;
   var headers = {
-    "api-key": `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`,
+    "api-key": `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`,
   };
   var params = {};
   var ffApiRequestBody = `

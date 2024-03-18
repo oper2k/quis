@@ -223,7 +223,7 @@ class _PracticeInterviewWidgetState extends State<PracticeInterviewWidget> {
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 2.0, 0.0, 0.0),
                                               child: Text(
-                                                'Register for a Practice Interview by selecting your Interview type and tap “Get Reminder”. You will receive a notification prior to Interview start, registration is open everyday until 6:50 PM +4 GST.',
+                                                'Register for a Practice Interview by selecting your Interview type and tap “Get Reminder”. You will receive a notification prior to Interview start, registration is open everyday until 6:50 PM GMT +4.',
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .headlineSmall

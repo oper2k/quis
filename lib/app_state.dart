@@ -66,6 +66,28 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _improvementList;
     });
+    _safeInit(() {
+      _onbFirstName = prefs.getString('ff_onbFirstName') ?? _onbFirstName;
+    });
+    _safeInit(() {
+      _onbLastName = prefs.getString('ff_onbLastName') ?? _onbLastName;
+    });
+    _safeInit(() {
+      _onbRole = prefs.getString('ff_onbRole')?.ref ?? _onbRole;
+    });
+    _safeInit(() {
+      _onbExperienceYears =
+          prefs.getInt('ff_onbExperienceYears') ?? _onbExperienceYears;
+    });
+    _safeInit(() {
+      _onbGroup = prefs.getString('ff_onbGroup')?.ref ?? _onbGroup;
+    });
+    _safeInit(() {
+      _onbLinkedIn = prefs.getString('ff_onbLinkedIn') ?? _onbLinkedIn;
+    });
+    _safeInit(() {
+      _hasWalkShown = prefs.getBool('ff_hasWalkShown') ?? _hasWalkShown;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -419,6 +441,59 @@ class FFAppState extends ChangeNotifier {
     _improvementList.insert(index, value);
     prefs.setStringList('ff_improvementList',
         _improvementList.map((x) => x.serialize()).toList());
+  }
+
+  String _onbFirstName = '';
+  String get onbFirstName => _onbFirstName;
+  set onbFirstName(String value) {
+    _onbFirstName = value;
+    prefs.setString('ff_onbFirstName', value);
+  }
+
+  String _onbLastName = '';
+  String get onbLastName => _onbLastName;
+  set onbLastName(String value) {
+    _onbLastName = value;
+    prefs.setString('ff_onbLastName', value);
+  }
+
+  DocumentReference? _onbRole;
+  DocumentReference? get onbRole => _onbRole;
+  set onbRole(DocumentReference? value) {
+    _onbRole = value;
+    value != null
+        ? prefs.setString('ff_onbRole', value.path)
+        : prefs.remove('ff_onbRole');
+  }
+
+  int _onbExperienceYears = 0;
+  int get onbExperienceYears => _onbExperienceYears;
+  set onbExperienceYears(int value) {
+    _onbExperienceYears = value;
+    prefs.setInt('ff_onbExperienceYears', value);
+  }
+
+  DocumentReference? _onbGroup;
+  DocumentReference? get onbGroup => _onbGroup;
+  set onbGroup(DocumentReference? value) {
+    _onbGroup = value;
+    value != null
+        ? prefs.setString('ff_onbGroup', value.path)
+        : prefs.remove('ff_onbGroup');
+  }
+
+  String _onbLinkedIn = '';
+  String get onbLinkedIn => _onbLinkedIn;
+  set onbLinkedIn(String value) {
+    _onbLinkedIn = value;
+    prefs.setString('ff_onbLinkedIn', value);
+  }
+
+  bool _hasWalkShown = false;
+  bool get hasWalkShown => _hasWalkShown;
+  set hasWalkShown(bool value) {
+    _hasWalkShown = value;
+    prefs.setBool('ff_hasWalkShown', value);
   }
 }
 

@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/onboarding/minus_element/minus_element_widget.dart';
 import 'onboarding19_o_n_b_c_o_m_p_l_e_t_e_d_widget.dart'
@@ -26,8 +25,6 @@ class Onboarding19ONBCOMPLETEDModel
   late MinusElementModel minusElementModel7;
   // Model for minusElement component.
   late MinusElementModel minusElementModel8;
-  // Stores action output result for [Backend Call - API (Create a contact)] action in Button widget.
-  ApiCallResponse? apiResultsj6;
 
   /// Initialization and disposal methods.
 

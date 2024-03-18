@@ -112,7 +112,7 @@ class _ThankYouForSubscriptionWidgetState
                       } else {
                         logFirebaseEvent('Container_navigate_to');
 
-                        context.goNamed('MyProfile');
+                        context.goNamed('SplashPage');
                       }
                     },
                     child: Container(

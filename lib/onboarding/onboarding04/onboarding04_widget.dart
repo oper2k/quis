@@ -1,10 +1,10 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'onboarding04_model.dart';
 export 'onboarding04_model.dart';
 
@@ -71,6 +71,8 @@ class _Onboarding04WidgetState extends State<Onboarding04Widget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -106,12 +108,10 @@ class _Onboarding04WidgetState extends State<Onboarding04Widget>
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: AuthUserStreamWidget(
-                          builder: (context) => Text(
-                            '${valueOrDefault(currentUserDocument?.firstName, '')} ${valueOrDefault(currentUserDocument?.lastName, '')}!',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context).displayLarge,
-                          ),
+                        child: Text(
+                          '${FFAppState().onbFirstName} ${FFAppState().onbLastName}!',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).displayLarge,
                         ),
                       ),
                     ],

@@ -103,7 +103,7 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                     .where((e) => (currentUserDocument?.likedBy.toList() ?? [])
                         .contains(e.reference))
                     .toList();
-                return ListView.builder(
+                return ListView.separated(
                   padding: const EdgeInsets.fromLTRB(
                     0,
                     10.0,
@@ -112,6 +112,7 @@ class _MatchedUsersWidgetState extends State<MatchedUsersWidget> {
                   ),
                   scrollDirection: Axis.vertical,
                   itemCount: matchedUsers.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 8.0),
                   itemBuilder: (context, matchedUsersIndex) {
                     final matchedUsersItem = matchedUsers[matchedUsersIndex];
                     return InkWell(

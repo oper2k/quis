@@ -1,6 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'init_page_model.dart';
 export 'init_page_model.dart';
@@ -165,8 +167,15 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                             if (user == null) {
                               return;
                             }
+                            logFirebaseEvent('Apple_action_block');
+                            unawaited(
+                              () async {
+                                await action_blocks.signupUserData(context);
+                              }(),
+                            );
+                            logFirebaseEvent('Apple_navigate_to');
 
-                            context.goNamedAuth('SplashPage', context.mounted);
+                            context.goNamedAuth('Home', context.mounted);
                           },
                           child: Container(
                             width: double.infinity,
@@ -225,8 +234,15 @@ class _InitPageWidgetState extends State<InitPageWidget> {
                             if (user == null) {
                               return;
                             }
+                            logFirebaseEvent('Google_action_block');
+                            unawaited(
+                              () async {
+                                await action_blocks.signupUserData(context);
+                              }(),
+                            );
+                            logFirebaseEvent('Google_navigate_to');
 
-                            context.goNamedAuth('SplashPage', context.mounted);
+                            context.goNamedAuth('Home', context.mounted);
                           },
                           child: Container(
                             width: double.infinity,

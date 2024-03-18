@@ -175,7 +175,7 @@ class _ConfirmEmailWidgetState extends State<ConfirmEmailWidget>
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth('InitPage', context.mounted);
+                  context.goNamedAuth('Onboarding01', context.mounted);
                 },
                 child: Container(
                   width: 40.0,

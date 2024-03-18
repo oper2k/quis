@@ -187,7 +187,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               PricingBackButton.onboarding2) {
                             logFirebaseEvent('Container_navigate_to');
 
-                            context.goNamed('Home');
+                            context.goNamed('InitPage');
                           } else {
                             logFirebaseEvent('Container_navigate_back');
                             context.safePop();

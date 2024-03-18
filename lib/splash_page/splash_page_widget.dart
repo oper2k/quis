@@ -1,8 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'splash_page_model.dart';
 export 'splash_page_model.dart';
 
@@ -27,33 +30,59 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('SPLASH_SplashPage_ON_INIT_STATE');
-      if (valueOrDefault<bool>(
-          currentUserDocument?.isOnboardingCompleted, false)) {
-        logFirebaseEvent('SplashPage_navigate_to');
+      if (loggedIn) {
+        if (valueOrDefault(currentUserDocument?.brevoId, 0) <= 0) {
+          logFirebaseEvent('SplashPage_backend_call');
+          _model.apiResultsj6 = await BrevoGroup.createAContactCall.call(
+            firstname: valueOrDefault(currentUserDocument?.firstName, ''),
+            lastname: valueOrDefault(currentUserDocument?.lastName, ''),
+            email: currentUserEmail,
+          );
+          if ((_model.apiResultsj6?.succeeded ?? true)) {
+            logFirebaseEvent('SplashPage_backend_call');
 
-        context.goNamed(
-          'Home',
-          extra: <String, dynamic>{
-            kTransitionInfoKey: const TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.fade,
-              duration: Duration(milliseconds: 0),
-            ),
-          },
-        );
+            await currentUserReference!.update(createUsersRecordData(
+              brevoId: BrevoGroup.createAContactCall.brevoID(
+                (_model.apiResultsj6?.jsonBody ?? ''),
+              ),
+            ));
+          }
+        }
+        if (FFAppState().hasWalkShown) {
+          logFirebaseEvent('SplashPage_navigate_to');
+
+          context.goNamed(
+            'Home',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        } else {
+          logFirebaseEvent('SplashPage_update_app_state');
+          setState(() {
+            FFAppState().hasWalkShown = true;
+          });
+          logFirebaseEvent('SplashPage_navigate_to');
+
+          context.goNamed(
+            'HomeGuide1',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+        }
       } else {
         logFirebaseEvent('SplashPage_navigate_to');
 
-        context.goNamed(
-          'Onboarding01',
-          extra: <String, dynamic>{
-            kTransitionInfoKey: const TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.fade,
-              duration: Duration(milliseconds: 0),
-            ),
-          },
-        );
+        context.pushNamed('InitPage');
       }
     });
   }
@@ -67,6 +96,8 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
