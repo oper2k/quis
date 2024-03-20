@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/walkthroughs/guide_interveiw4.dart';
+import '/walkthroughs/guide_interveiw5.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:expandable/expandable.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -35,17 +33,17 @@ class _PracticeInterviewGuideWidgetState
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('PRACTICE_INTERVIEW_GUIDE_PracticeIntervi');
+      logFirebaseEvent('PracticeInterviewGuide_scroll_to');
+      await _model.columnController?.animateTo(
+        _model.columnController!.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.ease,
+      );
       logFirebaseEvent('PracticeInterviewGuide_start_walkthrough');
       safeSetState(() =>
-          _model.guideInterveiw4Controller = createPageWalkthrough(context));
-      _model.guideInterveiw4Controller?.show(context: context);
+          _model.guideInterveiw5Controller = createPageWalkthrough(context));
+      _model.guideInterveiw5Controller?.show(context: context);
     });
-
-    _model.expandableController1 = ExpandableController(initialExpanded: false);
-    _model.expandableController2 = ExpandableController(initialExpanded: false);
-    _model.expandableController3 = ExpandableController(initialExpanded: false);
-    _model.expandableController4 = ExpandableController(initialExpanded: false);
-    _model.expandableController5 = ExpandableController(initialExpanded: false);
   }
 
   @override
@@ -79,6 +77,7 @@ class _PracticeInterviewGuideWidgetState
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: SingleChildScrollView(
+                  controller: _model.columnController,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -535,7 +534,7 @@ class _PracticeInterviewGuideWidgetState
                             ],
                           ).addWalkthrough(
                             column2axfwjh6,
-                            _model.guideInterveiw4Controller,
+                            _model.guideInterveiw5Controller,
                           ),
                         ),
                       ),
@@ -571,360 +570,7 @@ class _PracticeInterviewGuideWidgetState
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: const AlignmentDirectional(-1.0, 0.0),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 37.0, 0.0, 0.0),
-                          child: Text(
-                            'FAQ',
-                            style: FlutterFlowTheme.of(context).headlineLarge,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 20.0, 0.0, 0.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              const Divider(
-                                thickness: 3.0,
-                                color: Color(0x4DD8DADC),
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    color: const Color(0x00000000),
-                                    child: ExpandableNotifier(
-                                      controller: _model.expandableController1,
-                                      child: ExpandablePanel(
-                                        header: Text(
-                                          'What would happen if I missed Practice Interview?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium,
-                                        ),
-                                        collapsed: Container(
-                                          decoration: const BoxDecoration(),
-                                        ),
-                                        expanded: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 16.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Ooh that\'s sad to hear! We understand that plans can change, however we want you to know that your no show up will leave potential Practice Partner without opportunity to improve and practice. That’s why we do not recommend missing a Practice Interview that you registered for. To encourage practice more Quis giving a reward of +0.5 Karma and penalty for no show -0.5 Karma.',
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineSmall
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  useGoogleFonts: false,
-                                                  lineHeight: 1.16,
-                                                ),
-                                          ),
-                                        ),
-                                        theme: ExpandableThemeData(
-                                          tapHeaderToExpand: true,
-                                          tapBodyToExpand: false,
-                                          tapBodyToCollapse: false,
-                                          headerAlignment:
-                                              ExpandablePanelHeaderAlignment
-                                                  .center,
-                                          hasIcon: true,
-                                          expandIcon: FFIcons.kplus,
-                                          collapseIcon: FFIcons.kxmark,
-                                          iconSize: 24.0,
-                                          iconColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Divider(
-                                thickness: 3.0,
-                                color: Color(0x4DD8DADC),
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    color: const Color(0x00000000),
-                                    child: ExpandableNotifier(
-                                      controller: _model.expandableController2,
-                                      child: ExpandablePanel(
-                                        header: Text(
-                                          'How does matching happen?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium,
-                                        ),
-                                        collapsed: Container(
-                                          decoration: const BoxDecoration(),
-                                        ),
-                                        expanded: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 16.0, 0.0, 0.0),
-                                          child: RichText(
-                                            textScaler: MediaQuery.of(context)
-                                                .textScaler,
-                                            text: TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text:
-                                                      'Matching happened based on your Karma level. To know more about Practice Interview Matching please visit our ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .headlineSmall,
-                                                ),
-                                                TextSpan(
-                                                  text:
-                                                      'Karma & Karma Exchange page',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .headlineSmall
-                                                      .override(
-                                                        fontFamily: 'Sofia Pro',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .underline,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                  mouseCursor:
-                                                      SystemMouseCursors.click,
-                                                  recognizer:
-                                                      TapGestureRecognizer()
-                                                        ..onTap = () async {
-                                                          logFirebaseEvent(
-                                                              'PRACTICE_INTERVIEW_GUIDE_RichTextSpan_l5');
-                                                          logFirebaseEvent(
-                                                              'RichTextSpan_launch_u_r_l');
-                                                          await launchURL(
-                                                              'https://quisapp.notion.site/Karma-Karma-Exchange-5327c89c0dc04558add1d77aef5586b1');
-                                                        },
-                                                )
-                                              ],
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineSmall
-                                                      .override(
-                                                        fontFamily: 'Sofia Pro',
-                                                        useGoogleFonts: false,
-                                                        lineHeight: 1.16,
-                                                      ),
-                                            ),
-                                          ),
-                                        ),
-                                        theme: ExpandableThemeData(
-                                          tapHeaderToExpand: true,
-                                          tapBodyToExpand: false,
-                                          tapBodyToCollapse: false,
-                                          headerAlignment:
-                                              ExpandablePanelHeaderAlignment
-                                                  .center,
-                                          hasIcon: true,
-                                          expandIcon: FFIcons.kplus,
-                                          collapseIcon: FFIcons.kxmark,
-                                          iconSize: 24.0,
-                                          iconColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Divider(
-                                thickness: 3.0,
-                                color: Color(0x4DD8DADC),
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    color: const Color(0x00000000),
-                                    child: ExpandableNotifier(
-                                      controller: _model.expandableController3,
-                                      child: ExpandablePanel(
-                                        header: Text(
-                                          'I didn’t like my Practice partner, what should I do?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium,
-                                        ),
-                                        collapsed: Container(
-                                          decoration: const BoxDecoration(),
-                                        ),
-                                        expanded: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 16.0, 0.0, 0.0),
-                                          child: Text(
-                                            'After every Practice Interview everyone is prompted to share their feedback, we will do our best not to match you with the same person again.',
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineSmall
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  useGoogleFonts: false,
-                                                  lineHeight: 1.16,
-                                                ),
-                                          ),
-                                        ),
-                                        theme: ExpandableThemeData(
-                                          tapHeaderToExpand: true,
-                                          tapBodyToExpand: false,
-                                          tapBodyToCollapse: false,
-                                          headerAlignment:
-                                              ExpandablePanelHeaderAlignment
-                                                  .center,
-                                          hasIcon: true,
-                                          expandIcon: FFIcons.kplus,
-                                          collapseIcon: FFIcons.kxmark,
-                                          iconSize: 24.0,
-                                          iconColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Divider(
-                                thickness: 3.0,
-                                color: Color(0x4DD8DADC),
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    color: const Color(0x00000000),
-                                    child: ExpandableNotifier(
-                                      controller: _model.expandableController4,
-                                      child: ExpandablePanel(
-                                        header: Text(
-                                          'Can I get contact details of a person after a Practice Interview?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium,
-                                        ),
-                                        collapsed: Container(
-                                          decoration: const BoxDecoration(),
-                                        ),
-                                        expanded: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 16.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Yes! You will be directed to a swipe stage where both Practice Partners to match, if both Partners choose to network, you will be revealed with a LinkedIn profile link where you continue to network. You may find “People I matched with” in your User Profile.',
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineSmall
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  useGoogleFonts: false,
-                                                  lineHeight: 1.16,
-                                                ),
-                                          ),
-                                        ),
-                                        theme: ExpandableThemeData(
-                                          tapHeaderToExpand: true,
-                                          tapBodyToExpand: false,
-                                          tapBodyToCollapse: false,
-                                          headerAlignment:
-                                              ExpandablePanelHeaderAlignment
-                                                  .center,
-                                          hasIcon: true,
-                                          expandIcon: FFIcons.kplus,
-                                          collapseIcon: FFIcons.kxmark,
-                                          iconSize: 24.0,
-                                          iconColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Divider(
-                                thickness: 3.0,
-                                color: Color(0x4DD8DADC),
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    color: const Color(0x00000000),
-                                    child: ExpandableNotifier(
-                                      controller: _model.expandableController5,
-                                      child: ExpandablePanel(
-                                        header: Text(
-                                          'I got additional “Thumps Up” after Practice Interview, what does it mean?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium,
-                                        ),
-                                        collapsed: Container(
-                                          decoration: const BoxDecoration(),
-                                        ),
-                                        expanded: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 16.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Here at Quis we call it “Endorsement”. They are the indication of a great Practice Interview experience partner. You can view all stats by navigating to the Leadership Board.',
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineSmall
-                                                .override(
-                                                  fontFamily: 'Sofia Pro',
-                                                  useGoogleFonts: false,
-                                                  lineHeight: 1.16,
-                                                ),
-                                          ),
-                                        ),
-                                        theme: ExpandableThemeData(
-                                          tapHeaderToExpand: true,
-                                          tapBodyToExpand: false,
-                                          tapBodyToCollapse: false,
-                                          headerAlignment:
-                                              ExpandablePanelHeaderAlignment
-                                                  .center,
-                                          hasIcon: true,
-                                          expandIcon: FFIcons.kplus,
-                                          collapseIcon: FFIcons.kxmark,
-                                          iconSize: 24.0,
-                                          iconColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ].addToEnd(const SizedBox(height: 150.0)),
+                    ].addToEnd(const SizedBox(height: 50.0)),
                   ),
                 ),
               ),
@@ -939,7 +585,7 @@ class _PracticeInterviewGuideWidgetState
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
         onFinish: () {
-          safeSetState(() => _model.guideInterveiw4Controller = null);
+          safeSetState(() => _model.guideInterveiw5Controller = null);
           logFirebaseEvent('PRACTICE_INTERVIEW_GUIDE_PracticeIntervi');
           logFirebaseEvent('PracticeInterviewGuide_navigate_to');
 

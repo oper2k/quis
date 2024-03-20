@@ -6,7 +6,7 @@ import '/onboarding/guide/walk_element/walk_element_widget.dart';
 // Focus widget keys for this walkthrough
 final column2axfwjh6 = GlobalKey();
 
-/// guideInterveiw4
+/// guideInterveiw5
 ///
 ///
 List<TargetFocus> createWalkthroughTargets(BuildContext context) => [

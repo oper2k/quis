@@ -4,7 +4,7 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import '/onboarding/guide/walk_element/walk_element_widget.dart';
 
 // Focus widget keys for this walkthrough
-final containerAa69miij = GlobalKey();
+final containerXe0btcpn = GlobalKey();
 
 /// guideHome4
 ///
@@ -12,7 +12,7 @@ final containerAa69miij = GlobalKey();
 List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
       /// Step 1
       TargetFocus(
-        keyTarget: containerAa69miij,
+        keyTarget: containerXe0btcpn,
         enableOverlayTab: true,
         alignSkip: Alignment.topRight,
         shape: ShapeLightFocus.RRect,

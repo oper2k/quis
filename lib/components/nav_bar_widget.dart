@@ -108,7 +108,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 color: widget.index == 0
                                     ? FlutterFlowTheme.of(context).primary
                                     : FlutterFlowTheme.of(context).accent3,
-                                size: 24.0,
+                                size: 30.0,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
@@ -125,6 +125,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                             : FlutterFlowTheme.of(context)
                                                 .accent3,
                                         useGoogleFonts: false,
+                                        lineHeight: 1.33,
                                       ),
                                 ),
                               ),
@@ -166,7 +167,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 color: widget.index == 1
                                     ? FlutterFlowTheme.of(context).primary
                                     : FlutterFlowTheme.of(context).accent3,
-                                size: 24.0,
+                                size: 30.0,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
@@ -183,6 +184,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                             : FlutterFlowTheme.of(context)
                                                 .accent3,
                                         useGoogleFonts: false,
+                                        lineHeight: 1.33,
                                       ),
                                 ),
                               ),
@@ -225,11 +227,11 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 color: widget.index == 2
                                     ? FlutterFlowTheme.of(context).primary
                                     : FlutterFlowTheme.of(context).accent3,
-                                size: 26.0,
+                                size: 30.0,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 4.0, 0.0, 0.0),
+                                    0.0, 6.0, 0.0, 0.0),
                                 child: Text(
                                   'Practice',
                                   style: FlutterFlowTheme.of(context)
@@ -242,6 +244,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                             : FlutterFlowTheme.of(context)
                                                 .accent3,
                                         useGoogleFonts: false,
+                                        lineHeight: 1.33,
                                       ),
                                 ),
                               ),
@@ -284,7 +287,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 color: widget.index == 3
                                     ? FlutterFlowTheme.of(context).primary
                                     : FlutterFlowTheme.of(context).accent3,
-                                size: 24.0,
+                                size: 30.0,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
@@ -301,6 +304,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                             : FlutterFlowTheme.of(context)
                                                 .accent3,
                                         useGoogleFonts: false,
+                                        lineHeight: 1.33,
                                       ),
                                 ),
                               ),
@@ -342,7 +346,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 color: widget.index == 4
                                     ? FlutterFlowTheme.of(context).primary
                                     : FlutterFlowTheme.of(context).accent3,
-                                size: 24.0,
+                                size: 30.0,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
@@ -359,6 +363,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                             : FlutterFlowTheme.of(context)
                                                 .accent3,
                                         useGoogleFonts: false,
+                                        lineHeight: 1.33,
                                       ),
                                 ),
                               ),

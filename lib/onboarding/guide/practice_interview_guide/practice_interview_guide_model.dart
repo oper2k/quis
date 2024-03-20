@@ -7,7 +7,6 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'practice_interview_guide_widget.dart' show PracticeInterviewGuideWidget;
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class PracticeInterviewGuideModel
@@ -26,37 +25,23 @@ class PracticeInterviewGuideModel
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? guideInterveiw4Controller;
+  TutorialCoachMark? guideInterveiw5Controller;
   final unfocusNode = FocusNode();
-  // State field(s) for Expandable widget.
-  late ExpandableController expandableController1;
-
-  // State field(s) for Expandable widget.
-  late ExpandableController expandableController2;
-
-  // State field(s) for Expandable widget.
-  late ExpandableController expandableController3;
-
-  // State field(s) for Expandable widget.
-  late ExpandableController expandableController4;
-
-  // State field(s) for Expandable widget.
-  late ExpandableController expandableController5;
+  // State field(s) for Column widget.
+  ScrollController? columnController;
 
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    columnController = ScrollController();
+  }
 
   @override
   void dispose() {
-    guideInterveiw4Controller?.finish();
+    guideInterveiw5Controller?.finish();
     unfocusNode.dispose();
-    expandableController1.dispose();
-    expandableController2.dispose();
-    expandableController3.dispose();
-    expandableController4.dispose();
-    expandableController5.dispose();
+    columnController?.dispose();
   }
 
   /// Action blocks are added here.

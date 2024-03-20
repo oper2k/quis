@@ -86,12 +86,12 @@ class _Onboarding07WidgetState extends State<Onboarding07Widget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.asset(
                       'assets/images/NEWOnb02.webp',
-                      width: 300.0,
                       fit: BoxFit.contain,
                     ),
                   ),

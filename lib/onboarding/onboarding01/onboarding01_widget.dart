@@ -2,8 +2,10 @@ import '/components/check_mark_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'onboarding01_model.dart';
 export 'onboarding01_model.dart';
 
@@ -26,6 +28,15 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Onboarding01'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ONBOARDING01_Onboarding01_ON_INIT_STATE');
+      if (kDebugMode) {
+        logFirebaseEvent('Onboarding01_navigate_to');
+
+        context.goNamed('InitPage');
+      }
+    });
   }
 
   @override

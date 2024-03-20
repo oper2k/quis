@@ -126,8 +126,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
 
       if ((valueOrDefault<bool>(currentUserDocument?.is3dayOfferShown, false) !=
               true) &&
-          (getCurrentTimestamp >=
-              functions.datePlusDays(currentUserDocument!.createdTime!, 3))) {
+          (functions.dateTimeToDate(getCurrentTimestamp) ==
+              functions.dateTimeToDate(functions.datePlusDays(
+                  currentUserDocument!.createdTime!, 3)))) {
         logFirebaseEvent('Home_backend_call');
         unawaited(
           () async {
@@ -153,8 +154,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
       }
       if ((valueOrDefault<bool>(currentUserDocument?.is7dayOfferShown, false) !=
               true) &&
-          (getCurrentTimestamp >=
-              functions.datePlusDays(currentUserDocument!.createdTime!, 7))) {
+          (functions.dateTimeToDate(getCurrentTimestamp) ==
+              functions.dateTimeToDate(functions.datePlusDays(
+                  currentUserDocument!.createdTime!, 7)))) {
         logFirebaseEvent('Home_backend_call');
         unawaited(
           () async {
@@ -421,40 +423,21 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     }
                                                     final textRoleRecord =
                                                         snapshot.data!;
-                                                    return InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'HOME_PAGE_Text_u2ok5t3e_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'Text_navigate_to');
-
-                                                        context
-                                                            .pushNamed('test');
-                                                      },
-                                                      child: Text(
-                                                        textRoleRecord.name,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .accent2,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                      ),
+                                                    return Text(
+                                                      textRoleRecord.name,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent2,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
                                                     );
                                                   },
                                                 ),

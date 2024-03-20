@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/guide_home1.dart';
+import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
@@ -68,6 +69,8 @@ class _HomeGuide1WidgetState extends State<HomeGuide1Widget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_GUIDE1_HomeGuide1_ON_INIT_STATE');
+      logFirebaseEvent('HomeGuide1_wait__delay');
+      await Future.delayed(const Duration(milliseconds: 1000));
       logFirebaseEvent('HomeGuide1_start_walkthrough');
       safeSetState(
           () => _model.guideHome1Controller = createPageWalkthrough(context));

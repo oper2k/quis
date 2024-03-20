@@ -265,7 +265,6 @@ final parametersBuilderMap =
   'AllCoursesGuide': ParameterData.none(),
   'LatestInterviewQuestionsGuide': ParameterData.none(),
   'HomeGuide2': ParameterData.none(),
-  'test': ParameterData.none(),
   'PracticeInterviewGuide': ParameterData.none(),
 };
 

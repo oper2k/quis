@@ -564,11 +564,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HomeGuide2Widget(),
         ),
         FFRoute(
-          name: 'test',
-          path: '/test',
-          builder: (context, params) => const TestWidget(),
-        ),
-        FFRoute(
           name: 'PracticeInterviewGuide',
           path: '/practiceInterviewGuide',
           builder: (context, params) => const PracticeInterviewGuideWidget(),
