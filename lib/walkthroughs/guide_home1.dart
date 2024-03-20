@@ -23,7 +23,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
             align: ContentAlign.top,
             builder: (context, __) => const WalkElementWidget(
               text:
-                  'You can find everything for your sucess here: Job Referrals, Company Profiles, CV Review, and more',
+                  'You can find everything for your sucсess here: Job Referrals, Company Profiles, CV Review, and more',
               index: '1/6',
             ),
           ),

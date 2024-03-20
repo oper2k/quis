@@ -76,44 +76,7 @@ class _VideoWidgetState extends State<VideoWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('VIDEO_PAGE_Video_ON_INIT_STATE');
-      logFirebaseEvent('Video_update_page_state');
-      setState(() {
-        _model.isFavorite =
-            (currentUserDocument?.favoriteVideos.toList() ?? [])
-                .contains(widget.videoItem?.reference);
-      });
-      if (widget.videoItem!.likeDislike
-              .where((e) => e.user == currentUserReference)
-              .toList().isNotEmpty) {
-        logFirebaseEvent('Video_update_page_state');
-        setState(() {
-          _model.isLiked = widget.videoItem!.likeDislike
-                      .where((e) =>
-                          (e.user == currentUserReference) &&
-                          (e.isLike == true))
-                      .toList().isNotEmpty
-              ? true
-              : false;
-        });
-      }
-      logFirebaseEvent('Video_firestore_query');
-      _model.courseVideosQuery = await queryCourseVideoRecordOnce(
-        queryBuilder: (courseVideoRecord) => courseVideoRecord
-            .where(
-              'course',
-              isEqualTo: widget.videoItem?.course,
-            )
-            .where(
-              'type',
-              isEqualTo: 'lesson',
-            )
-            .orderBy('sort'),
-      );
-      if (_model.courseVideosQuery!
-              .take(FFAppConstants.freeVideosNumber)
-              .toList()
-              .where((e) => e.reference == widget.videoItem?.reference)
-              .toList().isEmpty) {
+      if (widget.videoItem!.sort > FFAppConstants.freeVideosNumber) {
         if (!revenue_cat.activeEntitlementIds
             .contains(FFAppState().entitlementID)) {
           logFirebaseEvent('Video_navigate_to');
@@ -132,6 +95,39 @@ class _VideoWidgetState extends State<VideoWidget>
 
           return;
         }
+      }
+      logFirebaseEvent('Video_update_page_state');
+      setState(() {
+        _model.isFavorite =
+            (currentUserDocument?.favoriteVideos.toList() ?? [])
+                .contains(widget.videoItem?.reference);
+      });
+      logFirebaseEvent('Video_firestore_query');
+      _model.courseVideosQuery = await queryCourseVideoRecordOnce(
+        queryBuilder: (courseVideoRecord) => courseVideoRecord
+            .where(
+              'course',
+              isEqualTo: widget.videoItem?.course,
+            )
+            .where(
+              'type',
+              isEqualTo: 'lesson',
+            )
+            .orderBy('sort'),
+      );
+      if (widget.videoItem!.likeDislike
+              .where((e) => e.user == currentUserReference)
+              .toList().isNotEmpty) {
+        logFirebaseEvent('Video_update_page_state');
+        setState(() {
+          _model.isLiked = widget.videoItem!.likeDislike
+                      .where((e) =>
+                          (e.user == currentUserReference) &&
+                          (e.isLike == true))
+                      .toList().isNotEmpty
+              ? true
+              : false;
+        });
       }
     });
 

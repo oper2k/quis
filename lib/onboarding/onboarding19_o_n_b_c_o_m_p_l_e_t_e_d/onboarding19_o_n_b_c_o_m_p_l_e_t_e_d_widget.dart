@@ -313,39 +313,21 @@ class _Onboarding19ONBCOMPLETEDWidgetState
                           true,
                         );
                       }
-                      if (FFAppState().refUser != null) {
-                        logFirebaseEvent('Button_navigate_to');
+                      logFirebaseEvent('Button_navigate_to');
 
-                        context.pushNamed(
-                          'Pricing',
-                          queryParameters: {
-                            'offers': serializeParam(
-                              PaywallPrice.off25,
-                              ParamType.Enum,
-                            ),
-                            'backButton': serializeParam(
-                              PricingBackButton.onboarding1,
-                              ParamType.Enum,
-                            ),
-                          }.withoutNulls,
-                        );
-                      } else {
-                        logFirebaseEvent('Button_navigate_to');
-
-                        context.pushNamed(
-                          'Pricing',
-                          queryParameters: {
-                            'offers': serializeParam(
-                              PaywallPrice.standard,
-                              ParamType.Enum,
-                            ),
-                            'backButton': serializeParam(
-                              PricingBackButton.onboarding1,
-                              ParamType.Enum,
-                            ),
-                          }.withoutNulls,
-                        );
-                      }
+                      context.pushNamed(
+                        'Pricing',
+                        queryParameters: {
+                          'offers': serializeParam(
+                            PaywallPrice.standard,
+                            ParamType.Enum,
+                          ),
+                          'backButton': serializeParam(
+                            PricingBackButton.onboarding1,
+                            ParamType.Enum,
+                          ),
+                        }.withoutNulls,
+                      );
                     },
                     text: 'Continue',
                     options: FFButtonOptions(

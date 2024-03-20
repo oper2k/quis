@@ -495,6 +495,12 @@ class FFAppState extends ChangeNotifier {
     _hasWalkShown = value;
     prefs.setBool('ff_hasWalkShown', value);
   }
+
+  DocumentReference? _activeCourseRef;
+  DocumentReference? get activeCourseRef => _activeCourseRef;
+  set activeCourseRef(DocumentReference? value) {
+    _activeCourseRef = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

@@ -70,7 +70,7 @@ class _HomeGuide1WidgetState extends State<HomeGuide1Widget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_GUIDE1_HomeGuide1_ON_INIT_STATE');
       logFirebaseEvent('HomeGuide1_wait__delay');
-      await Future.delayed(const Duration(milliseconds: 1000));
+      await Future.delayed(const Duration(milliseconds: 500));
       logFirebaseEvent('HomeGuide1_start_walkthrough');
       safeSetState(
           () => _model.guideHome1Controller = createPageWalkthrough(context));
@@ -504,169 +504,101 @@ class _HomeGuide1WidgetState extends State<HomeGuide1Widget>
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        StreamBuilder<List<WelcomeVideoRecord>>(
-                          stream: queryWelcomeVideoRecord(
-                            singleRecord: true,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            List<WelcomeVideoRecord>
-                                containerWelcomeVideoRecordList =
-                                snapshot.data!;
-                            // Return an empty Container when the item does not exist.
-                            if (snapshot.data!.isEmpty) {
-                              return Container();
-                            }
-                            final containerWelcomeVideoRecord =
-                                containerWelcomeVideoRecordList.isNotEmpty
-                                    ? containerWelcomeVideoRecordList.first
-                                    : null;
-                            return Container(
-                              decoration: const BoxDecoration(),
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 180.0,
-                                child: Stack(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 30.0),
-                                      child: PageView(
-                                        controller:
-                                            _model.pageViewController ??=
-                                                PageController(initialPage: 0),
-                                        scrollDirection: Axis.horizontal,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 18.0, 16.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'HOME_GUIDE1_PAGE_Image_0114sxa0_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Image_navigate_to');
-
-                                                context.pushNamed(
-                                                  'WelcomeVideo',
-                                                  queryParameters: {
-                                                    'welcomeVideo':
-                                                        serializeParam(
-                                                      containerWelcomeVideoRecord,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'welcomeVideo':
-                                                        containerWelcomeVideoRecord,
-                                                  },
-                                                );
-                                              },
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                child: Image.asset(
-                                                  'assets/images/1.webp',
-                                                  width: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 18.0, 16.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'HOME_GUIDE1_PAGE_Image_kgm86i04_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Image_launch_u_r_l');
-                                                await launchURL(
-                                                    'https://quisapp.notion.site/861b4762e223478c8518cdd934142215?v=959e87c0ddad47e1b3b18fc15fc04e24');
-                                              },
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                child: Image.asset(
-                                                  'assets/images/2.webp',
-                                                  width: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: const AlignmentDirectional(0.0, 1.0),
-                                      child: Padding(
+                        Container(
+                          decoration: const BoxDecoration(),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 180.0,
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 30.0),
+                                  child: PageView(
+                                    controller: _model.pageViewController ??=
+                                        PageController(initialPage: 0),
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 12.0),
-                                        child: smooth_page_indicator
-                                            .SmoothPageIndicator(
-                                          controller: _model
-                                                  .pageViewController ??=
-                                              PageController(initialPage: 0),
-                                          count: 2,
-                                          axisDirection: Axis.horizontal,
-                                          onDotClicked: (i) async {
-                                            await _model.pageViewController!
-                                                .animateToPage(
-                                              i,
-                                              duration:
-                                                  const Duration(milliseconds: 500),
-                                              curve: Curves.ease,
-                                            );
-                                          },
-                                          effect:
-                                              smooth_page_indicator.SlideEffect(
-                                            spacing: 8.0,
-                                            radius: 16.0,
-                                            dotWidth: 8.0,
-                                            dotHeight: 8.0,
-                                            dotColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .accent2,
-                                            activeDotColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            paintStyle: PaintingStyle.fill,
+                                            16.0, 18.0, 16.0, 0.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Image.asset(
+                                            'assets/images/1.webp',
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 18.0, 16.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'HOME_GUIDE1_PAGE_Image_kgm86i04_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Image_launch_u_r_l');
+                                            await launchURL(
+                                                'https://quisapp.notion.site/861b4762e223478c8518cdd934142215?v=959e87c0ddad47e1b3b18fc15fc04e24');
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: Image.asset(
+                                              'assets/images/2.webp',
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 1.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 12.0),
+                                    child: smooth_page_indicator
+                                        .SmoothPageIndicator(
+                                      controller: _model.pageViewController ??=
+                                          PageController(initialPage: 0),
+                                      count: 2,
+                                      axisDirection: Axis.horizontal,
+                                      onDotClicked: (i) async {
+                                        await _model.pageViewController!
+                                            .animateToPage(
+                                          i,
+                                          duration: const Duration(milliseconds: 500),
+                                          curve: Curves.ease,
+                                        );
+                                      },
+                                      effect: smooth_page_indicator.SlideEffect(
+                                        spacing: 8.0,
+                                        radius: 16.0,
+                                        dotWidth: 8.0,
+                                        dotHeight: 8.0,
+                                        dotColor: FlutterFlowTheme.of(context)
+                                            .accent2,
+                                        activeDotColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                        paintStyle: PaintingStyle.fill,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1464,449 +1396,6 @@ class _HomeGuide1WidgetState extends State<HomeGuide1Widget>
                             ],
                           ),
                         ),
-                        if ((currentUserDocument?.favoriteVideos.toList() ??
-                                    []).isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 18.0, 0.0, 0.0),
-                            child: AuthUserStreamWidget(
-                              builder: (context) => Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 9.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'My favorite videos',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium,
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'HOME_GUIDE1_Container_ydz5ctff_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Container_navigate_to');
-
-                                            context.pushNamed('FavoriteVideos');
-                                          },
-                                          child: Container(
-                                            decoration: const BoxDecoration(),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(7.0, 5.0, 7.0, 5.0),
-                                              child: Text(
-                                                'See all',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro',
-                                                          useGoogleFonts: false,
-                                                          lineHeight: 1.16,
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 9.0, 0.0, 0.0),
-                                    child: Builder(
-                                      builder: (context) {
-                                        final favoriteVideoRef =
-                                            (currentUserDocument?.favoriteVideos
-                                                        .toList() ??
-                                                    [])
-                                                .toList();
-                                        return SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: List.generate(
-                                                    favoriteVideoRef.length,
-                                                    (favoriteVideoRefIndex) {
-                                              final favoriteVideoRefItem =
-                                                  favoriteVideoRef[
-                                                      favoriteVideoRefIndex];
-                                              return StreamBuilder<
-                                                  CourseVideoRecord>(
-                                                stream: CourseVideoRecord
-                                                    .getDocument(
-                                                        favoriteVideoRefItem),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          valueColor:
-                                                              AlwaysStoppedAnimation<
-                                                                  Color>(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  final videoItemCourseVideoRecord =
-                                                      snapshot.data!;
-                                                  return Container(
-                                                    width: 159.0,
-                                                    height: 163.0,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'HOME_GUIDE1_Container_29oksi4x_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'Container_navigate_to');
-
-                                                        context.pushNamed(
-                                                          'Video',
-                                                          queryParameters: {
-                                                            'videoItem':
-                                                                serializeParam(
-                                                              videoItemCourseVideoRecord,
-                                                              ParamType
-                                                                  .Document,
-                                                            ),
-                                                            'showBottomButtons':
-                                                                serializeParam(
-                                                              false,
-                                                              ParamType.bool,
-                                                            ),
-                                                          }.withoutNulls,
-                                                          extra: <String,
-                                                              dynamic>{
-                                                            'videoItem':
-                                                                videoItemCourseVideoRecord,
-                                                          },
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        decoration:
-                                                            const BoxDecoration(),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets.all(
-                                                                  9.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 142.0,
-                                                                height: 99.0,
-                                                                child: Stack(
-                                                                  children: [
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10.0),
-                                                                      child: Image
-                                                                          .network(
-                                                                        videoItemCourseVideoRecord
-                                                                            .imagePath,
-                                                                        width: double
-                                                                            .infinity,
-                                                                        height:
-                                                                            double.infinity,
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      ),
-                                                                    ),
-                                                                    Align(
-                                                                      alignment:
-                                                                          const AlignmentDirectional(
-                                                                              0.0,
-                                                                              0.0),
-                                                                      child:
-                                                                          Icon(
-                                                                        FFIcons
-                                                                            .kocticonPlay24,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .white,
-                                                                        size:
-                                                                            30.0,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            6.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child: Text(
-                                                                  videoItemCourseVideoRecord
-                                                                      .name,
-                                                                  maxLines: 2,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineSmall
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro',
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                        lineHeight:
-                                                                            1.16,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            })
-                                                .divide(const SizedBox(width: 12.0))
-                                                .addToStart(
-                                                    const SizedBox(width: 16.0))
-                                                .addToEnd(
-                                                    const SizedBox(width: 16.0)),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        if (FFAppState().VideoOfTheDay != null)
-                          FutureBuilder<CourseVideoRecord>(
-                            future: CourseVideoRecord.getDocumentOnce(
-                                FFAppState().VideoOfTheDay!),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              final videoOfDayCourseVideoRecord =
-                                  snapshot.data!;
-                              return Container(
-                                decoration: const BoxDecoration(),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 20.0, 16.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Expert video of the day',
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineMedium,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 14.0, 0.0, 0.0),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              height: 150.0,
-                                              child: Stack(
-                                                children: [
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'HOME_GUIDE1_PAGE_Image_mgvidifm_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'Image_navigate_to');
-
-                                                      context.pushNamed(
-                                                        'Video',
-                                                        queryParameters: {
-                                                          'videoItem':
-                                                              serializeParam(
-                                                            videoOfDayCourseVideoRecord,
-                                                            ParamType.Document,
-                                                          ),
-                                                          'showBottomButtons':
-                                                              serializeParam(
-                                                            false,
-                                                            ParamType.bool,
-                                                          ),
-                                                        }.withoutNulls,
-                                                        extra: <String,
-                                                            dynamic>{
-                                                          'videoItem':
-                                                              videoOfDayCourseVideoRecord,
-                                                        },
-                                                      );
-                                                    },
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                      child: Image.network(
-                                                        videoOfDayCourseVideoRecord
-                                                            .imageForVideoOfDay,
-                                                        width: double.infinity,
-                                                        height: double.infinity,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  if (!revenue_cat
-                                                      .activeEntitlementIds
-                                                      .contains(FFAppState()
-                                                          .entitlementID))
-                                                    InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'HOME_GUIDE1_Container_7laq0q3n_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'Container_navigate_to');
-
-                                                        context.pushNamed(
-                                                          'Pricing',
-                                                          queryParameters: {
-                                                            'offers':
-                                                                serializeParam(
-                                                              PaywallPrice
-                                                                  .standard,
-                                                              ParamType.Enum,
-                                                            ),
-                                                          }.withoutNulls,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: double.infinity,
-                                                        height: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              const Color(0xB81A1919),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                        ),
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                0.0, 0.0),
-                                                        child: Icon(
-                                                          FFIcons
-                                                              .kocticonLock24,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .white,
-                                                          size: 30.0,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                            tablet: false,
-                                            tabletLandscape: false,
-                                            desktop: false,
-                                          ))
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 10.0, 0.0, 0.0),
-                                              child: Text(
-                                                videoOfDayCourseVideoRecord
-                                                    .name,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineSmall,
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 18.0, 0.0, 0.0),

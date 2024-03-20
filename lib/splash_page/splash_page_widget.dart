@@ -3,6 +3,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -66,18 +67,33 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
           setState(() {
             FFAppState().hasWalkShown = true;
           });
-          logFirebaseEvent('SplashPage_navigate_to');
+          if (kDebugMode) {
+            logFirebaseEvent('SplashPage_navigate_to');
 
-          context.goNamed(
-            'HomeGuide1',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: const TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
+            context.goNamed(
+              'Home',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 0),
+                ),
+              },
+            );
+          } else {
+            logFirebaseEvent('SplashPage_navigate_to');
+
+            context.goNamed(
+              'HomeGuide1',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 0),
+                ),
+              },
+            );
+          }
         }
       } else {
         logFirebaseEvent('SplashPage_navigate_to');

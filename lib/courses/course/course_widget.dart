@@ -107,17 +107,19 @@ class _CourseWidgetState extends State<CourseWidget> {
           elevation: 0.0,
         ),
         body: StreamBuilder<List<CourseVideoRecord>>(
-          stream: queryCourseVideoRecord(
-            queryBuilder: (courseVideoRecord) => courseVideoRecord
-                .where(
-                  'course',
-                  isEqualTo: widget.courseItem?.reference,
-                )
-                .where(
-                  'type',
-                  isEqualTo: 'lesson',
-                )
-                .orderBy('sort'),
+          stream: _model.lessonsQuery(
+            requestFn: () => queryCourseVideoRecord(
+              queryBuilder: (courseVideoRecord) => courseVideoRecord
+                  .where(
+                    'course',
+                    isEqualTo: widget.courseItem?.reference,
+                  )
+                  .where(
+                    'type',
+                    isEqualTo: 'lesson',
+                  )
+                  .orderBy('sort'),
+            ),
           ),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
