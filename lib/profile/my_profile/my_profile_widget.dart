@@ -2491,6 +2491,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                         ),
                         if (responsiveVisibility(
                           context: context,
+                          phone: false,
                           tablet: false,
                           tabletLandscape: false,
                           desktop: false,

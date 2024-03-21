@@ -864,7 +864,7 @@ class _PricingWidgetState extends State<PricingWidget>
                               PaywallPickedOption.week1) {
                             logFirebaseEvent('Button_revenue_cat');
                             _model.weeklysubscriptionOutput = await revenue_cat
-                                .purchasePackage('yearlysubscription');
+                                .purchasePackage('weeklysubscription');
                             shouldSetState = true;
                             if (!_model.weeklysubscriptionOutput!) {
                               logFirebaseEvent('Button_alert_dialog');
