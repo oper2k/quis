@@ -2363,7 +2363,7 @@ class _LatestInterviewQuestionsGuideWidgetState
   TutorialCoachMark createPageWalkthrough(BuildContext context) =>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
-        onFinish: () {
+        onFinish: () async {
           safeSetState(() => _model.guideQuestions3Controller = null);
           logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
           logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
@@ -2371,11 +2371,12 @@ class _LatestInterviewQuestionsGuideWidgetState
           context.goNamed('HomeGuide2');
         },
         onSkip: () {
-          logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
-          logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
+          () async {
+            logFirebaseEvent('LATEST_INTERVIEW_QUESTIONS_GUIDE_LatestI');
+            logFirebaseEvent('LatestInterviewQuestionsGuide_navigate_t');
 
-          context.goNamed('HomeGuide2');
-
+            context.goNamed('HomeGuide2');
+          }();
           return true;
         },
       );

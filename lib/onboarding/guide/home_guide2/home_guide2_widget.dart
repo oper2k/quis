@@ -2617,7 +2617,7 @@ class _HomeGuide2WidgetState extends State<HomeGuide2Widget>
   TutorialCoachMark createPageWalkthrough(BuildContext context) =>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
-        onFinish: () {
+        onFinish: () async {
           safeSetState(() => _model.guideHome4Controller = null);
           logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_CO');
           logFirebaseEvent('HomeGuide2_navigate_to');
@@ -2634,20 +2634,21 @@ class _HomeGuide2WidgetState extends State<HomeGuide2Widget>
           );
         },
         onSkip: () {
-          logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_SK');
-          logFirebaseEvent('HomeGuide2_navigate_to');
+          () async {
+            logFirebaseEvent('HOME_GUIDE2_HomeGuide2_ON_WALKTHROUGH_SK');
+            logFirebaseEvent('HomeGuide2_navigate_to');
 
-          context.goNamed(
-            'PracticeInterviewGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: const TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
+            context.goNamed(
+              'PracticeInterviewGuide',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 0),
+                ),
+              },
+            );
+          }();
           return true;
         },
       );

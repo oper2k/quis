@@ -712,7 +712,7 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
   TutorialCoachMark createPageWalkthrough(BuildContext context) =>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
-        onFinish: () {
+        onFinish: () async {
           safeSetState(() => _model.quideCourses2Controller = null);
           logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
           logFirebaseEvent('AllCoursesGuide_navigate_to');
@@ -729,20 +729,21 @@ class _AllCoursesGuideWidgetState extends State<AllCoursesGuideWidget>
           );
         },
         onSkip: () {
-          logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
-          logFirebaseEvent('AllCoursesGuide_navigate_to');
+          () async {
+            logFirebaseEvent('ALL_COURSES_GUIDE_AllCoursesGuide_ON_WAL');
+            logFirebaseEvent('AllCoursesGuide_navigate_to');
 
-          context.goNamed(
-            'LatestInterviewQuestionsGuide',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: const TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
+            context.goNamed(
+              'LatestInterviewQuestionsGuide',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 0),
+                ),
+              },
+            );
+          }();
           return true;
         },
       );

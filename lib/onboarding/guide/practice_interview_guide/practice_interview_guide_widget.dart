@@ -584,7 +584,7 @@ class _PracticeInterviewGuideWidgetState
   TutorialCoachMark createPageWalkthrough(BuildContext context) =>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
-        onFinish: () {
+        onFinish: () async {
           safeSetState(() => _model.guideInterveiw5Controller = null);
           logFirebaseEvent('PRACTICE_INTERVIEW_GUIDE_PracticeIntervi');
           logFirebaseEvent('PracticeInterviewGuide_navigate_to');
@@ -601,20 +601,21 @@ class _PracticeInterviewGuideWidgetState
           );
         },
         onSkip: () {
-          logFirebaseEvent('PRACTICE_INTERVIEW_GUIDE_PracticeIntervi');
-          logFirebaseEvent('PracticeInterviewGuide_navigate_to');
+          () async {
+            logFirebaseEvent('PRACTICE_INTERVIEW_GUIDE_PracticeIntervi');
+            logFirebaseEvent('PracticeInterviewGuide_navigate_to');
 
-          context.goNamed(
-            'Home',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: const TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
+            context.goNamed(
+              'Home',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 0),
+                ),
+              },
+            );
+          }();
           return true;
         },
       );
