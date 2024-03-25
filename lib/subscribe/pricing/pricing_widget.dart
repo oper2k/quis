@@ -764,7 +764,7 @@ class _PricingWidgetState extends State<PricingWidget>
                           model: _model.pricingOption1monthModel,
                           updateCallback: () => setState(() {}),
                           child: PricingOptionWidget(
-                            title: '1 Month',
+                            title: 'Monthly',
                             text: '9.99 USD/mo',
                             isTrial: false,
                             isPicked: _model.pickedOption ==
@@ -793,8 +793,8 @@ class _PricingWidgetState extends State<PricingWidget>
                           model: _model.pricingOption1weekModel,
                           updateCallback: () => setState(() {}),
                           child: PricingOptionWidget(
-                            title: '1 Week',
-                            text: '4.99 USD/mo',
+                            title: 'Weekly',
+                            text: '4.99 USD/week',
                             isTrial: false,
                             isPicked: _model.pickedOption ==
                                 PaywallPickedOption.week1,
@@ -1116,19 +1116,33 @@ class _PricingWidgetState extends State<PricingWidget>
                               ),
                             ),
                           ),
-                          Container(
-                            decoration: const BoxDecoration(),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                'Terms of Use ',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Sofia Pro',
-                                      color: FlutterFlowTheme.of(context).white,
-                                      useGoogleFonts: false,
-                                    ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'PRICING_PAGE_Container_2wt6tpum_ON_TAP');
+                              logFirebaseEvent('Container_launch_u_r_l');
+                              await launchURL(
+                                  'https://quisapp.notion.site/Terms-of-Use-6e0163631b634a80ae3b5265054de6d3');
+                            },
+                            child: Container(
+                              decoration: const BoxDecoration(),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  'Terms of Use ',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Sofia Pro',
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
                               ),
                             ),
                           ),
